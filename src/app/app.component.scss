@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
+
+main {
+    flex: 1;
+    height: inherit;
+}

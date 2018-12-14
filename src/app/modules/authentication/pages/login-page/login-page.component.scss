@@ -1,0 +1,201 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+:host {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #7F7FD5;
+    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+}
+
+.login {
+    --login-container-border-radius: 10px;
+    --form-background-color: white;
+    width: 75vmin;
+    display: flex;
+    box-shadow: 0px 10px 20px -14px black;
+
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+    }
+}
+
+.login__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--login-container-border-radius) 0 0 var(--login-container-border-radius);
+    background: #429dff;
+    flex: 1;
+
+    @include media-breakpoint-down(sm) {
+        background: var(--form-background-color);
+        border-radius: var(--login-container-border-radius) var(--login-container-border-radius) 0 0;
+    }
+
+    h2 {
+        flex: 1;
+        line-height: 1;
+        padding: 0 1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
+        word-spacing: -10px;
+        color: var(--form-background-color);
+
+        @include media-breakpoint-down(sm) {
+            color: #429dff;
+            justify-content: center;
+            padding: 1rem;
+        }
+    }
+}
+
+.login__logo {
+    flex: 1;
+    padding: 1rem;
+    height: 6rem;
+    width: 6rem;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+
+.login__form {
+    flex: 2;
+    padding: 1rem;
+    // background: rgba(140, 155, 231, 0.46);
+    background: var(--form-background-color);
+    border-radius: 0 var(--login-container-border-radius) var(--login-container-border-radius) 0;
+
+    @include media-breakpoint-down(sm) {
+        border-radius: 0 0 var(--login-container-border-radius) var(--login-container-border-radius);
+    }
+}
+
+.login-form__inputs {
+    padding: 1rem 0;
+
+    .input-group {
+        margin: 1rem 0 0;
+    }
+}
+
+.login-form__control-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form__input-container {
+    display: flex;
+}
+
+.login-form__input {
+    background: var(--form-background-color);
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--smokey-black);
+    color: var(--dark);
+    padding: 5px;
+    position: relative;
+
+    &:focus {
+        border-bottom-color: #666666;
+        box-shadow: 0 0 0 1000px white inset; // to hide the background yellow color in chrome
+    }
+
+    &#password {
+        &.ng-invalid.ng-touched,
+        &.ng-invalid.ng-dirty {
+            +.icon__visibility {
+                border-bottom-color: var(--danger);
+            }
+        }
+    }
+}
+
+.login-form__submit-btn {
+    margin: 1rem 0 0;
+    display: flex;
+
+    button {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        border-radius: 50px;
+        background-color: royalblue;
+        color: cornsilk;
+        transition: all 0.15s ease-in-out;
+        box-shadow: 0px 4px 10px -5px black;
+
+        &:hover:not(:disabled) {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+}
+
+.icon__person,
+.icon__vpn_key,
+.icon__visibility {
+    color: #444444;
+    margin-right: 7px;
+    margin-top: 8px;
+    padding-bottom: 5px;
+
+    &::selection {
+        background: transparent;
+    }
+}
+
+.icon__visibility {
+    border-bottom: 1px solid var(--smokey-black);
+    margin-right: 0;
+    padding-left: 7px;
+    cursor: pointer;
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    @at-root {
+        .login-form__input {
+            &:focus {
+                ~.icon__visibility {
+                    border-bottom-color: #666666;
+                }
+            }
+        }
+    }
+}
+
+.form-error {
+    color: var(--danger);
+    line-height: 1.2;
+    padding: 5px 5px 0 5px;
+}
+
+.ng-valid.required {
+    border-bottom-color: var(--success);
+}
+
+.ng-invalid.ng-touched,
+.ng-invalid.ng-dirty {
+    border-bottom-color: var(--danger);
+}

@@ -1,0 +1,55 @@
+<div class="login">
+    <div class="login__header">
+        <!-- <h2>Log In</h2> -->
+        <div class="login__logo">
+            <img src="/assets/images/logo.png" alt="Infin8 Logo">
+        </div>
+    </div>
+
+    <form class="login__form" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="login-form__inputs">
+            <div class="input-group">
+                <i class="material-icons icon__person">person</i>
+                <div class="login-form__control-container">
+                    <div class="login-form__input-container">
+                        <input id="username" type="text" class="form-control login-form__input" placeholder="Username" title="Your username" aria-label="Username" spellcheck="false" formControlName="username" maxlength="32">
+                    </div>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="form-error">
+                        <div *ngIf="username?.errors?.required">
+                            Username is required.
+                        </div>
+                        <div *ngIf="username?.errors?.minlength">
+                            Username must be at least 5 characters long.
+                        </div>
+                        <div *ngIf="username?.errors?.maxlength">
+                            Username must be no more than 32 characters in length.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <i class="material-icons icon__vpn_key">vpn_key</i>
+                <div class="login-form__control-container">
+                    <div class="login-form__input-container">
+                        <input id="password" [type]="passwordFieldType" class="form-control login-form__input" placeholder="Password" title="Your password" aria-label="Password" formControlName="password" maxlength="128">
+                        <i class="material-icons icon__visibility" (click)="togglePasswordVisibility()">{{ passwordVisibility ? 'visibility' : 'visibility_off' }}</i>
+                    </div>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="form-error">
+                        <div *ngIf="password?.errors?.required">
+                            Password is required.
+                        </div>
+                        <div *ngIf="password?.errors?.minlength">
+                            Password must be at least 8 characters long.
+                        </div>
+                        <div *ngIf="password?.errors?.maxlength">
+                            Password must be no more than 128 characters in length.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="login-form__submit-btn">
+            <button type="submit" class="btn" [disabled]="loginForm.invalid">Log In</button>
+        </div>
+    </form>
+</div>

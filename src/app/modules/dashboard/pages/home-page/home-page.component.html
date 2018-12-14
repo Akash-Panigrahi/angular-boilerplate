@@ -1,0 +1,5 @@
+<app-header></app-header>
+<section class="flex-grow-1" [@dashboardRouterTransition]="getState(o)">
+    <router-outlet #o="outlet"></router-outlet>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,68 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+:host {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #7F7FD5;
+    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+    }
+}
+
+.page-not-found {
+
+    &__image {
+        padding: 1rem;
+    }
+
+    &__info {
+        padding: 1rem;
+
+        h2 {
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px var(--gray);
+        }
+
+        p {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.go-home {
+    position: relative;
+    transition: all 0.1s ease-in-out;
+    display: inline-block;
+
+    &::after {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: yellow;
+        transition: all 0.2s ease-in-out;
+    }
+
+    &:hover,
+    &:active {
+        cursor: pointer;
+        text-shadow: 0 2px 0 var(--gray);
+        transform: translateY(-1px) scale(1.01);
+
+        &::after {
+            width: 0;
+        }
+    }
+
+    &:active {
+        text-shadow: none;
+        transform: translateY(0) scale(1);
+        outline: none;
+    }
+}
