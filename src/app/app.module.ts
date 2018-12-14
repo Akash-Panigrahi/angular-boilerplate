@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { environment } from 'src/environments/environment';
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule,
-        CoreModule
+        CoreModule,
+        HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent]
