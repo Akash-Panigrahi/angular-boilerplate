@@ -7,7 +7,7 @@ import { take } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class HttpService {
+export class ApiService {
 
     constructor(
         private _http: HttpClient
@@ -24,6 +24,11 @@ export class HttpService {
 
     post<T>(url: string, data: object, headers?: HttpHeaders | null): Observable<T> {
         return this._http.post<T>(`${environment.BASE_URL + url}`, data, this._prepareHeaders(headers))
+            .pipe(take(1));
+    }
+
+    get<T>(url: string, headers?: HttpHeaders | null): Observable<T> {
+        return this._http.get<T>(`${environment.BASE_URL + url}`, this._prepareHeaders(headers))
             .pipe(take(1));
     }
 }

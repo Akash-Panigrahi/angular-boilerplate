@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostBinding } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostBinding, Output, EventEmitter } from '@angular/core';
 import { slideDown } from './action-bar.animations';
 
 declare const $: any;
@@ -14,6 +14,22 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
     isOpen = false;
 
+    @Output() dateTimeRangeEvent = new EventEmitter<object>();
+
+    updateDateRangePicker = (start, end) => {
+
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+        const dateTimeRange = {
+            startDate: start.format('YYYY-MM-DD'),
+            endDate: end.format('YYYY-MM-DD'),
+            startTime: start.format('H:mm:ss'),
+            endTime: end.format('H:mm:ss')
+        };
+
+        this.dateTimeRangeEvent.emit(dateTimeRange);
+    }
+
     constructor() { }
 
     ngOnInit() {
@@ -22,11 +38,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
 
         const start = moment().startOf('hour');
-        const end = moment().startOf('hour').add(32, 'hour');
-
-        function daterangeCB(start, end) {
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
+        const end = moment().startOf('hour');
 
         $('#reportrange').daterangepicker({
             timePicker: true,
@@ -34,7 +46,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
             startDate: start,
             endDate: end,
             locale: {
-                format: 'DD/M/YYYY hh:mm A'
+                format: 'DD/M/YYYY hh:mm:ss A'
             },
             maxDate: new Date(),
             parentEl: '.action-bar',
@@ -58,9 +70,9 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
                     moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
                 ]
             }
-        }, daterangeCB);
+        }, this.updateDateRangePicker);
 
-        daterangeCB(start, end);
+        this.updateDateRangePicker(start, end);
     }
 
     isCalendarOpen() {

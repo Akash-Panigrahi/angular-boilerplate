@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, AfterViewInit } from '@angular/core';
+import { YyyyMmDdPipe } from 'src/app/shared/pipes/yyyy-MM-dd.pipe';
 declare const $: any;
 
 @Component({
     selector: 'app-report-datatable',
     templateUrl: './report-datatable.component.html',
-    styleUrls: ['./report-datatable.component.scss']
+    styleUrls: ['./report-datatable.component.scss'],
+    providers: [YyyyMmDdPipe]
 })
 export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -12,7 +14,9 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
 
     dataTable: any;
 
-    constructor() { }
+    constructor(
+        private _yyyyMMddPipe: YyyyMmDdPipe
+    ) { }
 
     ngOnInit() {
     }
@@ -52,18 +56,18 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
             `,
             columns: [
                 { data: 'id' },
-                { data: 'firstName' },
-                { data: 'lastName' },
-                { data: 'company' },
-                { data: 'city' },
+                { data: 'first_name' },
+                { data: 'last_name' },
+                { data: 'gender' },
                 { data: 'email' },
                 {
-                    data: 'picture',
-                    sorting: false,
-                    render: (data, type, full) => `
-                        <img src=${data} alt="${full.firstName}'s Picture" style="width: 3rem; border-radius: 50%;">
-                    `
-                }
+                    data: 'start_date',
+                    render: (data, type, full) => this._yyyyMMddPipe.transform(data)
+                },
+                {
+                    data: 'end_date',
+                    render: (data, type, full) => this._yyyyMMddPipe.transform(data)
+                },
             ]
         });
 
@@ -71,7 +75,6 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     }
 
     ngOnDestroy() {
-        // this.dataTable.clear();
         this.dataTable.destroy();
     }
 }

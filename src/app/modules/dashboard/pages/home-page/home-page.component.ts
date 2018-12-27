@@ -16,9 +16,15 @@ export class HomePageComponent implements OnInit {
     // animation
     @HostBinding('@pageAnimation') get pageAnimation() { return ''; }
 
+    dateTimeRange;
+
     constructor() { }
 
     ngOnInit() {
+    }
+
+    receiveDateTimeRange(e) {
+        this.dateTimeRange = e;
     }
 
     getState(outlet) {

@@ -1,12 +1,14 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { riseUp } from './details-page.animations';
+import { ApiService } from 'src/app/core/services/api/api.service';
+import { DetailsPageService } from './details-page.service';
 
 @Component({
     selector: 'app-details-page',
     templateUrl: './details-page.component.html',
     styleUrls: ['./details-page.component.scss'],
-    animations: [riseUp]
+    animations: [riseUp],
+    providers: [DetailsPageService]
 })
 export class DetailsPageComponent implements OnInit {
 
@@ -14,12 +16,20 @@ export class DetailsPageComponent implements OnInit {
 
     clients: any[];
 
-    constructor(private _http: HttpClient) { }
+    constructor(
+        private _detailsPageService: DetailsPageService
+    ) { }
 
     ngOnInit() {
-        this._http.get('https://5a5a9e00bc6e340012a03796.mockapi.io/clients')
-            .subscribe((data: any[]) => {
-                this.clients = data;
-            });
+        this._detailsPageService
+            .getReport({})
+            .subscribe(
+                (res: any) => {
+                    this.clients = res;
+                },
+                (err: Error) => {
+                    console.error(err);
+                }
+            );
     }
 }

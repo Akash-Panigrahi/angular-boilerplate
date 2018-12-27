@@ -10,6 +10,7 @@ import {
 
 // mock datasets
 import { USERS } from './users';
+import { REPORTS } from './report';
 
 export class MockBackendInterceptor implements HttpInterceptor {
 
@@ -58,7 +59,14 @@ export class MockBackendInterceptor implements HttpInterceptor {
                     }
 
                     if (request.url.endsWith('/report') && request.method === 'POST') {
-
+                        return of(new HttpResponse({
+                            status: 200,
+                            body: {
+                                status: 200,
+                                data: REPORTS,
+                                message: 'success'
+                            }
+                        }));
                     }
 
                     return next.handle(request);
