@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressRouterModule } from '@ngx-progressbar/router';
 
 @NgModule({
     declarations: [
@@ -17,7 +20,10 @@ import { HttpClientModule } from '@angular/common/http';
         BrowserAnimationsModule,
         RouterModule,
         CoreModule,
-        HttpClientModule
+        HttpClientModule,
+        ToastrModule.forRoot(),
+        NgProgressModule,
+        NgProgressRouterModule
     ],
     providers: [],
     bootstrap: [AppComponent]

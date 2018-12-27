@@ -1,0 +1,10 @@
+.charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+}
+
+.child-component {
+    border-radius: 5px;
+    box-shadow: 0 0 5px -1px rgb(100, 100, 100);
+}

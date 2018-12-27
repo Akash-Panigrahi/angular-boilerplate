@@ -3,6 +3,10 @@
 :host {
     flex: 1;
     display: flex;
+}
+
+.page-not-found {
+    display: flex;
     justify-content: center;
     align-items: center;
     background: #7F7FD5;
@@ -11,9 +15,6 @@
     @include media-breakpoint-down(md) {
         flex-direction: column;
     }
-}
-
-.page-not-found {
 
     &__image {
         padding: 1rem;

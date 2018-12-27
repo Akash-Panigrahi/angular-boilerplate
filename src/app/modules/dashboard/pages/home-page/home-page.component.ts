@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { dashboardRouterTransition } from './../../dashboard-router.animations';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { dashboardRouterAnimation } from './../../dashboard-router.animations';
+import { pageAnimation } from './home.animations';
 
 @Component({
     selector: 'app-home-page',
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.scss'],
-    animations: [dashboardRouterTransition]
+    animations: [
+        dashboardRouterAnimation,
+        pageAnimation
+    ]
 })
 export class HomePageComponent implements OnInit {
+
+    // animation
+    @HostBinding('@pageAnimation') get pageAnimation() { return ''; }
 
     constructor() { }
 
@@ -17,5 +24,4 @@ export class HomePageComponent implements OnInit {
     getState(outlet) {
         return outlet.activatedRouteData.state;
     }
-
 }

@@ -14,7 +14,7 @@
                     <div class="login-form__input-container">
                         <input id="username" type="text" class="form-control login-form__input" placeholder="Username" title="Your username" aria-label="Username" spellcheck="false" formControlName="username" maxlength="32">
                     </div>
-                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="form-error">
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="form-error" @slideDown>
                         <div *ngIf="username?.errors?.required">
                             Username is required.
                         </div>
@@ -34,7 +34,7 @@
                         <input id="password" [type]="passwordFieldType" class="form-control login-form__input" placeholder="Password" title="Your password" aria-label="Password" formControlName="password" maxlength="128">
                         <i class="material-icons icon__visibility" (click)="togglePasswordVisibility()">{{ passwordVisibility ? 'visibility' : 'visibility_off' }}</i>
                     </div>
-                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="form-error">
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="form-error" @slideDown>
                         <div *ngIf="password?.errors?.required">
                             Password is required.
                         </div>
