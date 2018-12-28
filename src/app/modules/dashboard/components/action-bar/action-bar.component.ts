@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, HostBinding, Output, EventEmitter } from '@angular/core';
 import { slideDown } from './action-bar.animations';
+import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 
 declare const $: any;
 declare const moment: any;
@@ -27,10 +28,13 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
             endTime: end.format('H:mm:ss')
         };
 
-        this.dateTimeRangeEvent.emit(dateTimeRange);
+        // save datetimerange in central store
+        localStorage.setItem('date-time-range', JSON.stringify(dateTimeRange));
+
+        this._dateTimeRangeService.changeDateTimeRange(dateTimeRange);
     }
 
-    constructor() { }
+    constructor(private _dateTimeRangeService: DateTimeRangeService) { }
 
     ngOnInit() {
     }

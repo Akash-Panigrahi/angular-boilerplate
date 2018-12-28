@@ -95,6 +95,7 @@ select:-internal-autofill-selected {
             &.active {
                 border-radius: 0 100px 100px 0;
                 background-color: #1a73e8;
+                color: white;
                 box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
             }
         }

@@ -37,6 +37,12 @@ export class SummaryPageComponent implements OnInit {
         { name: 'Other', y: 7.05 }
     ];
 
+    kpis = {
+        total_calls: 40,
+        inbound_calls: 11,
+        outbound_calls: 29
+    };
+
     constructor() { }
 
     ngOnInit() {

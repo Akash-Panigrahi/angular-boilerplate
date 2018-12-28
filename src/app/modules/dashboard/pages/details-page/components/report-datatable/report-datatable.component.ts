@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, AfterViewInit } from '@angular/core';
-import { YyyyMmDdPipe } from 'src/app/shared/pipes/yyyy-MM-dd.pipe';
+import { YyyyMmDdPipe } from 'src/app/shared/pipes/yyyy-MM-dd/yyyy-MM-dd.pipe';
+import { HMmAPipe } from 'src/app/shared/pipes/h-mm-a/h-mm-a.pipe';
 declare const $: any;
 
 @Component({
     selector: 'app-report-datatable',
     templateUrl: './report-datatable.component.html',
     styleUrls: ['./report-datatable.component.scss'],
-    providers: [YyyyMmDdPipe]
+    providers: [YyyyMmDdPipe, HMmAPipe]
 })
 export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -15,11 +16,11 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     dataTable: any;
 
     constructor(
-        private _yyyyMMddPipe: YyyyMmDdPipe
+        private _yyyyMMddPipe: YyyyMmDdPipe,
+        private _hmmaPipe: HMmAPipe
     ) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     ngOnChanges(changes: SimpleChanges) {
         if (!changes.clients.isFirstChange()) {
@@ -30,7 +31,8 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     }
 
     ngAfterViewInit() {
-        this.dataTable = $('table').DataTable({
+
+        this.dataTable = $('.report-table').DataTable({
             pagingType: 'full_numbers',
             pageLength: 5,
             lengthMenu: [5, 10, 25, 50, 100],
@@ -62,11 +64,19 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
                 { data: 'email' },
                 {
                     data: 'start_date',
-                    render: (data, type, full) => this._yyyyMMddPipe.transform(data)
+                    render: data => this._yyyyMMddPipe.transform(data)
+                },
+                {
+                    data: 'start_time',
+                    render: data => this._hmmaPipe.transform(data)
                 },
                 {
                     data: 'end_date',
-                    render: (data, type, full) => this._yyyyMMddPipe.transform(data)
+                    render: data => this._yyyyMMddPipe.transform(data)
+                },
+                {
+                    data: 'end_time',
+                    render: data => this._hmmaPipe.transform(data)
                 },
             ]
         });
@@ -75,6 +85,7 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     }
 
     ngOnDestroy() {
+        this.dataTable.clear();
         this.dataTable.destroy();
     }
 }

@@ -14,6 +14,7 @@ import { ReportDatatableComponent } from './pages/details-page/components/report
 import { ChartModule } from 'angular-highcharts';
 import { BasicColumnComponent } from './pages/summary-page/components/basic-column/basic-column.component';
 import { GradientPieComponent } from './pages/summary-page/components/gradient-pie/gradient-pie.component';
+import { KpisComponent } from './pages/summary-page/components/kpis/kpis.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { GradientPieComponent } from './pages/summary-page/components/gradient-p
         ActionBarComponent,
         ReportDatatableComponent,
         BasicColumnComponent,
-        GradientPieComponent
+        GradientPieComponent,
+        KpisComponent
     ],
     imports: [
         CommonModule,
