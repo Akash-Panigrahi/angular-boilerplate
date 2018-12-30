@@ -15,6 +15,8 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
     isOpen = false;
 
+    lastUpdated = new Date();
+
     @Output() dateTimeRangeEvent = new EventEmitter<object>();
 
     updateDateRangePicker = (start, end) => {

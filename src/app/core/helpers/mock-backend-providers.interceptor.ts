@@ -61,14 +61,14 @@ export class MockBackendInterceptor implements HttpInterceptor {
                     if (request.url.endsWith('/report') && request.method === 'POST') {
 
                         const reports = REPORTS.filter(report => {
+
                             const { start_date, end_date, start_time, end_time } = report;
-                            const [start_hour, start_minute] = start_time.split(':');
-                            const [end_hour, end_minute] = end_time.split(':');
+                            const [start_hour, start_minute] = start_time.split(':').map(parseFloat);
+                            const [end_hour, end_minute] = end_time.split(':').map(parseFloat);
+                            const reportStartDate = new Date(new Date(start_date).setHours(start_hour, start_minute));
+                            const reportEndDate = new Date(new Date(end_date).setHours(end_hour, end_minute));
 
                             const { startDate, endDate, startTime, endTime } = request.body;
-
-                            const reportStartDate = new Date(new Date(start_date).setHours(+start_hour, +start_minute));
-                            const reportEndDate = new Date(new Date(end_date).setHours(+end_hour, +end_minute));
                             const requestStartDate = new Date(`${startDate} ${startTime}`);
                             const requestEndDate = new Date(`${endDate} ${endTime}`);
 
@@ -79,8 +79,6 @@ export class MockBackendInterceptor implements HttpInterceptor {
                                 && reportEndDate >= requestStartDate
                                 ;
                         });
-
-                        console.log(reports);
 
                         return of(new HttpResponse({
                             status: 200,

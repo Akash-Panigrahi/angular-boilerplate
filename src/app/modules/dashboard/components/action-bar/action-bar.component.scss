@@ -1,6 +1,8 @@
 .action-bar {
     position: relative;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     z-index: 1;
 }
 
@@ -36,5 +38,11 @@
 
     span {
         flex: 1;
+    }
+}
+
+.last-updated {
+    span {
+        font-weight: bold;
     }
 }
