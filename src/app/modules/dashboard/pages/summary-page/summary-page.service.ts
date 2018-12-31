@@ -16,7 +16,6 @@ export class SummaryPageService {
             .pipe(
                 map((res: any) => {
                     if (res.status === 200) {
-                        console.log(res.data);
                         return res.data;
                     }
 

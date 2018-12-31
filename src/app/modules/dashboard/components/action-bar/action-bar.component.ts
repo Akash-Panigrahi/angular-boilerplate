@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { slideDown } from './action-bar.animations';
-import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
+import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 
 declare const $: any;
 declare const moment: any;

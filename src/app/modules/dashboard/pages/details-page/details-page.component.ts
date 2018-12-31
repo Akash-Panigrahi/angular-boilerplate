@@ -1,9 +1,9 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { riseUp } from './details-page.animations';
 import { DetailsPageService } from './details-page.service';
-import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 
 @Component({
     selector: 'app-details-page',

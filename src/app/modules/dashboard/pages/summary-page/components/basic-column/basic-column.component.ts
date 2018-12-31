@@ -66,11 +66,21 @@ export class BasicColumnComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes: SimpleChanges) {
+
         if (!changes.basicColumn.isFirstChange()) {
-            console.log(this.chart);
+
             this.basicColumn = changes.basicColumn.currentValue;
-            this.chart.removeSeries(0);
-            this.chart.addSeries(this.basicColumn, true, true);
+            const chart = this.chart.ref;
+
+            while (chart.series.length) {
+                chart.series[0].remove(false);
+            }
+
+            for (let i = 0; i < this.basicColumn.length; i++) {
+                chart.addSeries(this.basicColumn[i], false);
+            }
+
+            chart.redraw();
         }
     }
 
