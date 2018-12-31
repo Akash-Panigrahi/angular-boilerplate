@@ -1,5 +1,4 @@
 import { Component, HostBinding } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { pageNotFoundAnimation } from './page-not-found.animations';
 
 @Component({
@@ -15,9 +14,5 @@ export class PageNotFoundComponent {
     // animation
     @HostBinding('@pageNotFoundAnimation') get pageNotFoundAnimation() { return ''; }
 
-    constructor() {
-        if (!environment.production) {
-            console.log('PageNotFoundComponent loaded');
-        }
-    }
+    constructor() {}
 }

@@ -1,13 +1,13 @@
 <div class="container-fluid">
     <div class="kpi">
-        <app-kpis [kpis]="kpis"></app-kpis>
+        <app-kpis [kpis]="summaryData?.kpis"></app-kpis>
     </div>
     <div class="charts">
         <div class="child-component">
-            <app-basic-column [basicColumn]="basicColumn"></app-basic-column>
+            <app-basic-column [basicColumn]="summaryData?.basicColumn"></app-basic-column>
         </div>
         <div class="child-component">
-            <app-gradient-pie [gradientPie]="gradientPie"></app-gradient-pie>
+            <app-gradient-pie [gradientPie]="summaryData?.gradientPie"></app-gradient-pie>
         </div>
     </div>
 </div>

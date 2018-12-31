@@ -11,6 +11,8 @@ import {
 // mock datasets
 import { USERS } from './users';
 import { REPORTS } from './report';
+import { SUMMARY } from './summary';
+import { formatDate } from '@angular/common';
 
 export class MockBackendInterceptor implements HttpInterceptor {
 
@@ -90,12 +92,139 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         }));
                     }
 
+                    if (request.url.endsWith('/summary-data') && request.method === 'POST') {
+
+                        const summary = SUMMARY.reduce((summaries: any, summary) => {
+
+                            const { start_date, end_date, start_time, end_time } = summary;
+                            const [start_hour, start_minute] = start_time.split(':').map(parseFloat);
+                            const [end_hour, end_minute] = end_time.split(':').map(parseFloat);
+                            const summaryStartDate = new Date(new Date(start_date).setHours(start_hour, start_minute));
+                            const summaryEndDate = new Date(new Date(end_date).setHours(end_hour, end_minute));
+
+                            const { startDate, endDate, startTime, endTime } = request.body;
+                            const requestStartDate = new Date(`${startDate} ${startTime}`);
+                            const requestEndDate = new Date(`${endDate} ${endTime}`);
+
+                            if (
+                                summaryStartDate <= summaryEndDate &&
+                                summaryStartDate >= requestStartDate &&
+                                summaryStartDate <= requestEndDate &&
+                                summaryEndDate <= requestEndDate &&
+                                summaryEndDate >= requestStartDate
+                            ) {
+
+                                const gradientPie = [];
+
+                                for (let i = 0; i < summary.gradientPie.length; i++) {
+                                    const pie = summary.gradientPie[i];
+
+                                    if (pie.name === summaries.gradientPie[i].name) {
+                                        gradientPie.push({
+                                            name: pie.name,
+                                            y: +(((+pie.y) + (+summaries.gradientPie[i].y)).toFixed(2))
+                                        });
+                                    }
+                                }
+
+                                const basicColumn = [];
+
+                                for (let i = 0; i < summary.basicColumn.length; i++) {
+                                    const column = summary.basicColumn[i];
+
+                                    if (column.name === summaries.basicColumn[i].name) {
+                                        basicColumn.push({
+                                            name: column.name,
+                                            data: column.data.map((data, j) => +((+data) + (+summaries.basicColumn[i].data[j])).toFixed(2))
+                                        });
+                                    }
+                                }
+
+                                summaries = {
+                                    kpis: {
+                                        total_calls: summary.kpis.total_calls + summaries.kpis.total_calls,
+                                        inbound_calls: summary.kpis.inbound_calls + summaries.kpis.inbound_calls,
+                                        outbound_calls: summary.kpis.outbound_calls + summaries.kpis.outbound_calls
+                                    },
+                                    gradientPie,
+                                    basicColumn
+                                };
+                            }
+
+                            return summaries;
+                        }, {
+                                kpis: {
+                                    total_calls: 0,
+                                    inbound_calls: 0,
+                                    outbound_calls: 0
+                                },
+                                gradientPie: [
+                                    {
+                                        name: 'Chrome',
+                                        y: 0
+                                    },
+                                    {
+                                        name: 'Internet Explorer',
+                                        y: 0
+                                    },
+                                    {
+                                        name: 'Firefox',
+                                        y: 0
+                                    },
+                                    {
+                                        name: 'Edge',
+                                        y: 0
+                                    },
+                                    {
+                                        name: 'Safari',
+                                        y: 0
+                                    },
+                                    {
+                                        name: 'Other',
+                                        y: 0
+                                    }
+                                ],
+                                basicColumn: [
+                                    {
+                                        name: 'Tokyo',
+                                        data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+                                    },
+                                    {
+                                        name: 'New York',
+                                        data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+                                    },
+                                    {
+                                        name: 'London',
+                                        data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+                                    },
+                                    {
+                                        name: 'Berlin',
+                                        data: ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+                                    }
+                                ]
+                            }
+                        );
+
+                        return of(new HttpResponse({
+                            status: 200,
+                            body: {
+                                status: 200,
+                                data: summary,
+                                message: 'success'
+                            }
+                        }));
+                    }
+
                     return next.handle(request);
                 })
             )
             .pipe(materialize())
             .pipe(delay(500))
             .pipe(dematerialize());
+    }
+
+    yyyyMMdd(date) {
+        return formatDate(date, 'yyyy-MM-dd', 'en-US');
     }
 }
 

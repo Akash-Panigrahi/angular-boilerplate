@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostBinding, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { slideDown } from './action-bar.animations';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 
@@ -19,9 +19,13 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
     @Output() dateTimeRangeEvent = new EventEmitter<object>();
 
-    updateDateRangePicker = (start, end) => {
-
+    private _updateDateRangePicker(start, end) {
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    private _applyDateRangePicker = (ev, picker) => {
+        const start = picker.startDate;
+        const end = picker.endDate;
 
         const dateTimeRange = {
             startDate: start.format('YYYY-MM-DD'),
@@ -43,8 +47,10 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
 
-        const start = moment().startOf('hour');
-        const end = moment().startOf('hour');
+        const dateTimeRange = JSON.parse(localStorage.getItem('date-time-range'));
+
+        const start = this.setMoment(dateTimeRange.startDate, dateTimeRange.startTime);
+        const end = this.setMoment(dateTimeRange.endDate, dateTimeRange.endTime);
 
         $('#reportrange').daterangepicker({
             timePicker: true,
@@ -76,9 +82,24 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
                     moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
                 ]
             }
-        }, this.updateDateRangePicker);
+        }, this._updateDateRangePicker);
 
-        this.updateDateRangePicker(start, end);
+        $('#reportrange').on('apply.daterangepicker', this._applyDateRangePicker);
+
+        this._updateDateRangePicker(start, end);
+    }
+
+    setMoment(date, time) {
+        date = moment(date);
+        time = moment(time, 'HH:mm');
+
+        date.set({
+            hour: time.get('hour'),
+            minute: time.get('minute'),
+            second: time.get('second')
+        });
+
+        return date;
     }
 
     isCalendarOpen() {

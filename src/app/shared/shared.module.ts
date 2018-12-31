@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
-import { YyyyMmDdPipe } from './pipes/yyyy-MM-dd/yyyy-MM-dd.pipe';
-import { HMmAPipe } from './pipes/h-mm-a/h-mm-a.pipe';
+import { CopyrightPipe } from './pipes/copyright/copyright.pipe';
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [YyyyMmDdPipe, HMmAPipe],
-    providers: [DatePipe]
+    declarations: [CopyrightPipe],
+    exports: [CopyrightPipe]
 })
 export class SharedModule {
     constructor() {

@@ -1,4 +1,4 @@
-import { trigger, stagger, animate, style, group, query as q, transition, keyframes } from '@angular/animations';
+import { trigger, animate, style, group, query as q, transition, keyframes } from '@angular/animations';
 const query = (s, a, o = { optional: true }) => q(s, a, o);
 
 export const pageNotFoundAnimation = trigger('pageNotFoundAnimation', [

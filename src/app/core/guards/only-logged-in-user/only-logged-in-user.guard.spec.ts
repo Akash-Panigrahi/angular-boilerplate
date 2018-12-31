@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from './auth.guard';
+import { OnlyLoggedInUserGuard } from './only-logged-in-user.guard';
 
-describe('AuthService', () => {
+describe('OnlyLoggedInUserGuard', () => {
     beforeEach(() => TestBed.configureTestingModule({}));
 
     it('should be created', () => {
-        const service: AuthService = TestBed.get(AuthService);
+        const service: OnlyLoggedInUserGuard = TestBed.get(OnlyLoggedInUserGuard);
         expect(service).toBeTruthy();
     });
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 
 @Component({
@@ -6,7 +6,7 @@ import { Chart } from 'angular-highcharts';
     templateUrl: './basic-column.component.html',
     styleUrls: ['./basic-column.component.scss']
 })
-export class BasicColumnComponent implements OnInit, OnDestroy {
+export class BasicColumnComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() basicColumn;
 
@@ -24,9 +24,6 @@ export class BasicColumnComponent implements OnInit, OnDestroy {
             },
             title: {
                 text: 'Monthly Average Rainfall'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
             },
             xAxis: {
                 categories: [
@@ -64,9 +61,17 @@ export class BasicColumnComponent implements OnInit, OnDestroy {
                     pointPadding: 0.2,
                     borderWidth: 0
                 }
-            },
-            series: this.basicColumn
+            }
         });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (!changes.basicColumn.isFirstChange()) {
+            console.log(this.chart);
+            this.basicColumn = changes.basicColumn.currentValue;
+            this.chart.removeSeries(0);
+            this.chart.addSeries(this.basicColumn, true, true);
+        }
     }
 
     ngOnDestroy() {

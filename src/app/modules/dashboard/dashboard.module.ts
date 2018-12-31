@@ -15,6 +15,7 @@ import { ChartModule } from 'angular-highcharts';
 import { BasicColumnComponent } from './pages/summary-page/components/basic-column/basic-column.component';
 import { GradientPieComponent } from './pages/summary-page/components/gradient-pie/gradient-pie.component';
 import { KpisComponent } from './pages/summary-page/components/kpis/kpis.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { KpisComponent } from './pages/summary-page/components/kpis/kpis.compone
         NgbCollapseModule.forRoot(),
         NgbDatepickerModule.forRoot(),
         FormsModule,
-        ChartModule
+        ChartModule,
+        SharedModule
     ]
 })
 export class DashboardModule {

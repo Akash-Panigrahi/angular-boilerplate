@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { CoreModule } from '../../core.module';
 import { CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: CoreModule
+    providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class OnlyLoggedInUserGuard implements CanActivate {
 
     constructor(private _router: Router) { }
 
-    canActivate(): Observable<boolean> | boolean {
+    canActivate(): boolean {
 
-        if (sessionStorage.getItem('token')) {
+        if (sessionStorage.getItem('user')) {
             return true;
         }
 

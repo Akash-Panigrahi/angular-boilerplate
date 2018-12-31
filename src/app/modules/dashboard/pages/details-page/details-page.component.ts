@@ -26,9 +26,9 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
-        .subscribe(data => {
-            this._getReport(data);
-        });
+            .subscribe(data => {
+                this._getReport(data);
+            });
 
         this._dateTimeRangeService.changeDateTimeRange(JSON.parse(localStorage.getItem('date-time-range')));
     }

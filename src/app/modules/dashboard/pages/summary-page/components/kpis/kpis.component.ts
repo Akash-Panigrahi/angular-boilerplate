@@ -11,10 +11,11 @@ export class KpisComponent implements OnInit, OnChanges {
 
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     ngOnChanges(changes: SimpleChanges) {
-        this.kpis = changes.kpis.currentValue;
+        if (!changes.kpis.isFirstChange()) {
+            this.kpis = changes.kpis.currentValue;
+        }
     }
 }

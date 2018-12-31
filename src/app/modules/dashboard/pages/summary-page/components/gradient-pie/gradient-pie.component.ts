@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { Chart, Highcharts } from 'angular-highcharts';
-// import * as Highcharts from 'highcharts';
 
 @Component({
     selector: 'app-gradient-pie',
     templateUrl: './gradient-pie.component.html',
     styleUrls: ['./gradient-pie.component.scss']
 })
-export class GradientPieComponent implements OnInit, OnDestroy {
+export class GradientPieComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() gradientPie;
 
@@ -53,15 +52,19 @@ export class GradientPieComponent implements OnInit, OnDestroy {
                     },
                     stops: [
                         [0, color],
-                        [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                        [1, (Highcharts.Color(color) as any).brighten(-0.3).get('rgb')] // darken
                     ]
                 };
-            }),
-            series: [{
-                name: 'Share',
-                data: this.gradientPie
-            }]
+            })
         });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (!changes.gradientPie.isFirstChange()) {
+            this.gradientPie = changes.gradientPie.currentValue;
+            this.chart.removeSeries(0);
+            this.chart.addSeries({ name: 'Share', data: this.gradientPie }, true, true);
+        }
     }
 
     ngOnDestroy() {

@@ -1,18 +1,18 @@
 <div class="kpis">
     <div class="kpi">
         <p>Total Calls</p>
-        <span class="kpi__value">{{ kpis.total_calls }}</span>
+        <span class="kpi__value">{{ kpis?.total_calls }}</span>
     </div>
     <div class="kpi">
         <p>Inbound Calls
-            <span title="Inbound calls with respect to total calls">({{ (kpis.inbound_calls / kpis.total_calls) | percent: '.2' }})</span>
+            <span title="Inbound calls with respect to total calls">({{ (kpis?.inbound_calls / kpis?.total_calls) | percent: '.2' }})</span>
         </p>
-        <span class="kpi__value">{{ kpis.inbound_calls }}</span>
+        <span class="kpi__value">{{ kpis?.inbound_calls }}</span>
     </div>
     <div class="kpi">
         <p>Outbound Calls
-            <span title="Outbound calls with respect to total calls">({{ (kpis.outbound_calls / kpis.total_calls) | percent: '.2' }})</span>
+            <span title="Outbound calls with respect to total calls">({{ (kpis?.outbound_calls / kpis?.total_calls) | percent: '.2' }})</span>
         </p>
-        <span class="kpi__value">{{ kpis.outbound_calls }}</span>
+        <span class="kpi__value">{{ kpis?.outbound_calls }}</span>
     </div>
 </div>

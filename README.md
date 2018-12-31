@@ -25,3 +25,26 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+----------
+
+## Installation
+
+> 1. git clone http://git.vivaconnect.co/angular-boilerplate/basic.git
+> 1. npm install
+
+## Angular Examples
+
+> All the below examples can be found in the repository.
+
+### 1. Displaying Data
+### 2. Template Syntax
+### 3. User Input
+### 4. Lifecycle Hooks
+### 5. Component Interaction
+### 6. Component Styles
+### 7. Angular Elements
+### 8. Dynamic Components
+### 9. Attribute Directives
+### 10. Structural Directives
+### 11. Pipes

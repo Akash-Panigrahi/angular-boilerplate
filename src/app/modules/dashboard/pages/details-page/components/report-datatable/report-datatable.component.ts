@@ -1,13 +1,20 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, AfterViewInit } from '@angular/core';
-import { YyyyMmDdPipe } from 'src/app/shared/pipes/yyyy-MM-dd/yyyy-MM-dd.pipe';
-import { HMmAPipe } from 'src/app/shared/pipes/h-mm-a/h-mm-a.pipe';
+import {
+    Component,
+    OnInit,
+    Input,
+    OnChanges,
+    SimpleChanges,
+    OnDestroy,
+    AfterViewInit
+} from '@angular/core';
+import { formatDate } from '@angular/common';
+import { FormatTimeService } from 'src/app/core/services/format-time/format-time.service';
 declare const $: any;
 
 @Component({
     selector: 'app-report-datatable',
     templateUrl: './report-datatable.component.html',
-    styleUrls: ['./report-datatable.component.scss'],
-    providers: [YyyyMmDdPipe, HMmAPipe]
+    styleUrls: ['./report-datatable.component.scss']
 })
 export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -16,8 +23,7 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     dataTable: any;
 
     constructor(
-        private _yyyyMMddPipe: YyyyMmDdPipe,
-        private _hmmaPipe: HMmAPipe
+        private _formatTimeService: FormatTimeService
     ) { }
 
     ngOnInit() { }
@@ -64,19 +70,19 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
                 { data: 'email' },
                 {
                     data: 'start_date',
-                    render: data => this._yyyyMMddPipe.transform(data)
+                    render: data => formatDate(data, 'yyyy-MM-dd', 'en-US')
                 },
                 {
                     data: 'start_time',
-                    render: data => this._hmmaPipe.transform(data)
+                    render: data => this._formatTimeService.formatTime(data)
                 },
                 {
                     data: 'end_date',
-                    render: data => this._yyyyMMddPipe.transform(data)
+                    render: data => formatDate(data, 'yyyy-MM-dd', 'en-US')
                 },
                 {
                     data: 'end_time',
-                    render: data => this._hmmaPipe.transform(data)
+                    render: data => this._formatTimeService.formatTime(data)
                 },
             ]
         });
