@@ -177,6 +177,11 @@ select:-internal-autofill-selected {
 
 
 /* report datatable styling */
+.dataTables_wrapper {
+    box-shadow: 1px 2px 16px -2px #cccccc;
+    padding: 1rem;
+}
+
 .paginate_button {
 
     &:nth-child(1),
@@ -189,5 +194,34 @@ select:-internal-autofill-selected {
             display: flex;
             align-items: center;
         }
+    }
+}
+
+
+/* Effects */
+
+.ripple-element {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.ink {
+    display: block;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    transform: scale(0);
+}
+
+.animate {
+    animation: ripple 0.65s linear;
+}
+
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
     }
 }

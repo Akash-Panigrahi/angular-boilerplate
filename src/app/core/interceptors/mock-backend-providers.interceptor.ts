@@ -9,9 +9,9 @@ import {
 } from 'rxjs/operators';
 
 // mock datasets
-import { USERS } from './users';
-import { REPORTS } from './report';
-import { SUMMARY } from './summary';
+import { USERS } from '../mocks/users.mock';
+import { REPORTS } from '../mocks/report.mock';
+import { SUMMARY } from '../mocks/summary.mock';
 import { formatDate } from '@angular/common';
 
 export class MockBackendInterceptor implements HttpInterceptor {

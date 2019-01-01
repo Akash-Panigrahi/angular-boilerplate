@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { OnlyLoggedInUserGuard } from './core/guards/only-logged-in-user/only-logged-in-user.guard';
 import { AlreadyLoggedInUserGuard } from './core/guards/already-logged-in-user/already-logged-in-user.guard';
 

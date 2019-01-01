@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { environment } from 'src/environments/environment';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { mockBackendProvider } from './helpers/mock-backend-providers.interceptor';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { mockBackendProvider } from './interceptors/mock-backend-providers.interceptor';
 import { RouterModule } from '@angular/router';
+import { ModuleAlreadyLoadedGuard } from './guards/module-already-loaded/module-already-loaded.guard';
 
 @NgModule({
     declarations: [PageNotFoundComponent],
@@ -12,7 +13,12 @@ import { RouterModule } from '@angular/router';
     providers: [mockBackendProvider]
 })
 export class CoreModule {
-    constructor() {
+    constructor(
+        @Optional() @SkipSelf() parentModule: CoreModule,
+        private _moduleAlreadyLoadedGuard: ModuleAlreadyLoadedGuard
+    ) {
+        this._moduleAlreadyLoadedGuard.throwIfAlreadyLoaded(parentModule, 'CoreModule');
+
         if (!environment.production) {
             console.log('CoreModule loaded');
         }

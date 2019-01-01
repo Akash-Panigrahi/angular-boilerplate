@@ -1,4 +1,4 @@
-import { ApiService } from 'src/app/core/services/api/api.service';
+import { ApiService } from 'src/app/core/http/api/api.service';
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError, take } from 'rxjs/operators';
