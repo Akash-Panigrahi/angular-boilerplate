@@ -29,8 +29,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             .subscribe(data => {
                 this._getReport(data);
             });
-
-        this._dateTimeRangeService.changeDateTimeRange(JSON.parse(localStorage.getItem('date-time-range')));
     }
 
     private _getReport(reportRange) {

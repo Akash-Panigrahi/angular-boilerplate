@@ -1,8 +1,8 @@
 import {
-    trigger, animate, style, group, query as q, transition, sequence, animateChild, state
+    trigger, animate, style, query as q, transition
 } from '@angular/animations';
 
-const query = (s, a, o = { optional: true }) => q(s, a, o);
+export function query(s, a, o = { optional: true }) { return q(s, a, o); }
 
 export const slideDown = trigger('slideDown', [
     transition('* => *', [

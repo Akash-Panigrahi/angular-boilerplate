@@ -2,7 +2,7 @@ import {
     trigger, animate, style, group, query as q, transition, sequence, animateChild
 } from '@angular/animations';
 
-const query = (s, a, o = { optional: true }) => q(s, a, o);
+export function query(s, a, o = { optional: true }) { return q(s, a, o); }
 
 export const pageAnimation = trigger('pageAnimation', [
     transition(':enter', group([

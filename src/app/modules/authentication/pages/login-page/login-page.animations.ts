@@ -1,5 +1,6 @@
-import { trigger, stagger, animate, style, group, query as q, transition, keyframes, sequence } from '@angular/animations';
-const query = (s, a, o = { optional: true }) => q(s, a, o);
+import { trigger, stagger, animate, style, group, query as q, transition } from '@angular/animations';
+
+export function query(s, a, o = { optional: true }) { return q(s, a, o); }
 
 export const pageAnimation = trigger('pageAnimation', [
     transition(':enter', [

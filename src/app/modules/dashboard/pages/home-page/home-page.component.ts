@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { dashboardRouterAnimation } from './../../dashboard-router.animations';
-import { pageAnimation } from './home.animations';
+import { pageAnimation } from './home-page.animations';
 
 @Component({
     selector: 'app-home-page',

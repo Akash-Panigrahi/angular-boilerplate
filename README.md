@@ -27,16 +27,16 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ----------
 
-## Installation
+<!-- ## Installation
 
 > 1. git clone http://git.vivaconnect.co/angular-boilerplate/basic.git
-> 1. npm install
+> 1. npm install -->
 
 ## Architecture
 
 ### Project Folder Structure
 
-```
+```ts
 |-- app
     |-- modules
         |-- [+] authentication
@@ -67,7 +67,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
         |-- [+] pipes
         |-- shared.module.ts
     |
-    |-- [+] configs
     |-- app.component.ts|html|scss|spec.ts
     |-- app-router.animations.ts
     |-- app-routing.module.ts
@@ -90,7 +89,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 The CoreModule contains singleton services, universal components and other features where there’s only once instance per application. To prevent re-importing the core module elsewhere, a guard for it is added in the core modules’ constructor.
 
-```
+```ts
 |-- core
         |-- [+] guards
         |-- components
@@ -110,7 +109,7 @@ The CoreModule contains singleton services, universal components and other featu
 
 The guards folder contains all of the guards require to protect different routes in my applications. In addition it also contains some services that prevents certain actions.
 
-```
+```ts
 |-- guards
     |-- already-logged-in-user
         |-- already-logged-in-user.ts|spec.ts
@@ -122,7 +121,7 @@ The guards folder contains all of the guards require to protect different routes
 
 The components folder contains all the universal components that can be singleton. Error page components such as **404 not found** or **500 server error** can be a part of this module.
 
-```
+```ts
 |-- components
     |-- page-not-found
         |-- page-not-found.component.ts|html|scss|spec.ts
@@ -134,7 +133,7 @@ The components folder contains all the universal components that can be singleto
 
 The http folder handles all http calls from out application.
 
-```
+```ts
 |-- http
     |-- api
         |-- app.service.ts|spec.ts
@@ -149,7 +148,7 @@ The folder does otherwise contain folders for interacting with the different API
 
 Mocks are useful for testing, but you can also use them to retrieve fictional data until the back-end is set up. This specific mocks folder contains all the mock-files of our app. These mock files are essentially just data exports.
 
-```
+```ts
 |-- mocks
     |-- users.mock.ts
     |-- report.mock.ts
@@ -160,7 +159,7 @@ Mocks are useful for testing, but you can also use them to retrieve fictional da
 
 This allows us to catch and modify the requests and responses from our API calls. In addition to below interceptors, one can add *error-handler.interceptor* for error responses globally before passing to respective callbacks function.
 
-```
+```ts
 |-- interceptors
     |-- token
         |-- token.interceptor.ts|spec.ts
@@ -173,7 +172,7 @@ This also contains a *mock-backend-interceptor* which will put a halt to any req
 
 Interfaces contain type definitions for enforcing strict type checking.
 
-```
+```ts
 |-- interfaces
     |-- login.interface.ts
 ```
@@ -182,7 +181,7 @@ Interfaces contain type definitions for enforcing strict type checking.
 
 All additional singleton services are placed under services folder
 
-```
+```ts
 |-- services
     |-- [+] date-time-range
     |-- [+] format-time
@@ -194,7 +193,7 @@ All additional singleton services are placed under services folder
 
 The *SharedModule* is where any shared components, pipes/filters and services should go. The SharedModule can be imported in any other module when those items will be re-used. The shared module shouldn’t have any dependency to the rest of the application and should therefore not rely on any other module.
 
-```
+```ts
 |-- shared
     |-- components
         |-- kpi
@@ -214,7 +213,7 @@ Typically SharedModule should not be imported in the root module, but instead sh
 
 Contains all the feature/eagerly modules as well as lazy modules. It is just a folder for grouping modules and is not a module on its own.
 
-```
+```ts
 |-- modules
     |-- [+] authentication
     |-- dashboard
@@ -230,7 +229,7 @@ A single module, for instance, the **DashboardModule** is comprised of *componen
 
 **components** folder contains components that are exclusive to this module and will not be used by other modules. If a component needs to be reused by another component; move the component to the shared module and export the same.
 
-```
+```ts
 |-- components
     |-- action-bar
         |-- action-bar.component.ts|html|scss|spec.ts
@@ -252,7 +251,7 @@ They have a variety of role.
 
 > *Note:* The scope of the services defined in the **providers** array is that of the component, so it will not be available outside of the component.
 
-```
+```ts
 |-- pages
     |-- details-page
         |-- details-page.component.ts|html|scss|spec.ts
@@ -273,6 +272,46 @@ This responsibility is carried out by the **home-page** component of the **Dashb
 >
 > **SharedModule** is only imported by modules that requires it's exports.
 
-## Angular Examples
+---
 
-> All the below examples can be found in the repository.
+## Deployment
+
+### Build Angular app
+
+```bash
+ng build --prod --output-path=dist
+```
+
+By default, the output path of build is **dist\/\<app-name>**.
+One can change that in **angular.json** file
+
+```json
+"projects": {
+    "<app-name>": {
+        "architect": {
+                "build": {
+                    "options": {
+                        "outputPath": "dist"
+```
+
+But to provide flexibility, one can supply **--output-path=\<path-name>** to specify build path.
+
+### Dockerize
+
+```bash
+docker build -t basic-boilerplate .
+
+docker run -p 5200:80 --name basic-boilerplate -d basic-boilerplate
+```
+
+Open **http://localhost:5200** in browser.
+
+<style>
+.separator {
+    --line-gap: 10px;
+    height: 1px;
+    width: calc(100% - (var(--line-gap) * 2));
+    position: relative;
+    left: var(--line-gap);
+}
+</style>

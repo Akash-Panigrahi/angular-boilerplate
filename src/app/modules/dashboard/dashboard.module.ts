@@ -16,6 +16,7 @@ import { BasicColumnComponent } from './pages/summary-page/components/basic-colu
 import { GradientPieComponent } from './pages/summary-page/components/gradient-pie/gradient-pie.component';
 import { KpisComponent } from './pages/summary-page/components/kpis/kpis.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class DashboardModule {
     constructor() {
-        console.log('DashboardModule loaded');
+        if (!environment.production) {
+            console.log('DashboardModule loaded');
+        }
     }
 }

@@ -13,6 +13,7 @@ body {
     font-family: Courier New, Helvetica, monospace;
 }
 
+// css for overriding yellowing of text fields on autocomplete of chrome browser
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus textarea:-webkit-autofill,
@@ -36,13 +37,19 @@ select:-internal-autofill-selected {
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(assets/fonts/MaterialIcons-Regular.eot);
+    /*
+        Using absolute paths to stop duplicating of font files when building app.
+        If not, then ng build will duplicate font files with unique postfix everytime,
+        update the urls with the new file paths, and create those new files in
+        root folder, hence rendering font files in 'assets' folder useless.
+    */
+    src: url(/assets/fonts/MaterialIcons-Regular.eot);
     /* For IE6-8 */
     src: local('Material Icons'),
         local('MaterialIcons-Regular'),
-        url(assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
-        url(assets/fonts/MaterialIcons-Regular.woff) format('woff'),
-        url(assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        url(/assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+        url(/assets/fonts/MaterialIcons-Regular.woff) format('woff'),
+        url(/assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 .material-icons {
@@ -178,7 +185,7 @@ select:-internal-autofill-selected {
 
 /* report datatable styling */
 .dataTables_wrapper {
-    box-shadow: 1px 2px 16px -2px #cccccc;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
     padding: 1rem;
 }
 

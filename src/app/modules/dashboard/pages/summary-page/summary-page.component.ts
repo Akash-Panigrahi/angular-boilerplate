@@ -16,7 +16,11 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
 
     @HostBinding('@riseUp') riseUp = true;
 
-    summaryData = {};
+    summaryData = {
+        kpis: {},
+        basicColumn: {},
+        gradientPie: {}
+    };
     currentDateTimeRange$ = new Subscription();
 
     constructor(
@@ -29,8 +33,6 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
             .subscribe(data => {
                 this._getSummary(data);
             });
-
-        this._dateTimeRangeService.changeDateTimeRange(JSON.parse(localStorage.getItem('date-time-range')));
     }
 
     private _getSummary(summaryRange) {

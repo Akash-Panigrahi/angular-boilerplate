@@ -19,25 +19,13 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
     @Output() dateTimeRangeEvent = new EventEmitter<object>();
 
-    private _updateDateRangePicker(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-
     private _applyDateRangePicker = (ev, picker) => {
         const start = picker.startDate;
         const end = picker.endDate;
 
-        const dateTimeRange = {
-            startDate: start.format('YYYY-MM-DD'),
-            endDate: end.format('YYYY-MM-DD'),
-            startTime: start.format('H:mm:ss'),
-            endTime: end.format('H:mm:ss')
-        };
-
-        // save datetimerange in central store
-        localStorage.setItem('date-time-range', JSON.stringify(dateTimeRange));
-
-        this._dateTimeRangeService.changeDateTimeRange(dateTimeRange);
+        this._setDateTimeRangeInStore(start, end);
+        this.lastUpdated = new Date();
+        this._dateTimeRangeService.changeDateTimeRange(JSON.parse(sessionStorage.getItem('date-time-range')));
     }
 
     constructor(private _dateTimeRangeService: DateTimeRangeService) { }
@@ -47,10 +35,16 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
 
-        const dateTimeRange = JSON.parse(localStorage.getItem('date-time-range'));
+        const dateTimeRange = JSON.parse(sessionStorage.getItem('date-time-range'));
+        let start, end;
 
-        const start = this.setMoment(dateTimeRange.startDate, dateTimeRange.startTime);
-        const end = this.setMoment(dateTimeRange.endDate, dateTimeRange.endTime);
+        if (!dateTimeRange) {
+            start = moment(new Date());
+            end = moment(new Date());
+        } else {
+            start = this._setMoment(dateTimeRange.startDate, dateTimeRange.startTime);
+            end = this._setMoment(dateTimeRange.endDate, dateTimeRange.endTime);
+        }
 
         $('#reportrange').daterangepicker({
             timePicker: true,
@@ -86,10 +80,15 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
         $('#reportrange').on('apply.daterangepicker', this._applyDateRangePicker);
 
+        this._setDateTimeRangeInStore(start, end);
         this._updateDateRangePicker(start, end);
     }
 
-    setMoment(date, time) {
+    private _updateDateRangePicker(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    private _setMoment(date, time) {
         date = moment(date);
         time = moment(time, 'HH:mm');
 
@@ -100,6 +99,19 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
         });
 
         return date;
+    }
+
+    private _setDateTimeRangeInStore(start, end) {
+
+        const dateTimeRange = {
+            startDate: start.format('YYYY-MM-DD'),
+            endDate: end.format('YYYY-MM-DD'),
+            startTime: start.format('H:mm:ss'),
+            endTime: end.format('H:mm:ss')
+        };
+
+        // save datetimerange in central store
+        sessionStorage.setItem('date-time-range', JSON.stringify(dateTimeRange));
     }
 
     isCalendarOpen() {
