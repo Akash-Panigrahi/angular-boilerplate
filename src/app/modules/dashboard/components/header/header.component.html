@@ -7,6 +7,7 @@
 
         <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
             <ul class="navbar-nav ml-auto">
+                <!-- Looping navigation object using *ngFor -->
                 <li class="nav-item" routerLinkActive="active" *ngFor="let navItem of navItems">
                     <a class="nav-link" [routerLink]="navItem.url" routerLinkActive="active" (click)="isNavbarCollapsed = !isNavbarCollapsed">{{ navItem.name }}</a>
                 </li>

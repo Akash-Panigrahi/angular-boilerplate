@@ -13,20 +13,13 @@ import { pageAnimation } from './home-page.animations';
 })
 export class HomePageComponent implements OnInit {
 
-    // animation
+    // bind pageAnimation animation on host
     @HostBinding('@pageAnimation') get pageAnimation() { return ''; }
-
-    dateTimeRange;
 
     constructor() { }
 
     ngOnInit() {
     }
-
-    receiveDateTimeRange(e) {
-        this.dateTimeRange = e;
-    }
-
     getState(outlet) {
         return outlet.activatedRouteData.state;
     }

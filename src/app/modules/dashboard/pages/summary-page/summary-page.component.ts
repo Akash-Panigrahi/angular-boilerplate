@@ -21,6 +21,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
         basicColumn: {},
         gradientPie: {}
     };
+
     currentDateTimeRange$ = new Subscription();
 
     constructor(
@@ -29,6 +30,9 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        /*
+            listen to stream, then pass the new emitted value to getSummary observable
+        */
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
             .subscribe(data => {
                 this._getSummary(data);
@@ -38,14 +42,19 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
     private _getSummary(summaryRange) {
         this._summaryPageService
             .getSummary(summaryRange)
-            .pipe(take(1))
             .subscribe(
+                /*
+                    pass the response data,
+                    which will then be used to update
+                    dumb child components
+                */
                 res => this.summaryData = res,
                 err => console.error(err)
             );
     }
 
     ngOnDestroy() {
+        // stop listening to streams when component is destroyed
         this.currentDateTimeRange$.unsubscribe();
     }
 }

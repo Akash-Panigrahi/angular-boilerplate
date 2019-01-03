@@ -5,8 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class StateService {
 
-    username;
-    dateTimeRange;
-
     constructor() { }
+
+    getState(key: string) {
+        return JSON.parse(sessionStorage.getItem(key));
+    }
+
+    setState(key: string, value: any): void {
+        sessionStorage.setItem(key, JSON.stringify(value));
+    }
 }

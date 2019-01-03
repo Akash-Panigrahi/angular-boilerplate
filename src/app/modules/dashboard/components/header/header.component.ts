@@ -9,6 +9,8 @@ import { LogoutService } from 'src/app/core/services/logout/logout.service';
 export class HeaderComponent implements OnInit {
 
     isNavbarCollapsed = true;
+
+    // array defining navigation model
     navItems = [
         {
             name: 'Summary',

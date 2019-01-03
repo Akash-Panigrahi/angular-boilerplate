@@ -14,21 +14,17 @@ export class ApiService {
     ) { }
 
     private _prepareHeaders(headers: HttpHeaders = new HttpHeaders()): object {
+        // setting default headers for api response
         headers = headers.set('Content-Type', 'application/json');
         headers = headers.set('Accept', 'application/json');
 
         return { headers };
     }
 
-    // HTTP VERBS
-
+    // using T to return custom type
     post<T>(url: string, data: object, headers?: HttpHeaders | null): Observable<T> {
-        return this._http.post<T>(`${environment.BASE_URL + url}`, data, this._prepareHeaders(headers))
-            .pipe(take(1));
-    }
-
-    get<T>(url: string, headers?: HttpHeaders | null): Observable<T> {
-        return this._http.get<T>(`${environment.BASE_URL + url}`, this._prepareHeaders(headers))
+        return this._http
+            .post<T>(`${environment.BASE_URL + url}`, data, this._prepareHeaders(headers))
             .pipe(take(1));
     }
 }

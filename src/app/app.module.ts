@@ -12,9 +12,7 @@ import { NgProgressRouterModule } from '@ngx-progressbar/router';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         // 1st Party Modules
         BrowserModule,

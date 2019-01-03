@@ -1,7 +1,9 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { slideDown } from './action-bar.animations';
 import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
+import { StateService } from 'src/app/core/services/state/state.service';
 
+// declare variables to avoid error in aot compilation process
 declare const $: any;
 declare const moment: any;
 
@@ -13,29 +15,39 @@ declare const moment: any;
 })
 export class ActionBarComponent implements OnInit, AfterViewInit {
 
+    // property required to trigger animation
     isOpen = false;
 
+    // setting initial date when app is opened
     lastUpdated = new Date();
 
-    @Output() dateTimeRangeEvent = new EventEmitter<object>();
-
     private _applyDateRangePicker = (ev, picker) => {
+        // everytime new date range is selected
+
         const start = picker.startDate;
         const end = picker.endDate;
 
-        this._setDateTimeRangeInStore(start, end);
+        // save save in state
+        this._setDateTimeRangeInState(start, end);
+
+        // updating the value
         this.lastUpdated = new Date();
-        this._dateTimeRangeService.changeDateTimeRange(JSON.parse(sessionStorage.getItem('date-time-range')));
+
+        // pass new value in the stream
+        this._dateTimeRangeService.changeDateTimeRange(this._state.getState('date-time-range'));
     }
 
-    constructor(private _dateTimeRangeService: DateTimeRangeService) { }
+    constructor(
+        private _dateTimeRangeService: DateTimeRangeService,
+        private _state: StateService
+    ) { }
 
     ngOnInit() {
     }
 
     ngAfterViewInit() {
 
-        const dateTimeRange = JSON.parse(sessionStorage.getItem('date-time-range'));
+        const dateTimeRange = this._state.getState('date-time-range');
         let start, end;
 
         if (!dateTimeRange) {
@@ -80,7 +92,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
         $('#reportrange').on('apply.daterangepicker', this._applyDateRangePicker);
 
-        this._setDateTimeRangeInStore(start, end);
+        this._setDateTimeRangeInState(start, end);
         this._updateDateRangePicker(start, end);
     }
 
@@ -101,7 +113,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
         return date;
     }
 
-    private _setDateTimeRangeInStore(start, end) {
+    private _setDateTimeRangeInState(start, end) {
 
         const dateTimeRange = {
             startDate: start.format('YYYY-MM-DD'),
@@ -110,11 +122,12 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
             endTime: end.format('H:mm:ss')
         };
 
-        // save datetimerange in central store
-        sessionStorage.setItem('date-time-range', JSON.stringify(dateTimeRange));
+        // save datetimerange in state
+        this._state.setState('date-time-range', dateTimeRange);
     }
 
     isCalendarOpen() {
+        // triggering animation by changing state
         this.isOpen = !this.isOpen;
     }
 }

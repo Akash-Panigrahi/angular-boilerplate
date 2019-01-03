@@ -7,6 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class KpiComponent implements OnInit {
 
+    /*
+        We are not listening for ngOnChanges and also not for firstChange(),
+        since the @Input fields are static as opposed to it's parent component.
+    */
     @Input() kpiTitle = '';
     @Input() kpiValue = '';
     @Input() kpiPercent = '';

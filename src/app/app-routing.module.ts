@@ -1,34 +1,49 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
-import { OnlyLoggedInUserGuard } from './core/guards/only-logged-in-user/only-logged-in-user.guard';
-import { AlreadyLoggedInUserGuard } from './core/guards/already-logged-in-user/already-logged-in-user.guard';
+import { NotLoggedInUserGuard } from './core/guards/not-logged-in-user/not-logged-in-user.guard';
 
 const routes: Routes = [
     {
         path: 'login',
+        // loading authentication module only when required
+        /*
+            when specifiying lazy loaded module,
+            supply module path and export class name after '#'
+        */
         loadChildren: './modules/authentication/authentication.module#AuthenticationModule',
-        canActivate: [AlreadyLoggedInUserGuard]
+        // route can only be activated if user is not logged in
+        /*
+            if canActivate returns false, then next in line route will be checked which is 'home'
+        */
+        canActivate: [NotLoggedInUserGuard]
     },
     {
         path: 'home',
         loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
-        canActivate: [OnlyLoggedInUserGuard]
+        // route can only be activated by logged in user
+        canActivate: [NotLoggedInUserGuard]
     },
     {
         path: '',
+        // if nothing is specified redirect to login route
         redirectTo: 'login',
         pathMatch: 'full'
     },
     {
         path: '**',
+        // redirect to PageNotFoundComponent if no route matches
         component: PageNotFoundComponent,
         data: { state: 'page-not-found' }
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    imports: [
+        RouterModule.forRoot(routes, {
+            useHash: true // this will add '#' after base href, and app will a SPA
+        })
+    ],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,5 +1,5 @@
 import {
-    HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS
+    HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor
 } from '@angular/common/http';
 import {
     Observable, of
@@ -12,7 +12,6 @@ import {
 import { USERS } from '../mocks/users.mock';
 import { REPORTS } from '../mocks/report.mock';
 import { SUMMARY } from '../mocks/summary.mock';
-import { formatDate } from '@angular/common';
 
 export class MockBackendInterceptor implements HttpInterceptor {
 
@@ -222,14 +221,4 @@ export class MockBackendInterceptor implements HttpInterceptor {
             .pipe(delay(500))
             .pipe(dematerialize());
     }
-
-    yyyyMMdd(date) {
-        return formatDate(date, 'yyyy-MM-dd', 'en-US');
-    }
 }
-
-export const mockBackendProvider = {
-    provide: HTTP_INTERCEPTORS,
-    useClass: MockBackendInterceptor,
-    multi: true
-};

@@ -1,11 +1,13 @@
-import { Directive, HostListener, ElementRef, Renderer2 } from '@angular/core';
+import { Directive, HostListener, ElementRef } from '@angular/core';
 
 @Directive({
     selector: '[rippleOnClick]'
 })
 export class RippleOnClickDirective {
 
+    // listen for click events on the element the directive is attached to
     @HostListener('click', ['$event'])
+    // on click, run the below function and pass the 'event' object
     showRippleEffect(event) {
 
         const targetEl = this._el.nativeElement;
@@ -28,7 +30,6 @@ export class RippleOnClickDirective {
     }
 
     constructor(
-        private _el: ElementRef,
-        private _renderer: Renderer2
+        private _el: ElementRef
     ) { }
 }

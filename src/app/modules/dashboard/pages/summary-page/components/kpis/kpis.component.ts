@@ -7,6 +7,7 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/cor
 })
 export class KpisComponent implements OnInit, OnChanges {
 
+    // specify @Input field which will hold input data from parent component
     @Input() kpis;
 
     constructor() { }
@@ -14,6 +15,11 @@ export class KpisComponent implements OnInit, OnChanges {
     ngOnInit() { }
 
     ngOnChanges(changes: SimpleChanges) {
+        /*
+            dont listen to first time changes,
+            since we are calling data dynamically
+            from api service
+        */
         if (!changes.kpis.isFirstChange()) {
             this.kpis = changes.kpis.currentValue;
         }

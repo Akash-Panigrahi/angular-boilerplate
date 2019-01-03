@@ -34,7 +34,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     private _getReport(reportRange) {
         this._detailsPageService
             .getReport(reportRange)
-            .pipe(take(1))
             .subscribe(
                 res => this.clients = res,
                 err => console.error(err)

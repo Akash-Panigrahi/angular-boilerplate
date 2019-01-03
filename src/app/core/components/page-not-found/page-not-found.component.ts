@@ -5,9 +5,7 @@ import { pageNotFoundAnimation } from './page-not-found.animations';
     selector: 'app-page-not-found',
     templateUrl: 'page-not-found.component.html',
     styleUrls: ['page-not-found.component.scss'],
-    animations: [
-        pageNotFoundAnimation
-    ]
+    animations: [pageNotFoundAnimation]
 })
 export class PageNotFoundComponent {
 

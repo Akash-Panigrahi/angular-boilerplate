@@ -113,8 +113,7 @@ The guards folder contains all of the guards require to protect different routes
 |-- guards
     |-- already-logged-in-user
         |-- already-logged-in-user.ts|spec.ts
-    |-- [+] only-logged-in-user
-    |-- [+] module-already-loaded
+    |-- [+] not-logged-in-user
 ```
 
 ##### components
@@ -187,6 +186,7 @@ All additional singleton services are placed under services folder
     |-- [+] format-time
     |-- logout
         |-- logout.service.ts|spec.ts
+    |-- [+] state
 ```
 
 #### Shared Module (shared)
@@ -239,10 +239,10 @@ A single module, for instance, the **DashboardModule** is comprised of *componen
 
 **pages** folder is made up of components whose sole responsibility is *provide* for their child components. They do not show any data of their own.
 They have a variety of role.
-- As a smart parent component provide @Input data to their dumb child components.
+- As a smart parent component to provide @Input data to their dumb child components.
     This way all the computations and service requests are done at the smart components level.
 - It contains *components* folder comprising of one to many dumb child components.
-- Define animations.
+- Defines animations.
 
 > *Note:* Any component can define and execute animations on view of its own and it's child components.
 

@@ -91,6 +91,10 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     }
 
     ngOnDestroy() {
+        /*
+            since jquery runs outside angular and in the global scope,
+            we need to clear out elements ourselves.
+        */
         this.dataTable.clear();
         this.dataTable.destroy();
     }

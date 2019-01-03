@@ -1,4 +1,9 @@
 <br>
 <footer class="main-footer py-2 d-flex justify-content-end align-items-center flex-column flex-sm-row">
+    <!--
+        copyright pipe returns an HTML value, which needs to be passed to [innerHTML]
+        attribute of span element for the value to be interpreted as HTML.
+        otherwise it will just show as a string if interpolated
+    -->
     <span class="px-2" [innerHTML]="'vivaconnect.co' | copyright"></span>
 </footer>

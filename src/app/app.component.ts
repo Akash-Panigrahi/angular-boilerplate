@@ -9,12 +9,12 @@ import { appRouterTransition } from './app-router.animations';
     styleUrls: ['./app.component.scss'],
     animations: [appRouterTransition]
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit, AfterViewInit {
+
     title = 'basic';
 
+    // getting a reference to the progress bar in the html file
     @ViewChild('progressBar') private _progressBar: NgProgressComponent;
-
-    private routerEvents$ = new Subscription();
 
     constructor() { }
 
@@ -22,16 +22,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        // setting progress bar config
+        // setting progress bar configurations
         this._progressBar.color = 'red';
         this._progressBar.spinner = false;
     }
 
     getState(outlet) {
         return outlet.activatedRouteData.state;
-    }
-
-    ngOnDestroy() {
-        this.routerEvents$.unsubscribe();
     }
 }

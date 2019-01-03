@@ -12,9 +12,9 @@ import { ILoginData } from 'src/app/core/interfaces/login.interface';
     styleUrls: ['./login-page.component.scss'],
     animations: [
         pageAnimation,
-        borderExpandOnHover,
         slideDown
     ],
+    // using providers the scope of 'LoginPageService' is limited to this component class
     providers: [LoginPageService]
 })
 export class LoginPageComponent implements OnInit {
@@ -26,7 +26,7 @@ export class LoginPageComponent implements OnInit {
     passwordVisibility = false;
     passwordFieldType = 'password';
 
-    // form
+    // creating form using formbuilder
     loginForm = this._formBuilder.group({
         username: ['skyfleet', [
             Validators.required,
@@ -40,7 +40,11 @@ export class LoginPageComponent implements OnInit {
         ]]
     });
 
-    // getters for form controls
+    /*
+        specifying getters for form controls.
+        otherwise, one had to use loginForm.get('username') in the template
+        to reference the field model
+    */
     get username() { return this.loginForm.get('username'); }
     get password() { return this.loginForm.get('password'); }
 
@@ -68,6 +72,10 @@ export class LoginPageComponent implements OnInit {
                     this._router.navigate(['home/summary']);
                 },
                 (err: Error) => {
+                    /*
+                        any error thrown from the observable will be catch by this
+                        error observer
+                    */
 
                     this._toastr.error(err.message);
                 }

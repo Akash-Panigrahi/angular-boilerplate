@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
     imports: [CommonModule],
     declarations: [CopyrightPipe, RippleOnClickDirective, KpiComponent],
+    // declarations needs to be exported to be used by other modules
     exports: [CopyrightPipe, RippleOnClickDirective, KpiComponent]
 })
 export class SharedModule {
