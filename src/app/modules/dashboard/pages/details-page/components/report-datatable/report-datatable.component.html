@@ -1,17 +1,52 @@
-<h1>Clients list</h1>
-<table class="table table-hover report-table" cellspacing="0" style="width: 100%;">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>Email</th>
-            <th>Start Date</th>
-            <th>Start Time</th>
-            <th>End Date</th>
-            <th>End Time</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+<div class="getting-clients"
+    *ngIf="isInitialTableReady !== 'yes'"
+    [@gettingClientsLoader]="isInitialTableReady"
+    (@gettingClientsLoader.done)="isGettingClientsLoaderDone($event)"
+>
+    <h3>Getting Clients List</h3>
+    <h6>Please Wait...</h6>
+    <div class="getting-clients__progress-bar">
+        <ng-progress #gettingClientsBar
+            fixed="false"
+            (completed)="gettingClientsBarCompleted()"
+            id="getting-clients__progress-bar"
+        ></ng-progress>
+    </div>
+</div>
+
+<div class="table__wrapper"
+    [@isInitialTableReady__Table]="isInitialTableReady__Table"
+    (@isInitialTableReady__Table.start)="onIsInitialTableReady__Table($event)"
+    (@isInitialTableReady__Table.done)="onIsInitialTableReady__Table($event)"
+>
+    <h1>Clients list</h1>
+    <table class="table table-hover report-table" cellspacing="0" style="width: 100%;">
+        <thead>
+            <tr>
+                <th class="report-table__head">Id</th>
+                <th class="report-table__head">First Name</th>
+                <th class="report-table__head">Last Name</th>
+                <th class="report-table__head">Gender</th>
+                <th class="report-table__head">Email</th>
+                <th class="report-table__head">Start Date</th>
+                <th class="report-table__head">Start Time</th>
+                <th class="report-table__head">End Date</th>
+                <th class="report-table__head">End Time</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<!-- for component initialization -->
+<!--
+    Getting Client List
+        Please Wait
+    <<- Loader ->>
+-->
+
+<!-- for then subsequent requests -->
+<!--
+    Generating List...
+    <<- Loader ->>
+-->

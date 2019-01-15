@@ -1,8 +1,8 @@
 import {
-    sequence, trigger, stagger, animate, style, group, query as q, transition, keyframes, animateChild
+    sequence, trigger, animate, style, group, query as q, transition, animateChild
 } from '@angular/animations';
 
-export function query(s, a, o = { optional: true }) { return q(s, a, o); }
+const query = (s, a, o = { optional: true }) => q(s, a, o);
 
 export const dashboardRouterAnimation = trigger('dashboardRouterAnimation', [
     transition('* => *', [

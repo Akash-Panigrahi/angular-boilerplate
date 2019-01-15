@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgProgressComponent } from '@ngx-progressbar/core';
-import { Subscription } from 'rxjs';
 import { appRouterTransition } from './app-router.animations';
 
 @Component({

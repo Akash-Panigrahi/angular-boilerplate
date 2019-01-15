@@ -1,6 +1,4 @@
-import { trigger, animate, style, group, query as q, transition } from '@angular/animations';
-
-export function query(s, a, o = { optional: true }) { return q(s, a, o); }
+import { trigger, animate, style, group, query, transition } from '@angular/animations';
 
 export const pageNotFoundAnimation = trigger('pageNotFoundAnimation', [
     transition(':enter', [

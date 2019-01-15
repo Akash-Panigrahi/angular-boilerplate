@@ -5,12 +5,10 @@ import {
     animate,
     style,
     group,
-    query as q,
+    query,
     transition,
     animateChild
 } from '@angular/animations';
-
-export function query(s, a, o = { optional: true }) { return q(s, a, o); }
 
 export const authenticationRouterTransition = trigger('authenticationRouterTransition', [
     transition('* => *', [

@@ -17,6 +17,7 @@ import { GradientPieComponent } from './pages/summary-page/components/gradient-p
 import { KpisComponent } from './pages/summary-page/components/kpis/kpis.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { NgProgressModule } from '@ngx-progressbar/core';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { environment } from 'src/environments/environment';
         DashboardRoutingModule,
         NgbCollapseModule.forRoot(),
         NgbDatepickerModule.forRoot(),
+        NgProgressModule,
         FormsModule,
         ChartModule,
         SharedModule

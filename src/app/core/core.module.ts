@@ -6,7 +6,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RouterModule } from '@angular/router';
 import { ModuleAlreadyLoadedGuard } from './guards/module-already-loaded/module-already-loaded.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MockBackendInterceptor } from './interceptors/mock-backend-providers.interceptor';
+import { MockBackendInterceptor } from './interceptors/mock-backend.interceptor';
 import { TokenInterceptor } from './interceptors/token/token.interceptor';
 
 @NgModule({

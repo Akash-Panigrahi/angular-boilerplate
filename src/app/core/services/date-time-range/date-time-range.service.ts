@@ -11,9 +11,9 @@ export class DateTimeRangeService {
     // service class required to facilitate data exchange between two components
 
     /*
-        BehaviorSubject is a kind of Subject that allows to set initial value of stream
-        Subject allows for multicasting
-        So multiple components can listen to one data source
+        BehaviorSubject is a kind of Subject that allows to set initial value of stream.
+        Subject allows for multicasting,
+        so multiple components can listen to one data source.
     */
     private _dateTimeRangeSource = new BehaviorSubject(this._setDateTimeRangeInStore());
 

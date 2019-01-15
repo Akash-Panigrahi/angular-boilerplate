@@ -60,8 +60,9 @@ export class MockBackendInterceptor implements HttpInterceptor {
                     }
 
                     if (request.url.endsWith('/report') && request.method === 'POST') {
+                        const { startDate, endDate, startTime, endTime, start, length, draw } = request.body;
 
-                        const reports = REPORTS.filter(report => {
+                        const totalReports = REPORTS.filter(report => {
 
                             const { start_date, end_date, start_time, end_time } = report;
                             const [start_hour, start_minute] = start_time.split(':').map(parseFloat);
@@ -69,7 +70,6 @@ export class MockBackendInterceptor implements HttpInterceptor {
                             const reportStartDate = new Date(new Date(start_date).setHours(start_hour, start_minute));
                             const reportEndDate = new Date(new Date(end_date).setHours(end_hour, end_minute));
 
-                            const { startDate, endDate, startTime, endTime } = request.body;
                             const requestStartDate = new Date(`${startDate} ${startTime}`);
                             const requestEndDate = new Date(`${endDate} ${endTime}`);
 
@@ -81,11 +81,24 @@ export class MockBackendInterceptor implements HttpInterceptor {
                                 ;
                         });
 
+                        const filteredReports = totalReports
+                            .slice(start, start + length)
+                            ;
+
+                        const data = {
+                            draw,
+                            recordsFiltered: totalReports.length,
+                            recordsTotal: totalReports.length,
+                            data: filteredReports
+                        }
+
+                        console.log(data);
+
                         return of(new HttpResponse({
                             status: 200,
                             body: {
                                 status: 200,
-                                data: reports,
+                                data,
                                 message: 'success'
                             }
                         }));

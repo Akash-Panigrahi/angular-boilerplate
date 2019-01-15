@@ -1,5 +1,12 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
 .kpis {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2rem;
+
+    @include media-breakpoint-down(xs) {
+        grid-template-columns: 1fr;
+        // grid-template-rows: repeat(2, 1fr);
+    }
 }

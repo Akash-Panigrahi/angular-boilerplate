@@ -1,11 +1,15 @@
-import { trigger, transition, query as q, style, animate } from '@angular/animations';
-
-export function query(s, a, o = { optional: true }) { return q(s, a, o); }
+import { trigger, transition, query, style, animate, animateChild, sequence } from '@angular/animations';
 
 export const riseUp = trigger('riseUp', [
+    transition(':enter', [
+        query(':enter', animateChild())
+    ]),
     transition(':leave', [
-        query('.child-component', [
-            animate('500ms ease-in', style({ transform: 'translateY(150px)', opacity: '0' }))
+        sequence([
+            query(':leave', animateChild()),
+            query('.child-component', [
+                animate('500ms ease-in', style({ transform: 'translateY(150px)', opacity: '0' }))
+            ])
         ])
     ])
 ]);

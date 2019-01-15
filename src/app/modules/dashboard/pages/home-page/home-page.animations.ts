@@ -1,8 +1,6 @@
 import {
-    trigger, animate, style, group, query as q, transition, sequence, animateChild
+    trigger, animate, style, group, query, transition, sequence, animateChild
 } from '@angular/animations';
-
-export function query(s, a, o = { optional: true }) { return q(s, a, o); }
 
 export const pageAnimation = trigger('pageAnimation', [
     transition(':enter', group([
