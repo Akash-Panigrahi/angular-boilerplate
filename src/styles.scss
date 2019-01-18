@@ -1,7 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
-@import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
 @import '~daterangepicker/daterangepicker.css';
 @import '~ngx-toastr/toastr-bs4-alert';
+@import '~ag-grid-community/dist/styles/ag-grid.css';
+@import '~ag-grid-community/dist/styles/ag-theme-material.css';
 
 :root {
     --smokey-black: #b7b7b7;
@@ -246,5 +247,33 @@ div.dataTables_wrapper {
     100% {
         opacity: 0;
         transform: scale(2.5);
+    }
+}
+
+
+// customizing ag-grid theme
+.ag-theme-material {
+    font-size: 1rem;
+
+    .ag-header {
+        font-size: 1rem;
+    }
+
+    .ag-header-cell-label {
+        width: 100%;
+
+        .ag-header-icon {
+            margin-left: auto;
+        }
+    }
+
+    .ag-header-cell, .ag-header-group-cell {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .ag-cell {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }

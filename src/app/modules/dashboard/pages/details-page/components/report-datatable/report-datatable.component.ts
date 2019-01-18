@@ -1,35 +1,28 @@
 import {
-    Component,
-    OnInit,
-    Input,
-    OnChanges,
-    SimpleChanges,
-    OnDestroy,
-    AfterViewInit,
-    EventEmitter,
-    Output,
-    ViewChild,
-    HostListener
+    Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, AfterViewInit, EventEmitter, Output, ViewChild, HostListener, ElementRef
 } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { FormatTimeService } from 'src/app/core/services/format-time/format-time.service';
 import { IDataTableRequest } from 'src/app/core/interfaces/datatable.interface';
-import { isInitialTableReady__Table, gettingClientsLoader } from './report-datatable.animations';
+import {
+    isInitialTableReady__Table, gettingClientsLoader
+} from './report-datatable.animations';
 import { NgProgressComponent } from '@ngx-progressbar/core';
-import { Observable } from 'rxjs';
-declare const $: any;
+import {
+    AgGridEvent, GridApi, ColumnApi, ICellRendererParams
+} from 'ag-grid-community';
 
 @Component({
     selector: 'app-report-datatable',
     templateUrl: './report-datatable.component.html',
     styleUrls: ['./report-datatable.component.scss'],
-    animations: [isInitialTableReady__Table, gettingClientsLoader]
+    animations: [
+        isInitialTableReady__Table, gettingClientsLoader
+    ]
 })
 export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     @Input() clients: any[];
-    dataTable: any;
-    dataTableData$: Observable<any>;
 
     @Output() dataTableRequestEvent = new EventEmitter<IDataTableRequest>();
     dataTableRequest: IDataTableRequest;
@@ -37,37 +30,65 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     // getting a reference to the progress bar in the html file
     @ViewChild('gettingClientsBar') private _progressBar: NgProgressComponent;
 
+    @ViewChild('reportTable') private _reportTable: ElementRef;
+
     isInitialTableReady = 'no';
     isInitialTableReady__Table = 'no';
 
+    isLastPage = false;
+
+    columnDefs = [
+        { headerName: 'Id', field: 'id', sortable: true },
+        { headerName: 'First Name', field: 'first_name', sortable: true },
+        { headerName: 'Last Name', field: 'last_name', sortable: true },
+        { headerName: 'Email', field: 'email', sortable: true },
+        { headerName: 'Gender', field: 'gender', sortable: true },
+        { headerName: 'Start Date', field: 'start_date', sortable: true },
+        { headerName: 'End Date', field: 'end_date', sortable: true },
+        {
+            headerName: 'Start Time', field: 'start_time', sortable: true,
+            cellRenderer: (params: ICellRendererParams) => this._formatTimeService.formatTime(params.value)
+        },
+        {
+            headerName: 'End Time', field: 'end_time', sortable: true,
+            cellRenderer: (params: ICellRendererParams) => this._formatTimeService.formatTime(params.value)
+        },
+    ];
+
+    rowData: any;
+
+    gridApi: GridApi;
+    gridColumnApi: ColumnApi;
+
+    pageSizes = [10, 25, 50, 100];
+
     @HostListener('click', ['$event.target'])
     private _onClick(el) {
-        if (
-            // Sorting
-            el.classList.contains('report-table__head') ||
-            // Paging
-            (
-                el.classList.contains('page-link') ||
-                el.parentElement.classList.contains('page-link')
-            )
-        ) {
-            this._emitDataTableRequestEvent();
-        }
-    }
 
-    @HostListener('change', ['$event.target'])
-    private _onChange(el) {
-        // Page Length
-        if (el.classList.contains('report-table__length')) {
-            this._emitDataTableRequestEvent();
+        // if pagination button
+        if (el.classList.contains('ag-paging-button')) {
+            const refValue = el.attributes.ref.value;
+
+            if (
+                refValue === 'btLast' ||  // if last pagination button
+                refValue === 'btNext'     // if next pagintion button
+            ) {
+
+                // if last page
+                if (this.isLastPage) {
+                    // call service
+                    this._emitDataTableRequestEvent();
+                }
+            }
+
+            this.isLastPage = this.gridApi.paginationGetCurrentPage() + 1 === this.gridApi.paginationGetTotalPages()
+                ? true
+                : false
+                ;
         }
     }
 
     private _emitDataTableRequestEvent() {
-        const settings = this.dataTable.settings()[0];
-        this.dataTableRequest = settings.oApi._fnAjaxParameters(settings);
-
-        this.dataTableRequestEvent.emit(this.dataTableRequest);
     }
 
     onIsInitialTableReady__Table(event) {
@@ -87,15 +108,9 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     ngOnInit() { }
 
     ngOnChanges(changes: SimpleChanges) {
+
         if (!changes.clients.isFirstChange()) {
-
-            // this.dataTable.clear();
-            // this.dataTable.rows.add(changes.clients.currentValue.data);
-            // this.dataTable.draw();
-            this.dataTableData$ = changes.clients.currentValue.data;
-
-            // settings paging info
-            // _fnUpdateInfo
+            this.rowData = changes.clients.currentValue;
 
             // completing progress bar
             if (this._progressBar) {
@@ -118,75 +133,6 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
 
     ngAfterViewInit() {
 
-        this.dataTable = $('.report-table').DataTable({
-            pagingType: 'full_numbers',
-            pageLength: 5,
-            lengthMenu: [5, 10, 25, 50, 100],
-            language: {
-                paginate: {
-                    first: '<i class="material-icons">first_page</i>',
-                    last: '<i class="material-icons">last_page</i>',
-                    previous: '<i class="material-icons">chevron_left</i>',
-                    next: '<i class="material-icons">chevron_right</i>'
-                }
-            },
-            searching: false,
-            dom: `
-                <"row"
-                    <"col-sm-12 col-md-6"l>
-                    <"col-sm-12 col-md-6"f>
-                >
-                r
-                <"table-responsive"t>
-                <"row table-footer"
-                    <"col-sm-12 col-md-5 table-footer__info"i>
-                    <"col-sm-12 col-md-7"p>
-                >
-            `,
-            columns: [
-                { data: 'id', name: 'Id' },
-                { data: 'first_name', name: 'First Name' },
-                { data: 'last_name', name: 'Last Name' },
-                { data: 'gender', name: 'Gender' },
-                { data: 'email', name: 'Email' },
-                {
-                    data: 'start_date', name: 'Start Date',
-                    render: data => formatDate(data, 'yyyy-MM-dd', 'en-US')
-                },
-                {
-                    data: 'start_time', name: 'Start Time',
-                    render: data => this._formatTimeService.formatTime(data)
-                },
-                {
-                    data: 'end_date', name: 'End Date',
-                    render: data => formatDate(data, 'yyyy-MM-dd', 'en-US')
-                },
-                {
-                    data: 'end_time', name: 'End Time',
-                    render: data => this._formatTimeService.formatTime(data)
-                },
-            ],
-            initComplete: function () {
-                $('div.dataTables_length select').addClass('report-table__length');
-            },
-            ajax: (data, callback, settings) => {
-                this.dataTableRequest = settings.oApi._fnAjaxParameters(settings);
-                this.dataTableRequestEvent.emit(this.dataTableRequest);
-                console.log(this.dataTable);
-
-                if (this.dataTableData$) {
-                    this.dataTableData$.subscribe(data => {
-                        callback(data);
-                    });
-                }
-            }
-        });
-
-        // this._emitDataTableRequestEvent();
-
-        // to set pagination buttons number
-        $.fn.DataTable.ext.pager.numbers_length = 15;
-
         // setting progress bar configurations
         this._progressBar.color = 'red';
         this._progressBar.spinner = false;
@@ -196,12 +142,25 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
         this.isInitialTableReady = 'yes';
     }
 
-    ngOnDestroy() {
-        /*
-            since jquery runs outside angular and in the global scope,
-            we need to clear out the elements ourselves.
-        */
-        this.dataTable.clear();
-        this.dataTable.destroy();
+    onGridReady(e: AgGridEvent) {
+        this.gridApi = e.api;
+        this.gridColumnApi = e.columnApi;
+
+        this.gridColumnApi.autoSizeAllColumns();
     }
+
+    onLengthChange(length) {
+        this.gridApi.paginationSetPageSize(Number(length));
+    }
+
+    onSearchChange(text) {
+        this.gridApi.setQuickFilter(text);
+    }
+
+    onPaginationChanged(e) {
+        this._reportTable.nativeElement.querySelector('[ref="btLast"]').disabled = false;
+        this._reportTable.nativeElement.querySelector('[ref="btNext"]').disabled = false;
+    }
+
+    ngOnDestroy() { }
 }

@@ -1,3 +1,9 @@
+<div class="getting-data__progress-bar">
+    <ng-progress #gettingDataBar
+        fixed="false"
+        id="getting-data__progress-bar"
+    ></ng-progress>
+</div>
 <br>
 <div class="container-fluid action-bar" [@slideDown]="isOpen ? 'open' : 'close'">
     <div id="reportrange" class="datetimerangepicker" rippleOnClick (click)="isCalendarOpen()">

@@ -18,6 +18,7 @@ import { KpisComponent } from './pages/summary-page/components/kpis/kpis.compone
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { NgProgressModule } from '@ngx-progressbar/core';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { NgProgressModule } from '@ngx-progressbar/core';
         NgProgressModule,
         FormsModule,
         ChartModule,
-        SharedModule
+        SharedModule,
+        AgGridModule.withComponents([])
     ]
 })
 export class DashboardModule {

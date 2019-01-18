@@ -1,3 +1,7 @@
+:host {
+    z-index: 1;
+}
+
 .action-bar {
     position: relative;
     display: flex;
@@ -53,5 +57,11 @@
 
     span {
         text-emphasis: shadow;
+    }
+}
+
+.getting-data__progress-bar {
+    >ng-progress {
+        z-index: 1;
     }
 }

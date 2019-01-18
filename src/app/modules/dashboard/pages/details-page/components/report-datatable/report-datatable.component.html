@@ -20,22 +20,43 @@
     (@isInitialTableReady__Table.done)="onIsInitialTableReady__Table($event)"
 >
     <h1>Clients list</h1>
-    <table class="table table-hover report-table" cellspacing="0" style="width: 100%;">
-        <thead>
-            <tr>
-                <th class="report-table__head">Id</th>
-                <th class="report-table__head">First Name</th>
-                <th class="report-table__head">Last Name</th>
-                <th class="report-table__head">Gender</th>
-                <th class="report-table__head">Email</th>
-                <th class="report-table__head">Start Date</th>
-                <th class="report-table__head">Start Time</th>
-                <th class="report-table__head">End Date</th>
-                <th class="report-table__head">End Time</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+
+    <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList">
+        <div class="report-table__length-search row">
+            <div class="report-table__length col-12 col-sm-5 col-md-3">
+                <span>Show</span>
+                &nbsp;
+                <select class="form-control" (change)="onLengthChange($event.target.value)">
+                    <option *ngFor="let pageSize of pageSizes" [value]="pageSize">{{ pageSize }}</option>
+                </select>
+                &nbsp;
+                <span>Records</span>
+            </div>
+            <div class="col-sm-2 col-md-6"></div>
+            <div class="report-table__search col-12 col-sm-5 col-md-3">
+                <span>Search</span>
+                &nbsp;
+                <input type="text" placeholder="table..."  class="form-control" (input)="onSearchChange($event.target.value)" />
+            </div>
+        </div>
+        <br>
+        <ag-grid-angular
+            class="ag-theme-material"
+            [rowData]="rowData"
+            [columnDefs]="columnDefs"
+            [pagination]="true"
+            [paginationPageSize]="pageSizes[0]"
+            (paginationChanged)="onPaginationChanged($event)"
+            (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+    </div>
+
+    <ng-template #noClientsList>
+        <div class="no-clients-list">
+            <span>No Data to Display!</span>
+        </div>
+    </ng-template>
 </div>
 
 <!-- for component initialization -->

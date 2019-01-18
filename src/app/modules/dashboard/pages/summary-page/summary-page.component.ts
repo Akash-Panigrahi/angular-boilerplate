@@ -3,6 +3,7 @@ import { pageAnimations } from './summary-page.animations';
 import { SummaryPageService } from './summary-page.service';
 import { Subscription } from 'rxjs';
 import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
+import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 
 @Component({
     selector: 'app-summary-page',
@@ -25,7 +26,8 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
 
     constructor(
         private _summaryPageService: SummaryPageService,
-        private _dateTimeRangeService: DateTimeRangeService
+        private _dateTimeRangeService: DateTimeRangeService,
+        private _actionBarUiState: ActionBarUIState
     ) { }
 
     ngOnInit() {
@@ -47,7 +49,10 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
                     which will then be used to update
                     dumb child components
                 */
-                res => this.summaryData = res,
+                res => {
+                    this.summaryData = res;
+                    this._actionBarUiState.changeGettingDataBar('complete');
+                },
                 err => console.error(err)
             );
     }

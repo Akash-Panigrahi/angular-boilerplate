@@ -1,5 +1,9 @@
 @import '~bootstrap/scss/bootstrap-grid.scss';
 
+:host {
+    z-index: 2;
+}
+
 .divider {
     width: 1px;
     background: var(--light);

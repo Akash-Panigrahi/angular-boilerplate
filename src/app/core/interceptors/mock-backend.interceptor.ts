@@ -60,7 +60,8 @@ export class MockBackendInterceptor implements HttpInterceptor {
                     }
 
                     if (request.url.endsWith('/report') && request.method === 'POST') {
-                        const { startDate, endDate, startTime, endTime, start, length, draw } = request.body;
+                        // const { startDate, endDate, startTime, endTime, start, length, draw } = request.body;
+                        const { startDate, endDate, startTime, endTime } = request.body;
 
                         const totalReports = REPORTS.filter(report => {
 
@@ -81,24 +82,24 @@ export class MockBackendInterceptor implements HttpInterceptor {
                                 ;
                         });
 
-                        const filteredReports = totalReports
-                            .slice(start, start + length)
-                            ;
+                        // const filteredReports = totalReports
+                        //     .slice(start, start + length)
+                        //     ;
 
-                        const data = {
-                            draw,
-                            recordsFiltered: totalReports.length,
-                            recordsTotal: totalReports.length,
-                            data: filteredReports
-                        }
+                        // const data = {
+                        //     draw,
+                        //     recordsFiltered: totalReports.length,
+                        //     recordsTotal: totalReports.length,
+                        //     data: filteredReports
+                        // }
 
-                        console.log(data);
+                        // console.log(data);
 
                         return of(new HttpResponse({
                             status: 200,
                             body: {
                                 status: 200,
-                                data,
+                                data: totalReports,
                                 message: 'success'
                             }
                         }));

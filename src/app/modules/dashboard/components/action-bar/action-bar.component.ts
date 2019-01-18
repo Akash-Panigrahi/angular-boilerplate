@@ -1,7 +1,11 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+    Component, OnInit, AfterViewInit, ViewChild
+} from '@angular/core';
 import { slideDown } from './action-bar.animations';
 import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 import { StateService } from 'src/app/core/services/state/state.service';
+import { NgProgressComponent } from '@ngx-progressbar/core';
+import { ActionBarUIState } from './action-bar.ui-state';
 
 // declare variables to avoid error in aot compilation process
 declare const $: any;
@@ -14,6 +18,9 @@ declare const moment: any;
     animations: [slideDown]
 })
 export class ActionBarComponent implements OnInit, AfterViewInit {
+
+    // getting a reference to the progress bar in the html file
+    @ViewChild('gettingDataBar') private _progressBar: NgProgressComponent;
 
     // property required to trigger animation
     isOpen = false;
@@ -35,11 +42,18 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
         // pass new value in the stream
         this._dateTimeRangeService.changeDateTimeRange(this._state.getState('date-time-range'));
+
+        this._actionBarUIState.changeGettingDataBar('start');
+
+        this._actionBarUIState.currentGettingDataBar.subscribe(state => {
+            this._progressBar[state]();
+        });
     }
 
     constructor(
         private _dateTimeRangeService: DateTimeRangeService,
-        private _state: StateService
+        private _state: StateService,
+        private _actionBarUIState: ActionBarUIState
     ) { }
 
     ngOnInit() {
@@ -94,6 +108,9 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
         this._setDateTimeRangeInState(start, end);
         this._updateDateRangePicker(start, end);
+
+        // setting progress bar configurations
+        this._progressBar.color = 'red';
     }
 
     private _updateDateRangePicker(start, end) {
