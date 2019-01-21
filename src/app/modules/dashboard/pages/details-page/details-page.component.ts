@@ -27,10 +27,10 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
-            .subscribe(data => {
-                this._getReport(data);
-            });
+        // this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
+        //     .subscribe(data => {
+        //         this._getReport(data);
+        //     });
     }
 
     private _getReport(reportRange) {
@@ -44,6 +44,13 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
                 },
                 err => console.error(err)
             );
+    }
+
+    receiveReportTableRequest(reportTableReceive) {
+        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
+            .subscribe(data => {
+                this._getReport({ ...data, ...reportTableReceive });
+            });
     }
 
     ngOnDestroy() {

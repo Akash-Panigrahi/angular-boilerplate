@@ -1,3 +1,8 @@
+<div class="overlay"
+    *ngIf="isInitialTableReady !== 'yes'"
+    [@showOverlay]="isInitialTableReady"
+></div>
+
 <div class="getting-clients"
     *ngIf="isInitialTableReady !== 'yes'"
     [@gettingClientsLoader]="isInitialTableReady"
@@ -8,6 +13,8 @@
     <div class="getting-clients__progress-bar">
         <ng-progress #gettingClientsBar
             fixed="false"
+            [spinner]="false"
+            color="red"
             (completed)="gettingClientsBarCompleted()"
             id="getting-clients__progress-bar"
         ></ng-progress>
@@ -21,7 +28,8 @@
 >
     <h1>Clients list</h1>
 
-    <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList">
+    <div class="report-table" #reportTable>
+    <!-- <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList"> -->
         <div class="report-table__length-search row">
             <div class="report-table__length col-12 col-sm-5 col-md-3">
                 <span>Show</span>
@@ -43,13 +51,35 @@
         <ag-grid-angular
             class="ag-theme-material"
             [rowData]="rowData"
+            [defaultColDef]="defaultColDef"
             [columnDefs]="columnDefs"
-            [pagination]="true"
-            [paginationPageSize]="pageSizes[0]"
-            (paginationChanged)="onPaginationChanged($event)"
             (gridReady)="onGridReady($event)"
+            (sortChanged)="onSortChanged($event)"
         >
+        <!--     [pagination]="true"
+            [paginationPageSize]="pageSizes[0]"
+            (paginationChanged)="onPaginationChanged($event)" -->
         </ag-grid-angular>
+
+        <br>
+
+        <div class="report-table__info-pagination row">
+            <div class="report-table__info col-12 col-sm-5 col-md-5">
+                Showing {{ recordsInfo.from }} to {{ recordsInfo.to }} of {{ recordsInfo.total }} records
+            </div>
+            <div class="col-sm-2 col-md-2"></div>
+            <div class="report-table__pagination col-12 col-sm-5 col-md-5">
+                <ngb-pagination class="d-flex justify-content-end"
+                    [collectionSize]="paginationCollectionSize"
+                    [page]="page"
+                    [maxSize]="3"
+                    [rotate]="true"
+                    [ellipses]="true"
+                    [boundaryLinks]="true"
+                    (pageChange)="onPageChange($event)"
+                ></ngb-pagination>
+            </div>
+        </div>
     </div>
 
     <ng-template #noClientsList>
@@ -58,16 +88,3 @@
         </div>
     </ng-template>
 </div>
-
-<!-- for component initialization -->
-<!--
-    Getting Client List
-        Please Wait
-    <<- Loader ->>
--->
-
-<!-- for then subsequent requests -->
-<!--
-    Generating List...
-    <<- Loader ->>
--->

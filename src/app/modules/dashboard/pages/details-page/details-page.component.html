@@ -2,7 +2,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 child-component">
-            <app-report-datatable [clients]="clients" (dataTableRequestEvent)="receiveDataTableRequest($event)"></app-report-datatable>
+            <app-report-datatable
+                [clients]="clients"
+                (reportTableRequestEvent)="receiveReportTableRequest($event)"
+            >
+            </app-report-datatable>
         </div>
     </div>
 </div>
