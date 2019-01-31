@@ -28,24 +28,21 @@
 >
     <h1>Clients list</h1>
 
-    <div class="report-table" #reportTable>
-    <!-- <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList"> -->
+    <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList">
         <div class="report-table__length-search row">
             <div class="report-table__length col-12 col-sm-5 col-md-3">
-                <span>Show</span>
-                &nbsp;
-                <select class="form-control" (change)="onLengthChange($event.target.value)">
-                    <option *ngFor="let pageSize of pageSizes" [value]="pageSize">{{ pageSize }}</option>
-                </select>
-                &nbsp;
-                <span>Records</span>
+                <app-report-table-length
+                    [pageSizes]="pageSizes"
+                    [initialPageSize]="initialPageSize"
+                    (lengthChangeEvent)="onLengthChange($event)"
+                ></app-report-table-length>
             </div>
             <div class="col-sm-2 col-md-6"></div>
-            <div class="report-table__search col-12 col-sm-5 col-md-3">
+            <!-- <div class="report-table__search col-12 col-sm-5 col-md-3">
                 <span>Search</span>
                 &nbsp;
                 <input type="text" placeholder="table..."  class="form-control" (input)="onSearchChange($event.target.value)" />
-            </div>
+            </div> -->
         </div>
         <br>
         <ag-grid-angular
@@ -53,30 +50,35 @@
             [rowData]="rowData"
             [defaultColDef]="defaultColDef"
             [columnDefs]="columnDefs"
+            [frameworkComponents]="frameworkComponents"
+            [loadingOverlayComponent]="loadingOverlayComponent"
             (gridReady)="onGridReady($event)"
             (sortChanged)="onSortChanged($event)"
-        >
-        <!--     [pagination]="true"
-            [paginationPageSize]="pageSizes[0]"
-            (paginationChanged)="onPaginationChanged($event)" -->
-        </ag-grid-angular>
+        ></ag-grid-angular>
 
         <br>
 
         <div class="report-table__info-pagination row">
             <div class="report-table__info col-12 col-sm-5 col-md-5">
-                Showing {{ recordsInfo.from }} to {{ recordsInfo.to }} of {{ recordsInfo.total }} records
+                <app-report-table-info
+                    [recordsInfoFrom]="rowData?.length ? recordsInfo.from : '0'"
+                    [recordsInfoTo]="recordsInfo.to"
+                    [recordsInfoTotal]="recordsInfo.total"
+                ></app-report-table-info>
             </div>
             <div class="col-sm-2 col-md-2"></div>
             <div class="report-table__pagination col-12 col-sm-5 col-md-5">
                 <ngb-pagination class="d-flex justify-content-end"
+                    #reportTablePagination
                     [collectionSize]="paginationCollectionSize"
-                    [page]="page"
+                    [page]="1"
                     [maxSize]="3"
                     [rotate]="true"
                     [ellipses]="true"
                     [boundaryLinks]="true"
-                    (pageChange)="onPageChange($event)"
+                    appCustomNgbPagination
+                    [initialPageSet]="initialPageSet"
+                    (customPageChangeEvent)="onPageChange($event)"
                 ></ngb-pagination>
             </div>
         </div>

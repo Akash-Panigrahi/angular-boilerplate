@@ -2,14 +2,14 @@ import { trigger, transition, query, style, animate, animateChild, sequence } fr
 
 export const riseUp = trigger('riseUp', [
     transition(':enter', [
-        query(':enter', animateChild())
+        query(':enter', animateChild(), { optional: true })
     ]),
     transition(':leave', [
         sequence([
-            query(':leave', animateChild()),
+            query(':leave', animateChild(), { optional: true }),
             query('.child-component', [
                 animate('500ms ease-in', style({ transform: 'translateY(150px)', opacity: '0' }))
-            ])
+            ], { optional: true })
         ])
     ])
 ]);

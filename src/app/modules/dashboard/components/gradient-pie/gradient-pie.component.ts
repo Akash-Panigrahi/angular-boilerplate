@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
+import {
+    Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges, AfterViewInit
+} from '@angular/core';
 import { Chart, Highcharts } from 'angular-highcharts';
 
 @Component({
@@ -6,9 +8,11 @@ import { Chart, Highcharts } from 'angular-highcharts';
     templateUrl: './gradient-pie.component.html',
     styleUrls: ['./gradient-pie.component.scss']
 })
-export class GradientPieComponent implements OnInit, OnChanges, OnDestroy {
+export class GradientPieComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     @Input() gradientPie;
+
+    private _currentGradientPie = null;
 
     chart;
 
@@ -60,11 +64,45 @@ export class GradientPieComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!changes.gradientPie.isFirstChange()) {
-            this.gradientPie = changes.gradientPie.currentValue;
-            this.chart.removeSeries(0);
-            this.chart.addSeries({ name: 'Share', data: this.gradientPie }, true, true);
+
+        /*
+            Not listening for !isFirstChange() event;
+            because we are updating data from cache,
+            which **will** have data in the first change.
+        */
+        if (changes.gradientPie.currentValue) {
+
+            /*
+                storing data in the local variable,
+                to use for subsequent invocation from router.
+            */
+            this._currentGradientPie = changes.gradientPie.currentValue;
+
+            /*
+                But for first change this.chart will not be present,
+                hence the *if* check
+            */
+            if (this.chart) {
+                this._updateChart();
+            }
         }
+    }
+
+    /*
+        This code will only execute once after the chart is created;
+        (i.e., component initialization; both for first time and subsequent invocation from routing)
+
+        For first time, data will be null.
+        For subsequent invocation, data will come from cache,
+        and chart will be created.
+    */
+    ngAfterViewInit() {
+        this._updateChart();
+    }
+
+    private _updateChart() {
+        this.chart.removeSeries(0);
+        this.chart.addSeries({ name: 'Share', data: this._currentGradientPie }, true, true);
     }
 
     ngOnDestroy() {

@@ -14,11 +14,11 @@ export class HeaderComponent implements OnInit {
     navItems = [
         {
             name: 'Summary',
-            url: '/home/summary'
+            url: '/dashboard/summary'
         },
         {
             name: 'Details',
-            url: '/home/details'
+            url: '/dashboard/details'
         }
     ];
 

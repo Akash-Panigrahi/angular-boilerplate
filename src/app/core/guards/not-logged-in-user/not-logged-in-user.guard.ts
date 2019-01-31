@@ -18,7 +18,13 @@ export class NotLoggedInUserGuard implements CanActivate {
 
         // if route is of login page and user is already logged in
         if (state.url === '/login') {
-            return user ? false : true;
+
+            if (user) {
+                this._router.navigate(['/dashboard']);
+                return false;
+            }
+
+            return true;
         }
 
         // else if route is not of login page

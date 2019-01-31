@@ -6,6 +6,7 @@
 
 :root {
     --smokey-black: #b7b7b7;
+    --grey-white: #f0f0f0;
 }
 
 body {
@@ -78,6 +79,10 @@ select:-internal-autofill-selected {
 
     /* Support for IE. */
     font-feature-settings: 'liga';
+}
+
+.bg-grey-white {
+    background-color: var(--grey-white);
 }
 
 // Date Time Range Picker styling
@@ -277,8 +282,15 @@ div.dataTables_wrapper {
         padding-left: 1rem;
         padding-right: 1rem;
     }
-}
 
+    .ag-overlay {
+        pointer-events: all;
+    }
+
+    .ag-overlay-loading-wrapper {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+}
 
 .page-item {
 

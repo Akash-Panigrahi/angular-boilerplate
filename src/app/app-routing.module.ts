@@ -14,12 +14,12 @@ const routes: Routes = [
         loadChildren: './modules/authentication/authentication.module#AuthenticationModule',
         // route can only be activated if user is not logged in
         /*
-            if canActivate returns false, then next in line route will be checked which is 'home'
+            if canActivate returns false, then next in line route will be checked which is 'dashboard'
         */
         canActivate: [NotLoggedInUserGuard]
     },
     {
-        path: 'home',
+        path: 'dashboard',
         loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
         // route can only be activated by logged in user
         canActivate: [NotLoggedInUserGuard]

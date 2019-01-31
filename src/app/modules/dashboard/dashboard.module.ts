@@ -1,34 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+
+import { NgbCollapseModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartModule } from 'angular-highcharts';
+
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { HomePageComponent } from './pages/home-page/home-page.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ReportingModule } from '../reporting/reporting.module';
+
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { SummaryPageComponent } from './pages/summary-page/summary-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NgbCollapseModule, NgbDatepickerModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActionBarComponent } from './components/action-bar/action-bar.component';
-import { FormsModule } from '@angular/forms';
-import { ReportDatatableComponent } from './pages/details-page/components/report-datatable/report-datatable.component';
-import { ChartModule } from 'angular-highcharts';
-import { BasicColumnComponent } from './pages/summary-page/components/basic-column/basic-column.component';
-import { GradientPieComponent } from './pages/summary-page/components/gradient-pie/gradient-pie.component';
-import { KpisComponent } from './pages/summary-page/components/kpis/kpis.component';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { environment } from 'src/environments/environment';
+import { BasicColumnComponent } from './components/basic-column/basic-column.component';
+import { GradientPieComponent } from './components/gradient-pie/gradient-pie.component';
+import { KpisComponent } from './components/kpis/kpis.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
-import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
     declarations: [
-        HomePageComponent,
+        DashboardPageComponent,
         DetailsPageComponent,
         SummaryPageComponent,
         HeaderComponent,
         FooterComponent,
         ActionBarComponent,
-        ReportDatatableComponent,
         BasicColumnComponent,
         GradientPieComponent,
         KpisComponent
@@ -36,15 +37,16 @@ import { AgGridModule } from 'ag-grid-angular';
     imports: [
         CommonModule,
         RouterModule,
-        DashboardRoutingModule,
-        NgbCollapseModule.forRoot(),
-        NgbDatepickerModule.forRoot(),
-        NgbPaginationModule.forRoot(),
-        NgProgressModule,
         FormsModule,
+
+        NgbCollapseModule.forRoot(),
         ChartModule,
+        NgProgressModule,
+        NgbDatepickerModule.forRoot(),
+
         SharedModule,
-        AgGridModule.withComponents([])
+        DashboardRoutingModule,
+        ReportingModule,
     ]
 })
 export class DashboardModule {

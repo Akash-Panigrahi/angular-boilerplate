@@ -10,6 +10,9 @@ import { NgProgressComponent } from '@ngx-progressbar/core';
 import {
     AgGridEvent, GridApi, ColumnApi, ICellRendererParams
 } from 'ag-grid-community';
+import { takeWhile, endWith, tap } from 'rxjs/operators';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { AgGridLoadingOverlayComponent } from '../ag-grid-loading-overlay/ag-grid-loading-overlay.component';
 
 @Component({
     selector: 'app-report-datatable',
@@ -21,18 +24,25 @@ import {
         showOverlay
     ]
 })
-export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ReportDatatableComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() clients: any[];
+
+    private _currentClients = null;
 
     @Output() reportTableRequestEvent = new EventEmitter<any>();
 
     // getting a reference to the progress bar in the html file
     @ViewChild('gettingClientsBar') private _progressBar: NgProgressComponent;
 
+    @ViewChild('reportTablePagination') private _reportTablePagination: NgbPagination;
+
+    initialPageSize = 5;
+    initialPageSet = true;
+
     reportTableRequest = {
         start: 0,
-        length: 5
+        length: this.initialPageSize
     };
 
     recordsInfo = {
@@ -44,9 +54,9 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     isInitialTableReady = 'no';
     isInitialTableReady__Table = 'no';
 
-    // enable sorting on all columns by default
     defaultColDef = {
-        sortable: true
+        // enable sorting on all columns by default
+        // sortable: true
     };
 
     columnDefs = [
@@ -67,17 +77,24 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
         },
     ];
 
+    frameworkComponents = {
+        customLoadingOverlay: AgGridLoadingOverlayComponent
+    }
+
+    loadingOverlayComponent = 'customLoadingOverlay';
+
     rowData: any;
 
     gridApi: GridApi;
     gridColumnApi: ColumnApi;
 
-    pageSizes = [5, 10, 25, 50, 100];
-    page = 1;
+    pageSizes = [3, 5, 10, 25, 50, 100];
     paginationCollectionSize;
 
     private _emitDataTableRequestEvent() {
         this.reportTableRequestEvent.emit(this.reportTableRequest);
+        // this.isInitialTableReady = 'no';
+        this.gridApi.showLoadingOverlay();
     }
 
     onIsInitialTableReady__Table(event) {
@@ -99,25 +116,40 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     ngOnChanges(changes: SimpleChanges) {
 
         if (!changes.clients.isFirstChange()) {
-            const value = changes.clients.currentValue;
 
-            this.rowData = value.data;
-            this.recordsInfo = value.info;
+            this._currentClients = changes.clients.currentValue;
+
+            const clients = changes.clients.currentValue;
+
+            this.rowData = clients.data;
+            this.recordsInfo = clients.info;
 
             let pages = 1;
-            const lastPageRowsCount = value.info.total % this.reportTableRequest.length;
+            const lastPageRowsCount = clients.info.total % this.reportTableRequest.length;
 
             if (lastPageRowsCount >= 5) {
-                pages = Math.ceil(value.info.total / this.reportTableRequest.length);
+                pages = Math.ceil(clients.info.total / this.reportTableRequest.length);
             } else if (lastPageRowsCount < 5) {
-                pages = Math.floor(value.info.total / this.reportTableRequest.length);
+                pages = Math.floor(clients.info.total / this.reportTableRequest.length);
             }
 
-            this.paginationCollectionSize = pages * 10;
+            this.paginationCollectionSize = (pages || 1) * 10;
+
+            if (this.gridColumnApi) {
+                this.gridColumnApi.autoSizeAllColumns();
+            }
 
             // completing progress bar
             if (this._progressBar) {
-                this._progressBar.complete();
+
+                this._progressBar.state$
+                    .pipe(
+                        // tap(console.log),
+                        takeWhile(value => !value.active),
+                        endWith({ active: true, transform: '' })
+                    )
+                    .subscribe(() => this._progressBar.complete())
+                    ;
             }
         }
     }
@@ -134,10 +166,6 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
         }
     }
 
-    ngAfterViewInit() {
-        this._emitDataTableRequestEvent();
-    }
-
     gettingClientsBarCompleted() {
         this.isInitialTableReady = 'yes';
     }
@@ -145,19 +173,21 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
     onGridReady(e: AgGridEvent) {
         this.gridApi = e.api;
         this.gridColumnApi = e.columnApi;
-
         this.gridColumnApi.autoSizeAllColumns();
     }
 
     onLengthChange(length) {
         length = Number(length);
 
-        this.reportTableRequest.length = length;
+        this.reportTableRequest = {
+            start: 0,
+            length
+        };
 
-        this.recordsInfo.total <= length
-            ? this.onPageChange(1)
-            : this.onPageChange(Math.ceil(this.recordsInfo.total / length))
-            ;
+        this._reportTablePagination.selectPage(1);
+        this.initialPageSet = !this.initialPageSet;
+
+        this._emitDataTableRequestEvent();
     }
 
     onSearchChange(text) {
@@ -168,7 +198,6 @@ export class ReportDatatableComponent implements OnInit, OnChanges, AfterViewIni
         this.reportTableRequest.start = page - 1;
 
         this._emitDataTableRequestEvent();
-        this.isInitialTableReady = 'no';
     }
 
     onSortChanged(e) {

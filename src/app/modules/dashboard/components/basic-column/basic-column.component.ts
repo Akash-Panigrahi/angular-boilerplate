@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import {
+    Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, AfterViewInit
+} from '@angular/core';
 import { Chart } from 'angular-highcharts';
 
 @Component({
@@ -6,9 +8,11 @@ import { Chart } from 'angular-highcharts';
     templateUrl: './basic-column.component.html',
     styleUrls: ['./basic-column.component.scss']
 })
-export class BasicColumnComponent implements OnInit, OnChanges, OnDestroy {
+export class BasicColumnComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     @Input() basicColumn;
+
+    private _currentBasicColumn = null;
 
     chart;
 
@@ -67,21 +71,34 @@ export class BasicColumnComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnChanges(changes: SimpleChanges) {
 
-        if (!changes.basicColumn.isFirstChange()) {
+        if (changes.basicColumn.currentValue) {
 
-            this.basicColumn = changes.basicColumn.currentValue;
-            const chart = this.chart.ref;
+            this._currentBasicColumn = changes.basicColumn.currentValue;
 
-            while (chart.series.length) {
-                chart.series[0].remove(false);
+            if (this.chart) {
+                this._updateChart();
             }
-
-            for (let i = 0; i < this.basicColumn.length; i++) {
-                chart.addSeries(this.basicColumn[i], false);
-            }
-
-            chart.redraw();
         }
+    }
+
+    ngAfterViewInit() {
+        this._updateChart();
+    }
+
+    private _updateChart() {
+        const chart = this.chart.ref;
+
+        while (chart.series.length) {
+            chart.series[0].remove(false);
+        }
+
+        if (this._currentBasicColumn) {
+            for (let i = 0; i < this._currentBasicColumn.length; i++) {
+                chart.addSeries(this._currentBasicColumn[i], false);
+            }
+        }
+
+        chart.redraw();
     }
 
     ngOnDestroy() {

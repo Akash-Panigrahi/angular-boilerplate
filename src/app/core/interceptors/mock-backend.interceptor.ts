@@ -25,7 +25,9 @@ export class MockBackendInterceptor implements HttpInterceptor {
         return of(null)
             .pipe(
                 mergeMap(() => {
-                    console.log(request.body);
+                    console.log('%cNetwork Hit!',
+                        'color: #232323; background-color: skyblue; padding: 5px; border-radius: 10px;'
+                    );
 
                     if (request.url.endsWith('/login') && request.method === 'POST') {
                         const user = USERS.find(user => {
@@ -97,7 +99,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
                             info: { from: from + 1, to, total: totalReports.length }
                         };
 
-                        console.log(data);
+                        // console.group('request-response');
+                        // console.log('Request', request.body);
+                        // console.log('Response', data);
+                        // console.groupEnd();
 
                         return of(new HttpResponse({
                             status: 200,

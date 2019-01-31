@@ -1,11 +1,12 @@
 import {
-    Component, OnInit, AfterViewInit, ViewChild
+    Component, OnInit, AfterViewInit, ViewChild, OnDestroy
 } from '@angular/core';
 import { slideDown } from './action-bar.animations';
 import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { NgProgressComponent } from '@ngx-progressbar/core';
 import { ActionBarUIState } from './action-bar.ui-state';
+import { Subscription } from 'rxjs';
 
 // declare variables to avoid error in aot compilation process
 declare const $: any;
@@ -17,7 +18,7 @@ declare const moment: any;
     styleUrls: ['./action-bar.component.scss'],
     animations: [slideDown]
 })
-export class ActionBarComponent implements OnInit, AfterViewInit {
+export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // getting a reference to the progress bar in the html file
     @ViewChild('gettingDataBar') private _progressBar: NgProgressComponent;
@@ -27,6 +28,8 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
 
     // setting initial date when app is opened
     lastUpdated = new Date();
+
+    currentGettingDataBar$ = new Subscription();
 
     private _applyDateRangePicker = (ev, picker) => {
         // everytime new date range is selected
@@ -40,14 +43,13 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
         // updating the value
         this.lastUpdated = new Date();
 
+        this._actionBarUIState.changeGettingDataBar('start');
+
         // pass new value in the stream
         this._dateTimeRangeService.changeDateTimeRange(this._state.getState('date-time-range'));
 
-        this._actionBarUIState.changeGettingDataBar('start');
-
-        this._actionBarUIState.currentGettingDataBar.subscribe(state => {
-            this._progressBar[state]();
-        });
+        this.currentGettingDataBar$ = this._actionBarUIState.currentGettingDataBar
+            .subscribe(state => this._progressBar[state]());
     }
 
     constructor(
@@ -100,6 +102,9 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
                 ],
                 'Last Month': [
                     moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
+                ],
+                'Last Year': [
+                    moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')
                 ]
             }
         }, this._updateDateRangePicker);
@@ -146,5 +151,9 @@ export class ActionBarComponent implements OnInit, AfterViewInit {
     isCalendarOpen() {
         // triggering animation by changing state
         this.isOpen = !this.isOpen;
+    }
+
+    ngOnDestroy() {
+        this.currentGettingDataBar$.unsubscribe();
     }
 }

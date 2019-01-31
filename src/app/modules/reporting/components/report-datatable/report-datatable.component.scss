@@ -15,7 +15,7 @@
     filter: blur(10px);
     filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>%23svgMask");
     z-index: 1;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.3);
     opacity: 0.5;
 }
 
@@ -71,15 +71,7 @@
     flex-direction: column;
     box-shadow: 0 0 20px -8px rgba(0, 0, 0, 0.11), 0 0 5px 0 rgba(0, 0, 0, 0.08);
     padding: 1rem;
-
-    &__length {
-        display: flex;
-        align-items: center;
-
-        select {
-            width: 6rem;
-        }
-    }
+    background-color: white;
 
     &__search {
         display: flex;

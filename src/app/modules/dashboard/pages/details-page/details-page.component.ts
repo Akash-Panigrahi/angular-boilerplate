@@ -1,10 +1,11 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { riseUp } from './details-page.animations';
 import { DetailsPageService } from './details-page.service';
-import { delay } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
+import { StateService } from 'src/app/core/services/state/state.service';
+import { take, delay } from 'rxjs/operators';
 
 @Component({
     selector: 'app-details-page',
@@ -23,20 +24,27 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     constructor(
         private _detailsPageService: DetailsPageService,
         private _dateTimeRangeService: DateTimeRangeService,
-        private _actionBarUiState: ActionBarUIState
+        private _actionBarUiState: ActionBarUIState,
+        private _state: StateService
     ) { }
 
     ngOnInit() {
-        // this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
-        //     .subscribe(data => {
-        //         this._getReport(data);
-        //     });
+
+        this._state.setState('report-table-request', { start: 0, length: 5 });
+
+        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
+            .subscribe(reportRange => {
+                this._getReport(reportRange, this._state.getState('report-table-request'));
+            });
     }
 
-    private _getReport(reportRange) {
+    private _getReport(reportRange, reportTableRequest) {
+
+        const reportRequest = { ...reportRange, ...reportTableRequest };
+
         this._detailsPageService
-            .getReport(reportRange)
-            .pipe(delay(3000))
+            .getReport(reportRequest)
+            // .pipe(delay(3000))
             .subscribe(
                 res => {
                     this.clients = res;
@@ -46,10 +54,11 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             );
     }
 
-    receiveReportTableRequest(reportTableReceive) {
-        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
-            .subscribe(data => {
-                this._getReport({ ...data, ...reportTableReceive });
+    receiveReportTableRequest(reportTableRequest) {
+        this._dateTimeRangeService.currentDateTimeRange
+            .pipe(take(1))
+            .subscribe(reportRange => {
+                this._getReport(reportRange, reportTableRequest);
             });
     }
 

@@ -1,17 +1,17 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { dashboardRouterAnimation } from './../../dashboard-router.animations';
-import { pageAnimation } from './home-page.animations';
+import { dashboardRouterAnimation } from '../../dashboard-router.animations';
+import { pageAnimation } from './dashboard-page.animations';
 
 @Component({
-    selector: 'app-home-page',
-    templateUrl: './home-page.component.html',
-    styleUrls: ['./home-page.component.scss'],
+    selector: 'app-dashboard-page',
+    templateUrl: './dashboard-page.component.html',
+    styleUrls: ['./dashboard-page.component.scss'],
     animations: [
         dashboardRouterAnimation,
         pageAnimation
     ]
 })
-export class HomePageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit {
 
     // bind pageAnimation animation on host
     @HostBinding('@pageAnimation') get pageAnimation() { return ''; }

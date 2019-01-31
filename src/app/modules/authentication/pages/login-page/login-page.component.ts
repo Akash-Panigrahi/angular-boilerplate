@@ -69,7 +69,7 @@ export class LoginPageComponent implements OnInit {
                 (res: ILoginData) => {
 
                     this._toastr.success(`${res.username} logged in successfully!`);
-                    this._router.navigate(['home/summary']);
+                    this._router.navigate(['dashboard/summary']);
                 },
                 (err: Error) => {
                     /*

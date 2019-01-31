@@ -20,7 +20,7 @@ export class KpisComponent implements OnInit, OnChanges {
             since we are calling data dynamically
             from api service
         */
-        if (!changes.kpis.isFirstChange()) {
+        if (changes.kpis.currentValue) {
             this.kpis = changes.kpis.currentValue;
         }
     }
