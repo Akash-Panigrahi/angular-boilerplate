@@ -1,14 +1,14 @@
 export class CacheService {
-    static db = {
+    private static _db = {
         summary: {},
         report: {}
     };
 
     static set(api, dateRange, data) {
-        CacheService.db[api][JSON.stringify(dateRange)] = data;
+        CacheService._db[api][JSON.stringify(dateRange)] = data;
     }
 
     static get(api, dateRange) {
-        return CacheService.db[api][JSON.stringify(dateRange)];
+        return CacheService._db[api][JSON.stringify(dateRange)];
     }
 }

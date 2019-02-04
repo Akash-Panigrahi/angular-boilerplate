@@ -29,45 +29,44 @@
     <h1>Clients list</h1>
 
     <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList">
-        <div class="report-table__length-search row">
-            <div class="report-table__length col-12 col-sm-5 col-md-3">
+        <div class="report-table__length-search row justify-content-center justify-content-sm-between">
+            <div class="report-table__length px-3">
                 <app-report-table-length
                     [pageSizes]="pageSizes"
                     [initialPageSize]="initialPageSize"
                     (lengthChangeEvent)="onLengthChange($event)"
                 ></app-report-table-length>
             </div>
-            <div class="col-sm-2 col-md-6"></div>
-            <!-- <div class="report-table__search col-12 col-sm-5 col-md-3">
+            <div class="report-table__search px-3 mt-xs">
                 <span>Search</span>
                 &nbsp;
                 <input type="text" placeholder="table..."  class="form-control" (input)="onSearchChange($event.target.value)" />
-            </div> -->
+            </div>
         </div>
         <br>
         <ag-grid-angular
             class="ag-theme-material"
             [rowData]="rowData"
+            [animateRows]="true"
             [defaultColDef]="defaultColDef"
             [columnDefs]="columnDefs"
             [frameworkComponents]="frameworkComponents"
             [loadingOverlayComponent]="loadingOverlayComponent"
             (gridReady)="onGridReady($event)"
-            (sortChanged)="onSortChanged($event)"
+            (sortChanged)="onSortChange($event)"
         ></ag-grid-angular>
 
         <br>
 
-        <div class="report-table__info-pagination row">
-            <div class="report-table__info col-12 col-sm-5 col-md-5">
+        <div class="report-table__info-pagination row justify-content-center justify-content-sm-between">
+            <div class="report-table__info px-3">
                 <app-report-table-info
                     [recordsInfoFrom]="rowData?.length ? recordsInfo.from : '0'"
                     [recordsInfoTo]="recordsInfo.to"
                     [recordsInfoTotal]="recordsInfo.total"
                 ></app-report-table-info>
             </div>
-            <div class="col-sm-2 col-md-2"></div>
-            <div class="report-table__pagination col-12 col-sm-5 col-md-5">
+            <div class="report-table__pagination px-3 mt-xs">
                 <ngb-pagination class="d-flex justify-content-end"
                     #reportTablePagination
                     [collectionSize]="paginationCollectionSize"

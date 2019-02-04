@@ -1,3 +1,5 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
 :host {
     display: flex;
     flex-direction: column;
@@ -12,10 +14,7 @@
     bottom: 0;
     width: 100%;
     height: 0;
-    filter: blur(10px);
-    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>%23svgMask");
     z-index: 1;
-    background: rgba(255, 255, 255, 0.3);
     opacity: 0.5;
 }
 
@@ -44,10 +43,6 @@
         height: 5px;
         display: flex;
         flex-direction: column;
-
-        >ng-progress {
-            // bottom: 0;
-        }
     }
 }
 
@@ -76,5 +71,11 @@
     &__search {
         display: flex;
         align-items: center;
+    }
+}
+
+@include media-breakpoint-down(xs) {
+    .mt-xs {
+        margin-top: 10px;
     }
 }

@@ -5,10 +5,8 @@ export const REPORTS = [
         'last_name': 'Mowson',
         'email': 'fmowson0@redcross.org',
         'gender': 'Male',
-        'start_date': '2018-02-21',
-        'end_date': '2018-06-17',
-        'start_time': '7:44',
-        'end_time': '21:45'
+        'date': '2018-02-21',
+        'time': '7:44'
     },
     {
         'id': 2,
@@ -16,10 +14,8 @@ export const REPORTS = [
         'last_name': 'Bier',
         'email': 'jbier1@1und1.de',
         'gender': 'Female',
-        'start_date': '2018-10-01',
-        'end_date': '2018-11-21',
-        'start_time': '14:49',
-        'end_time': '10:30'
+        'date': '2018-10-01',
+        'time': '14:49'
     },
     {
         'id': 3,
@@ -27,10 +23,8 @@ export const REPORTS = [
         'last_name': 'Peron',
         'email': 'uperon2@arizona.edu',
         'gender': 'Male',
-        'start_date': '2018-09-25',
-        'end_date': '2018-04-28',
-        'start_time': '16:42',
-        'end_time': '18:00'
+        'date': '2018-09-25',
+        'time': '16:42'
     },
     {
         'id': 4,
@@ -38,10 +32,8 @@ export const REPORTS = [
         'last_name': 'Sambedge',
         'email': 'ssambedge3@sina.com.cn',
         'gender': 'Female',
-        'start_date': '2018-04-13',
-        'end_date': '2018-05-25',
-        'start_time': '4:05',
-        'end_time': '20:26'
+        'date': '2018-04-13',
+        'time': '4:05'
     },
     {
         'id': 5,
@@ -49,10 +41,8 @@ export const REPORTS = [
         'last_name': 'Sowley',
         'email': 'wsowley4@smugmug.com',
         'gender': 'Male',
-        'start_date': '2018-11-02',
-        'end_date': '2018-10-03',
-        'start_time': '15:33',
-        'end_time': '3:43'
+        'date': '2018-11-02',
+        'time': '15:33'
     },
     {
         'id': 6,
@@ -60,10 +50,8 @@ export const REPORTS = [
         'last_name': 'Swyer-Sexey',
         'email': 'iswyersexey5@gizmodo.com',
         'gender': 'Male',
-        'start_date': '2018-09-26',
-        'end_date': '2018-10-16',
-        'start_time': '23:00',
-        'end_time': '8:04'
+        'date': '2018-09-26',
+        'time': '23:00'
     },
     {
         'id': 7,
@@ -71,10 +59,8 @@ export const REPORTS = [
         'last_name': 'Eastup',
         'email': 'aeastup6@moonfruit.com',
         'gender': 'Female',
-        'start_date': '2018-09-14',
-        'end_date': '2018-10-29',
-        'start_time': '12:23',
-        'end_time': '2:30'
+        'date': '2018-09-14',
+        'time': '12:23'
     },
     {
         'id': 8,
@@ -82,10 +68,8 @@ export const REPORTS = [
         'last_name': 'Bacher',
         'email': 'sbacher7@pen.io',
         'gender': 'Male',
-        'start_date': '2018-07-03',
-        'end_date': '2018-03-17',
-        'start_time': '0:58',
-        'end_time': '5:24'
+        'date': '2018-07-03',
+        'time': '0:58'
     },
     {
         'id': 9,
@@ -93,10 +77,8 @@ export const REPORTS = [
         'last_name': 'Lidgate',
         'email': 'alidgate8@constantcontact.com',
         'gender': 'Female',
-        'start_date': '2018-11-08',
-        'end_date': '2018-11-08',
-        'start_time': '12:48',
-        'end_time': '17:36'
+        'date': '2018-11-08',
+        'time': '12:48'
     },
     {
         'id': 10,
@@ -104,10 +86,8 @@ export const REPORTS = [
         'last_name': 'Spieck',
         'email': 'cspieck9@example.com',
         'gender': 'Male',
-        'start_date': '2018-03-02',
-        'end_date': '2018-11-16',
-        'start_time': '16:46',
-        'end_time': '22:57'
+        'date': '2018-03-02',
+        'time': '16:46'
     },
     {
         'id': 11,
@@ -115,10 +95,8 @@ export const REPORTS = [
         'last_name': 'Szymanowski',
         'email': 'cszymanowskia@reuters.com',
         'gender': 'Male',
-        'start_date': '2018-08-17',
-        'end_date': '2018-11-24',
-        'start_time': '9:33',
-        'end_time': '20:33'
+        'date': '2018-08-17',
+        'time': '9:33'
     },
     {
         'id': 12,
@@ -126,10 +104,8 @@ export const REPORTS = [
         'last_name': 'Tinklin',
         'email': 'vtinklinb@mapy.cz',
         'gender': 'Female',
-        'start_date': '2018-08-21',
-        'end_date': '2018-06-10',
-        'start_time': '12:42',
-        'end_time': '3:01'
+        'date': '2018-08-21',
+        'time': '12:42'
     },
     {
         'id': 13,
@@ -137,10 +113,8 @@ export const REPORTS = [
         'last_name': 'Shyre',
         'email': 'cshyrec@youtube.com',
         'gender': 'Female',
-        'start_date': '2018-11-22',
-        'end_date': '2018-10-17',
-        'start_time': '5:17',
-        'end_time': '19:48'
+        'date': '2018-11-22',
+        'time': '5:17'
     },
     {
         'id': 14,
@@ -148,10 +122,8 @@ export const REPORTS = [
         'last_name': 'Silverman',
         'email': 'csilvermand@fc2.com',
         'gender': 'Female',
-        'start_date': '2018-01-10',
-        'end_date': '2018-06-05',
-        'start_time': '10:36',
-        'end_time': '2:11'
+        'date': '2018-01-10',
+        'time': '10:36'
     },
     {
         'id': 15,
@@ -159,10 +131,8 @@ export const REPORTS = [
         'last_name': 'Petersen',
         'email': 'mpetersene@vk.com',
         'gender': 'Male',
-        'start_date': '2018-01-11',
-        'end_date': '2018-10-22',
-        'start_time': '14:27',
-        'end_time': '5:23'
+        'date': '2018-01-11',
+        'time': '14:27'
     },
     {
         'id': 16,
@@ -170,10 +140,8 @@ export const REPORTS = [
         'last_name': 'Waller',
         'email': 'swallerf@tumblr.com',
         'gender': 'Male',
-        'start_date': '2018-04-19',
-        'end_date': '2018-05-01',
-        'start_time': '20:40',
-        'end_time': '17:33'
+        'date': '2018-04-19',
+        'time': '20:40'
     },
     {
         'id': 17,
@@ -181,10 +149,8 @@ export const REPORTS = [
         'last_name': 'Dowthwaite',
         'email': 'kdowthwaiteg@disqus.com',
         'gender': 'Female',
-        'start_date': '2018-04-12',
-        'end_date': '2018-01-24',
-        'start_time': '10:12',
-        'end_time': '9:35'
+        'date': '2018-04-12',
+        'time': '10:12'
     },
     {
         'id': 18,
@@ -192,10 +158,8 @@ export const REPORTS = [
         'last_name': 'Beacham',
         'email': 'nbeachamh@nifty.com',
         'gender': 'Female',
-        'start_date': '2018-07-02',
-        'end_date': '2018-03-17',
-        'start_time': '17:48',
-        'end_time': '20:02'
+        'date': '2018-07-02',
+        'time': '17:48'
     },
     {
         'id': 19,
@@ -203,10 +167,8 @@ export const REPORTS = [
         'last_name': 'Cutmare',
         'email': 'fcutmarei@salon.com',
         'gender': 'Male',
-        'start_date': '2018-12-12',
-        'end_date': '2018-01-30',
-        'start_time': '3:44',
-        'end_time': '13:55'
+        'date': '2018-12-12',
+        'time': '3:44'
     },
     {
         'id': 20,
@@ -214,10 +176,8 @@ export const REPORTS = [
         'last_name': 'Raund',
         'email': 'braundj@latimes.com',
         'gender': 'Female',
-        'start_date': '2018-04-30',
-        'end_date': '2018-05-03',
-        'start_time': '10:10',
-        'end_time': '14:17'
+        'date': '2018-04-30',
+        'time': '10:10'
     },
     {
         'id': 21,
@@ -225,10 +185,8 @@ export const REPORTS = [
         'last_name': 'Madill',
         'email': 'jmadillk@surveymonkey.com',
         'gender': 'Female',
-        'start_date': '2018-06-08',
-        'end_date': '2018-07-17',
-        'start_time': '17:23',
-        'end_time': '0:32'
+        'date': '2018-06-08',
+        'time': '17:23'
     },
     {
         'id': 22,
@@ -236,10 +194,8 @@ export const REPORTS = [
         'last_name': 'Barbrick',
         'email': 'nbarbrickl@1und1.de',
         'gender': 'Male',
-        'start_date': '2018-01-06',
-        'end_date': '2018-04-21',
-        'start_time': '17:25',
-        'end_time': '17:42'
+        'date': '2018-01-06',
+        'time': '17:25'
     },
     {
         'id': 23,
@@ -247,10 +203,8 @@ export const REPORTS = [
         'last_name': 'Snashall',
         'email': 'ssnashallm@slashdot.org',
         'gender': 'Female',
-        'start_date': '2018-11-23',
-        'end_date': '2018-04-23',
-        'start_time': '11:38',
-        'end_time': '0:18'
+        'date': '2018-11-23',
+        'time': '11:38'
     },
     {
         'id': 24,
@@ -258,10 +212,8 @@ export const REPORTS = [
         'last_name': 'Heine',
         'email': 'bheinen@nytimes.com',
         'gender': 'Female',
-        'start_date': '2018-07-12',
-        'end_date': '2018-05-30',
-        'start_time': '1:07',
-        'end_time': '5:43'
+        'date': '2018-07-12',
+        'time': '1:07'
     },
     {
         'id': 25,
@@ -269,10 +221,8 @@ export const REPORTS = [
         'last_name': 'Estcot',
         'email': 'restcoto@ox.ac.uk',
         'gender': 'Male',
-        'start_date': '2018-05-23',
-        'end_date': '2018-07-05',
-        'start_time': '4:40',
-        'end_time': '3:26'
+        'date': '2018-05-23',
+        'time': '4:40'
     },
     {
         'id': 26,
@@ -280,10 +230,8 @@ export const REPORTS = [
         'last_name': 'Tedman',
         'email': 'dtedmanp@wiley.com',
         'gender': 'Male',
-        'start_date': '2018-07-24',
-        'end_date': '2018-04-24',
-        'start_time': '22:49',
-        'end_time': '22:27'
+        'date': '2018-07-24',
+        'time': '22:49'
     },
     {
         'id': 27,
@@ -291,10 +239,8 @@ export const REPORTS = [
         'last_name': 'Crace',
         'email': 'lcraceq@themeforest.net',
         'gender': 'Male',
-        'start_date': '2018-11-29',
-        'end_date': '2018-01-15',
-        'start_time': '8:21',
-        'end_time': '13:12'
+        'date': '2018-11-29',
+        'time': '8:21'
     },
     {
         'id': 28,
@@ -302,10 +248,8 @@ export const REPORTS = [
         'last_name': 'Pentin',
         'email': 'bpentinr@addthis.com',
         'gender': 'Male',
-        'start_date': '2018-10-10',
-        'end_date': '2018-12-20',
-        'start_time': '4:03',
-        'end_time': '12:26'
+        'date': '2018-10-10',
+        'time': '4:03'
     },
     {
         'id': 29,
@@ -313,10 +257,8 @@ export const REPORTS = [
         'last_name': 'Jachtym',
         'email': 'ljachtyms@soundcloud.com',
         'gender': 'Male',
-        'start_date': '2018-03-15',
-        'end_date': '2018-11-11',
-        'start_time': '19:07',
-        'end_time': '9:36'
+        'date': '2018-03-15',
+        'time': '19:07'
     },
     {
         'id': 30,
@@ -324,10 +266,8 @@ export const REPORTS = [
         'last_name': 'Mora',
         'email': 'amorat@sitemeter.com',
         'gender': 'Male',
-        'start_date': '2018-03-09',
-        'end_date': '2018-02-13',
-        'start_time': '17:45',
-        'end_time': '0:22'
+        'date': '2018-03-09',
+        'time': '17:45'
     },
     {
         'id': 31,
@@ -335,10 +275,8 @@ export const REPORTS = [
         'last_name': 'Pero',
         'email': 'fperou@ask.com',
         'gender': 'Female',
-        'start_date': '2018-01-20',
-        'end_date': '2018-03-10',
-        'start_time': '9:30',
-        'end_time': '4:30'
+        'date': '2018-01-20',
+        'time': '9:30'
     },
     {
         'id': 32,
@@ -346,10 +284,8 @@ export const REPORTS = [
         'last_name': 'Lacroix',
         'email': 'rlacroixv@arstechnica.com',
         'gender': 'Female',
-        'start_date': '2018-08-01',
-        'end_date': '2018-09-14',
-        'start_time': '21:55',
-        'end_time': '14:38'
+        'date': '2018-08-01',
+        'time': '21:55'
     },
     {
         'id': 33,
@@ -357,10 +293,8 @@ export const REPORTS = [
         'last_name': 'Richardet',
         'email': 'wrichardetw@ebay.com',
         'gender': 'Female',
-        'start_date': '2018-07-29',
-        'end_date': '2018-12-21',
-        'start_time': '4:46',
-        'end_time': '22:21'
+        'date': '2018-07-29',
+        'time': '4:46'
     },
     {
         'id': 34,
@@ -368,10 +302,8 @@ export const REPORTS = [
         'last_name': 'Pendock',
         'email': 'ependockx@dmoz.org',
         'gender': 'Male',
-        'start_date': '2018-02-08',
-        'end_date': '2018-11-01',
-        'start_time': '6:17',
-        'end_time': '19:48'
+        'date': '2018-02-08',
+        'time': '6:17'
     },
     {
         'id': 35,
@@ -379,10 +311,8 @@ export const REPORTS = [
         'last_name': 'Hince',
         'email': 'ahincey@linkedin.com',
         'gender': 'Female',
-        'start_date': '2018-03-22',
-        'end_date': '2017-12-31',
-        'start_time': '2:01',
-        'end_time': '8:07'
+        'date': '2018-03-22',
+        'time': '2:01'
     },
     {
         'id': 36,
@@ -390,10 +320,8 @@ export const REPORTS = [
         'last_name': 'MacCaughey',
         'email': 'mmaccaugheyz@biblegateway.com',
         'gender': 'Female',
-        'start_date': '2018-10-14',
-        'end_date': '2018-10-16',
-        'start_time': '3:11',
-        'end_time': '14:07'
+        'date': '2018-10-14',
+        'time': '3:11'
     },
     {
         'id': 37,
@@ -401,10 +329,8 @@ export const REPORTS = [
         'last_name': 'Ulrik',
         'email': 'culrik10@1688.com',
         'gender': 'Female',
-        'start_date': '2018-10-31',
-        'end_date': '2017-12-30',
-        'start_time': '20:34',
-        'end_time': '8:28'
+        'date': '2018-10-31',
+        'time': '20:34'
     },
     {
         'id': 38,
@@ -412,10 +338,8 @@ export const REPORTS = [
         'last_name': 'Berni',
         'email': 'rberni11@nih.gov',
         'gender': 'Male',
-        'start_date': '2018-04-18',
-        'end_date': '2018-06-10',
-        'start_time': '8:24',
-        'end_time': '12:27'
+        'date': '2018-04-18',
+        'time': '8:24'
     },
     {
         'id': 39,
@@ -423,10 +347,8 @@ export const REPORTS = [
         'last_name': 'Peracco',
         'email': 'pperacco12@addthis.com',
         'gender': 'Female',
-        'start_date': '2018-01-08',
-        'end_date': '2018-01-22',
-        'start_time': '19:01',
-        'end_time': '3:05'
+        'date': '2018-01-08',
+        'time': '19:01'
     },
     {
         'id': 40,
@@ -434,10 +356,8 @@ export const REPORTS = [
         'last_name': 'Deboo',
         'email': 'tdeboo13@opensource.org',
         'gender': 'Male',
-        'start_date': '2018-07-08',
-        'end_date': '2018-07-02',
-        'start_time': '23:37',
-        'end_time': '5:48'
+        'date': '2018-07-08',
+        'time': '23:37'
     },
     {
         'id': 41,
@@ -445,10 +365,8 @@ export const REPORTS = [
         'last_name': 'Adamowicz',
         'email': 'oadamowicz14@buzzfeed.com',
         'gender': 'Male',
-        'start_date': '2018-12-18',
-        'end_date': '2018-12-25',
-        'start_time': '23:45',
-        'end_time': '12:15'
+        'date': '2018-12-18',
+        'time': '23:45'
     },
     {
         'id': 42,
@@ -456,10 +374,8 @@ export const REPORTS = [
         'last_name': 'McGavigan',
         'email': 'hmcgavigan15@cam.ac.uk',
         'gender': 'Male',
-        'start_date': '2018-10-02',
-        'end_date': '2018-11-30',
-        'start_time': '1:19',
-        'end_time': '4:44'
+        'date': '2018-10-02',
+        'time': '1:19'
     },
     {
         'id': 43,
@@ -467,10 +383,8 @@ export const REPORTS = [
         'last_name': 'Gley',
         'email': 'sgley16@linkedin.com',
         'gender': 'Female',
-        'start_date': '2018-03-02',
-        'end_date': '2018-07-17',
-        'start_time': '0:42',
-        'end_time': '16:34'
+        'date': '2018-03-02',
+        'time': '0:42'
     },
     {
         'id': 44,
@@ -478,10 +392,8 @@ export const REPORTS = [
         'last_name': 'Grove',
         'email': 'hgrove17@psu.edu',
         'gender': 'Male',
-        'start_date': '2018-06-29',
-        'end_date': '2018-01-24',
-        'start_time': '12:43',
-        'end_time': '13:30'
+        'date': '2018-06-29',
+        'time': '12:43'
     },
     {
         'id': 45,
@@ -489,10 +401,8 @@ export const REPORTS = [
         'last_name': 'Crain',
         'email': 'rcrain18@wikispaces.com',
         'gender': 'Male',
-        'start_date': '2018-11-03',
-        'end_date': '2018-02-10',
-        'start_time': '8:25',
-        'end_time': '9:15'
+        'date': '2018-11-03',
+        'time': '8:25'
     },
     {
         'id': 46,
@@ -500,10 +410,8 @@ export const REPORTS = [
         'last_name': 'Shapira',
         'email': 'bshapira19@weather.com',
         'gender': 'Male',
-        'start_date': '2018-01-08',
-        'end_date': '2018-03-30',
-        'start_time': '15:34',
-        'end_time': '11:59'
+        'date': '2018-01-08',
+        'time': '15:34'
     },
     {
         'id': 47,
@@ -511,10 +419,8 @@ export const REPORTS = [
         'last_name': 'Gini',
         'email': 'egini1a@arizona.edu',
         'gender': 'Female',
-        'start_date': '2018-03-12',
-        'end_date': '2018-03-21',
-        'start_time': '1:12',
-        'end_time': '16:22'
+        'date': '2018-03-12',
+        'time': '1:12'
     },
     {
         'id': 48,
@@ -522,10 +428,8 @@ export const REPORTS = [
         'last_name': 'Coldman',
         'email': 'pcoldman1b@dell.com',
         'gender': 'Female',
-        'start_date': '2018-01-04',
-        'end_date': '2018-03-21',
-        'start_time': '11:47',
-        'end_time': '23:32'
+        'date': '2018-01-04',
+        'time': '11:47'
     },
     {
         'id': 49,
@@ -533,9 +437,7 @@ export const REPORTS = [
         'last_name': 'Brimacombe',
         'email': 'cbrimacombe1c@lulu.com',
         'gender': 'Male',
-        'start_date': '2018-08-19',
-        'end_date': '2018-06-14',
-        'start_time': '8:50',
-        'end_time': '7:31'
+        'date': '2018-08-19',
+        'time': '8:50'
     }
 ];

@@ -1,4 +1,8 @@
 :host {
+    --circle-width: 3px;
+    --circle-boundary: 30px;
+    --loader-bg: white;
+
     padding: 0.8rem;
     background: white;
     border-radius: 5px;
@@ -9,17 +13,15 @@
 
 .loader-wrapper {
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: var(--circle-boundary);
+    height: var(--circle-boundary);
     margin-right: 0.8rem;
 }
 
 .loader {
-    --loader-bg: #fff;
-
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: var(--circle-boundary);
+    height: var(--circle-boundary);
     margin: auto;
     animation: spin 4s linear infinite;
 
@@ -32,18 +34,18 @@
         content: "";
         position: absolute;
         border-radius: 50%;
-        border: 5px solid var(--loader-bg);
+        border: var(--circle-width) solid var(--loader-bg);
     }
 
     &:before {
-        border-bottom: 5px solid orange;
-        border-left: 5px solid orange;
+        border-bottom: var(--circle-width) solid orange;
+        border-left: var(--circle-width) solid orange;
         animation: spin1 1s linear infinite;
     }
 
     &:after {
-        border-top: 5px solid transparent;
-        border-right: 5px solid transparent;
+        border-top: var(--circle-width) solid transparent;
+        border-right: var(--circle-width) solid transparent;
         animation: spin2 1s linear infinite;
     }
 }

@@ -262,6 +262,7 @@ div.dataTables_wrapper {
 
     .ag-header {
         font-size: 1rem;
+        border-bottom: 0;
     }
 
     .ag-header-cell-label {
@@ -290,6 +291,19 @@ div.dataTables_wrapper {
     .ag-overlay-loading-wrapper {
         background-color: rgba(255, 255, 255, 0.6);
     }
+
+    .ag-header-container {
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+        margin: auto;
+    }
+
+    .ag-center-cols-container {
+        margin: auto;
+    }
+}
+
+.pagination {
+    flex-wrap: wrap;
 }
 
 .page-item {

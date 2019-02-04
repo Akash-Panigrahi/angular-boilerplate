@@ -63,26 +63,21 @@ export class MockBackendInterceptor implements HttpInterceptor {
                     }
 
                     if (request.url.endsWith('/report') && request.method === 'POST') {
-                        // const { startDate, endDate, startTime, endTime, start, length, draw } = request.body;
+
                         const { startDate, endDate, startTime, endTime, start, length } = request.body;
 
                         const totalReports = REPORTS
                             .filter(report => {
 
-                                const { start_date, end_date, start_time, end_time } = report;
-                                const [start_hour, start_minute] = start_time.split(':').map(parseFloat);
-                                const [end_hour, end_minute] = end_time.split(':').map(parseFloat);
-                                const reportStartDate = new Date(new Date(start_date).setHours(start_hour, start_minute));
-                                const reportEndDate = new Date(new Date(end_date).setHours(end_hour, end_minute));
+                                const { date, time } = report;
+                                const [hour, minute] = time.split(':').map(parseFloat);
+                                const reportDate = new Date(new Date(date).setHours(hour, minute));
 
                                 const requestStartDate = new Date(`${startDate} ${startTime}`);
                                 const requestEndDate = new Date(`${endDate} ${endTime}`);
 
-                                return reportStartDate <= reportEndDate
-                                    && reportStartDate >= requestStartDate
-                                    && reportStartDate <= requestEndDate
-                                    && reportEndDate <= requestEndDate
-                                    && reportEndDate >= requestStartDate
+                                return reportDate >= requestStartDate
+                                    && reportDate <= requestEndDate
                                     ;
                             });
 

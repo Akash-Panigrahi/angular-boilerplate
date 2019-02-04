@@ -15,6 +15,7 @@ export class NotLoggedInUserGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
         const user = this._state.getState('user');
+        console.log(user);
 
         // if route is of login page and user is already logged in
         if (state.url === '/login') {
