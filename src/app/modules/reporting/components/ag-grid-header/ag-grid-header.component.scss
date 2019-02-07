@@ -1,0 +1,19 @@
+.customHeaderLabel,
+.customSortDownLabel,
+.customSortUpLabel,
+.customSortRemoveLabel {
+    float: left;
+    margin: 0 0 0 3px;
+}
+
+.customSortUpLabel {
+    margin: 0;
+}
+
+.customSortRemoveLabel {
+    font-size: 11px;
+}
+
+.inactive {
+    display: none
+}

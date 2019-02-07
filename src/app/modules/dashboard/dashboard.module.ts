@@ -19,7 +19,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ActionBarComponent } from './components/action-bar/action-bar.component';
 import { BasicColumnComponent } from './components/basic-column/basic-column.component';
 import { GradientPieComponent } from './components/gradient-pie/gradient-pie.component';
-import { KpisComponent } from './components/kpis/kpis.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
 
 @NgModule({
@@ -31,8 +30,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
         FooterComponent,
         ActionBarComponent,
         BasicColumnComponent,
-        GradientPieComponent,
-        KpisComponent
+        GradientPieComponent
     ],
     imports: [
         CommonModule,

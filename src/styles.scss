@@ -6,7 +6,8 @@
 
 :root {
     --smokey-black: #b7b7b7;
-    --grey-white: #f0f0f0;
+    // --grey-white: #f0f0f0;
+    --grey-white: #fff;
 }
 
 body {
@@ -286,6 +287,16 @@ div.dataTables_wrapper {
 
     .ag-overlay {
         pointer-events: all;
+    }
+
+    .ag-overlay-panel {
+        display: flex;
+    }
+
+    .ag-overlay-no-rows-wrapper,
+    .ag-overlay-loading-wrapper {
+        flex: 1;
+        display: flex;
     }
 
     .ag-overlay-loading-wrapper {

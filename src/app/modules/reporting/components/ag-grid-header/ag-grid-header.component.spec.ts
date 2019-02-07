@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KpisComponent } from './kpis.component';
+import { AgGridHeaderComponent } from './ag-grid-header.component';
 
-describe('KpisComponent', () => {
-  let component: KpisComponent;
-  let fixture: ComponentFixture<KpisComponent>;
+describe('AgGridHeaderComponent', () => {
+  let component: AgGridHeaderComponent;
+  let fixture: ComponentFixture<AgGridHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KpisComponent ]
+      declarations: [ AgGridHeaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KpisComponent);
+    fixture = TestBed.createComponent(AgGridHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

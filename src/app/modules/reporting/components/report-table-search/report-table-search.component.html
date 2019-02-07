@@ -1,0 +1,16 @@
+<input
+    type="text"
+    placeholder="Search table..."
+    class="form-control"
+    #searchInput
+    (keydown.enter)="searchChangeEvent.emit($event.target.value)"
+>
+&nbsp;
+<div
+    class="btn btn-primary search-button"
+    tabindex="0"
+    (click)="searchChangeEvent.emit(searchInput.value)"
+    (keydown.enter)="searchChangeEvent.emit(searchInput.value)"
+>
+    <i class="material-icons">search</i>
+</div>

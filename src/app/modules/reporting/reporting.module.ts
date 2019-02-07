@@ -9,6 +9,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ReportTableLengthComponent } from './components/report-table-length/report-table-length.component';
 import { ReportTableInfoComponent } from './components/report-table-info/report-table-info.component';
 import { AgGridLoadingOverlayComponent } from './components/ag-grid-loading-overlay/ag-grid-loading-overlay.component';
+import { ReportTableSearchComponent } from './components/report-table-search/report-table-search.component';
+import { AgGridNoRowsOverlayComponent } from './components/ag-grid-no-rows-overlay/ag-grid-no-rows-overlay.component';
+import { AgGridHeaderComponent } from './components/ag-grid-header/ag-grid-header.component';
 
 @NgModule({
     declarations: [
@@ -16,11 +19,18 @@ import { AgGridLoadingOverlayComponent } from './components/ag-grid-loading-over
         CustomNgbPaginationDirective,
         ReportTableLengthComponent,
         ReportTableInfoComponent,
-        AgGridLoadingOverlayComponent
+        AgGridLoadingOverlayComponent,
+        AgGridNoRowsOverlayComponent,
+        ReportTableSearchComponent,
+        AgGridHeaderComponent
     ],
     imports: [
         CommonModule,
-        AgGridModule.withComponents([AgGridLoadingOverlayComponent]),
+        AgGridModule.withComponents([
+            AgGridLoadingOverlayComponent,
+            AgGridNoRowsOverlayComponent,
+            AgGridHeaderComponent
+        ]),
         NgbPaginationModule.forRoot(),
         NgProgressModule
     ],

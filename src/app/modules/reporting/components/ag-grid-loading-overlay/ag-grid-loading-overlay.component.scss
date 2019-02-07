@@ -1,4 +1,10 @@
 :host {
+    all: inherit;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-wrapper {
     --circle-width: 3px;
     --circle-boundary: 30px;
     --loader-bg: white;

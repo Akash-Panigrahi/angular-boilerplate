@@ -64,7 +64,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
 
                     if (request.url.endsWith('/report') && request.method === 'POST') {
 
-                        const { startDate, endDate, startTime, endTime, start, length } = request.body;
+                        const { startDate, endDate, startTime, endTime, start, length, sort } = request.body;
 
                         const totalReports = REPORTS
                             .filter(report => {
@@ -79,7 +79,37 @@ export class MockBackendInterceptor implements HttpInterceptor {
                                 return reportDate >= requestStartDate
                                     && reportDate <= requestEndDate
                                     ;
-                            });
+                            })
+                            .sort((prev, curr) => {
+
+                                if (typeof (prev[sort.sortKey]) === 'number') {
+                                    switch (sort.sortDir) {
+                                        case 1:
+                                            // ascending sort
+                                            return prev[sort.sortKey] - curr[sort.sortKey];
+                                        case -1:
+                                            // descending sort
+                                            return curr[sort.sortKey] - prev[sort.sortKey];
+                                        case 0:
+                                            // no sort
+                                            return 0;
+                                    }
+
+                                } else if (typeof (prev[sort.sortKey]) === 'string') {
+                                    switch (sort.sortDir) {
+                                        case 1:
+                                            // ascending sort
+                                            return prev[sort.sortKey].localeCompare(curr[sort.sortKey]);
+                                        case -1:
+                                            // descending sort
+                                            return curr[sort.sortKey].localeCompare(prev[sort.sortKey]);
+                                        case 0:
+                                            // no sort
+                                            return 0;
+                                    }
+                                }
+                            })
+                            ;
 
                         const from = start * length
                             , to = totalReports.length < (start * length) + length

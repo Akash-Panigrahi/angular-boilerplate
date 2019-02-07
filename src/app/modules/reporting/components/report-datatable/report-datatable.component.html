@@ -28,7 +28,8 @@
 >
     <h1>Clients list</h1>
 
-    <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList">
+    <div class="report-table" #reportTable>
+    <!-- <div class="report-table" #reportTable *ngIf="rowData?.length; else noClientsList"> -->
         <div class="report-table__length-search row justify-content-center justify-content-sm-between">
             <div class="report-table__length px-3">
                 <app-report-table-length
@@ -38,9 +39,9 @@
                 ></app-report-table-length>
             </div>
             <div class="report-table__search px-3 mt-xs">
-                <span>Search</span>
-                &nbsp;
-                <input type="text" placeholder="table..."  class="form-control" (input)="onSearchChange($event.target.value)" />
+                <app-report-table-search
+                    (searchChangeEvent)="onSearchChange($event)"
+                ></app-report-table-search>
             </div>
         </div>
         <br>
@@ -52,8 +53,9 @@
             [columnDefs]="columnDefs"
             [frameworkComponents]="frameworkComponents"
             [loadingOverlayComponent]="loadingOverlayComponent"
+            [noRowsOverlayComponent]="noRowsOverlayComponent"
             (gridReady)="onGridReady($event)"
-            (sortChanged)="onSortChange($event)"
+            (viewportChanged)="onViewportChanged($event)"
         ></ag-grid-angular>
 
         <br>
@@ -76,7 +78,7 @@
                     [ellipses]="true"
                     [boundaryLinks]="true"
                     appCustomNgbPagination
-                    [initialPageSet]="initialPageSet"
+                    [pageSetTrigger]="pageSetTrigger"
                     (customPageChangeEvent)="onPageChange($event)"
                 ></ngb-pagination>
             </div>

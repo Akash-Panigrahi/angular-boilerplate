@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
-import { pageAnimation, borderExpandOnHover, slideDown } from './login-page.animations';
+import { loginPageAnimation, slideDown } from './login-page.animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginPageService } from './login-page.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { ILoginData } from 'src/app/core/interfaces/login.interface';
     templateUrl: './login-page.component.html',
     styleUrls: ['./login-page.component.scss'],
     animations: [
-        pageAnimation,
+        loginPageAnimation,
         slideDown
     ],
     // using providers the scope of 'LoginPageService' is limited to this component class
@@ -20,7 +20,7 @@ import { ILoginData } from 'src/app/core/interfaces/login.interface';
 export class LoginPageComponent implements OnInit {
 
     // animation
-    @HostBinding('@pageAnimation') get pageAnimation() { return ''; }
+    @HostBinding('@loginPageAnimation') get pageAnimation() { return ''; }
 
     // password visibility toggling
     passwordVisibility = false;
@@ -53,7 +53,9 @@ export class LoginPageComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _loginPageService: LoginPageService,
         private _toastr: ToastrService
-    ) { }
+    ) {
+        console.log('inside login page');
+    }
 
     ngOnInit() { }
 
@@ -69,7 +71,7 @@ export class LoginPageComponent implements OnInit {
                 (res: ILoginData) => {
 
                     this._toastr.success(`${res.username} logged in successfully!`);
-                    this._router.navigate(['dashboard/summary']);
+                    this._router.navigateByUrl('/summary');
                 },
                 (err: Error) => {
                     /*

@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { dashboardRouterAnimation } from '../../dashboard-router.animations';
-import { pageAnimation } from './dashboard-page.animations';
+import { dashboardPageAnimation } from './dashboard-page.animations';
 
 @Component({
     selector: 'app-dashboard-page',
@@ -8,13 +8,13 @@ import { pageAnimation } from './dashboard-page.animations';
     styleUrls: ['./dashboard-page.component.scss'],
     animations: [
         dashboardRouterAnimation,
-        pageAnimation
+        dashboardPageAnimation
     ]
 })
 export class DashboardPageComponent implements OnInit {
 
     // bind pageAnimation animation on host
-    @HostBinding('@pageAnimation') get pageAnimation() { return ''; }
+    @HostBinding('@dashboardPageAnimation') get dashboardPageAnimation() { return ''; }
 
     constructor() { }
 

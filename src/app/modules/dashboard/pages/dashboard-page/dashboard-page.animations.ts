@@ -2,7 +2,7 @@ import {
     trigger, animate, style, group, query, transition, sequence, animateChild
 } from '@angular/animations';
 
-export const pageAnimation = trigger('pageAnimation', [
+export const dashboardPageAnimation = trigger('dashboardPageAnimation', [
     transition(':enter', group([
         // Initial Styles
         query('.app-action-bar', style({ opacity: '0' })),
@@ -19,10 +19,13 @@ export const pageAnimation = trigger('pageAnimation', [
             ])
         ])
     ])),
-    transition(':leave', group([
+    transition(':leave', sequence([
         // Animations
-        query('.app-header', animate('500ms ease-out', style({ transform: 'translateY(-100%)', opacity: '0' }))),
-        query('.app-footer', animate('500ms ease-out', style({ transform: 'translateY(100%)', opacity: '0' }))),
-        query('.app-action-bar', animate('500ms ease-out', style({ opacity: '0' })))
+        // query('.app-section', animateChild()),
+        group([
+            query('.app-header', animate('500ms ease-out', style({ transform: 'translateY(-100%)', opacity: '0' }))),
+            query('.app-footer', animate('500ms ease-out', style({ transform: 'translateY(100%)', opacity: '0' }))),
+            query('.app-action-bar', animate('500ms ease-out', style({ opacity: '0' })))
+        ])
     ]))
 ]);

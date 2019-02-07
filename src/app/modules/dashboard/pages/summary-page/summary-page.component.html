@@ -1,13 +1,35 @@
 <div class="container-fluid bg-grey-white">
     <div class="kpi">
-        <app-kpis [kpis]="summaryData.kpis"></app-kpis>
+        <div class="kpis">
+            <app-kpi
+                class="child-component"
+                [kpiTitle]="'Total Calls'"
+                [kpiValue]="summaryData.kpis?.total_calls"
+            ></app-kpi>
+            <app-kpi
+                class="child-component"
+                [kpiTitle]="'Inbound Calls'"
+                [kpiPercentTitle]="'Inbound calls with respect to total calls'"
+                [kpiPercent]="(summaryData.kpis?.inbound_calls / summaryData.kpis?.total_calls) | percent: '.2'"
+                [kpiValue]="summaryData.kpis?.inbound_calls"
+            ></app-kpi>
+            <app-kpi
+                class="child-component"
+                [kpiTitle]="'Outbound Calls'"
+                [kpiPercentTitle]="'Outbound calls with respect to total calls'"
+                [kpiPercent]="(summaryData.kpis?.outbound_calls / summaryData.kpis?.total_calls) | percent: '.2'"
+                [kpiValue]="summaryData.kpis?.outbound_calls"
+            ></app-kpi>
+        </div>
     </div>
     <div class="charts">
-        <div class="child-component">
-            <app-basic-column [basicColumn]="summaryData.basicColumn"></app-basic-column>
-        </div>
-        <div class="child-component">
-            <app-gradient-pie [gradientPie]="summaryData.gradientPie"></app-gradient-pie>
-        </div>
+        <app-basic-column
+            class="child-component"
+            [basicColumn]="summaryData.basicColumn"
+        ></app-basic-column>
+        <app-gradient-pie
+            class="child-component"
+            [gradientPie]="summaryData.gradientPie"
+        ></app-gradient-pie>
     </div>
 </div>

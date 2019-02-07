@@ -15,13 +15,13 @@ export class NotLoggedInUserGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
         const user = this._state.getState('user');
-        console.log(user);
+        console.log(user, state.url);
 
         // if route is of login page and user is already logged in
         if (state.url === '/login') {
 
             if (user) {
-                this._router.navigate(['/dashboard']);
+                this._router.navigateByUrl('/');
                 return false;
             }
 
@@ -34,7 +34,7 @@ export class NotLoggedInUserGuard implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
-        this._router.navigate(['/login']);
+        this._router.navigateByUrl('/login');
         return false;
     }
 }

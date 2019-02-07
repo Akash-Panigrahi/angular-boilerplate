@@ -18,7 +18,7 @@ export class LogoutService {
         // clear the state
         this._state.clearState();
 
-        // redirect to '/' which will then redirect to login page
-        this._router.navigateByUrl('/');
+        // redirect to '/login' which will then redirect to login page
+        this._router.navigateByUrl('/login');
     }
 }

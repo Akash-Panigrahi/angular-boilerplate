@@ -19,7 +19,7 @@ const routes: Routes = [
         canActivate: [NotLoggedInUserGuard]
     },
     {
-        path: 'dashboard',
+        path: '',
         loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
         // route can only be activated by logged in user
         canActivate: [NotLoggedInUserGuard]

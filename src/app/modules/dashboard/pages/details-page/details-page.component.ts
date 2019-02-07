@@ -6,6 +6,7 @@ import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { take, delay } from 'rxjs/operators';
+import { IReportTableRequest, IReportTableData } from 'src/app/core/interfaces/report-table.interface';
 
 @Component({
     selector: 'app-details-page',
@@ -16,9 +17,10 @@ import { take, delay } from 'rxjs/operators';
 })
 export class DetailsPageComponent implements OnInit, OnDestroy {
 
-    @HostBinding('@riseUp') riseUp = true;
+    @HostBinding('@riseUp')
+    private _riseUp = true;
 
-    clients: any[];
+    clients: IReportTableData[];
     currentDateTimeRange$ = new Subscription();
 
     constructor(
@@ -28,9 +30,17 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         private _state: StateService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
 
-        this._state.setState('report-table-request', { start: 0, length: 5 });
+        this._state.setState('report-table-request', {
+            start: 0,
+            length: 5,
+            search: '',
+            sort: {
+                sortKey: 'id',
+                sortDir: 0
+            }
+        });
 
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
             .subscribe(reportRange => {
@@ -38,7 +48,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             });
     }
 
-    private _getReport(reportRange, reportTableRequest) {
+    private _getReport(reportRange, reportTableRequest: IReportTableRequest): void {
 
         const reportRequest = { ...reportRange, ...reportTableRequest };
 
@@ -46,7 +56,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             .getReport(reportRequest)
             // .pipe(delay(3000))
             .subscribe(
-                res => {
+                (res: IReportTableData[]) => {
                     this.clients = res;
                     this._actionBarUiState.changeGettingDataBar('complete');
                 },
@@ -54,7 +64,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             );
     }
 
-    receiveReportTableRequest(reportTableRequest) {
+    receiveReportTableRequest(reportTableRequest: IReportTableRequest): void {
         this._dateTimeRangeService.currentDateTimeRange
             .pipe(take(1))
             .subscribe(reportRange => {
@@ -62,7 +72,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.currentDateTimeRange$.unsubscribe();
     }
 }

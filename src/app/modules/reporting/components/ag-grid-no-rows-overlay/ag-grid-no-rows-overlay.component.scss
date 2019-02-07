@@ -1,0 +1,22 @@
+:host {
+    all: inherit;
+}
+
+.no-clients-list {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: linear-gradient(to right, rgb(86, 204, 242), rgb(47, 128, 237));
+    box-shadow: inset 1px 1px 5px 2px rgba(0, 0, 0, .11);
+    text-align: center;
+
+    span {
+        display: inline-block;
+        padding: 0.8rem;
+        color: white;
+        font-size: 1.2rem;
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
+    }
+}

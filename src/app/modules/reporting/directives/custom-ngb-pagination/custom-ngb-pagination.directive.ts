@@ -8,7 +8,8 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CustomNgbPaginationDirective implements OnChanges {
 
-    @Input() initialPageSet;
+    // required to trigger change detection
+    @Input() pageSetTrigger;
 
     private _lastPage = 1;
 

@@ -2,7 +2,7 @@ import { trigger, stagger, animate, style, group, query as q, transition } from 
 
 export function query(s, a, o = { optional: true }) { return q(s, a, o); }
 
-export const pageAnimation = trigger('pageAnimation', [
+export const loginPageAnimation = trigger('loginPageAnimation', [
     transition(':enter', [
         query('.login', style({ opacity: '0', transform: 'rotateX(-90deg) translateY(150px) translateZ(50px)' })),
         query('.login__logo', style({ transform: 'scale(0)' })),
@@ -23,15 +23,6 @@ export const pageAnimation = trigger('pageAnimation', [
             style({ transform: 'translateY(0px)', opacity: 1 }),
             animate('400ms', style({ transform: 'translateY(-50px)', opacity: '0' })),
         ]),
-    ])
-]);
-
-export const borderExpandOnHover = trigger('borderExpandOnHover', [
-    transition(':enter', [
-        query('.login-form__input-container::before, .login-form__input-container::after', [
-            style({ width: '0' }),
-            animate('1s', style({ width: '50%' }))
-        ])
     ])
 ]);
 
