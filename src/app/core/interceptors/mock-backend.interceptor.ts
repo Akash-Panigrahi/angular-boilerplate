@@ -10,7 +10,7 @@ import {
 
 // mock datasets
 import { USERS } from '../mocks/users.mock';
-import { REPORTS } from '../mocks/report.mock';
+import { DETAILS } from '../mocks/details.mock';
 import { SUMMARY } from '../mocks/summary.mock';
 
 export class MockBackendInterceptor implements HttpInterceptor {
@@ -62,23 +62,29 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         return of(new HttpResponse(httpResponse));
                     }
 
-                    if (request.url.endsWith('/report') && request.method === 'POST') {
+                    if (request.url.endsWith('/details') && request.method === 'POST') {
 
-                        const { startDate, endDate, startTime, endTime, start, length, sort } = request.body;
+                        const { startDate, endDate, startTime, endTime, start, length, search, sort } = request.body;
 
-                        const totalReports = REPORTS
-                            .filter(report => {
+                        const totalDetails = DETAILS
+                            .filter(details => {
 
-                                const { date, time } = report;
+                                const { date, time } = details;
                                 const [hour, minute] = time.split(':').map(parseFloat);
-                                const reportDate = new Date(new Date(date).setHours(hour, minute));
+                                const detailsDate = new Date(new Date(date).setHours(hour, minute));
 
                                 const requestStartDate = new Date(`${startDate} ${startTime}`);
                                 const requestEndDate = new Date(`${endDate} ${endTime}`);
 
-                                return reportDate >= requestStartDate
-                                    && reportDate <= requestEndDate
-                                    ;
+                                if (detailsDate >= requestStartDate && detailsDate <= requestEndDate) {
+                                    for (const detailsVal of Object.values(details)) {
+                                        if (typeof (detailsVal) === 'string' && detailsVal.toLowerCase().includes(search)) {
+                                            return true;
+                                        }
+                                    }
+                                }
+
+                                return false;
                             })
                             .sort((prev, curr) => {
 
@@ -112,16 +118,16 @@ export class MockBackendInterceptor implements HttpInterceptor {
                             ;
 
                         const from = start * length
-                            , to = totalReports.length < (start * length) + length
-                                ? totalReports.length
+                            , to = totalDetails.length < (start * length) + length
+                                ? totalDetails.length
                                 : (start * length) + length
                             ;
 
-                        const filteredReports = totalReports.slice(from, to);
+                        const filteredDetails = totalDetails.slice(from, to);
 
                         const data = {
-                            data: filteredReports,
-                            info: { from: from + 1, to, total: totalReports.length }
+                            data: filteredDetails,
+                            info: { from: from + 1, to, total: totalDetails.length }
                         };
 
                         // console.group('request-response');
@@ -139,7 +145,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         }));
                     }
 
-                    if (request.url.endsWith('/summary-data') && request.method === 'POST') {
+                    if (request.url.endsWith('/summary') && request.method === 'POST') {
 
                         const summary = SUMMARY.reduce((summaries: any, summary) => {
 

@@ -14,7 +14,7 @@ const routes: Routes = [
         loadChildren: './modules/authentication/authentication.module#AuthenticationModule',
         // route can only be activated if user is not logged in
         /*
-            if canActivate returns false, then next in line route will be checked which is 'dashboard'
+            if canActivate returns false, then next in line route will be checked which is '', hence will go to DashboardModule routes
         */
         canActivate: [NotLoggedInUserGuard]
     },
@@ -41,7 +41,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
-            useHash: true // this will add '#' after base href, and app will a SPA
+            useHash: true // this will add '#' after base href, and app will be an SPA
         })
     ],
     exports: [RouterModule]

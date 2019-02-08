@@ -3,11 +3,11 @@ import {
 } from '@angular/core';
 
 @Component({
-    selector: 'app-report-table-length',
-    templateUrl: './report-table-length.component.html',
-    styleUrls: ['./report-table-length.component.scss']
+    selector: 'app-details-table-length',
+    templateUrl: './details-table-length.component.html',
+    styleUrls: ['./details-table-length.component.scss']
 })
-export class ReportTableLengthComponent implements OnInit {
+export class DetailsTableLengthComponent implements OnInit {
 
     @Input() pageSizes: Array<number>;
     @Input() initialPageSize: number;

@@ -10,7 +10,7 @@ export const isInitialTableReady__Table = trigger('isInitialTableReady__Table', 
     transition('no => yes', animate('500ms'))
 ]);
 
-export const gettingClientsLoader = trigger('gettingClientsLoader', [
+export const gettingDetailsLoader = trigger('gettingDetailsLoader', [
     state('void', style({ opacity: 0, transform: 'translateY(-100px)', height: 'auto' })),
     state('no', style({
         transform: 'translateX(0)',

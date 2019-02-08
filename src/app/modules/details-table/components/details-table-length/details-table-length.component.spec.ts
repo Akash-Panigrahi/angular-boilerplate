@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportTableLengthComponent } from './report-table-length.component';
+import { DetailsTableLengthComponent } from './details-table-length.component';
 
-describe('ReportTableLengthComponent', () => {
-  let component: ReportTableLengthComponent;
-  let fixture: ComponentFixture<ReportTableLengthComponent>;
+describe('DetailsTableLengthComponent', () => {
+  let component: DetailsTableLengthComponent;
+  let fixture: ComponentFixture<DetailsTableLengthComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReportTableLengthComponent ]
+      declarations: [ DetailsTableLengthComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportTableLengthComponent);
+    fixture = TestBed.createComponent(DetailsTableLengthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

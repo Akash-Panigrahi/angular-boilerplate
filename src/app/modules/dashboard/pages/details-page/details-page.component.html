@@ -2,10 +2,10 @@
 <div class="container-fluid bg-grey-white">
     <div class="row">
         <div class="col-12 child-component">
-            <app-report-datatable
-                [clients]="clients"
-                (reportTableRequestEvent) = "receiveReportTableRequest($event)"
-            ></app-report-datatable>
+            <app-details-table
+                [details]="details"
+                (detailsTableRequestEvent) = "receiveDetailsTableRequest($event)"
+            ></app-details-table>
         </div>
     </div>
 </div>

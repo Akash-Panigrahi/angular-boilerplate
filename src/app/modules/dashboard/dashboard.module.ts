@@ -9,7 +9,7 @@ import { ChartModule } from 'angular-highcharts';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ReportingModule } from '../reporting/reporting.module';
+import { DetailsTableModule } from '../details-table/details-table.module';
 
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
@@ -44,7 +44,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 
         SharedModule,
         DashboardRoutingModule,
-        ReportingModule,
+        DetailsTableModule,
     ]
 })
 export class DashboardModule {

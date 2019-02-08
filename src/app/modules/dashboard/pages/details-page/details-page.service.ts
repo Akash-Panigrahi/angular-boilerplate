@@ -10,8 +10,8 @@ export class DetailsPageService {
         private _api: ApiService
     ) { }
 
-    getReport(data): Observable<any> {
-        return this._api.post('/report', data)
+    getDetails(data): Observable<any> {
+        return this._api.post('/details', data)
             .pipe(take(1))
             .pipe(
                 map((res: any) => {

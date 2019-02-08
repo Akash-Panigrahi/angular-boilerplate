@@ -1,4 +1,4 @@
-export interface IReportTableData {
+export interface IDetailsTableData {
     id: number;
     first_name: string;
     last_name: string;
@@ -8,15 +8,15 @@ export interface IReportTableData {
     time: string;
 }
 
-export interface IReportTableRequest {
+export interface IDetailsTableRequest {
     start: number;
     length: number;
     search: string;
     sort: ISortEvent;
 }
 
-export interface IReportTableResponse {
-    data: IReportTableData[];
+export interface IDetailsTableResponse {
+    data: IDetailsTableData[];
     info: {
         from: number,
         to: number,

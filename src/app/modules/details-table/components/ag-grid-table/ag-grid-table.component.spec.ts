@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportTableSearchComponent } from './report-table-search.component';
+import { AgGridTableComponent } from './ag-grid-table.component';
 
-describe('ReportTableSearchComponent', () => {
-  let component: ReportTableSearchComponent;
-  let fixture: ComponentFixture<ReportTableSearchComponent>;
+describe('AgGridTableComponent', () => {
+  let component: AgGridTableComponent;
+  let fixture: ComponentFixture<AgGridTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReportTableSearchComponent ]
+      declarations: [ AgGridTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportTableSearchComponent);
+    fixture = TestBed.createComponent(AgGridTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

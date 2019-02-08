@@ -1,0 +1,81 @@
+<div class="overlay"
+    *ngIf="isInitialTableReady !== 'yes'"
+    [@showOverlay]="isInitialTableReady"
+></div>
+
+<div class="getting-details"
+    *ngIf="isInitialTableReady !== 'yes'"
+    [@gettingDetailsLoader]="isInitialTableReady"
+    (@gettingDetailsLoader.done)="isGettingDetailsLoaderDone($event)"
+>
+    <h3>Getting Details List</h3>
+    <h6>Please Wait...</h6>
+    <div class="getting-details__progress-bar">
+        <ng-progress #gettingDetailsBar
+            fixed="false"
+            [spinner]="false"
+            color="red"
+            (completed)="gettingDetailsBarCompleted()"
+            id="getting-details__progress-bar"
+        ></ng-progress>
+    </div>
+</div>
+
+<div class="table__wrapper"
+    [@isInitialTableReady__Table]="isInitialTableReady__Table"
+    (@isInitialTableReady__Table.start)="onIsInitialTableReady__Table($event)"
+    (@isInitialTableReady__Table.done)="onIsInitialTableReady__Table($event)"
+>
+    <h1>Details list</h1>
+
+    <div class="details-table" #detailsTable>
+        <div class="details-table__length-search row justify-content-center justify-content-sm-between">
+            <div class="details-table__length px-3">
+                <app-details-table-length
+                    [pageSizes]="pageSizes"
+                    [initialPageSize]="initialPageSize"
+                    (lengthChangeEvent)="onLengthChange($event)"
+                ></app-details-table-length>
+            </div>
+            <div class="details-table__search px-3 mt-xs">
+                <app-details-table-search
+                    (searchChangeEvent)="onSearchChange($event)"
+                ></app-details-table-search>
+            </div>
+        </div>
+
+        <br>
+
+        <app-ag-grid-table
+            [detailsData]="detailsData"
+            (gridReadyEvent)="onGridReady($event)"
+        ></app-ag-grid-table>
+
+        <br>
+
+        <div class="details-table__info-pagination row justify-content-center justify-content-sm-between">
+            <div class="details-table__info px-3">
+                <app-details-table-info
+                    [recordsInfoFrom]="detailsData?.length ? recordsInfo.from : '0'"
+                    [recordsInfoTo]="recordsInfo.to"
+                    [recordsInfoTotal]="recordsInfo.total"
+                ></app-details-table-info>
+            </div>
+            <div class="details-table__pagination px-3 mt-xs">
+                <ngb-pagination class="d-flex justify-content-end"
+                    #detailsTablePagination
+                    [collectionSize]="paginationCollectionSize"
+                    [page]="1"
+                    [maxSize]="3"
+                    [rotate]="true"
+                    [ellipses]="true"
+                    [boundaryLinks]="true"
+
+                    appCustomNgbPagination
+                    [pageSetTrigger]="pageSetTrigger"
+                    (customPageChangeEvent)="onPageChange($event)"
+                ></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-export const REPORTS = [
+export const DETAILS = [
     {
         'id': 1,
         'first_name': 'Francklin',

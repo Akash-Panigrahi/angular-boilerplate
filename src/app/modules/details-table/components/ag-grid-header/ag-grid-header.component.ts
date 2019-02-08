@@ -76,7 +76,7 @@ export class AgGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDest
 
         // dispatch the custom click event with the specified data
         target.dispatchEvent(
-            new CustomEvent('reportTableSortChangeEvent', {
+            new CustomEvent('detailsTableSortChangeEvent', {
                 detail: {
                     sortKey: colId,
                     sortDir: this.sortDir

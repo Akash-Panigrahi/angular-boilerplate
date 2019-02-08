@@ -6,7 +6,7 @@ import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { take, delay } from 'rxjs/operators';
-import { IReportTableRequest, IReportTableData } from 'src/app/core/interfaces/report-table.interface';
+import { IDetailsTableRequest } from 'src/app/core/interfaces/details-table.interface';
 
 @Component({
     selector: 'app-details-page',
@@ -20,7 +20,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     @HostBinding('@riseUp')
     private _riseUp = true;
 
-    clients: IReportTableData[];
+    details: IDetailsTableRequest[];
     currentDateTimeRange$ = new Subscription();
 
     constructor(
@@ -32,7 +32,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-        this._state.setState('report-table-request', {
+        this._state.setState('details-table-request', {
             start: 0,
             length: 5,
             search: '',
@@ -43,32 +43,32 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         });
 
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
-            .subscribe(reportRange => {
-                this._getReport(reportRange, this._state.getState('report-table-request'));
+            .subscribe(dateTimeRange => {
+                this._getDetails(dateTimeRange, this._state.getState('details-table-request'));
             });
     }
 
-    private _getReport(reportRange, reportTableRequest: IReportTableRequest): void {
+    private _getDetails(dateTimeRange, detailsTableRequest: IDetailsTableRequest): void {
 
-        const reportRequest = { ...reportRange, ...reportTableRequest };
+        const detailsRequest = { ...dateTimeRange, ...detailsTableRequest };
 
         this._detailsPageService
-            .getReport(reportRequest)
+            .getDetails(detailsRequest)
             // .pipe(delay(3000))
             .subscribe(
-                (res: IReportTableData[]) => {
-                    this.clients = res;
+                (res: IDetailsTableRequest[]) => {
+                    this.details = res;
                     this._actionBarUiState.changeGettingDataBar('complete');
                 },
                 err => console.error(err)
             );
     }
 
-    receiveReportTableRequest(reportTableRequest: IReportTableRequest): void {
+    receiveDetailsTableRequest(detailsTableRequest: IDetailsTableRequest): void {
         this._dateTimeRangeService.currentDateTimeRange
             .pipe(take(1))
-            .subscribe(reportRange => {
-                this._getReport(reportRange, reportTableRequest);
+            .subscribe(dateTimeRange => {
+                this._getDetails(dateTimeRange, detailsTableRequest);
             });
     }
 

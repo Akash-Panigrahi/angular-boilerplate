@@ -11,7 +11,7 @@ export class SummaryPageService {
     ) { }
 
     getSummary(data): Observable<any> {
-        return this._api.post('/summary-data', data)
+        return this._api.post('/summary', data)
             .pipe(take(1))
             .pipe(
                 map((res: any) => {
