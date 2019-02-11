@@ -1,11 +1,15 @@
 <span>Show</span>
 &nbsp;
-<select class="form-control" (change)="lengthChangeEvent.emit($event.target.value)">
-    <option
-        *ngFor="let pageSize of pageSizes"
-        [value]="pageSize"
-        [selected]="pageSize === initialPageSize"
-    >{{ pageSize }}</option>
-</select>
+
+<ng-select
+    class="details-table-length"
+    [items]="pageSizes"
+    [(ngModel)]="initialPageSize"
+    [clearable]="false"
+    [clearOnBackspace]="false"
+    [searchable]="false"
+    (change)="lengthChangeEvent.emit($event)"
+></ng-select>
+
 &nbsp;
 <span>Records</span>

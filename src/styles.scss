@@ -3,6 +3,7 @@
 @import '~ngx-toastr/toastr-bs4-alert';
 @import '~ag-grid-community/dist/styles/ag-grid.css';
 @import '~ag-grid-community/dist/styles/ag-theme-material.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 :root {
     --smokey-black: #b7b7b7;
@@ -86,7 +87,8 @@ select:-internal-autofill-selected {
     background-color: var(--grey-white);
 }
 
-// Date Time Range Picker styling
+
+/* customzing date-time-range picker style */
 .daterangepicker {
     background-color: #f5f5f5;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
@@ -193,43 +195,7 @@ select:-internal-autofill-selected {
 }
 
 
-/* report datatable styling */
-div.dataTables_wrapper {
-    box-shadow: 0 0 20px -8px rgba(0, 0, 0, 0.11), 0 0 5px 0 rgba(0, 0, 0, 0.08);
-    padding: 1rem;
-
-    div.dataTables_info {
-        padding-top: 0;
-    }
-}
-
-.table-footer {
-    padding-top: 0.85em;
-
-    &__info {
-        display: flex;
-        align-items: center;
-    }
-}
-
-.paginate_button {
-
-    &:nth-child(1),
-    &:nth-child(2),
-    &:nth-last-child(1),
-    &:nth-last-child(2) {
-
-        i {
-            height: 20px;
-            display: flex;
-            align-items: center;
-        }
-    }
-}
-
-
-/* Effects */
-
+/* effects */
 .ripple-element {
     display: block;
     position: relative;
@@ -257,7 +223,7 @@ div.dataTables_wrapper {
 }
 
 
-// customizing ag-grid theme
+/* customizing ag-grid style */
 .ag-theme-material {
     font-size: 1rem;
 
@@ -313,6 +279,8 @@ div.dataTables_wrapper {
     }
 }
 
+
+/* customizing ngb-pagination style */
 .pagination {
     flex-wrap: wrap;
     justify-content: center;
@@ -332,5 +300,18 @@ div.dataTables_wrapper {
         &.active .page-link {
             z-index: initial;
         }
+    }
+}
+
+/* customizing ng=select details-table-length style */
+.ng-select.details-table-length {
+    min-width: 4rem;
+
+    .ng-select-container {
+        border-radius: 17px;
+    }
+
+    .ng-arrow-wrapper {
+        padding-left: 10px;
     }
 }

@@ -27,11 +27,12 @@
     (@isInitialTableReady__Table.done)="onIsInitialTableReady__Table($event)"
 >
     <div class="details-list">
-        <h1 class="details-list__text">Details list</h1>
+        <h1 class="details-list__text">Details List</h1>
         <div class="download-details">
             <button
                 class="download-details__button"
                 rippleOnClick
+                [disabled]="!detailsData?.length"
                 (click)="downloadDetails()"
             >
                 <span>Download Details</span>

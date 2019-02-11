@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { AgGridModule } from 'ag-grid-angular';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { environment } from 'src/environments/environment';
 
@@ -33,14 +35,18 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ],
     imports: [
         CommonModule,
+        FormsModule,
+
         SharedModule,
+
         AgGridModule.withComponents([
             AgGridLoadingOverlayComponent,
             AgGridNoRowsOverlayComponent,
             AgGridHeaderComponent
         ]),
+        NgProgressModule,
         NgbPaginationModule.forRoot(),
-        NgProgressModule
+        NgSelectModule
     ],
     exports: [DetailsTableComponent]
 })
