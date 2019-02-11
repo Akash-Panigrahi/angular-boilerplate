@@ -26,7 +26,21 @@
     (@isInitialTableReady__Table.start)="onIsInitialTableReady__Table($event)"
     (@isInitialTableReady__Table.done)="onIsInitialTableReady__Table($event)"
 >
-    <h1>Details list</h1>
+    <div class="details-list">
+        <h1 class="details-list__text">Details list</h1>
+        <div class="download-details">
+            <button
+                class="download-details__button"
+                rippleOnClick
+                (click)="downloadDetails()"
+            >
+                <span>Download Details</span>
+                <i class="material-icons">arrow_downward</i>
+            </button>
+        </div>
+    </div>
+
+    <br>
 
     <div class="details-table" #detailsTable>
         <div class="details-table__length-search row justify-content-center justify-content-sm-between">

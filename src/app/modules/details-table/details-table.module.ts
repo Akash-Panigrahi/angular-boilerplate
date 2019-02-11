@@ -17,6 +17,7 @@ import { AgGridNoRowsOverlayComponent } from './components/ag-grid-no-rows-overl
 import { AgGridHeaderComponent } from './components/ag-grid-header/ag-grid-header.component';
 import { AgGridTableComponent } from './components/ag-grid-table/ag-grid-table.component';
 import { DetailsTableComponent } from './details-table.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { DetailsTableComponent } from './details-table.component';
     ],
     imports: [
         CommonModule,
+        SharedModule,
         AgGridModule.withComponents([
             AgGridLoadingOverlayComponent,
             AgGridNoRowsOverlayComponent,

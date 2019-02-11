@@ -11,6 +11,7 @@ import { StateService } from 'src/app/core/services/state/state.service';
 import { ISortEvent, IDetailsTableData, IDetailsTableRequest } from 'src/app/core/interfaces/details-table.interface';
 
 import { isInitialTableReady__Table, gettingDetailsLoader, showOverlay } from './details-table.animations';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-details-table',
@@ -194,5 +195,15 @@ export class DetailsTableComponent implements OnInit, OnChanges {
     onSortChange(sort: ISortEvent): void {
         this.detailsTableRequest.sort = sort;
         this._emitDataTableRequestEvent();
+    }
+
+    downloadDetails() {
+
+        const { startDate, startTime, endDate, endTime } = this._state.getState('date-time-range');
+        const { start, length, search, sort } = this.detailsTableRequest;
+
+        const query = `?startDate=${startDate}&startTime=${startTime}&endDate=${endDate}&endTime=${endTime}&start=${start}&length=${length}&search=${search}&sort=${sort}`;
+
+        window.open(`${environment.BASE_URL}/get-details-file${query}`, '_blank');
     }
 }
