@@ -64,12 +64,28 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             );
     }
 
-    receiveDetailsTableRequest(detailsTableRequest: IDetailsTableRequest): void {
+    onDetailsTableRequest(detailsTableRequest: IDetailsTableRequest): void {
+
+        // save state
+        this._state.setState('details-table-request', detailsTableRequest);
+
         this._dateTimeRangeService.currentDateTimeRange
             .pipe(take(1))
             .subscribe(dateTimeRange => {
                 this._getDetails(dateTimeRange, detailsTableRequest);
             });
+    }
+
+    onDownloadDetails(detailsTableRequest: IDetailsTableRequest): void {
+
+        const { startDate, startTime, endDate, endTime } = this._state.getState('date-time-range');
+        const { start, length, search, sort } = detailsTableRequest;
+
+        /* to disable max 140 characters for a line rule */
+        // tslint:disable-next-line
+        const query = `?startDate=${startDate}&startTime=${startTime}&endDate=${endDate}&endTime=${endTime}&start=${start}&length=${length}&search=${search}&sort=${sort}`;
+
+        this._detailsPageService.downloadDetails(query);
     }
 
     ngOnDestroy(): void {

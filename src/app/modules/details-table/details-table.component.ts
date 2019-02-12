@@ -7,11 +7,9 @@ import { AgGridEvent, GridApi, ColumnApi } from 'ag-grid-community';
 import { takeWhile, endWith, tap } from 'rxjs/operators';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
-import { StateService } from 'src/app/core/services/state/state.service';
 import { ISortEvent, IDetailsTableData, IDetailsTableRequest } from 'src/app/core/interfaces/details-table.interface';
 
 import { isInitialTableReady__Table, gettingDetailsLoader, showOverlay } from './details-table.animations';
-import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-details-table',
@@ -30,6 +28,9 @@ export class DetailsTableComponent implements OnInit, OnChanges {
 
     @Output()
     detailsTableRequestEvent = new EventEmitter<IDetailsTableRequest>();
+
+    @Output()
+    downloadDetailsEvent = new EventEmitter<IDetailsTableRequest>();
 
     // getting a reference to the progress bar in the html file
     @ViewChild('gettingDetailsBar')
@@ -96,9 +97,7 @@ export class DetailsTableComponent implements OnInit, OnChanges {
         // console.groupEnd();
     }
 
-    constructor(
-        private _state: StateService
-    ) { }
+    constructor() { }
 
     ngOnInit() { }
 
@@ -174,8 +173,6 @@ export class DetailsTableComponent implements OnInit, OnChanges {
             }
         };
 
-        this._state.setState('details-table-request', this.detailsTableRequest);
-
         this._detailsTablePagination.selectPage(1);
         this.pageSetTrigger = !this.pageSetTrigger;
 
@@ -195,15 +192,5 @@ export class DetailsTableComponent implements OnInit, OnChanges {
     onSortChange(sort: ISortEvent): void {
         this.detailsTableRequest.sort = sort;
         this._emitDataTableRequestEvent();
-    }
-
-    downloadDetails() {
-
-        const { startDate, startTime, endDate, endTime } = this._state.getState('date-time-range');
-        const { start, length, search, sort } = this.detailsTableRequest;
-
-        const query = `?startDate=${startDate}&startTime=${startTime}&endDate=${endDate}&endTime=${endTime}&start=${start}&length=${length}&search=${search}&sort=${sort}`;
-
-        window.open(`${environment.BASE_URL}/get-details-file${query}`, '_blank');
     }
 }

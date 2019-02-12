@@ -4,7 +4,8 @@
         <div class="col-12 child-component">
             <app-details-table
                 [details]="details"
-                (detailsTableRequestEvent) = "receiveDetailsTableRequest($event)"
+                (detailsTableRequestEvent)="onDetailsTableRequest($event)"
+                (downloadDetailsEvent)="onDownloadDetails($event)"
             ></app-details-table>
         </div>
     </div>

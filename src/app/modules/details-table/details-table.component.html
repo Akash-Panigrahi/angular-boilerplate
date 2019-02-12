@@ -33,7 +33,7 @@
                 class="download-details__button"
                 rippleOnClick
                 [disabled]="!detailsData?.length"
-                (click)="downloadDetails()"
+                (click)="downloadDetailsEvent.emit(detailsTableRequest)"
             >
                 <span>Download Details</span>
                 <i class="material-icons">arrow_downward</i>

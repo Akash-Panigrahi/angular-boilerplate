@@ -2,6 +2,7 @@ import { ApiService } from 'src/app/core/http/api/api.service';
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError, take } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class DetailsPageService {
@@ -23,5 +24,9 @@ export class DetailsPageService {
                 })
             )
             .pipe(catchError(err => throwError(err)));
+    }
+
+    downloadDetails(query): void {
+        window.open(`${environment.BASE_URL}/get-details-file${query}`, '_blank');
     }
 }
