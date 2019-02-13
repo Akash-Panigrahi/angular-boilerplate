@@ -17,12 +17,12 @@ const routes: Routes = [
             {
                 path: 'summary',
                 component: SummaryPageComponent,
-                data: { state: 'summary' }
+                data: { title: 'Summary' }
             },
             {
                 path: 'details',
                 component: DetailsPageComponent,
-                data: { state: 'details' }
+                data: { title: 'Details' }
             }
         ]
     }

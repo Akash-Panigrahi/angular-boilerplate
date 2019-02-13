@@ -34,7 +34,7 @@ const routes: Routes = [
         path: '**',
         // redirect to PageNotFoundComponent if no route matches
         component: PageNotFoundComponent,
-        data: { state: 'page-not-found' }
+        data: { title: 'Oops! Page Not Found' }
     }
 ];
 
