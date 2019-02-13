@@ -1,5 +1,5 @@
 import {
-    Component, OnInit, EventEmitter, Output
+    Component, OnInit, EventEmitter, Output, Input
 } from '@angular/core';
 
 @Component({
@@ -9,7 +9,11 @@ import {
 })
 export class DetailsTableSearchComponent implements OnInit {
 
-    @Output() searchChangeEvent = new EventEmitter<string>();
+    @Input()
+    initialSearchValue: string;
+
+    @Output()
+    searchChangeEvent = new EventEmitter<string>();
 
     constructor() { }
 

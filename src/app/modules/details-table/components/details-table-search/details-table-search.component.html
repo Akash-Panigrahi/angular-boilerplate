@@ -3,6 +3,7 @@
     placeholder="Search table..."
     class="form-control search-input"
     #searchInput
+    [value]="initialSearchValue"
     (keydown.enter)="searchChangeEvent.emit($event.target.value)"
 >
 &nbsp;

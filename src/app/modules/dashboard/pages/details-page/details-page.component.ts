@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy, Input } from '@angular/core';
 import { riseUp } from './details-page.animations';
 import { DetailsPageService } from './details-page.service';
 import { Subscription } from 'rxjs';
@@ -6,7 +6,7 @@ import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { take, delay } from 'rxjs/operators';
-import { IDetailsTableRequest } from 'src/app/core/interfaces/details-table.interface';
+import { IDetailsTableRequest, IDetailsTableResponse } from 'src/app/core/interfaces/details-table.interface';
 
 @Component({
     selector: 'app-details-page',
@@ -20,8 +20,18 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     @HostBinding('@riseUp')
     private _riseUp = true;
 
-    details: IDetailsTableRequest[];
+    details: IDetailsTableResponse[];
     currentDateTimeRange$ = new Subscription();
+
+    detailsTableRequest = {
+        start: 0,
+        length: 5,
+        search: '',
+        sort: {
+            sortKey: 'id',
+            sortDir: 0
+        }
+    };
 
     constructor(
         private _detailsPageService: DetailsPageService,
@@ -32,15 +42,16 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-        this._state.setState('details-table-request', {
-            start: 0,
-            length: 5,
-            search: '',
-            sort: {
-                sortKey: 'id',
-                sortDir: 0
-            }
-        });
+        const detailsTableRequestFromState = this._state.getState('details-table-request');
+        /**
+         * if user in session
+         * i.e., there is data in storage
+         */
+        if (!detailsTableRequestFromState) {
+            this._state.setState('details-table-request', this.detailsTableRequest);
+        } else {
+            this.detailsTableRequest = detailsTableRequestFromState;
+        }
 
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
             .subscribe(dateTimeRange => {
@@ -56,7 +67,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             .getDetails(detailsRequest)
             // .pipe(delay(3000))
             .subscribe(
-                (res: IDetailsTableRequest[]) => {
+                (res: IDetailsTableResponse[]) => {
                     this.details = res;
                     this._actionBarUiState.changeGettingDataBar('complete');
                 },

@@ -7,7 +7,9 @@ import { AgGridEvent, GridApi, ColumnApi } from 'ag-grid-community';
 import { takeWhile, endWith, tap } from 'rxjs/operators';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
-import { ISortEvent, IDetailsTableData, IDetailsTableRequest } from 'src/app/core/interfaces/details-table.interface';
+import {
+    ISortEvent, IDetailsTableData, IDetailsTableRequest, IDetailsTableResponse
+} from 'src/app/core/interfaces/details-table.interface';
 
 import { isInitialTableReady__Table, gettingDetailsLoader, showOverlay } from './details-table.animations';
 
@@ -24,7 +26,10 @@ import { isInitialTableReady__Table, gettingDetailsLoader, showOverlay } from '.
 export class DetailsTableComponent implements OnInit, OnChanges {
 
     @Input()
-    details: IDetailsTableRequest[];
+    details: IDetailsTableResponse[];
+
+    @Input()
+    detailsTableRequest: IDetailsTableRequest;
 
     @Output()
     detailsTableRequestEvent = new EventEmitter<IDetailsTableRequest>();
@@ -40,18 +45,7 @@ export class DetailsTableComponent implements OnInit, OnChanges {
     private _detailsTablePagination: NgbPagination;
 
     private _currentDetails = null;
-    initialPageSize = 5;
     pageSetTrigger = true;
-
-    detailsTableRequest = {
-        start: 0,
-        length: this.initialPageSize,
-        search: '',
-        sort: {
-            sortKey: 'id',
-            sortDir: 0
-        }
-    };
 
     recordsInfo = {
         from: 0,
@@ -164,16 +158,22 @@ export class DetailsTableComponent implements OnInit, OnChanges {
     onLengthChange(length: string): void {
 
         this.detailsTableRequest = {
+            // resetting properties
             start: 0,
-            length: Number(length),
-            search: this.detailsTableRequest.search,
             sort: {
                 sortKey: 'id',
-                sortDir: -1
-            }
+                sortDir: 0
+            },
+
+            // changing properties
+            length: Number(length),
+            search: this.detailsTableRequest.search
         };
 
+        // setting pagination so as to show first page
         this._detailsTablePagination.selectPage(1);
+
+        // triggering change detection for pagination component
         this.pageSetTrigger = !this.pageSetTrigger;
 
         this._emitDataTableRequestEvent();

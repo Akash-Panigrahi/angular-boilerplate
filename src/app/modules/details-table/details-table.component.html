@@ -48,12 +48,13 @@
             <div class="details-table__length px-3">
                 <app-details-table-length
                     [pageSizes]="pageSizes"
-                    [initialPageSize]="initialPageSize"
+                    [initialPageSize]="this.detailsTableRequest.length"
                     (lengthChangeEvent)="onLengthChange($event)"
                 ></app-details-table-length>
             </div>
             <div class="details-table__search px-3 mt-xs">
                 <app-details-table-search
+                    [initialSearchValue]="this.detailsTableRequest.search"
                     (searchChangeEvent)="onSearchChange($event)"
                 ></app-details-table-search>
             </div>
