@@ -44,10 +44,7 @@ export class DetailsTableComponent implements OnInit, OnChanges {
     @ViewChild('detailsTablePagination')
     private _detailsTablePagination: NgbPagination;
 
-    private _currentDetails = null;
-    pageSetTrigger = true;
-
-    recordsInfo = {
+    detailsInfo = {
         from: 0,
         to: 0,
         total: 0
@@ -62,6 +59,8 @@ export class DetailsTableComponent implements OnInit, OnChanges {
 
     pageSizes = [3, 5, 10, 25, 50, 100];
     paginationCollectionSize;
+
+    currentPage: number;
 
     @HostListener('detailsTableSortChangeEvent', ['$event.detail'])
     private _onDetailsTableSortChange(detail) {
@@ -99,12 +98,10 @@ export class DetailsTableComponent implements OnInit, OnChanges {
 
         if (!changes.details.isFirstChange()) {
 
-            this._currentDetails = changes.details.currentValue;
-
             const details = changes.details.currentValue;
 
             this.detailsData = details.data;
-            this.recordsInfo = details.info;
+            this.detailsInfo = details.info;
 
             let pages = 1;
 
@@ -114,6 +111,10 @@ export class DetailsTableComponent implements OnInit, OnChanges {
                 ;
 
             this.paginationCollectionSize = (pages || 1) * 10;
+
+            // resetting page to previous page
+            this._detailsTablePagination.page = this.detailsTableRequest.start + 1;
+            this.currentPage = this._detailsTablePagination.page;
 
             if (this.gridColumnApi) {
                 this.gridColumnApi.autoSizeAllColumns();
@@ -171,16 +172,20 @@ export class DetailsTableComponent implements OnInit, OnChanges {
         };
 
         // setting pagination so as to show first page
-        this._detailsTablePagination.selectPage(1);
+        this._detailsTablePagination.page = 1;
 
-        // triggering change detection for pagination component
-        this.pageSetTrigger = !this.pageSetTrigger;
+        /**
+         * triggering change detection for
+         * appCustomNgbPagination directive
+         */
+        this.currentPage = this._detailsTablePagination.page;
 
         this._emitDataTableRequestEvent();
     }
 
     onSearchChange(text: string): void {
         this.detailsTableRequest.search = text.toLowerCase();
+        this.detailsTableRequest.start = 0;
         this._emitDataTableRequestEvent();
     }
 

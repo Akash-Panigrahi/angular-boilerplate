@@ -72,23 +72,22 @@
         <div class="details-table__info-pagination row justify-content-center justify-content-sm-between">
             <div class="details-table__info px-3">
                 <app-details-table-info
-                    [recordsInfoFrom]="detailsData?.length ? recordsInfo.from : '0'"
-                    [recordsInfoTo]="recordsInfo.to"
-                    [recordsInfoTotal]="recordsInfo.total"
+                    [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
+                    [detailsInfoTo]="detailsInfo.to"
+                    [detailsInfoTotal]="detailsInfo.total"
                 ></app-details-table-info>
             </div>
             <div class="details-table__pagination px-3 mt-xs">
                 <ngb-pagination class="d-flex justify-content-end"
                     #detailsTablePagination
                     [collectionSize]="paginationCollectionSize"
-                    [page]="1"
                     [maxSize]="3"
                     [rotate]="true"
                     [ellipses]="true"
                     [boundaryLinks]="true"
 
                     appCustomNgbPagination
-                    [pageSetTrigger]="pageSetTrigger"
+                    [currentPage]="currentPage"
                     (customPageChangeEvent)="onPageChange($event)"
                 ></ngb-pagination>
             </div>

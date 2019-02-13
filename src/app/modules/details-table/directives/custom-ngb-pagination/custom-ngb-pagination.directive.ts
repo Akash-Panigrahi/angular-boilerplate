@@ -1,17 +1,15 @@
 import {
-    Directive, Host, Self, Optional, HostListener, Output, EventEmitter, SimpleChanges, OnChanges, Input
+    Directive, Host, Self, Optional, HostListener, Output, EventEmitter, Input
 } from '@angular/core';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
 @Directive({
     selector: '[appCustomNgbPagination]'
 })
-export class CustomNgbPaginationDirective implements OnChanges {
+export class CustomNgbPaginationDirective {
 
-    // required to trigger change detection
-    @Input() pageSetTrigger;
-
-    private _lastPage = 1;
+    // current page displayed
+    @Input() currentPage;
 
     @Output() customPageChangeEvent = new EventEmitter<number>();
 
@@ -36,11 +34,10 @@ export class CustomNgbPaginationDirective implements OnChanges {
             )
         ) {
 
-            if (this._lastPage === this._hostEl.page) {
+            if (this.currentPage === this._hostEl.page) {
                 return;
             }
 
-            this._lastPage = this._hostEl.page;
             this.customPageChangeEvent.emit(this._hostEl.page);
         }
     }
@@ -48,8 +45,4 @@ export class CustomNgbPaginationDirective implements OnChanges {
     constructor(
         @Host() @Self() @Optional() private _hostEl: NgbPagination
     ) { }
-
-    ngOnChanges(changes: SimpleChanges) {
-        this._lastPage = 1;
-    }
 }

@@ -7,9 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DetailsTableInfoComponent implements OnInit {
 
-    @Input() recordsInfoFrom: number;
-    @Input() recordsInfoTo: number;
-    @Input() recordsInfoTotal: number;
+    @Input()
+    detailsInfoFrom: number;
+
+    @Input()
+    detailsInfoTo: number;
+
+    @Input()
+    detailsInfoTotal: number;
 
     constructor() { }
 
