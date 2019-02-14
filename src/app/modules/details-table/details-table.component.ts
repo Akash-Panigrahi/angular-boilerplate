@@ -35,7 +35,8 @@ export class DetailsTableComponent implements OnChanges {
     detailsInfo = {
         from: 0,
         to: 0,
-        total: 0
+        total: 0,
+        filteredFrom: 0
     };
 
     showGettingDetailsLoader = true;

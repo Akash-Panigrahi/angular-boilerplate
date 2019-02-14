@@ -21,6 +21,7 @@ export interface IDetailsTableResponse {
         from: number,
         to: number,
         total: number,
+        filteredFrom: number
     };
 }
 

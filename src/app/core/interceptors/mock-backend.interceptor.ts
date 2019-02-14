@@ -66,10 +66,13 @@ export class MockBackendInterceptor implements HttpInterceptor {
 
                         const { startDate, endDate, startTime, endTime, start, length, search, sort } = request.body;
 
-                        const totalDetails = DETAILS
-                            .filter(details => {
+                        let totalWithoutSearch = 0;
+                        let totalWithSearch = 0;
 
-                                const { date, time } = details;
+                        const totalDetails = DETAILS
+                            .filter(detail => {
+
+                                const { date, time } = detail;
                                 const [hour, minute] = time.split(':').map(parseFloat);
                                 const detailsDate = new Date(new Date(date).setHours(hour, minute));
 
@@ -77,8 +80,13 @@ export class MockBackendInterceptor implements HttpInterceptor {
                                 const requestEndDate = new Date(`${endDate} ${endTime}`);
 
                                 if (detailsDate >= requestStartDate && detailsDate <= requestEndDate) {
-                                    for (const detailsVal of Object.values(details)) {
-                                        if (typeof (detailsVal) === 'string' && detailsVal.toLowerCase().includes(search)) {
+
+                                    totalWithoutSearch++;
+
+                                    // search/filter block
+                                    for (const detailVal of Object.values(detail)) {
+                                        if (detailVal.toString().toLowerCase().includes(search)) {
+                                            totalWithSearch++;
                                             return true;
                                         }
                                     }
@@ -118,8 +126,8 @@ export class MockBackendInterceptor implements HttpInterceptor {
                             ;
 
                         const from = start * length
-                            , to = totalDetails.length < (start * length) + length
-                                ? totalDetails.length
+                            , to = totalWithSearch < (start * length) + length
+                                ? totalWithSearch
                                 : (start * length) + length
                             ;
 
@@ -127,7 +135,12 @@ export class MockBackendInterceptor implements HttpInterceptor {
 
                         const data = {
                             data: filteredDetails,
-                            info: { from: from + 1, to, total: totalDetails.length }
+                            info: {
+                                from: from + 1,
+                                to,
+                                total: totalWithSearch,
+                                filteredFrom: totalWithoutSearch
+                            }
                         };
 
                         // console.group('request-response');
