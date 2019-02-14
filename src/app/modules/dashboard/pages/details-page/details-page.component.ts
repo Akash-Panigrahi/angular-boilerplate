@@ -48,6 +48,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
          * i.e., there is data in storage
          */
         if (!detailsTableRequestFromState) {
+            // initial state saving
             this._state.setState('details-table-request', this.detailsTableRequest);
         } else {
             this.detailsTableRequest = detailsTableRequestFromState;

@@ -1,9 +1,5 @@
-import {
-    Component, Input, OnChanges, SimpleChanges, Output, EventEmitter
-} from '@angular/core';
-
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GridApi, ColumnApi, ICellRendererParams, AgGridEvent } from 'ag-grid-community';
-
 import { AgGridLoadingOverlayComponent } from '../ag-grid-loading-overlay/ag-grid-loading-overlay.component';
 import { AgGridNoRowsOverlayComponent } from '../ag-grid-no-rows-overlay/ag-grid-no-rows-overlay.component';
 import { AgGridHeaderComponent } from '../ag-grid-header/ag-grid-header.component';
@@ -19,11 +15,7 @@ import { IDetailsTableData } from 'src/app/core/interfaces/details-table.interfa
 })
 export class AgGridTableComponent implements OnChanges {
 
-    @Input()
-    detailsData: IDetailsTableData;
-
-    @Output()
-    gridReadyEvent = new EventEmitter<AgGridEvent>();
+    @Input() detailsData: IDetailsTableData;
 
     gridApi: GridApi;
     gridColumnApi: ColumnApi;
@@ -69,11 +61,18 @@ export class AgGridTableComponent implements OnChanges {
     onGridReady(e: AgGridEvent): void {
         this.gridApi = e.api;
         this.gridColumnApi = e.columnApi;
-        this.gridReadyEvent.emit(e);
     }
 
     onViewportChanged(e: AgGridEvent): void {
-        // for initially resizing of table
+        // for initial resizing of table
         e.columnApi.autoSizeAllColumns();
+    }
+
+    showLoadingOverlay() {
+        this.gridApi.showLoadingOverlay();
+    }
+
+    autoSizeAllColumns() {
+        this.gridColumnApi.autoSizeAllColumns();
     }
 }

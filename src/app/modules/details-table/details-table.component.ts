@@ -1,17 +1,15 @@
 import {
-    Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output, ViewChild, HostListener
+    Component, Input, OnChanges, SimpleChanges, EventEmitter, Output, ViewChild, HostListener
 } from '@angular/core';
-
 import { NgProgressComponent } from '@ngx-progressbar/core';
 import { AgGridEvent, GridApi, ColumnApi } from 'ag-grid-community';
 import { takeWhile, endWith, tap } from 'rxjs/operators';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-
 import {
     ISortEvent, IDetailsTableData, IDetailsTableRequest, IDetailsTableResponse
 } from 'src/app/core/interfaces/details-table.interface';
-
 import { isInitialTableReady__Table, gettingDetailsLoader, showOverlay } from './details-table.animations';
+import { AgGridTableComponent } from './components/ag-grid-table/ag-grid-table.component';
 
 @Component({
     selector: 'app-details-table',
@@ -23,26 +21,18 @@ import { isInitialTableReady__Table, gettingDetailsLoader, showOverlay } from '.
         showOverlay
     ]
 })
-export class DetailsTableComponent implements OnInit, OnChanges {
+export class DetailsTableComponent implements OnChanges {
 
-    @Input()
-    details: IDetailsTableResponse[];
+    @Input() details: IDetailsTableResponse[];
+    @Input() detailsTableRequest: IDetailsTableRequest;
 
-    @Input()
-    detailsTableRequest: IDetailsTableRequest;
+    @Output() detailsTableRequestEvent = new EventEmitter<IDetailsTableRequest>();
+    @Output() downloadDetailsEvent = new EventEmitter<IDetailsTableRequest>();
 
-    @Output()
-    detailsTableRequestEvent = new EventEmitter<IDetailsTableRequest>();
-
-    @Output()
-    downloadDetailsEvent = new EventEmitter<IDetailsTableRequest>();
-
-    // getting a reference to the progress bar in the html file
-    @ViewChild('gettingDetailsBar')
-    private _progressBar: NgProgressComponent;
-
-    @ViewChild('detailsTablePagination')
-    private _detailsTablePagination: NgbPagination;
+    // references to elements in the html file
+    @ViewChild('gettingDetailsBar') private _progressBar: NgProgressComponent;
+    @ViewChild('detailsTablePagination') private _detailsTablePagination: NgbPagination;
+    @ViewChild('agGridTable') private _agGridTable: AgGridTableComponent;
 
     detailsInfo = {
         from: 0,
@@ -52,14 +42,10 @@ export class DetailsTableComponent implements OnInit, OnChanges {
 
     isInitialTableReady = 'no';
     isInitialTableReady__Table = 'no';
+    pageSizes = [3, 5, 10, 25, 50, 100];
 
     detailsData: IDetailsTableData[];
-    gridApi: GridApi;
-    gridColumnApi: ColumnApi;
-
-    pageSizes = [3, 5, 10, 25, 50, 100];
-    paginationCollectionSize;
-
+    paginationCollectionSize: number;
     currentPage: number;
 
     @HostListener('detailsTableSortChangeEvent', ['$event.detail'])
@@ -77,7 +63,9 @@ export class DetailsTableComponent implements OnInit, OnChanges {
         */
 
         this.detailsTableRequestEvent.emit(this.detailsTableRequest);
-        this.gridApi.showLoadingOverlay();
+
+        // showing ag-grid loading overlay
+        this._agGridTable.showLoadingOverlay();
     }
 
     onIsInitialTableReady__Table(event) {
@@ -89,10 +77,6 @@ export class DetailsTableComponent implements OnInit, OnChanges {
         // console.log('Total Time:', event.totalTime);
         // console.groupEnd();
     }
-
-    constructor() { }
-
-    ngOnInit() { }
 
     ngOnChanges(changes: SimpleChanges): void {
 
@@ -116,9 +100,8 @@ export class DetailsTableComponent implements OnInit, OnChanges {
             this._detailsTablePagination.page = this.detailsTableRequest.start + 1;
             this.currentPage = this._detailsTablePagination.page;
 
-            if (this.gridColumnApi) {
-                this.gridColumnApi.autoSizeAllColumns();
-            }
+            // resizing columns in ag-grid table
+            this._agGridTable.autoSizeAllColumns();
 
             // completing progress bar
             if (this._progressBar) {
@@ -149,11 +132,6 @@ export class DetailsTableComponent implements OnInit, OnChanges {
 
     gettingDetailsBarCompleted(): void {
         this.isInitialTableReady = 'yes';
-    }
-
-    onGridReady(e: AgGridEvent): void {
-        this.gridApi = e.api;
-        this.gridColumnApi = e.columnApi;
     }
 
     onLengthChange(length: string): void {
