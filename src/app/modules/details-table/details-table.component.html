@@ -1,31 +1,23 @@
-<div class="overlay"
-    *ngIf="isInitialTableReady !== 'yes'"
-    [@showOverlay]="isInitialTableReady"
-></div>
-
 <div class="getting-details"
-    *ngIf="isInitialTableReady !== 'yes'"
-    [@gettingDetailsLoader]="isInitialTableReady"
-    (@gettingDetailsLoader.done)="isGettingDetailsLoaderDone($event)"
->
+    *ngIf="showGettingDetailsLoader"
+    @gettingDetailsLoader
+    (@gettingDetailsLoader.done)="onGettingDetailsLoader($event)">
     <h3>Getting Details List</h3>
     <h6>Please Wait...</h6>
     <div class="getting-details__progress-bar">
-        <ng-progress #gettingDetailsBar
-            fixed="false"
-            [spinner]="false"
-            color="red"
-            (completed)="gettingDetailsBarCompleted()"
+        <ng-progress
             id="getting-details__progress-bar"
-        ></ng-progress>
+            #gettingDetailsBar
+            fixed="false"
+            spinner="false"
+            color="red"
+            (completed)="onGettingDetailsProgressBarComplete()">
+        </ng-progress>
     </div>
 </div>
 
 <div class="table__wrapper"
-    [@isInitialTableReady__Table]="isInitialTableReady__Table"
-    (@isInitialTableReady__Table.start)="onIsInitialTableReady__Table($event)"
-    (@isInitialTableReady__Table.done)="onIsInitialTableReady__Table($event)"
->
+    [@initialTableReady]="initialTableReady">
     <div class="details-list">
         <h1 class="details-list__text">Details List</h1>
         <div class="download-details">
@@ -33,8 +25,7 @@
                 class="download-details__button"
                 rippleOnClick
                 [disabled]="!detailsData?.length"
-                (click)="downloadDetailsEvent.emit(detailsTableRequest)"
-            >
+                (click)="downloadDetailsEvent.emit(detailsTableRequest)">
                 <span>Download Details</span>
                 <i class="material-icons">arrow_downward</i>
             </button>
@@ -49,14 +40,14 @@
                 <app-details-table-length
                     [pageSizes]="pageSizes"
                     [initialPageSize]="this.detailsTableRequest.length"
-                    (lengthChangeEvent)="onLengthChange($event)"
-                ></app-details-table-length>
+                    (lengthChangeEvent)="onLengthChange($event)">
+                </app-details-table-length>
             </div>
             <div class="details-table__search px-3 mt-xs">
                 <app-details-table-search
                     [initialSearchValue]="this.detailsTableRequest.search"
-                    (searchChangeEvent)="onSearchChange($event)"
-                ></app-details-table-search>
+                    (searchChangeEvent)="onSearchChange($event)">
+                </app-details-table-search>
             </div>
         </div>
 
@@ -64,8 +55,8 @@
 
         <app-ag-grid-table
             #agGridTable
-            [detailsData]="detailsData"
-        ></app-ag-grid-table>
+            [detailsData]="detailsData">
+        </app-ag-grid-table>
 
         <br>
 
@@ -74,8 +65,8 @@
                 <app-details-table-info
                     [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
                     [detailsInfoTo]="detailsInfo.to"
-                    [detailsInfoTotal]="detailsInfo.total"
-                ></app-details-table-info>
+                    [detailsInfoTotal]="detailsInfo.total">
+                </app-details-table-info>
             </div>
             <div class="details-table__pagination px-3 mt-xs">
                 <ngb-pagination class="d-flex justify-content-end"
@@ -88,8 +79,8 @@
 
                     appCustomNgbPagination
                     [currentPage]="currentPage"
-                    (customPageChangeEvent)="onPageChange($event)"
-                ></ngb-pagination>
+                    (customPageChangeEvent)="onPageChange($event)">
+                </ngb-pagination>
             </div>
         </div>
     </div>

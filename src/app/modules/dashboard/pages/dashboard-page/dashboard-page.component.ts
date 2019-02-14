@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { dashboardRouterAnimation } from '../../dashboard-router.animations';
 import { dashboardPageAnimation } from './dashboard-page.animations';
 
@@ -11,16 +11,12 @@ import { dashboardPageAnimation } from './dashboard-page.animations';
         dashboardPageAnimation
     ]
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent {
 
-    // bind pageAnimation animation on host
-    @HostBinding('@dashboardPageAnimation') get dashboardPageAnimation() { return ''; }
+    // bind dashboardPageAnimation animation on host
+    @HostBinding('@dashboardPageAnimation') dashboardPageAnimation = '';
 
-    constructor() { }
-
-    ngOnInit() {
-    }
     getState(outlet) {
-        return outlet.activatedRouteData.state;
+        return outlet.activatedRouteData.title;
     }
 }

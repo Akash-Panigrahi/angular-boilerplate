@@ -1,4 +1,11 @@
-<ng-progress #progressBar id="routing__progress-bar"></ng-progress>
-<main class="d-flex flex-column" [@appRouterTransition]="getState(o)">
-    <router-outlet #o="outlet"></router-outlet>
+<ng-progress
+    id="routing__progress-bar"
+    #progressBar>
+</ng-progress>
+<main
+    class="d-flex flex-column"
+    [@appRouterTransition]="o.isActivated ? o.activatedRoute : ''">
+    <router-outlet
+        #o="outlet">
+    </router-outlet>
 </main>

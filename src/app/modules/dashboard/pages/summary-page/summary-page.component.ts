@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
-import { pageAnimations } from './summary-page.animations';
+import { summaryPageAnimation } from './summary-page.animations';
 import { SummaryPageService } from './summary-page.service';
 import { Subscription } from 'rxjs';
 import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
@@ -10,12 +10,12 @@ import { CacheService } from 'src/app/core/services/cache/cache.service';
     selector: 'app-summary-page',
     templateUrl: './summary-page.component.html',
     styleUrls: ['./summary-page.component.scss'],
-    animations: [pageAnimations],
+    animations: [summaryPageAnimation],
     providers: [SummaryPageService]
 })
 export class SummaryPageComponent implements OnInit, OnDestroy {
 
-    @HostBinding('@pageAnimations') pageAnimations = true;
+    @HostBinding('@summaryPageAnimation') summaryPageAnimation = '';
 
     summaryData = {
         kpis: null,
@@ -35,7 +35,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
         /*
             listen to stream, then pass the new emitted value to getSummary observable
         */
-        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
+        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange()
             .subscribe(data => {
 
                 // check if data is present in cacheservice

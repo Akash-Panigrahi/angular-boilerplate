@@ -1,6 +1,12 @@
 <app-header class="app-header"></app-header>
+
 <app-action-bar class="app-action-bar"></app-action-bar>
-<section class="app-section flex-grow-1" [@dashboardRouterAnimation]="getState(o)">
-    <router-outlet #o="outlet"></router-outlet>
+
+<section class="app-section flex-grow-1"
+    [@dashboardRouterAnimation]="o.isActivated ? o.activatedRoute : ''">
+    <router-outlet
+        #o="outlet">
+    </router-outlet>
 </section>
+
 <app-footer class="app-footer"></app-footer>

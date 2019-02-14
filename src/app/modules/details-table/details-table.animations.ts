@@ -1,30 +1,26 @@
 import { animate, style, trigger, transition, state } from '@angular/animations';
 
-export const isInitialTableReady__Table = trigger('isInitialTableReady__Table', [
-    state('no', style({
-        transform: 'translateX(99%)',
-        opacity: 0,
-    })),
+export const initialTableReady = trigger('initialTableReady', [
+
+    state('no', style({ transform: 'translateX(100%)', opacity: 0 })),
     state('yes', style('*')),
 
-    transition('no => yes', animate('500ms'))
+    transition('no => yes',
+        animate('500ms')
+    )
 ]);
 
 export const gettingDetailsLoader = trigger('gettingDetailsLoader', [
-    state('void', style({ opacity: 0, transform: 'translateY(-100px)', height: 'auto' })),
-    state('no', style({
-        transform: 'translateX(0)',
-        opacity: 1
-    })),
 
-    transition('void => no', animate('300ms ease-out')),
-    transition('no => yes, :leave', animate('400ms ease-in-out'))
-]);
+    transition(':enter',
+        animate('300ms ease-out')
+    ),
 
-export const showOverlay = trigger('showOverlay', [
-    state('void', style({ opacity: 0 })),
-    state('no', style({ height: '100%', opacity: 1 })),
-
-    transition('void => no', animate('200ms ease-out')),
-    transition('no => yes, :leave', animate('500ms'))
+    transition(':leave',
+        animate('400ms ease-in-out',
+            style({
+                opacity: 0, transform: 'translateY(-100px)', height: 'auto'
+            })
+        )
+    )
 ]);

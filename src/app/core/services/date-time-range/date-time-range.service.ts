@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { StateService } from '../state/state.service';
 
 declare const moment: any;
@@ -18,7 +18,7 @@ export class DateTimeRangeService {
     private _dateTimeRangeSource = new BehaviorSubject(this._setDateTimeRangeInStore());
 
     // creating an observable from source for listening components to subscribe to
-    currentDateTimeRange = this._dateTimeRangeSource.asObservable();
+    // currentDateTimeRange = this._dateTimeRangeSource.asObservable();
 
     constructor(
         private _state: StateService
@@ -27,6 +27,19 @@ export class DateTimeRangeService {
     changeDateTimeRange(dateTimeRange) {
         // emit a new value, that will be passed to listening components
         this._dateTimeRangeSource.next(dateTimeRange);
+    }
+
+    currentDateTimeRange() {
+
+        if (!this._state.getState('date-time-range')) {
+            /**
+             * resetting observable if null in session storage
+             * i.e., user is not logged in
+             */
+            this._dateTimeRangeSource = new BehaviorSubject(this._setDateTimeRangeInStore());
+        }
+
+        return this._dateTimeRangeSource.asObservable();
     }
 
     private _setDateTimeRangeInStore() {

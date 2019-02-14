@@ -55,8 +55,4 @@ export class AppComponent implements OnInit, AfterViewInit {
         this._progressBar.color = 'red';
         this._progressBar.spinner = false;
     }
-
-    getState(outlet) {
-        return outlet.activatedRouteData.title;
-    }
 }

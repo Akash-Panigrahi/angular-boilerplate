@@ -53,9 +53,7 @@ export class LoginPageComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private _loginPageService: LoginPageService,
         private _toastr: ToastrService
-    ) {
-        console.log('inside login page');
-    }
+    ) { }
 
     ngOnInit() { }
 

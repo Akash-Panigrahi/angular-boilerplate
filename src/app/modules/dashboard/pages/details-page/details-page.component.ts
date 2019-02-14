@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding, OnDestroy, Input } from '@angular/core';
-import { riseUp } from './details-page.animations';
+import { detailsPageAnimation } from './details-page.animations';
 import { DetailsPageService } from './details-page.service';
 import { Subscription } from 'rxjs';
 import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
@@ -12,13 +12,12 @@ import { IDetailsTableRequest, IDetailsTableResponse } from 'src/app/core/interf
     selector: 'app-details-page',
     templateUrl: './details-page.component.html',
     styleUrls: ['./details-page.component.scss'],
-    animations: [riseUp],
+    animations: [detailsPageAnimation],
     providers: [DetailsPageService]
 })
 export class DetailsPageComponent implements OnInit, OnDestroy {
 
-    @HostBinding('@riseUp')
-    private _riseUp = true;
+    @HostBinding('@detailsPageAnimation') detailsPageAnimation = true;
 
     details: IDetailsTableResponse[];
     currentDateTimeRange$ = new Subscription();
@@ -54,7 +53,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             this.detailsTableRequest = detailsTableRequestFromState;
         }
 
-        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange
+        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange()
             .subscribe(dateTimeRange => {
                 this._getDetails(dateTimeRange, this._state.getState('details-table-request'));
             });
@@ -81,7 +80,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         // save state
         this._state.setState('details-table-request', detailsTableRequest);
 
-        this._dateTimeRangeService.currentDateTimeRange
+        this._dateTimeRangeService.currentDateTimeRange()
             .pipe(take(1))
             .subscribe(dateTimeRange => {
                 this._getDetails(dateTimeRange, detailsTableRequest);
