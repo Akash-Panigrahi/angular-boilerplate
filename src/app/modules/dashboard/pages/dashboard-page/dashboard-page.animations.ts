@@ -43,7 +43,7 @@ export const dashboardPageAnimation = trigger('dashboardPageAnimation', [
     ])),
     transition(':leave', sequence([
         // Animations
-        // query('.app-section', animateChild()),
+        query('.app-section', animateChild()),
         group([
             query('.app-header',
                 animate('500ms ease-out',
@@ -56,6 +56,11 @@ export const dashboardPageAnimation = trigger('dashboardPageAnimation', [
                 )
             ),
             query('.app-action-bar',
+                animate('500ms ease-out',
+                    style({ opacity: '0' })
+                )
+            ),
+            query('.app-section',
                 animate('500ms ease-out',
                     style({ opacity: '0' })
                 )

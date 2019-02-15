@@ -15,8 +15,4 @@ export class DashboardPageComponent {
 
     // bind dashboardPageAnimation animation on host
     @HostBinding('@dashboardPageAnimation') dashboardPageAnimation = '';
-
-    getState(outlet) {
-        return outlet.activatedRouteData.title;
-    }
 }
