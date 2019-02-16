@@ -2,7 +2,7 @@ import {
     trigger, animate, style, group, query, transition, sequence, animateChild
 } from '@angular/animations';
 
-export const dashboardPageAnimation = trigger('dashboardPageAnimation', [
+export const dashboardAnimation = trigger('dashboardAnimation', [
     transition(':enter', group([
         // Initial Styles
         query('.app-action-bar',

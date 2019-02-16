@@ -11,7 +11,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DetailsTableModule } from '../details-table/details-table.module';
 
-import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { DashboardComponent } from './dashboard.component';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { SummaryPageComponent } from './pages/summary-page/summary-page.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,7 +23,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 
 @NgModule({
     declarations: [
-        DashboardPageComponent,
+        DashboardComponent,
         DetailsPageComponent,
         SummaryPageComponent,
         HeaderComponent,
