@@ -1,10 +1,10 @@
-<br>
 <div class="container-fluid bg-grey-white">
     <div class="row">
         <div class="col-12 child-component">
-            <app-details-grid [details]="details" [detailsTableRequest]="detailsTableRequest"
-                (detailsTableRequestEvent)="onDetailsTableRequest($event)"
-                (downloadDetailsEvent)="onDownloadDetails($event)">
+            <app-details-grid [details]="details"
+                              [detailsTableRequest]="detailsTableRequest"
+                              (detailsTableRequestEvent)="onDetailsTableRequest($event)"
+                              (downloadDetailsEvent)="onDownloadDetails($event)">
             </app-details-grid>
         </div>
     </div>

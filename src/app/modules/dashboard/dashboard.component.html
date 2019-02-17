@@ -2,7 +2,10 @@
 
 <app-action-bar class="app-action-bar"></app-action-bar>
 
-<section class="app-section flex-grow-1" [@dashboardRoutingAnimation]="o.isActivated ? o.activatedRoute : ''">
+<br>
+
+<section class="app-section flex-grow-1"
+         [@dashboardRoutingAnimation]="o.isActivated ? o.activatedRoute : ''">
     <router-outlet #o="outlet">
     </router-outlet>
 </section>

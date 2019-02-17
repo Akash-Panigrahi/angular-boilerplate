@@ -1,13 +1,16 @@
 <div class="getting-data__progress-bar">
-    <ng-progress
-        #gettingDataBar
-        fixed="false"
-        id="getting-data__progress-bar"
-    ></ng-progress>
+    <ng-progress #gettingDataBar
+                 fixed="false"
+                 id="getting-data__progress-bar">
+    </ng-progress>
 </div>
 <br>
-<div class="container-fluid action-bar" [@slideDown]="isOpen ? 'open' : 'close'">
-    <div id="reportrange" class="datetimerangepicker" rippleOnClick (click)="isCalendarOpen()">
+<div class="container-fluid action-bar"
+     [@slideDown]="isOpen ? 'open' : 'close'">
+    <div id="reportrange"
+         class="datetimerangepicker"
+         rippleOnClick
+         (click)="isCalendarOpen()">
         <div class="calendar-icon">
             <i class="material-icons">calendar_today</i>
         </div>
@@ -20,4 +23,3 @@
         <h5>Last Updated | {{ lastUpdated | date: 'yyyy-MM-dd h:mm:ss a' }}</h5>
     </div>
 </div>
-<br>

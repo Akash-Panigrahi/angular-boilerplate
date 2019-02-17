@@ -4,7 +4,7 @@ import { loginPageAnimation, slideDown } from './login-page.animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginPageService } from './login-page.service';
 import { ToastrService } from 'ngx-toastr';
-import { ILoginData } from 'src/app/core/interfaces/login.interface';
+import { ILoginData } from '../../interfaces/login.interfaces';
 
 @Component({
     selector: 'app-login-page',

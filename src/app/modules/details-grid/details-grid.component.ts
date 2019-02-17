@@ -4,11 +4,9 @@ import {
 import { NgProgressComponent } from '@ngx-progressbar/core';
 import { takeWhile, endWith, tap } from 'rxjs/operators';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
-import {
-    ISortEvent, IDetailsTableData, IDetailsTableRequest, IDetailsTableResponse
-} from 'src/app/core/interfaces/details-table.interface';
 import { initialTableReady, gettingDetailsLoader } from './details-grid.animations';
 import { DetailsGridTableComponent } from './components/details-grid-table/details-grid-table.component';
+import { DetailsGridResponse, DetailsGridRequest, DetailsTableData, DetailsTableSortEvent } from './interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-grid',
@@ -21,11 +19,11 @@ import { DetailsGridTableComponent } from './components/details-grid-table/detai
 })
 export class DetailsGridComponent implements OnChanges {
 
-    @Input() details: IDetailsTableResponse[];
-    @Input() detailsTableRequest: IDetailsTableRequest;
+    @Input() details: DetailsGridResponse[];
+    @Input() detailsTableRequest: DetailsGridRequest;
 
-    @Output() detailsTableRequestEvent = new EventEmitter<IDetailsTableRequest>();
-    @Output() downloadDetailsEvent = new EventEmitter<IDetailsTableRequest>();
+    @Output() detailsTableRequestEvent = new EventEmitter<DetailsGridRequest>();
+    @Output() downloadDetailsEvent = new EventEmitter<DetailsGridRequest>();
 
     // references to elements in the html file
     @ViewChild('gettingDetailsBar') private _progressBar: NgProgressComponent;
@@ -43,7 +41,7 @@ export class DetailsGridComponent implements OnChanges {
     initialTableReady = 'no';
     pageSizes = [3, 5, 10, 25, 50, 100];
 
-    detailsData: IDetailsTableData[];
+    detailsData: DetailsTableData[];
     paginationCollectionSize: number;
     currentPage: number;
 
@@ -155,8 +153,8 @@ export class DetailsGridComponent implements OnChanges {
             // resetting properties
             start: 0,
             sort: {
-                sortKey: 'id',
-                sortDir: 0
+                key: 'id',
+                direction: 0
             },
 
             // changing properties
@@ -187,7 +185,7 @@ export class DetailsGridComponent implements OnChanges {
         this._emitDataTableRequestEvent();
     }
 
-    onSortChange(sort: ISortEvent): void {
+    onSortChange(sort: DetailsTableSortEvent): void {
         this.detailsTableRequest.sort = sort;
         this._emitDataTableRequestEvent();
     }

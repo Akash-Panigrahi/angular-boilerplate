@@ -18,12 +18,12 @@ import { TokenInterceptor } from './interceptors/token/token.interceptor';
             useClass: TokenInterceptor,
             multi: true
         },
-        /* {
+        {
             // mock provider for faking backend
             provide: HTTP_INTERCEPTORS,
             useClass: MockBackendInterceptor,
             multi: true
-        } */
+        }
     ]
 })
 export class CoreModule {

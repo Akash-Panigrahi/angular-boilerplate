@@ -96,27 +96,27 @@ export class MockBackendInterceptor implements HttpInterceptor {
                             })
                             .sort((prev, curr) => {
 
-                                if (typeof (prev[sort.sortKey]) === 'number') {
-                                    switch (sort.sortDir) {
+                                if (typeof (prev[sort.key]) === 'number') {
+                                    switch (sort.direction) {
                                         case 1:
                                             // ascending sort
-                                            return prev[sort.sortKey] - curr[sort.sortKey];
+                                            return prev[sort.key] - curr[sort.key];
                                         case -1:
                                             // descending sort
-                                            return curr[sort.sortKey] - prev[sort.sortKey];
+                                            return curr[sort.key] - prev[sort.key];
                                         case 0:
                                             // no sort
                                             return 0;
                                     }
 
-                                } else if (typeof (prev[sort.sortKey]) === 'string') {
-                                    switch (sort.sortDir) {
+                                } else if (typeof (prev[sort.key]) === 'string') {
+                                    switch (sort.direction) {
                                         case 1:
                                             // ascending sort
-                                            return prev[sort.sortKey].localeCompare(curr[sort.sortKey]);
+                                            return prev[sort.key].localeCompare(curr[sort.key]);
                                         case -1:
                                             // descending sort
-                                            return curr[sort.sortKey].localeCompare(prev[sort.sortKey]);
+                                            return curr[sort.key].localeCompare(prev[sort.key]);
                                         case 0:
                                             // no sort
                                             return 0;

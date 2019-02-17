@@ -19,7 +19,7 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
     noSort: any;
 
     // initial sorting direction
-    sortDir = 0;
+    direction = 0;
 
     constructor(
         private _changeToNoSortState: ChangeToNoSortStateService
@@ -35,36 +35,36 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
             .currentNoSortState
             .subscribe(columnToSkip => {
                 if (this.params.column.colId !== columnToSkip) {
-                    this.sortDir = 0;
-                    this.setSortDirection();
+                    this.direction = 0;
+                    this.setdirection();
                 }
             });
     }
 
     agInit(params: IHeaderParams) {
         this.params = params;
-        this.setSortDirection();
+        this.setdirection();
     }
 
-    setSortDirection(): void {
+    setdirection(): void {
 
         // hide all sort icons
         this.ascSort = this.descSort = this.noSort = 'inactive';
 
-        switch (this.sortDir) {
+        switch (this.direction) {
             case 1:
                 // show the icon
                 this.ascSort = 'active';
                 // set the sort direction to the next one
-                this.sortDir = -1;
+                this.direction = -1;
                 break;
             case -1:
                 this.descSort = 'active';
-                this.sortDir = 0;
+                this.direction = 0;
                 break;
             case 0:
                 this.noSort = 'active';
-                this.sortDir = 1;
+                this.direction = 1;
                 break;
         }
     }
@@ -78,15 +78,15 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
         target.dispatchEvent(
             new CustomEvent('detailsTableSortChangeEvent', {
                 detail: {
-                    sortKey: colId,
-                    sortDir: this.sortDir
+                    key: colId,
+                    direction: this.direction
                 },
                 bubbles: true
             })
         );
 
         // now modify the sort direction and change the icon according
-        this.setSortDirection();
+        this.setdirection();
     }
 
     ngOnDestroy() {

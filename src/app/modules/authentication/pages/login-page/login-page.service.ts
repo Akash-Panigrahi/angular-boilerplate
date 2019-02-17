@@ -2,8 +2,8 @@ import { ApiService } from 'src/app/core/http/api/api.service';
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError, take } from 'rxjs/operators';
-import { ILoginResponse, ILoginData } from 'src/app/core/interfaces/login.interface';
 import { StateService } from 'src/app/core/services/state/state.service';
+import { ILoginResponse, ILoginData } from '../../interfaces/login.interfaces';
 
 @Injectable()
 export class LoginPageService {

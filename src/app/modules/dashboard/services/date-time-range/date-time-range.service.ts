@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { StateService } from 'src/app/core/services/state/state.service';
+import { DateTimeRange } from 'src/app/modules/dashboard/interfaces/date-time-range.interface';
 
 declare const moment: any;
 
@@ -24,7 +25,7 @@ export class DateTimeRangeService {
         private _state: StateService
     ) { }
 
-    changeDateTimeRange(dateTimeRange) {
+    changeDateTimeRange(dateTimeRange: DateTimeRange) {
         // emit a new value, that will be passed to listening components
         this._dateTimeRangeSource.next(dateTimeRange);
     }

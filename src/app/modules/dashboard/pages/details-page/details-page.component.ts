@@ -5,8 +5,9 @@ import { Subscription } from 'rxjs';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { take, delay } from 'rxjs/operators';
-import { IDetailsTableRequest, IDetailsTableResponse } from 'src/app/core/interfaces/details-table.interface';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
+import { DateTimeRange } from 'src/app/modules/dashboard/interfaces/date-time-range.interface';
+import { DetailsGridRequest, DetailsGridResponse } from 'src/app/modules/details-grid/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-page',
@@ -19,7 +20,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
     @HostBinding('@detailsPageAnimation') detailsPageAnimation = true;
 
-    details: IDetailsTableResponse[];
+    details: DetailsGridResponse[];
     currentDateTimeRange$ = new Subscription();
 
     detailsTableRequest = {
@@ -27,8 +28,8 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         length: 5,
         search: '',
         sort: {
-            sortKey: 'id',
-            sortDir: 0
+            key: 'id',
+            direction: 0
         }
     };
 
@@ -54,12 +55,12 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         }
 
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange()
-            .subscribe(dateTimeRange => {
+            .subscribe((dateTimeRange: DateTimeRange) => {
                 this._getDetails(dateTimeRange, this._state.getState('details-table-request'));
             });
     }
 
-    private _getDetails(dateTimeRange, detailsTableRequest: IDetailsTableRequest): void {
+    private _getDetails(dateTimeRange: DateTimeRange, detailsTableRequest: DetailsGridRequest): void {
 
         const detailsRequest = { ...dateTimeRange, ...detailsTableRequest };
 
@@ -67,7 +68,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             .getDetails(detailsRequest)
             // .pipe(delay(3000))
             .subscribe(
-                (res: IDetailsTableResponse[]) => {
+                (res: DetailsGridResponse[]) => {
                     this.details = res;
                     this._actionBarUiState.changeGettingDataBar('complete');
                 },
@@ -75,19 +76,19 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             );
     }
 
-    onDetailsTableRequest(detailsTableRequest: IDetailsTableRequest): void {
+    onDetailsTableRequest(detailsTableRequest: DetailsGridRequest): void {
 
         // save state
         this._state.setState('details-table-request', detailsTableRequest);
 
         this._dateTimeRangeService.currentDateTimeRange()
             .pipe(take(1))
-            .subscribe(dateTimeRange => {
+            .subscribe((dateTimeRange: DateTimeRange) => {
                 this._getDetails(dateTimeRange, detailsTableRequest);
             });
     }
 
-    onDownloadDetails(detailsTableRequest: IDetailsTableRequest): void {
+    onDownloadDetails(detailsTableRequest: DetailsGridRequest): void {
 
         const { startDate, startTime, endDate, endTime } = this._state.getState('date-time-range');
         const { start, length, search, sort } = detailsTableRequest;
