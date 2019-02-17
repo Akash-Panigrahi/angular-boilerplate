@@ -1,0 +1,63 @@
+<div class="getting-details" *ngIf="showGettingDetailsLoader" @gettingDetailsLoader
+    (@gettingDetailsLoader.done)="onGettingDetailsLoader($event)">
+    <h3>Getting Details List</h3>
+    <h6>Please Wait...</h6>
+    <div class="getting-details__progress-bar">
+        <ng-progress id="getting-details__progress-bar" #gettingDetailsBar fixed="false" spinner="false" color="red"
+            (completed)="onGettingDetailsProgressBarComplete()">
+        </ng-progress>
+    </div>
+</div>
+
+<div class="grid__wrapper" [@initialTableReady]="initialTableReady">
+    <div class="details-list">
+        <h1 class="details-list__text">Details List</h1>
+        <div class="download-details">
+            <button class="download-details__button" rippleOnClick [disabled]="!detailsData?.length"
+                (click)="downloadDetailsEvent.emit(detailsTableRequest)">
+                <span>Download Details</span>
+                <i class="material-icons">arrow_downward</i>
+            </button>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="details-grid" #detailsGrid>
+        <div class="details-grid__length-search row justify-content-center justify-content-sm-between">
+            <div class="details-grid__length px-3">
+                <app-details-grid-length [pageSizes]="pageSizes" [initialPageSize]="this.detailsTableRequest.length"
+                    (lengthChangeEvent)="onLengthChange($event)">
+                </app-details-grid-length>
+            </div>
+            <div class="details-grid__search px-3 mt-xs">
+                <app-details-grid-search [initialSearchValue]="this.detailsTableRequest.search"
+                    (searchChangeEvent)="onSearchChange($event)">
+                </app-details-grid-search>
+            </div>
+        </div>
+
+        <br>
+
+        <app-details-grid-table #detailsGridTable [detailsData]="detailsData">
+        </app-details-grid-table>
+
+        <br>
+
+        <div class="details-grid__info-pagination row justify-content-center justify-content-sm-between">
+            <div class="details-grid__info px-3">
+                <app-details-grid-info [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
+                    [detailsInfoTo]="detailsInfo.to" [detailsInfoTotal]="detailsInfo.total"
+                    [detailsInfoFilteredFrom]="detailsInfo.filteredFrom">
+                </app-details-grid-info>
+            </div>
+            <div class="details-grid__pagination px-3 mt-xs">
+                <ngb-pagination class="d-flex justify-content-end" #detailsGridPagination
+                    [collectionSize]="paginationCollectionSize" [maxSize]="3" [rotate]="true" [ellipses]="true"
+                    [boundaryLinks]="true" appCustomNgbPagination [currentPage]="currentPage"
+                    (customPageChangeEvent)="onPageChange($event)">
+                </ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

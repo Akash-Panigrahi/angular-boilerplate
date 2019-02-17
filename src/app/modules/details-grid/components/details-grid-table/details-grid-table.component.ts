@@ -1,19 +1,19 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GridApi, ColumnApi, ICellRendererParams, AgGridEvent } from 'ag-grid-community';
-import { AgGridLoadingOverlayComponent } from '../ag-grid-loading-overlay/ag-grid-loading-overlay.component';
-import { AgGridNoRowsOverlayComponent } from '../ag-grid-no-rows-overlay/ag-grid-no-rows-overlay.component';
-import { AgGridHeaderComponent } from '../ag-grid-header/ag-grid-header.component';
-import { NoSortStateService } from '../ag-grid-header/no-sort-state.service';
+import { DetailsGridLoadingOverlayComponent } from '../details-grid-loading-overlay/details-grid-loading-overlay.component';
+import { DetailsGridNoRowsOverlayComponent } from '../details-grid-no-rows-overlay/details-grid-no-rows-overlay.component';
+import { DetailsGridHeaderComponent } from '../details-grid-header/details-grid-header.component';
 import { IDetailsTableData } from 'src/app/core/interfaces/details-table.interface';
 import { FormatTimeService } from 'src/app/modules/dashboard/services/format-time/format-time.service';
+import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
 
 @Component({
-    selector: 'app-ag-grid-table',
-    templateUrl: './ag-grid-table.component.html',
-    styleUrls: ['./ag-grid-table.component.scss'],
-    providers: [NoSortStateService]
+    selector: 'app-details-grid-table',
+    templateUrl: './details-grid-table.component.html',
+    styleUrls: ['./details-grid-table.component.scss'],
+    providers: [ChangeToNoSortStateService]
 })
-export class AgGridTableComponent implements OnChanges {
+export class DetailsGridTableComponent implements OnChanges {
 
     @Input() detailsData: IDetailsTableData;
 
@@ -40,9 +40,9 @@ export class AgGridTableComponent implements OnChanges {
     ];
 
     frameworkComponents = {
-        customLoadingOverlay: AgGridLoadingOverlayComponent,
-        customNoRowsOverlay: AgGridNoRowsOverlayComponent,
-        agColumnHeader: AgGridHeaderComponent
+        customLoadingOverlay: DetailsGridLoadingOverlayComponent,
+        customNoRowsOverlay: DetailsGridNoRowsOverlayComponent,
+        agColumnHeader: DetailsGridHeaderComponent
     };
 
     loadingOverlayComponent = 'customLoadingOverlay';

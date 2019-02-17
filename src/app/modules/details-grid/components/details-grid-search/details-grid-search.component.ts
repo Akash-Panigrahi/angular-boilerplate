@@ -3,11 +3,11 @@ import {
 } from '@angular/core';
 
 @Component({
-    selector: 'app-details-table-search',
-    templateUrl: './details-table-search.component.html',
-    styleUrls: ['./details-table-search.component.scss']
+    selector: 'app-details-grid-search',
+    templateUrl: './details-grid-search.component.html',
+    styleUrls: ['./details-grid-search.component.scss']
 })
-export class DetailsTableSearchComponent implements OnInit {
+export class DetailsGridSearchComponent implements OnInit {
 
     @Input()
     initialSearchValue: string;

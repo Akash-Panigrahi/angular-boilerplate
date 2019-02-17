@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-details-table-info',
-    templateUrl: './details-table-info.component.html',
-    styleUrls: ['./details-table-info.component.scss']
+    selector: 'app-details-grid-info',
+    templateUrl: './details-grid-info.component.html',
+    styleUrls: ['./details-grid-info.component.scss']
 })
-export class DetailsTableInfoComponent {
+export class DetailsGridInfoComponent {
 
     @Input() detailsInfoFrom: number;
     @Input() detailsInfoTo: number;

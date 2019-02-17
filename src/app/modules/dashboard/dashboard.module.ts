@@ -9,7 +9,7 @@ import { ChartModule } from 'angular-highcharts';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { DetailsTableModule } from '../details-table/details-table.module';
+import { DetailsGridModule } from '../details-grid/details-grid.module';
 
 import { DashboardComponent } from './dashboard.component';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
@@ -48,7 +48,7 @@ import { CopyrightPipe } from './pipes/copyright/copyright.pipe';
 
         SharedModule,
         DashboardRoutingModule,
-        DetailsTableModule,
+        DetailsGridModule,
     ]
 })
 export class DashboardModule {

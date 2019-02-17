@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IHeaderAngularComp } from 'ag-grid-angular';
 import { IHeaderParams } from 'ag-grid-community';
-import { NoSortStateService } from './no-sort-state.service';
 import { Subscription } from 'rxjs';
+import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
 
 @Component({
-    selector: 'app-ag-grid-header',
-    templateUrl: './ag-grid-header.component.html',
-    styleUrls: ['./ag-grid-header.component.scss'],
+    selector: 'app-details-grid-header',
+    templateUrl: './details-grid-header.component.html',
+    styleUrls: ['./details-grid-header.component.scss'],
 })
-export class AgGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDestroy {
+export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDestroy {
 
     private _currentNoSortState$ = new Subscription();
 
@@ -22,7 +22,7 @@ export class AgGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDest
     sortDir = 0;
 
     constructor(
-        private _noSortState: NoSortStateService
+        private _changeToNoSortState: ChangeToNoSortStateService
     ) { }
 
     ngOnInit() {
@@ -31,7 +31,7 @@ export class AgGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDest
             header component
             and reset all components to no sort state
         */
-        this._currentNoSortState$ = this._noSortState
+        this._currentNoSortState$ = this._changeToNoSortState
             .currentNoSortState
             .subscribe(columnToSkip => {
                 if (this.params.column.colId !== columnToSkip) {
@@ -72,7 +72,7 @@ export class AgGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDest
     onHeaderClick(target: HTMLElement, colId: string): void {
 
         // change sort directions of all sibling header components to 0
-        this._noSortState.changeNoSortState(colId);
+        this._changeToNoSortState.changeToNoSortState(colId);
 
         // dispatch the custom click event with the specified data
         target.dispatchEvent(

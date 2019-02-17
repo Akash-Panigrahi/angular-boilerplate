@@ -7,19 +7,19 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import {
     ISortEvent, IDetailsTableData, IDetailsTableRequest, IDetailsTableResponse
 } from 'src/app/core/interfaces/details-table.interface';
-import { initialTableReady, gettingDetailsLoader } from './details-table.animations';
-import { AgGridTableComponent } from './components/ag-grid-table/ag-grid-table.component';
+import { initialTableReady, gettingDetailsLoader } from './details-grid.animations';
+import { DetailsGridTableComponent } from './components/details-grid-table/details-grid-table.component';
 
 @Component({
-    selector: 'app-details-table',
-    templateUrl: './details-table.component.html',
-    styleUrls: ['./details-table.component.scss'],
+    selector: 'app-details-grid',
+    templateUrl: './details-grid.component.html',
+    styleUrls: ['./details-grid.component.scss'],
     animations: [
         initialTableReady,
         gettingDetailsLoader
     ]
 })
-export class DetailsTableComponent implements OnChanges {
+export class DetailsGridComponent implements OnChanges {
 
     @Input() details: IDetailsTableResponse[];
     @Input() detailsTableRequest: IDetailsTableRequest;
@@ -29,8 +29,8 @@ export class DetailsTableComponent implements OnChanges {
 
     // references to elements in the html file
     @ViewChild('gettingDetailsBar') private _progressBar: NgProgressComponent;
-    @ViewChild('detailsTablePagination') private _detailsTablePagination: NgbPagination;
-    @ViewChild('agGridTable') private _agGridTable: AgGridTableComponent;
+    @ViewChild('detailsGridPagination') private _detailsGridPagination: NgbPagination;
+    @ViewChild('detailsGridTable') private _detailsGridTable: DetailsGridTableComponent;
 
     detailsInfo = {
         from: 0,
@@ -71,12 +71,12 @@ export class DetailsTableComponent implements OnChanges {
             this.paginationCollectionSize = (pages || 1) * 10;
 
             // resetting page to previous page
-            this._detailsTablePagination.page = this.detailsTableRequest.start + 1;
-            this.currentPage = this._detailsTablePagination.page;
+            this._detailsGridPagination.page = this.detailsTableRequest.start + 1;
+            this.currentPage = this._detailsGridPagination.page;
 
-            if (this._agGridTable) {
+            if (this._detailsGridTable) {
                 // resizing columns in ag-grid table
-                this._agGridTable.autoSizeAllColumns();
+                this._detailsGridTable.autoSizeAllColumns();
             }
 
             // completing progress bar
@@ -106,7 +106,7 @@ export class DetailsTableComponent implements OnChanges {
         this.detailsTableRequestEvent.emit(this.detailsTableRequest);
 
         // showing ag-grid loading overlay
-        this._agGridTable.showLoadingOverlay();
+        this._detailsGridTable.showLoadingOverlay();
     }
 
 
@@ -165,13 +165,13 @@ export class DetailsTableComponent implements OnChanges {
         };
 
         // setting pagination so as to show first page
-        this._detailsTablePagination.page = 1;
+        this._detailsGridPagination.page = 1;
 
         /**
          * triggering change detection for
          * appCustomNgbPagination directive
          */
-        this.currentPage = this._detailsTablePagination.page;
+        this.currentPage = this._detailsGridPagination.page;
 
         this._emitDataTableRequestEvent();
     }

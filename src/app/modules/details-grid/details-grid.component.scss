@@ -18,7 +18,7 @@
     opacity: 0.5;
 }
 
-.table__wrapper {
+.grid__wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -46,7 +46,7 @@
     }
 }
 
-.details-table {
+.details-grid {
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 20px -8px rgba(0, 0, 0, 0.11), 0 0 5px 0 rgba(0, 0, 0, 0.08);

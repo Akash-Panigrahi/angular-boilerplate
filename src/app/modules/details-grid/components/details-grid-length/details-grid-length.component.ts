@@ -3,11 +3,11 @@ import {
 } from '@angular/core';
 
 @Component({
-    selector: 'app-details-table-length',
-    templateUrl: './details-table-length.component.html',
-    styleUrls: ['./details-table-length.component.scss']
+    selector: 'app-details-grid-length',
+    templateUrl: './details-grid-length.component.html',
+    styleUrls: ['./details-grid-length.component.scss']
 })
-export class DetailsTableLengthComponent implements OnInit {
+export class DetailsGridLengthComponent implements OnInit {
 
     @Input() pageSizes: Array<number>;
     @Input() initialPageSize: number;
