@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CoreModule } from '../../core.module';
 import { Router } from '@angular/router';
-import { StateService } from '../state/state.service';
 import { CacheService } from '../cache/cache.service';
+import { StateService } from 'src/app/core/services/state/state.service';
 
 @Injectable({
-    providedIn: CoreModule
+    providedIn: 'root'
 })
 export class LogoutService {
 

@@ -2,11 +2,11 @@ import {
     Component, OnInit, AfterViewInit, ViewChild, OnDestroy
 } from '@angular/core';
 import { slideDown } from './action-bar.animations';
-import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { NgProgressComponent } from '@ngx-progressbar/core';
 import { ActionBarUIState } from './action-bar.ui-state';
 import { Subscription } from 'rxjs';
+import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 
 // declare variables to avoid error in aot compilation process
 declare const $: any;

@@ -3,9 +3,9 @@ import { GridApi, ColumnApi, ICellRendererParams, AgGridEvent } from 'ag-grid-co
 import { AgGridLoadingOverlayComponent } from '../ag-grid-loading-overlay/ag-grid-loading-overlay.component';
 import { AgGridNoRowsOverlayComponent } from '../ag-grid-no-rows-overlay/ag-grid-no-rows-overlay.component';
 import { AgGridHeaderComponent } from '../ag-grid-header/ag-grid-header.component';
-import { FormatTimeService } from 'src/app/core/services/format-time/format-time.service';
 import { NoSortStateService } from '../ag-grid-header/no-sort-state.service';
 import { IDetailsTableData } from 'src/app/core/interfaces/details-table.interface';
+import { FormatTimeService } from 'src/app/modules/dashboard/services/format-time/format-time.service';
 
 @Component({
     selector: 'app-ag-grid-table',

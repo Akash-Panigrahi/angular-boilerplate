@@ -2,11 +2,11 @@ import { Component, OnInit, HostBinding, OnDestroy, Input } from '@angular/core'
 import { detailsPageAnimation } from './details-page.animations';
 import { DetailsPageService } from './details-page.service';
 import { Subscription } from 'rxjs';
-import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { take, delay } from 'rxjs/operators';
 import { IDetailsTableRequest, IDetailsTableResponse } from 'src/app/core/interfaces/details-table.interface';
+import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 
 @Component({
     selector: 'app-details-page',

@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CopyrightPipe } from './pipes/copyright/copyright.pipe';
 import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
-import { KpiComponent } from './components/kpi/kpi.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [CopyrightPipe, RippleOnClickDirective, KpiComponent],
+    declarations: [RippleOnClickDirective],
     // declarations needs to be exported to be used by other modules
-    exports: [CopyrightPipe, RippleOnClickDirective, KpiComponent]
+    exports: [RippleOnClickDirective]
 })
 export class SharedModule {
     constructor() {

@@ -2,9 +2,9 @@ import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { summaryPageAnimation } from './summary-page.animations';
 import { SummaryPageService } from './summary-page.service';
 import { Subscription } from 'rxjs';
-import { DateTimeRangeService } from 'src/app/core/services/date-time-range/date-time-range.service';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
-import { CacheService } from 'src/app/core/services/cache/cache.service';
+import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
+import { CacheService } from '../../services/cache/cache.service';
 
 @Component({
     selector: 'app-summary-page',
