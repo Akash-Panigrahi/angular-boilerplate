@@ -11,7 +11,7 @@
 .login {
     --login-container-border-radius: 10px;
     --form-background-color: white;
-    max-width: 550px;
+    max-width: 80vmin;
     display: flex;
     box-shadow: 0px 12px 20px -14px black, 0 0 10px 1px rgba(53, 149, 252, 0.6);
     border-radius: var(--login-container-border-radius);

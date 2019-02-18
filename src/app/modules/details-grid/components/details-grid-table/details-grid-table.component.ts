@@ -8,70 +8,69 @@ import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-sta
 import { DetailsTableData } from '../../interfaces/details-grid.interfaces';
 
 @Component({
-  selector: 'app-details-grid-table',
-  templateUrl: './details-grid-table.component.html',
-  styleUrls: ['./details-grid-table.component.scss'],
-  providers: [ChangeToNoSortStateService]
+    selector: 'app-details-grid-table',
+    templateUrl: './details-grid-table.component.html',
+    styleUrls: ['./details-grid-table.component.scss'],
+    providers: [ChangeToNoSortStateService]
 })
 export class DetailsGridTableComponent implements OnChanges {
 
-  @Input() detailsData: DetailsTableData;
+    @Input() detailsData: DetailsTableData;
 
-  gridApi: GridApi;
-  gridColumnApi: ColumnApi;
+    gridApi: GridApi;
+    gridColumnApi: ColumnApi;
 
-  defaultColDef = {
-    sortable: true,
-    // resizable: true,
-  };
+    defaultColDef = {
+        sortable: true,
+        // resizable: true,
+    };
 
-  columnDefs = [
-    { headerName: 'Id', field: 'id' },
-    { headerName: 'First Name', field: 'first_name' },
-    { headerName: 'Last Name', field: 'last_name' },
-    { headerName: 'Email', field: 'email' },
-    { headerName: 'Gender', field: 'gender' },
-    { headerName: 'Date', field: 'date' },
-    {
-      headerName: 'Time', field: 'time',
-      cellRenderer: (params: ICellRendererParams) => this._formatTimeService.formatTime(params.value)
-    },
-  ];
+    columnDefs = [
+        { headerName: 'Id', field: 'id' },
+        { headerName: 'First Name', field: 'first_name' },
+        { headerName: 'Last Name', field: 'last_name' },
+        { headerName: 'Email', field: 'email' },
+        { headerName: 'Gender', field: 'gender' },
+        { headerName: 'Date', field: 'date' },
+        {
+            headerName: 'Time', field: 'time',
+            cellRenderer: (params: ICellRendererParams) => this._formatTimeService.formatTime(params.value)
+        },
+    ];
 
-  frameworkComponents = {
-    customLoadingOverlay: DetailsGridLoadingOverlayComponent,
-    customNoRowsOverlay: DetailsGridNoRowsOverlayComponent,
-    agColumnHeader: DetailsGridHeaderComponent
-  };
+    frameworkComponents = {
+        customLoadingOverlay: DetailsGridLoadingOverlayComponent,
+        customNoRowsOverlay: DetailsGridNoRowsOverlayComponent,
+        agColumnHeader: DetailsGridHeaderComponent
+    };
 
-  loadingOverlayComponent = 'customLoadingOverlay';
-  noRowsOverlayComponent = 'customNoRowsOverlay';
+    loadingOverlayComponent = 'customLoadingOverlay';
+    noRowsOverlayComponent = 'customNoRowsOverlay';
 
-  constructor(
-    private _formatTimeService: FormatTimeService
-  ) { }
+    constructor(
+        private _formatTimeService: FormatTimeService
+    ) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.detailsData.isFirstChange()) {
-      this.detailsData = changes.detailsData.currentValue;
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!changes.detailsData.isFirstChange()) {
+            this.detailsData = changes.detailsData.currentValue;
+            this.gridColumnApi.autoSizeAllColumns();
+        }
     }
-  }
 
-  onGridReady(e: AgGridEvent): void {
-    this.gridApi = e.api;
-    this.gridColumnApi = e.columnApi;
-  }
+    onGridReady(e: AgGridEvent): void {
+        this.gridApi = e.api;
 
-  onViewportChanged(e: AgGridEvent): void {
-    // for initial resizing of table
-    e.columnApi.autoSizeAllColumns();
-  }
+        // resizing columns in ag-grid table
+        this.gridColumnApi = e.columnApi;
+    }
 
-  showLoadingOverlay(): void {
-    this.gridApi.showLoadingOverlay();
-  }
+    onViewportChanged(e: AgGridEvent): void {
+        // for initial resizing of table
+        e.columnApi.autoSizeAllColumns();
+    }
 
-  autoSizeAllColumns(): void {
-    this.gridColumnApi.autoSizeAllColumns();
-  }
+    showLoadingOverlay(): void {
+        this.gridApi.showLoadingOverlay();
+    }
 }

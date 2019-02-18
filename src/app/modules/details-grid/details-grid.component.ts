@@ -72,11 +72,6 @@ export class DetailsGridComponent implements OnChanges {
             this._detailsGridPagination.page = this.detailsTableRequest.start + 1;
             this.currentPage = this._detailsGridPagination.page;
 
-            if (this._detailsGridTable) {
-                // resizing columns in ag-grid table
-                this._detailsGridTable.autoSizeAllColumns();
-            }
-
             // completing progress bar
             if (this._progressBar) {
 
