@@ -7,11 +7,11 @@ export const summaryPageAnimation = trigger('summaryPageAnimation', [
             stagger('200ms', animate('750ms ease-out', style('*')))
         ])
     ]),
+
     transition(':leave', [
         query('.child-component', [
             stagger('100ms', animate('750ms ease-out', style({
-                transform: 'translateX(-350px)',
-                opacity: 0
+                transform: 'translateX(-350px)', opacity: 0
             })))
         ])
     ])

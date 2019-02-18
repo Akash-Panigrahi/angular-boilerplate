@@ -36,13 +36,15 @@
        #detailsGrid>
     <div class="details-grid__length-search d-flex flex-wrap justify-content-center justify-content-sm-between">
       <div class="details-grid__length">
-        <app-details-grid-length [pageSizes]="pageSizes"
+        <app-details-grid-length class="child-component"
+                                 [pageSizes]="pageSizes"
                                  [initialPageSize]="this.detailsTableRequest.length"
                                  (lengthChangeEvent)="onLengthChange($event)">
         </app-details-grid-length>
       </div>
       <div class="details-grid__search mt-xs">
-        <app-details-grid-search [initialSearchValue]="this.detailsTableRequest.search"
+        <app-details-grid-search class="child-component"
+                                 [initialSearchValue]="this.detailsTableRequest.search"
                                  (searchChangeEvent)="onSearchChange($event)">
         </app-details-grid-search>
       </div>
@@ -50,7 +52,8 @@
 
     <br>
 
-    <app-details-grid-table #detailsGridTable
+    <app-details-grid-table class="child-component"
+                            #detailsGridTable
                             [detailsData]="detailsData">
     </app-details-grid-table>
 
@@ -58,13 +61,14 @@
 
     <div class="details-grid__info-pagination d-flex flex-wrap justify-content-center justify-content-sm-between align-items-center">
       <div class="details-grid__info">
-        <app-details-grid-info [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
+        <app-details-grid-info class="child-component"
+                               [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
                                [detailsInfoTo]="detailsInfo.to" [detailsInfoTotal]="detailsInfo.total"
                                [detailsInfoFilteredFrom]="detailsInfo.filteredFrom">
         </app-details-grid-info>
       </div>
       <div class="details-grid__pagination mt-xs">
-        <ngb-pagination class="d-flex justify-content-end"
+        <ngb-pagination class="child-component d-flex justify-content-end"
                         #detailsGridPagination
                         [collectionSize]="paginationCollectionSize"
                         [maxSize]="3"

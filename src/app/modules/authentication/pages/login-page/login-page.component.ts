@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
-import { loginPageAnimation, slideDown } from './login-page.animations';
+import { loginPageAnimation, errorSlideDown } from './login-page.animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginPageService } from './login-page.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +12,7 @@ import { ILoginData } from '../../interfaces/login.interfaces';
     styleUrls: ['./login-page.component.scss'],
     animations: [
         loginPageAnimation,
-        slideDown
+        errorSlideDown
     ],
     // using providers the scope of 'LoginPageService' is limited to this component class
     providers: [LoginPageService]
