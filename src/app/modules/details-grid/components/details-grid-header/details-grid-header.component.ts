@@ -3,6 +3,7 @@ import { IHeaderAngularComp } from 'ag-grid-angular';
 import { IHeaderParams } from 'ag-grid-community';
 import { Subscription } from 'rxjs';
 import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
+import { StateService } from 'src/app/core/services/state/state.service';
 
 @Component({
     selector: 'app-details-grid-header',
@@ -13,32 +14,49 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
 
     private _currentNoSortState$ = new Subscription();
 
-    params: any;
-    ascSort: any;
-    descSort: any;
-    noSort: any;
+    params: IHeaderParams;
+    ascSort: string;
+    descSort: string;
+    noSort: string;
 
-    // initial sorting direction
+    /**
+     * initial sorting direction
+     * if user is not logged in
+     */
     direction = 0;
 
     constructor(
-        private _changeToNoSortState: ChangeToNoSortStateService
+        private _changeToNoSortState: ChangeToNoSortStateService,
+        private _state: StateService
     ) { }
 
     ngOnInit() {
-        /*
-            listen to events for skipping the specified
-            header component
-            and reset all components to no sort state
-        */
+
+        const colId = this.params.column.colId;
+
+        /**
+         * listen to events for skipping the specified
+         * header component
+         * and reset all components to no sort state
+         */
         this._currentNoSortState$ = this._changeToNoSortState
             .currentNoSortState
             .subscribe(columnToSkip => {
-                if (this.params.column.colId !== columnToSkip) {
+                if (colId !== columnToSkip) {
                     this.direction = 0;
                     this.setdirection();
                 }
             });
+
+        /**
+         * to restore column ui state for sorting
+         */
+        const { key: sortKey, direction: sortDirection } = this._state.getState('details-table-request').sort;
+
+        if (sortKey === colId) {
+            this.direction = sortDirection;
+            this.setdirection();
+        }
     }
 
     agInit(params: IHeaderParams) {
@@ -71,10 +89,16 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
 
     onHeaderClick(target: HTMLElement, colId: string): void {
 
-        // change sort directions of all sibling header components to 0
+        /**
+         * change sort directions of all sibling header components to 0
+         * expect for the given colId
+         */
         this._changeToNoSortState.changeToNoSortState(colId);
 
-        // dispatch the custom click event with the specified data
+        /**
+         * dispatch the custom click event with the specified data
+         * observable can also be used
+         */
         target.dispatchEvent(
             new CustomEvent('detailsTableSortChangeEvent', {
                 detail: {
