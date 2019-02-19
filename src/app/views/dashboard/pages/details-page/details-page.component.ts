@@ -6,8 +6,8 @@ import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-stat
 import { StateService } from 'src/app/core/services/state/state.service';
 import { take, delay } from 'rxjs/operators';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
-import { DateTimeRange } from 'src/app/modules/dashboard/interfaces/date-time-range.interface';
-import { DetailsGridRequest, DetailsGridResponse } from 'src/app/modules/details-grid/interfaces/details-grid.interfaces';
+import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
+import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/details-grid/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-page',

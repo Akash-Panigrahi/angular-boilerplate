@@ -14,13 +14,16 @@ import { ILoginData } from '../../interfaces/login.interfaces';
         loginPageAnimation,
         errorSlideDown
     ],
-    // using providers the scope of 'LoginPageService' is limited to this component class
+    /**
+     * using 'providers' the scope of 'LoginPageService'
+     * is limited to this component class and it's descendents
+     */
     providers: [LoginPageService]
 })
 export class LoginPageComponent implements OnInit {
 
     // animation
-    @HostBinding('@loginPageAnimation') get pageAnimation() { return ''; }
+    @HostBinding('@loginPageAnimation') get loginPageAnimation() { return ''; }
 
     // password visibility toggling
     passwordVisibility = false;

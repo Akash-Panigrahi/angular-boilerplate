@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { StateService } from 'src/app/core/services/state/state.service';
-import { DateTimeRange } from 'src/app/modules/dashboard/interfaces/date-time-range.interface';
+import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
 
 declare const moment: any;
 

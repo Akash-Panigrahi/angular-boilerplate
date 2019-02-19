@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgProgressComponent } from '@ngx-progressbar/core';
-import { appRouterTransition } from './app-router.animations';
+import { appRoutingTransition } from './app-routing.animations';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { filter, map, mergeMap } from 'rxjs/operators';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [appRouterTransition]
+    animations: [appRoutingTransition]
 })
 export class AppComponent implements OnInit, AfterViewInit {
 

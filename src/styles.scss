@@ -5,6 +5,8 @@
 @import '~ag-grid-community/dist/styles/ag-theme-material.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700');
+
 :root {
     --smokey-black: #b7b7b7;
     // --grey-white: #f0f0f0;
@@ -14,7 +16,7 @@
 body {
     height: 100vh;
     max-width: 100vw;
-    font-family: Courier New, Helvetica, monospace;
+    font-family: 'Roboto Mono', Courier New, Helvetica, monospace;
     overflow-x: hidden;
 }
 

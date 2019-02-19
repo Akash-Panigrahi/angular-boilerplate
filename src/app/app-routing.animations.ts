@@ -2,12 +2,16 @@ import {
     sequence, trigger, animate, style, group, query, transition, animateChild
 } from '@angular/animations';
 
-export const appRouterTransition = trigger('appRouterTransition', [
+export const appRoutingTransition = trigger('appRoutingTransition', [
     transition('* => *', [
         query(':enter, :leave', style({
             position: 'fixed', width: '100%', height: '100%'
         }), { optional: true }),
-        query(':enter', style({ transform: 'translateX(100%)' }), { optional: true }),
+
+        query(':enter', style({
+            transform: 'translateX(100%)'
+        }), { optional: true }),
+
         sequence([
             query(':leave', animateChild(), { optional: true }),
             group([

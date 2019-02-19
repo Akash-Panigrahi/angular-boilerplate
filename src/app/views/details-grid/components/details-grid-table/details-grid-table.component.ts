@@ -3,7 +3,7 @@ import { GridApi, ColumnApi, ICellRendererParams, AgGridEvent } from 'ag-grid-co
 import { DetailsGridLoadingOverlayComponent } from '../details-grid-loading-overlay/details-grid-loading-overlay.component';
 import { DetailsGridNoRowsOverlayComponent } from '../details-grid-no-rows-overlay/details-grid-no-rows-overlay.component';
 import { DetailsGridHeaderComponent } from '../details-grid-header/details-grid-header.component';
-import { FormatTimeService } from 'src/app/modules/dashboard/services/format-time/format-time.service';
+import { FormatTimeService } from 'src/app/views/dashboard/services/format-time/format-time.service';
 import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
 import { DetailsTableData } from '../../interfaces/details-grid.interfaces';
 

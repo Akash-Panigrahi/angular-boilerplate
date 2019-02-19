@@ -11,7 +11,7 @@ const routes: Routes = [
             when specifiying lazy loaded module,
             supply module path and export class name after '#'
         */
-        loadChildren: './modules/authentication/authentication.module#AuthenticationModule',
+        loadChildren: './views/authentication/authentication.module#AuthenticationModule',
         // route can only be activated if user is not logged in
         /*
             if canActivate returns false, then next in line route will be checked which is '', hence will go to DashboardModule routes
@@ -20,7 +20,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule',
         // route can only be activated by logged in user
         canActivate: [NotLoggedInUserGuard]
     },
