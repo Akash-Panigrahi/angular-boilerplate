@@ -1,16 +1,16 @@
-export interface ILoginData {
+export interface LoginData {
     token: string;
     username: string;
     password: string;
 }
 
-export interface ILoginResponse {
+export interface LoginResponse {
     status: number;
-    data: ILoginData;
+    data: LoginData;
     message: string;
 }
 
-export interface ILoginRequest {
+export interface LoginRequest {
     username: string;
     password: string;
 }

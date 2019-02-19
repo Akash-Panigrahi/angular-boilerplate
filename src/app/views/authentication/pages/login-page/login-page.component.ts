@@ -4,7 +4,7 @@ import { loginPageAnimation, errorSlideDown } from './login-page.animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginPageService } from './login-page.service';
 import { ToastrService } from 'ngx-toastr';
-import { ILoginData } from '../../interfaces/login.interfaces';
+import { LoginData } from '../../interfaces/login.interfaces';
 
 @Component({
     selector: 'app-login-page',
@@ -69,7 +69,7 @@ export class LoginPageComponent implements OnInit {
         this._loginPageService
             .login(this.loginForm.value)
             .subscribe(
-                (res: ILoginData) => {
+                (res: LoginData) => {
 
                     this._toastr.success(`${res.username} logged in successfully!`);
                     this._router.navigateByUrl('/summary');

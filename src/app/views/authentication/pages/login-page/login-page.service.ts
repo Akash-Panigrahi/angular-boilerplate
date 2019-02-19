@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError, take } from 'rxjs/operators';
 import { StateService } from 'src/app/core/services/state/state.service';
-import { ILoginResponse, ILoginData } from '../../interfaces/login.interfaces';
+import { LoginResponse, LoginData } from '../../interfaces/login.interfaces';
 
 @Injectable()
 export class LoginPageService {
@@ -13,7 +13,7 @@ export class LoginPageService {
         private _state: StateService
     ) { }
 
-    login(data): Observable<ILoginData> {
+    login(data): Observable<LoginData> {
         return this._api.post('/login', data)
             /*
                 Just take one value from the stream.
@@ -22,7 +22,7 @@ export class LoginPageService {
             */
             .pipe(take(1))
             .pipe(
-                map((res: ILoginResponse) => {
+                map((res: LoginResponse) => {
                     if (res.status === 200) {
                         this._state.setState('user', res.data);
                         return res.data;

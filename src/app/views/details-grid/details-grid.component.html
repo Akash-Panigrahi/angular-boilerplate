@@ -23,7 +23,7 @@
       <button class="download-details__button"
               rippleOnClick
               [disabled]="!detailsData?.length"
-              (click)="downloadDetailsEvent.emit(detailsTableRequest)">
+              (click)="downloadDetailsEvent.emit(detailsGridRequest)">
         <span>Download Details</span>
         <i class="material-icons">arrow_downward</i>
       </button>
@@ -38,13 +38,13 @@
       <div class="details-grid__length">
         <app-details-grid-length class="child-component"
                                  [pageSizes]="pageSizes"
-                                 [initialPageSize]="this.detailsTableRequest.length"
+                                 [initialPageSize]="this.detailsGridRequest.length"
                                  (lengthChangeEvent)="onLengthChange($event)">
         </app-details-grid-length>
       </div>
       <div class="details-grid__search mt-xs">
         <app-details-grid-search class="child-component"
-                                 [initialSearchValue]="this.detailsTableRequest.search"
+                                 [initialSearchValue]="this.detailsGridRequest.search"
                                  (searchChangeEvent)="onSearchChange($event)">
         </app-details-grid-search>
       </div>

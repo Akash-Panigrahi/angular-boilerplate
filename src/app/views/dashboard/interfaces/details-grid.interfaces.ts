@@ -10,7 +10,7 @@ export interface DetailsTableData {
     time: string;
 }
 
-export interface DetailsTableInfo {
+export interface DetailsGridInfo {
     from: number;
     to: number;
     total: number;
@@ -26,7 +26,7 @@ export interface DetailsGridRequest {
 
 export interface DetailsGridResponse {
     data: DetailsTableData[];
-    info: DetailsTableInfo;
+    info: DetailsGridInfo;
 }
 
 export interface DetailsTableSortEvent {

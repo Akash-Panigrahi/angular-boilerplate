@@ -5,7 +5,7 @@ import { DetailsGridNoRowsOverlayComponent } from '../details-grid-no-rows-overl
 import { DetailsGridHeaderComponent } from '../details-grid-header/details-grid-header.component';
 import { FormatTimeService } from 'src/app/views/dashboard/services/format-time/format-time.service';
 import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
-import { DetailsTableData } from '../../interfaces/details-grid.interfaces';
+import { DetailsTableData } from '../../../dashboard/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-grid-table',

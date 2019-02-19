@@ -34,6 +34,10 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private _applyDateRangePicker = (ev, picker) => {
         // everytime new date range is selected
 
+        if (this._isOldDateRange(picker)) {
+            return false;
+        }
+
         const start = picker.startDate;
         const end = picker.endDate;
 
@@ -113,9 +117,6 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this._setDateTimeRangeInState(start, end);
         this._updateDateRangePicker(start, end);
-
-        // setting progress bar configurations
-        this._progressBar.color = 'red';
     }
 
     private _updateDateRangePicker(start, end) {
@@ -151,6 +152,15 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     isCalendarOpen() {
         // triggering animation by changing state
         this.isOpen = !this.isOpen;
+    }
+
+    private _isOldDateRange(picker): boolean {
+        const { oldStartDate, oldEndDate, startDate, endDate } = picker;
+
+        return moment(oldStartDate).isSame(startDate) && moment(oldEndDate).isSame(endDate)
+            ? true
+            : false
+            ;
     }
 
     ngOnDestroy() {

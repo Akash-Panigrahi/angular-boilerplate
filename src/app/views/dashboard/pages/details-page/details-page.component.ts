@@ -7,7 +7,7 @@ import { StateService } from 'src/app/core/services/state/state.service';
 import { take, delay } from 'rxjs/operators';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
-import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/details-grid/interfaces/details-grid.interfaces';
+import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-page',
@@ -21,9 +21,11 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     @HostBinding('@detailsPageAnimation') detailsPageAnimation = true;
 
     details: DetailsGridResponse[];
+    detailsGridRequest: DetailsGridRequest;
+
     currentDateTimeRange$ = new Subscription();
 
-    detailsTableRequest = {
+    initialDetailsGridRequest = {
         start: 0,
         length: 5,
         search: '',
@@ -42,27 +44,31 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-        const detailsTableRequestFromState = this._state.getState('details-table-request');
+        const detailsGridRequestFromState = this._state.getState('details-table-request');
         /**
          * if user in session
          * i.e., there is data in storage
          */
-        if (!detailsTableRequestFromState) {
-            // initial state saving
-            this._state.setState('details-table-request', this.detailsTableRequest);
+        if (detailsGridRequestFromState) {
+            this.detailsGridRequest = detailsGridRequestFromState;
         } else {
-            this.detailsTableRequest = detailsTableRequestFromState;
+            // initial state saving
+            this._state.setState('details-table-request', this.initialDetailsGridRequest);
+            this.detailsGridRequest = this.initialDetailsGridRequest;
         }
 
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange()
             .subscribe((dateTimeRange: DateTimeRange) => {
-                this._getDetails(dateTimeRange, this._state.getState('details-table-request'));
+                this._state.setState('details-table-request', this.initialDetailsGridRequest);
+                this._getDetails(dateTimeRange, this.initialDetailsGridRequest);
             });
     }
 
-    private _getDetails(dateTimeRange: DateTimeRange, detailsTableRequest: DetailsGridRequest): void {
+    private _getDetails(
+        dateTimeRange: DateTimeRange,
+        detailsGridRequest: DetailsGridRequest): void {
 
-        const detailsRequest = { ...dateTimeRange, ...detailsTableRequest };
+        const detailsRequest = { ...dateTimeRange, ...detailsGridRequest };
 
         this._detailsPageService
             .getDetails(detailsRequest)
@@ -76,22 +82,24 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             );
     }
 
-    onDetailsTableRequest(detailsTableRequest: DetailsGridRequest): void {
+    onDetailsGridRequest(
+        detailsGridRequest: DetailsGridRequest): void {
 
         // save state
-        this._state.setState('details-table-request', detailsTableRequest);
+        this._state.setState('details-table-request', detailsGridRequest);
 
         this._dateTimeRangeService.currentDateTimeRange()
             .pipe(take(1))
             .subscribe((dateTimeRange: DateTimeRange) => {
-                this._getDetails(dateTimeRange, detailsTableRequest);
+                this._getDetails(dateTimeRange, detailsGridRequest);
             });
     }
 
-    onDownloadDetails(detailsTableRequest: DetailsGridRequest): void {
+    onDownloadDetails(
+        detailsGridRequest: DetailsGridRequest): void {
 
         const { startDate, startTime, endDate, endTime } = this._state.getState('date-time-range');
-        const { start, length, search, sort } = detailsTableRequest;
+        const { start, length, search, sort } = detailsGridRequest;
 
         /* to disable max 140 characters for a line rule */
         // tslint:disable-next-line
