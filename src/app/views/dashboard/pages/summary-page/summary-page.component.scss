@@ -1,0 +1,32 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+
+    @include media-breakpoint-down(xs) {
+        grid-template-columns: 1fr;
+        // grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+.kpi {
+    margin-bottom: 2rem;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-gap: 2rem;
+
+    @include media-breakpoint-down(sm) {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+.child-component {
+    border-radius: 5px;
+    box-shadow: 0 0 5px -1px rgb(100, 100, 100);
+}

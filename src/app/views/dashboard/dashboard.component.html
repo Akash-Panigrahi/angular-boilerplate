@@ -1,0 +1,15 @@
+<app-header class="app-header"></app-header>
+
+<app-action-bar class="app-action-bar"></app-action-bar>
+
+<br>
+
+<section class="app-section flex-grow-1"
+         [@dashboardRoutingAnimation]="o.isActivated ? o.activatedRoute : ''">
+    <router-outlet #o="outlet">
+    </router-outlet>
+</section>
+
+<br>
+
+<app-footer class="app-footer"></app-footer>

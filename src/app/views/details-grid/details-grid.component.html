@@ -1,0 +1,85 @@
+<div class="getting-details"
+     *ngIf="showGettingDetailsLoader"
+     @gettingDetailsLoader
+     (@gettingDetailsLoader.done)="onGettingDetailsLoader($event)">
+  <h3>Getting Details List</h3>
+  <h6>Please Wait...</h6>
+  <div class="getting-details__progress-bar">
+    <ng-progress id="getting-details__progress-bar"
+                 #gettingDetailsBar
+                 fixed="false"
+                 spinner="false"
+                 color="red"
+                 (completed)="onGettingDetailsProgressBarComplete()">
+    </ng-progress>
+  </div>
+</div>
+
+<div class="grid__wrapper"
+     [@initialTableReady]="initialTableReady">
+  <div class="details-list">
+    <h1 class="details-list__text">Details List</h1>
+    <div class="download-details mt-xs ml-auto">
+      <button class="download-details__button"
+              rippleOnClick
+              [disabled]="!detailsData?.length"
+              (click)="downloadDetailsEvent.emit(detailsTableRequest)">
+        <span>Download Details</span>
+        <i class="material-icons">arrow_downward</i>
+      </button>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="details-grid"
+       #detailsGrid>
+    <div class="details-grid__length-search d-flex flex-wrap justify-content-center justify-content-sm-between">
+      <div class="details-grid__length">
+        <app-details-grid-length class="child-component"
+                                 [pageSizes]="pageSizes"
+                                 [initialPageSize]="this.detailsTableRequest.length"
+                                 (lengthChangeEvent)="onLengthChange($event)">
+        </app-details-grid-length>
+      </div>
+      <div class="details-grid__search mt-xs">
+        <app-details-grid-search class="child-component"
+                                 [initialSearchValue]="this.detailsTableRequest.search"
+                                 (searchChangeEvent)="onSearchChange($event)">
+        </app-details-grid-search>
+      </div>
+    </div>
+
+    <br>
+
+    <app-details-grid-table class="child-component"
+                            #detailsGridTable
+                            [detailsData]="detailsData">
+    </app-details-grid-table>
+
+    <br>
+
+    <div class="details-grid__info-pagination d-flex flex-wrap justify-content-center justify-content-sm-between align-items-center">
+      <div class="details-grid__info">
+        <app-details-grid-info class="child-component"
+                               [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
+                               [detailsInfoTo]="detailsInfo.to" [detailsInfoTotal]="detailsInfo.total"
+                               [detailsInfoFilteredFrom]="detailsInfo.filteredFrom">
+        </app-details-grid-info>
+      </div>
+      <div class="details-grid__pagination mt-xs">
+        <ngb-pagination class="child-component d-flex justify-content-end"
+                        #detailsGridPagination
+                        [collectionSize]="paginationCollectionSize"
+                        [maxSize]="3"
+                        [rotate]="true"
+                        [ellipses]="true"
+                        [boundaryLinks]="true"
+                        appCustomNgbPagination
+                        [currentPage]="currentPage"
+                        (customPageChangeEvent)="onPageChange($event)">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

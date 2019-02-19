@@ -1,0 +1,68 @@
+:host {
+    z-index: 2;
+    background-color: var(--grey-white);
+}
+
+.action-bar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.datetimerangepicker {
+    --picker-blue: #1a73e8;
+    background: lighten(#1a73e8, 5%);
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid var(--primary);
+    border-radius: 2px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: inset 0 -15px 10px var(--picker-blue);
+    transition: all 0.1s ease-out;
+
+    &:hover,
+    &:focus {
+        box-shadow: inset 0 15px 10px var(--picker-blue);
+    }
+
+    .calendar-icon {
+        width: 24px;
+        height: 24px;
+        position: relative;
+
+        i {
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    span {
+        flex: 1;
+    }
+}
+
+.last-updated {
+    margin: 1rem 0 0 1rem;
+    flex-grow: 1;
+    text-align: right;
+
+    h5 {
+        margin-bottom: 0;
+    }
+
+    span {
+        text-emphasis: shadow;
+    }
+}
+
+.getting-data__progress-bar {
+    >ng-progress {
+        z-index: 1;
+    }
+}

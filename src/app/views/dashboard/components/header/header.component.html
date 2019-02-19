@@ -1,0 +1,26 @@
+<header class="main-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <a class="navbar-brand text-white" routerLink="/summary">Angular 7 Dashboard</a>
+        <button class="navbar-toggler hidden-md-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+            <ul class="navbar-nav ml-auto">
+                <!-- Looping navigation object using *ngFor -->
+                <li class="nav-item" routerLinkActive="active" *ngFor="let navItem of navItems">
+                    <a class="nav-link" [routerLink]="navItem.url" routerLinkActive="active" (click)="isNavbarCollapsed = !isNavbarCollapsed">{{ navItem.name }}</a>
+                </li>
+            </ul>
+            <span class="one-space">&nbsp;</span>
+            <span class="divider"></span>
+            <span class="one-space">&nbsp;</span>
+            <a class="nav-link text-white logout-link" (click)="logout()">
+                Logout&nbsp;
+                <span>
+                    &rarr;
+                </span>
+            </a>
+        </div>
+    </nav>
+</header>

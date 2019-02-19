@@ -1,0 +1,15 @@
+<span>Show</span>
+&nbsp;
+
+<ng-select
+    class="details-table-length"
+    [items]="pageSizes"
+    [(ngModel)]="initialPageSize"
+    [clearable]="false"
+    [clearOnBackspace]="false"
+    [searchable]="false"
+    (change)="lengthChangeEvent.emit($event)"
+></ng-select>
+
+&nbsp;
+<span>Records</span>

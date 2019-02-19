@@ -1,0 +1,12 @@
+<ag-grid-angular class="ag-theme-material"
+                 [rowData]="detailsData"
+                 [animateRows]="true"
+                 [defaultColDef]="defaultColDef"
+                 [columnDefs]="columnDefs"
+                 [suppressMovableColumns]="true"
+                 [frameworkComponents]="frameworkComponents"
+                 [loadingOverlayComponent]="loadingOverlayComponent"
+                 [noRowsOverlayComponent]="noRowsOverlayComponent"
+                 (gridReady)="onGridReady($event)"
+                 (viewportChanged)="onViewportChanged($event)">
+</ag-grid-angular>

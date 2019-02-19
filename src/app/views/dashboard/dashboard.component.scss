@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    background-color: var(--grey-white);
+}
+
+section {
+    z-index: 1;
+}

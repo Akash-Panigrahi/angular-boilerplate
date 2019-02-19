@@ -1,0 +1,28 @@
+<div class="ag-header-cell-label"
+    (click)="onHeaderClick($event.target, params.column.colId)"
+>
+    <div class="ag-header-cell-text">
+        {{ params.displayName }}
+    </div>
+    <div
+        *ngIf="params.enableSorting"
+        [ngClass]="ascSort"
+        class="ag-header-icon ag-sort-ascending-icon"
+    >
+        <span class="ag-icon ag-icon-asc"></span>
+    </div>
+    <div
+        *ngIf="params.enableSorting"
+        [ngClass]="descSort"
+        class="ag-header-icon ag-sort-descending-icon"
+    >
+        <span class="ag-icon ag-icon-desc"></span>
+    </div>
+    <div
+        *ngIf="params.enableSorting"
+        [ngClass]="noSort"
+        class="ag-header-icon ag-sort-none-icon ag-hidden"
+    >
+        <span class="ag-icon ag-icon-none"></span>
+    </div>
+</div>

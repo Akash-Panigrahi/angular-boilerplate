@@ -1,16 +1,26 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~daterangepicker/daterangepicker.css';
+@import '~ngx-toastr/toastr-bs4-alert';
+@import '~ag-grid-community/dist/styles/ag-grid.css';
+@import '~ag-grid-community/dist/styles/ag-theme-material.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700');
 
 :root {
     --smokey-black: #b7b7b7;
+    // --grey-white: #f0f0f0;
+    --grey-white: #fff;
 }
 
 body {
     height: 100vh;
     max-width: 100vw;
-    font-family: Courier New, Helvetica, monospace;
-    --webkit-autofill-color: var(--smokey-black);
+    font-family: 'Roboto Mono', Courier New, Helvetica, monospace;
+    overflow-x: hidden;
 }
 
+// css for overriding yellowing of text fields on autocomplete of chrome browser
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus textarea:-webkit-autofill,
@@ -34,13 +44,19 @@ select:-internal-autofill-selected {
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(assets/fonts/MaterialIcons-Regular.eot);
+    /*
+        Using absolute paths to stop duplicating of font files when building app.
+        If not, then ng build will duplicate font files with unique postfix everytime,
+        update the urls with the new file paths, and create those new files in
+        root folder, hence rendering font files in 'assets' folder useless.
+    */
+    src: url(/assets/fonts/MaterialIcons-Regular.eot);
     /* For IE6-8 */
     src: local('Material Icons'),
         local('MaterialIcons-Regular'),
-        url(assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
-        url(assets/fonts/MaterialIcons-Regular.woff) format('woff'),
-        url(assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        url(/assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+        url(/assets/fonts/MaterialIcons-Regular.woff) format('woff'),
+        url(/assets/fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 .material-icons {
@@ -67,4 +83,238 @@ select:-internal-autofill-selected {
 
     /* Support for IE. */
     font-feature-settings: 'liga';
+}
+
+.bg-grey-white {
+    background-color: var(--grey-white);
+}
+
+
+/* customzing date-time-range picker style */
+.daterangepicker {
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
+
+    .ranges {
+        background-color: #f5f5f5;
+        padding-right: 10px;
+
+        li {
+            font-size: inherit;
+            padding: 10px 0 10px 16px;
+            letter-spacing: 0.25px;
+            text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
+
+            &:hover,
+            &:focus {
+                border-radius: 0 100px 100px 0;
+                color: #1a73e8;
+            }
+
+            &.active {
+                border-radius: 0 100px 100px 0;
+                background-color: #1a73e8;
+                color: white;
+                box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
+            }
+        }
+    }
+
+    &.show-calendar {
+
+        .ranges {
+            margin-top: 0;
+        }
+    }
+
+    .drp-calendar {
+        background: white;
+
+        &.left {
+            padding: 5px;
+            margin: 6px 3px 6px 6px !important;
+        }
+
+        &.right {
+            padding: 5px;
+            margin: 6px 6px 6px 3px !important;
+        }
+    }
+
+    .drp-buttons {
+        background-color: white;
+
+        .drp-selected {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: #111111;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            font-size: 1rem;
+            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
+            border-radius: 2px;
+
+            &:active {
+                box-shadow: none;
+            }
+        }
+    }
+
+    select {
+
+        &.monthselect,
+        &.yearselect,
+        &.hourselect,
+        &.minuteselect,
+        &.ampmselect {
+            background-color: #eeeeee;
+            border: 1px solid #eeeeee;
+            padding: 5px;
+            color: #303030;
+            font-size: 14px;
+            width: auto;
+        }
+    }
+
+    .calendar-table {
+        padding: 0 !important;
+
+        table {
+            border-collapse: separate;
+            border-spacing: 1px;
+        }
+
+        td,
+        th {
+            padding: 5px;
+            font-size: 15px;
+            border: 0;
+        }
+    }
+}
+
+
+/* effects */
+.ripple-element {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.ink {
+    display: block;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    transform: scale(0);
+}
+
+.animate {
+    animation: ripple 0.65s linear;
+}
+
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+
+
+/* customizing ag-grid style */
+.ag-theme-material {
+    font-size: 1rem;
+
+    .ag-header {
+        font-size: 1rem;
+        border-bottom: 0;
+    }
+
+    .ag-header-cell-label {
+        width: 100%;
+
+        .ag-header-icon {
+            margin-left: auto;
+        }
+    }
+
+    .ag-header-cell,
+    .ag-header-group-cell {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .ag-cell {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .ag-overlay {
+        pointer-events: all;
+    }
+
+    .ag-overlay-panel {
+        display: flex;
+    }
+
+    .ag-overlay-no-rows-wrapper,
+    .ag-overlay-loading-wrapper {
+        flex: 1;
+        display: flex;
+    }
+
+    .ag-overlay-loading-wrapper {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .ag-header-container {
+        border-bottom: 1px solid rgba(0,0,0,0.3);
+        margin: auto;
+    }
+
+    .ag-center-cols-container {
+        margin: auto;
+    }
+}
+
+
+/* customizing ngb-pagination style */
+.pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 0;
+
+    .page-item {
+
+        &:first-child .page-link {
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        &:last-child .page-link {
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        &.active .page-link {
+            z-index: initial;
+        }
+    }
+}
+
+/* customizing ng=select details-table-length style */
+.ng-select.details-table-length {
+    min-width: 4rem;
+
+    .ng-select-container {
+        border-radius: 17px;
+    }
+
+    .ng-arrow-wrapper {
+        padding-left: 10px;
+    }
 }

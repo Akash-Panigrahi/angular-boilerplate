@@ -1,0 +1,122 @@
+:host {
+    all: inherit;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-wrapper {
+    --circle-width: 3px;
+    --circle-boundary: 30px;
+    --loader-bg: white;
+
+    padding: 0.8rem;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.3);
+    display: inline-flex;
+    align-items: center;
+}
+
+.loader-wrapper {
+    position: relative;
+    width: var(--circle-boundary);
+    height: var(--circle-boundary);
+    margin-right: 0.8rem;
+}
+
+.loader {
+    position: absolute;
+    width: var(--circle-boundary);
+    height: var(--circle-boundary);
+    margin: auto;
+    animation: spin 4s linear infinite;
+
+    &:before,
+    &:after {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        border: var(--circle-width) solid var(--loader-bg);
+    }
+
+    &:before {
+        border-bottom: var(--circle-width) solid orange;
+        border-left: var(--circle-width) solid orange;
+        animation: spin1 1s linear infinite;
+    }
+
+    &:after {
+        border-top: var(--circle-width) solid transparent;
+        border-right: var(--circle-width) solid transparent;
+        animation: spin2 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes spin1 {
+    20% {
+        transform: rotate(150deg);
+    }
+
+    40% {
+        transform: rotate(300deg);
+    }
+
+    80% {
+        transform: rotate(300deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin2 {
+    0% {
+        transform: rotate(-30deg);
+    }
+
+    20% {
+        transform: rotate(-30deg);
+        border-color: transparent transparent var(--loader-bg) var(--loader-bg);
+    }
+
+    21% {
+        border-color: orange orange transparent transparent;
+    }
+
+    40% {
+        transform: rotate(-30deg);
+    }
+
+    60% {
+        transform: rotate(120deg);
+        border-color: orange orange transparent transparent;
+    }
+
+    61% {
+        border-color: transparent transparent var(--loader-bg) var(--loader-bg);
+    }
+
+    80% {
+        transform: rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(330deg);
+    }
+}
+
+.processing {
+    text-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
