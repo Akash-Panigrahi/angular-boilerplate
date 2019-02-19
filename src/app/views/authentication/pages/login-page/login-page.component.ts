@@ -28,6 +28,7 @@ export class LoginPageComponent implements OnInit {
     // password visibility toggling
     passwordVisibility = false;
     passwordFieldType = 'password';
+    loggingIn = false;
 
     // creating form using formbuilder
     loginForm = this._formBuilder.group({
@@ -66,6 +67,8 @@ export class LoginPageComponent implements OnInit {
     }
 
     onSubmit() {
+        this.loggingIn = true;
+
         this._loginPageService
             .login(this.loginForm.value)
             .subscribe(
@@ -79,6 +82,8 @@ export class LoginPageComponent implements OnInit {
                         any error thrown from the observable will be catch by this
                         error observer
                     */
+
+                    this.loggingIn = false;
 
                     this._toastr.error(err.message);
                 }

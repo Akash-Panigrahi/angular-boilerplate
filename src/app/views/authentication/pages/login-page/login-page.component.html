@@ -76,8 +76,8 @@
             <button class="btn"
                     type="submit"
                     rippleOnClick
-                    [disabled]="loginForm.invalid">
-                Log In
+                    [disabled]="loginForm.invalid || loggingIn">
+                {{ loggingIn ? 'Logging In...' : 'Log In' }}
             </button>
         </div>
     </form>
