@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import { authenticationAnimation } from './authentication.animations';
 
 @Component({
-  selector: 'app-authentication',
-  templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.scss']
+    selector: 'app-authentication',
+    templateUrl: './authentication.component.html',
+    styleUrls: ['./authentication.component.scss'],
+    animations: [authenticationAnimation]
 })
-export class AuthenticationComponent implements OnInit {
+export class AuthenticationComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    @HostBinding('@authenticationAnimation')
+    private _authenticationAnimation = true;
 }

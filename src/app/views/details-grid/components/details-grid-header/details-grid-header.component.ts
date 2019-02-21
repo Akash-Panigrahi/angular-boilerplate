@@ -8,10 +8,10 @@ import { StateService } from 'src/app/core/services/state/state.service';
 @Component({
     selector: 'app-details-grid-header',
     templateUrl: './details-grid-header.component.html',
-    styleUrls: ['./details-grid-header.component.scss'],
+    styleUrls: ['./details-grid-header.component.scss']
 })
-export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDestroy {
-
+export class DetailsGridHeaderComponent
+    implements IHeaderAngularComp, OnInit, OnDestroy {
     private _currentNoSortState$ = new Subscription();
 
     params: IHeaderParams;
@@ -51,7 +51,7 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
         /**
          * to restore column ui state for sorting
          */
-        const { key: sortKey, direction: sortDirection } = this._state.getState('details-table-request').sort;
+        const { key: sortKey, direction: sortDirection } = this._state.get('details-grid-request').sort;
 
         if (sortKey === colId) {
             this.direction = sortDirection;

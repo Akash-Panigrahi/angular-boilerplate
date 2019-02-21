@@ -10,7 +10,8 @@ import { pageNotFoundAnimation } from './page-not-found.animations';
 export class PageNotFoundComponent {
 
     // animation
-    @HostBinding('@pageNotFoundAnimation') get pageNotFoundAnimation() { return ''; }
+    @HostBinding('@pageNotFoundAnimation')
+    private _pageNotFoundAnimation = true;
 
     constructor() {}
 }

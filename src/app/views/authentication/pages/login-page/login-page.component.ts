@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginPageAnimation, errorSlideDown } from './login-page.animations';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -10,10 +10,7 @@ import { LoginData } from '../../interfaces/login.interfaces';
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
     styleUrls: ['./login-page.component.scss'],
-    animations: [
-        loginPageAnimation,
-        errorSlideDown
-    ],
+    animations: [loginPageAnimation, errorSlideDown],
     /**
      * using 'providers' the scope of 'LoginPageService'
      * is limited to this component class and it's descendents
@@ -21,9 +18,9 @@ import { LoginData } from '../../interfaces/login.interfaces';
     providers: [LoginPageService]
 })
 export class LoginPageComponent implements OnInit {
-
     // animation
-    @HostBinding('@loginPageAnimation') get loginPageAnimation() { return ''; }
+    @HostBinding('@loginPageAnimation')
+    private _loginPageAnimation = true;
 
     // password visibility toggling
     passwordVisibility = false;
@@ -32,16 +29,14 @@ export class LoginPageComponent implements OnInit {
 
     // creating form using formbuilder
     loginForm = this._formBuilder.group({
-        username: ['skyfleet', [
-            Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(32)
-        ]],
-        password: ['skysvibe', [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(128)
-        ]]
+        username: [
+            'skyfleet',
+            [Validators.required, Validators.minLength(5), Validators.maxLength(32)]
+        ],
+        password: [
+            'skysvibe',
+            [Validators.required, Validators.minLength(8), Validators.maxLength(128)]
+        ]
     });
 
     /*
@@ -49,17 +44,21 @@ export class LoginPageComponent implements OnInit {
         otherwise, one had to use loginForm.get('username') in the template
         to reference the field model
     */
-    get username() { return this.loginForm.get('username'); }
-    get password() { return this.loginForm.get('password'); }
+    get username() {
+        return this.loginForm.get('username');
+    }
+    get password() {
+        return this.loginForm.get('password');
+    }
 
     constructor(
         private _router: Router,
         private _formBuilder: FormBuilder,
         private _loginPageService: LoginPageService,
         private _toastr: ToastrService
-    ) { }
+    ) {}
 
-    ngOnInit() { }
+    ngOnInit() {}
 
     togglePasswordVisibility() {
         this.passwordVisibility = !this.passwordVisibility;
@@ -69,24 +68,21 @@ export class LoginPageComponent implements OnInit {
     onSubmit() {
         this.loggingIn = true;
 
-        this._loginPageService
-            .login(this.loginForm.value)
-            .subscribe(
-                (res: LoginData) => {
-
-                    this._toastr.success(`${res.username} logged in successfully!`);
-                    this._router.navigateByUrl('/summary');
-                },
-                (err: Error) => {
-                    /*
+        this._loginPageService.login(this.loginForm.value).subscribe(
+            (res: LoginData) => {
+                this._toastr.success(`${res.username} logged in successfully!`);
+                this._router.navigateByUrl('/summary');
+            },
+            (err: Error) => {
+                /*
                         any error thrown from the observable will be catch by this
                         error observer
                     */
 
-                    this.loggingIn = false;
+                this.loggingIn = false;
 
-                    this._toastr.error(err.message);
-                }
-            );
+                this._toastr.error(err.message);
+            }
+        );
     }
 }

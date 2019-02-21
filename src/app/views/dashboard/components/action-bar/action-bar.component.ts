@@ -1,6 +1,4 @@
-import {
-    Component, OnInit, AfterViewInit, ViewChild, OnDestroy
-} from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { slideDown } from './action-bar.animations';
 import { StateService } from 'src/app/core/services/state/state.service';
 import { NgProgressComponent } from '@ngx-progressbar/core';
@@ -19,7 +17,6 @@ declare const moment: any;
     animations: [slideDown]
 })
 export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
-
     // getting a reference to the progress bar in the html file
     @ViewChild('gettingDataBar') private _progressBar: NgProgressComponent;
 
@@ -41,7 +38,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         const start = picker.startDate;
         const end = picker.endDate;
 
-        // save save in state
+        // save in state
         this._setDateTimeRangeInState(start, end);
 
         // updating the value
@@ -50,24 +47,23 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         this._actionBarUIState.changeGettingDataBar('start');
 
         // pass new value in the stream
-        this._dateTimeRangeService.changeDateTimeRange(this._state.getState('date-time-range'));
+        this._dateTimeRangeService.changeDateTimeRange(this._state.get('date-time-range'));
 
-        this.currentGettingDataBar$ = this._actionBarUIState.currentGettingDataBar
-            .subscribe(state => this._progressBar[state]());
+        this.currentGettingDataBar$ = this._actionBarUIState.currentGettingDataBar.subscribe(
+            state => this._progressBar[state]()
+        );
     }
 
     constructor(
         private _dateTimeRangeService: DateTimeRangeService,
         private _state: StateService,
         private _actionBarUIState: ActionBarUIState
-    ) { }
+    ) {}
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     ngAfterViewInit() {
-
-        const dateTimeRange = this._state.getState('date-time-range');
+        const dateTimeRange = this._state.get('date-time-range');
         let start, end;
 
         if (!dateTimeRange) {
@@ -78,40 +74,43 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
             end = this._setMoment(dateTimeRange.endDate, dateTimeRange.endTime);
         }
 
-        $('#reportrange').daterangepicker({
-            timePicker: true,
-            showDropdowns: true,
-            startDate: start,
-            endDate: end,
-            locale: {
-                format: 'DD/M/YYYY hh:mm:ss A'
+        $('#reportrange').daterangepicker(
+            {
+                timePicker: true,
+                showDropdowns: true,
+                startDate: start,
+                endDate: end,
+                locale: {
+                    format: 'DD/MM/YYYY h:mm:ss A'
+                },
+                maxDate: new Date(),
+                parentEl: '.action-bar',
+                ranges: {
+                    Today: [moment(), moment()],
+                    Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [
+                        moment()
+                            .subtract(1, 'month')
+                            .startOf('month'),
+                        moment()
+                            .subtract(1, 'month')
+                            .endOf('month')
+                    ],
+                    'Last Year': [
+                        moment()
+                            .subtract(1, 'year')
+                            .startOf('year'),
+                        moment()
+                            .subtract(1, 'year')
+                            .endOf('year')
+                    ]
+                }
             },
-            maxDate: new Date(),
-            parentEl: '.action-bar',
-            ranges: {
-                'Today': [
-                    moment(), moment()
-                ],
-                'Yesterday': [
-                    moment().subtract(1, 'days'), moment().subtract(1, 'days')
-                ],
-                'Last 7 Days': [
-                    moment().subtract(6, 'days'), moment()
-                ],
-                'Last 30 Days': [
-                    moment().subtract(29, 'days'), moment()
-                ],
-                'This Month': [
-                    moment().startOf('month'), moment().endOf('month')
-                ],
-                'Last Month': [
-                    moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
-                ],
-                'Last Year': [
-                    moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')
-                ]
-            }
-        }, this._updateDateRangePicker);
+            this._updateDateRangePicker
+        );
 
         $('#reportrange').on('apply.daterangepicker', this._applyDateRangePicker);
 
@@ -120,12 +119,14 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private _updateDateRangePicker(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        $('#reportrange span').html(
+            start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY')
+        );
     }
 
     private _setMoment(date, time) {
         date = moment(date);
-        time = moment(time, 'HH:mm');
+        time = moment(time, 'h:mm:ss');
 
         date.set({
             hour: time.get('hour'),
@@ -137,7 +138,6 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private _setDateTimeRangeInState(start, end) {
-
         const dateTimeRange = {
             startDate: start.format('YYYY-MM-DD'),
             endDate: end.format('YYYY-MM-DD'),
@@ -146,7 +146,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         };
 
         // save datetimerange in state
-        this._state.setState('date-time-range', dateTimeRange);
+        this._state.set('date-time-range', dateTimeRange);
     }
 
     isCalendarOpen() {
@@ -157,10 +157,14 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private _isOldDateRange(picker): boolean {
         const { oldStartDate, oldEndDate, startDate, endDate } = picker;
 
-        return moment(oldStartDate).isSame(startDate) && moment(oldEndDate).isSame(endDate)
-            ? true
-            : false
-            ;
+        if (
+            oldStartDate.format('YYYY-MM-DD H:mm:ss') === startDate.format('YYYY-MM-DD H:mm:ss') &&
+            oldEndDate.format('YYYY-MM-DD H:mm:ss') === endDate.format('YYYY-MM-DD H:mm:ss')
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     ngOnDestroy() {

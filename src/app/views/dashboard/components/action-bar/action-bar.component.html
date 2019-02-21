@@ -6,7 +6,7 @@
                  [spinner]="false">
     </ng-progress>
 </div>
-<br>
+<div class="line-separator"></div>
 <div class="container-fluid action-bar"
      [@slideDown]="isOpen ? 'open' : 'close'">
     <div id="reportrange"
@@ -22,6 +22,6 @@
         <i class="material-icons">arrow_drop_down</i>
     </div>
     <div class="last-updated">
-        <h5>Last Updated | {{ lastUpdated | date: 'yyyy-MM-dd h:mm:ss a' }}</h5>
+        <h5>Last Updated | {{ lastUpdated | date: 'dd-MM-yyyy h:mm:ss a' }}</h5>
     </div>
 </div>

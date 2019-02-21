@@ -22,7 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        const user = this._state.getState('user');
+        const user = this._state.get('user');
 
         if (user) {
             request = request.clone({
@@ -45,7 +45,7 @@ export class TokenInterceptor implements HttpInterceptor {
                         if (err instanceof HttpErrorResponse) {
                             if (err.status === 401 || err.status === 403) {
 
-                                this._state.setState('token', '');
+                                this._state.set('token', '');
 
                                 if (err.error && err.error.code === 4000) {
 
@@ -65,4 +65,3 @@ export class TokenInterceptor implements HttpInterceptor {
             );
     }
 }
-

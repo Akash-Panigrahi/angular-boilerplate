@@ -15,7 +15,8 @@ import { CacheService } from '../../services/cache/cache.service';
 })
 export class SummaryPageComponent implements OnInit, OnDestroy {
 
-    @HostBinding('@summaryPageAnimation') summaryPageAnimation = '';
+    @HostBinding('@summaryPageAnimation')
+    private _summaryPageAnimation = true;
 
     summaryData = {
         kpis: null,

@@ -5,9 +5,7 @@ import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-rang
 
 declare const moment: any;
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class DateTimeRangeService {
     // service class required to facilitate data exchange between two components
 
@@ -16,7 +14,7 @@ export class DateTimeRangeService {
         Subject allows for multicasting,
         so multiple components can listen to one data source.
     */
-    private _dateTimeRangeSource = new BehaviorSubject(this._setDateTimeRangeInStore());
+    private _dateTimeRangeSource = new BehaviorSubject(this._setDateTimeRange());
 
     // creating an observable from source for listening components to subscribe to
     // currentDateTimeRange = this._dateTimeRangeSource.asObservable();
@@ -32,21 +30,21 @@ export class DateTimeRangeService {
 
     currentDateTimeRange() {
 
-        if (!this._state.getState('date-time-range')) {
+        if (!this._state.get('date-time-range')) {
             /**
              * resetting observable if null in session storage
              * i.e., user is not logged in
              */
-            this._dateTimeRangeSource = new BehaviorSubject(this._setDateTimeRangeInStore());
+            this._dateTimeRangeSource = new BehaviorSubject(this._setDateTimeRange());
         }
 
         return this._dateTimeRangeSource.asObservable();
     }
 
-    private _setDateTimeRangeInStore() {
+    private _setDateTimeRange() {
         // setting initial value that will current date and time
 
-        const dateTimeRange = this._state.getState('date-time-range');
+        const dateTimeRange = this._state.get('date-time-range');
 
         if (dateTimeRange) {
             return dateTimeRange;

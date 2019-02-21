@@ -33,8 +33,12 @@ export const dashboardAnimation = trigger('dashboardAnimation', [
             query('.app-footer', animate('500ms ease-out', style({
                 transform: 'translateY(100%)', opacity: '0'
             }))),
-            query('.app-action-bar', animate('500ms ease-out', style({ opacity: '0' }))),
-            query('.app-section', animate('500ms ease-out', style({ opacity: '0' })))
+            query('.app-action-bar', animate('500ms ease-out', style({
+                opacity: 0
+            }))),
+            query('.app-section', animate('500ms ease-out', style({
+                opacity: 0
+            })))
         ])
     ]))
 ]);

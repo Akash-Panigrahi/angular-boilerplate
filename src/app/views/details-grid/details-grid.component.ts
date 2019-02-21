@@ -107,14 +107,6 @@ export class DetailsGridComponent implements OnChanges {
      * Animation Events
      */
 
-    private _debugAnimation(e) {
-        console.group(`${e.phaseName} animating ${e.triggerName}`);
-        console.log('From:', e.fromState);
-        console.log('To:', e.toState);
-        console.log('Total Time:', e.totalTime);
-        console.groupEnd();
-    }
-
     onGettingDetailsLoader(e): void {
 
         // entering

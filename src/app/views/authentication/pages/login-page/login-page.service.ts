@@ -24,7 +24,7 @@ export class LoginPageService {
             .pipe(
                 map((res: LoginResponse) => {
                     if (res.status === 200) {
-                        this._state.setState('user', res.data);
+                        this._state.set('user', res.data);
                         return res.data;
                     }
 

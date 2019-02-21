@@ -14,5 +14,6 @@ import { dashboardAnimation } from './dashboard.animations';
 export class DashboardComponent {
 
     // bind dashboardAnimation animation on host
-    @HostBinding('@dashboardAnimation') dashboardAnimation = '';
+    @HostBinding('@dashboardAnimation')
+    private _dashboardAnimation = true;
 }

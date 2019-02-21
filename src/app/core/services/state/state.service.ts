@@ -5,15 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class StateService {
 
-    getState(key: string) {
+    get(key: string) {
         return JSON.parse(sessionStorage.getItem(key));
     }
 
-    setState(key: string, value: any): void {
+    set(key: string, value: any): void {
         sessionStorage.setItem(key, JSON.stringify(value));
     }
 
-    clearState() {
+    clear(): void {
         sessionStorage.clear();
     }
 }

@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { CacheService } from '../cache/cache.service';
 import { StateService } from 'src/app/core/services/state/state.service';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class LogoutService {
 
     constructor(
@@ -16,7 +14,7 @@ export class LogoutService {
     logout() {
 
         // clear the state
-        this._state.clearState();
+        this._state.clear();
 
         // clear the cache
         CacheService.clear();

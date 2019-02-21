@@ -23,6 +23,10 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { KpiComponent } from './components/kpi/kpi.component';
 import { CopyrightPipe } from './pipes/copyright/copyright.pipe';
 
+import { DateTimeRangeService } from './services/date-time-range/date-time-range.service';
+import { FormatTimeService } from './services/format-time/format-time.service';
+import { LogoutService } from './services/logout/logout.service';
+
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -41,14 +45,19 @@ import { CopyrightPipe } from './pipes/copyright/copyright.pipe';
         RouterModule,
         FormsModule,
 
-        NgbCollapseModule.forRoot(),
+        NgbCollapseModule,
         ChartModule,
         NgProgressModule,
-        NgbDatepickerModule.forRoot(),
+        NgbDatepickerModule,
 
         SharedModule,
         DashboardRoutingModule,
         DetailsGridModule,
+    ],
+    providers: [
+        DateTimeRangeService,
+        FormatTimeService,
+        LogoutService
     ]
 })
 export class DashboardModule {

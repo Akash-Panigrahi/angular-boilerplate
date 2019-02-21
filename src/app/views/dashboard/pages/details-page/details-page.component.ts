@@ -18,7 +18,8 @@ import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/dashboard
 })
 export class DetailsPageComponent implements OnInit, OnDestroy {
 
-    @HostBinding('@detailsPageAnimation') detailsPageAnimation = true;
+    @HostBinding('@detailsPageAnimation')
+    private _detailsPageAnimation = true;
 
     details: DetailsGridResponse[];
     detailsGridRequest: DetailsGridRequest;
@@ -44,7 +45,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-        const detailsGridRequestFromState = this._state.getState('details-table-request');
+        const detailsGridRequestFromState = this._state.get('details-grid-request');
         /**
          * if user in session
          * i.e., there is data in storage
@@ -53,14 +54,13 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             this.detailsGridRequest = detailsGridRequestFromState;
         } else {
             // initial state saving
-            this._state.setState('details-table-request', this.initialDetailsGridRequest);
+            this._state.set('details-grid-request', this.initialDetailsGridRequest);
             this.detailsGridRequest = this.initialDetailsGridRequest;
         }
 
         this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange()
             .subscribe((dateTimeRange: DateTimeRange) => {
-                this._state.setState('details-table-request', this.initialDetailsGridRequest);
-                this._getDetails(dateTimeRange, this.initialDetailsGridRequest);
+                this._getDetails(dateTimeRange, this.detailsGridRequest);
             });
     }
 
@@ -86,7 +86,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         detailsGridRequest: DetailsGridRequest): void {
 
         // save state
-        this._state.setState('details-table-request', detailsGridRequest);
+        this._state.set('details-grid-request', detailsGridRequest);
 
         this._dateTimeRangeService.currentDateTimeRange()
             .pipe(take(1))
@@ -98,7 +98,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     onDownloadDetails(
         detailsGridRequest: DetailsGridRequest): void {
 
-        const { startDate, startTime, endDate, endTime } = this._state.getState('date-time-range');
+        const { startDate, startTime, endDate, endTime } = this._state.get('date-time-range');
         const { start, length, search, sort } = detailsGridRequest;
 
         /* to disable max 140 characters for a line rule */
