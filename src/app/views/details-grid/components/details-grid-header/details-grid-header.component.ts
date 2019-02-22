@@ -1,88 +1,108 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IHeaderAngularComp } from 'ag-grid-angular';
 import { IHeaderParams } from 'ag-grid-community';
-import { Subscription } from 'rxjs';
-import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
-import { StateService } from 'src/app/core/services/state/state.service';
+import { Subject } from 'rxjs';
+import { ChangeToNoSortStorageService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { take, takeUntil, takeWhile } from 'rxjs/operators';
+import { DetailsGridRequest } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-grid-header',
     templateUrl: './details-grid-header.component.html',
     styleUrls: ['./details-grid-header.component.scss']
 })
-export class DetailsGridHeaderComponent
-    implements IHeaderAngularComp, OnInit, OnDestroy {
-    private _currentNoSortState$ = new Subscription();
+export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDestroy {
+    private _destroy$ = new Subject();
 
     params: IHeaderParams;
+    colId: string;
+
     ascSort: string;
     descSort: string;
     noSort: string;
 
     /**
-     * initial sorting direction
+     * initial sorting directions
      * if user is not logged in
      */
-    direction = 0;
+    currDirection = 0;
+    nextDirection = 1;
 
     constructor(
-        private _changeToNoSortState: ChangeToNoSortStateService,
-        private _state: StateService
-    ) { }
+        private _changeToNoSortState: ChangeToNoSortStorageService,
+        private _storage: StorageService
+    ) {}
 
     ngOnInit() {
-
-        const colId = this.params.column.getColId();
-
         /**
          * listen to events for skipping the specified
          * header component
          * and reset all components to no sort state
          */
-        this._currentNoSortState$ = this._changeToNoSortState
-            .currentNoSortState
+        this._changeToNoSortState.currentNoSortState
+            .pipe(takeUntil(this._destroy$))
             .subscribe(columnToSkip => {
-                if (colId !== columnToSkip) {
-                    this.direction = 0;
-                    this.setdirection();
+                if (this.colId !== columnToSkip) {
+                    this.currDirection = 0;
+                    this.setSortDirection(this.currDirection);
                 }
             });
 
         /**
          * to restore column ui state for sorting
          */
-        const { key: sortKey, direction: sortDirection } = this._state.get('details-grid-request').sort;
+        this._storage
+            .getItem('details-grid-request')
+            /**
+             * using takeWhile operator to unsubscribe
+             * from _storage stream
+             * cause the stream is completed by passing null to it
+             * so all that remains is to check if value is null or not
+             */
+            .pipe(takeWhile(value => !!value))
+            .subscribe((detailsGridRequestData: DetailsGridRequest) => {
+                const { key, direction } = detailsGridRequestData.sort;
 
-        if (sortKey === colId) {
-            this.direction = sortDirection;
-            this.setdirection();
-        }
+                if (key === this.colId) {
+                    /** set ui state of this header component */
+                    this.currDirection = direction;
+                    this.setSortDirection(this.currDirection);
+
+                    /** set ui state of sibling header components to noSort */
+                    this._changeToNoSortState.changeToNoSortState(this.colId);
+                }
+            });
     }
 
-    agInit(params: IHeaderParams) {
+    agInit(params: IHeaderParams): void {
         this.params = params;
-        this.setdirection();
+        this.colId = this.params.column.getColId();
     }
 
-    setdirection(): void {
+    setSortDirection(direction: number): void {
 
         // hide all sort icons
         this.ascSort = this.descSort = this.noSort = 'inactive';
 
-        switch (this.direction) {
+        switch (direction) {
             case 1:
                 // show the icon
                 this.ascSort = 'active';
+                // set the current sort direction
+                this.currDirection = 1;
                 // set the sort direction to the next one
-                this.direction = -1;
+                this.nextDirection = -1;
                 break;
             case -1:
                 this.descSort = 'active';
-                this.direction = 0;
+                this.currDirection = -1;
+                this.nextDirection = 0;
                 break;
             case 0:
                 this.noSort = 'active';
-                this.direction = 1;
+                this.currDirection = 0;
+                this.nextDirection = 1;
                 break;
         }
     }
@@ -103,17 +123,17 @@ export class DetailsGridHeaderComponent
             new CustomEvent('detailsTableSortChangeEvent', {
                 detail: {
                     key: colId,
-                    direction: this.direction
+                    direction: this.nextDirection
                 },
                 bubbles: true
             })
         );
 
         // now modify the sort direction and change the icon according
-        this.setdirection();
+        this.setSortDirection(this.currDirection);
     }
 
     ngOnDestroy() {
-        this._currentNoSortState$.unsubscribe();
+        this._destroy$.next(true);
     }
 }

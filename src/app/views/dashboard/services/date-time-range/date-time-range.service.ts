@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { StateService } from 'src/app/core/services/state/state.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
+import { take } from 'rxjs/operators';
 
 declare const moment: any;
 
@@ -20,7 +21,7 @@ export class DateTimeRangeService {
     // currentDateTimeRange = this._dateTimeRangeSource.asObservable();
 
     constructor(
-        private _state: StateService
+        private _storage: StorageService
     ) { }
 
     changeDateTimeRange(dateTimeRange: DateTimeRange) {
@@ -30,7 +31,15 @@ export class DateTimeRangeService {
 
     currentDateTimeRange() {
 
-        if (!this._state.get('date-time-range')) {
+        let dateTimeRange;
+
+        this._storage
+            .getItem('date-time-range')
+            .pipe(take(1))
+            .subscribe((dateTimeRangeData: DateTimeRange) => dateTimeRange = dateTimeRangeData)
+            ;
+
+        if (!dateTimeRange) {
             /**
              * resetting observable if null in session storage
              * i.e., user is not logged in
@@ -44,7 +53,13 @@ export class DateTimeRangeService {
     private _setDateTimeRange() {
         // setting initial value that will current date and time
 
-        const dateTimeRange = this._state.get('date-time-range');
+        let dateTimeRange;
+
+        this._storage
+            .getItem('date-time-range')
+            .pipe(take(1))
+            .subscribe((dateTimeRangeData: DateTimeRange) => dateTimeRange = dateTimeRangeData)
+            ;
 
         if (dateTimeRange) {
             return dateTimeRange;

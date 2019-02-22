@@ -2,7 +2,7 @@ import { ApiService } from 'src/app/core/http/api/api.service';
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError, take } from 'rxjs/operators';
-import { StateService } from 'src/app/core/services/state/state.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { LoginResponse, LoginData } from '../../interfaces/login.interfaces';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class LoginPageService {
 
     constructor(
         private _api: ApiService,
-        private _state: StateService
+        private _storage: StorageService
     ) { }
 
     login(data): Observable<LoginData> {
@@ -24,7 +24,7 @@ export class LoginPageService {
             .pipe(
                 map((res: LoginResponse) => {
                     if (res.status === 200) {
-                        this._state.set('user', res.data);
+                        this._storage.setItem('user', res.data);
                         return res.data;
                     }
 

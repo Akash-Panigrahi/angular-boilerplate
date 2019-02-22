@@ -4,14 +4,14 @@ import { DetailsGridLoadingOverlayComponent } from '../details-grid-loading-over
 import { DetailsGridNoRowsOverlayComponent } from '../details-grid-no-rows-overlay/details-grid-no-rows-overlay.component';
 import { DetailsGridHeaderComponent } from '../details-grid-header/details-grid-header.component';
 import { FormatTimeService } from 'src/app/views/dashboard/services/format-time/format-time.service';
-import { ChangeToNoSortStateService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
+import { ChangeToNoSortStorageService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
 import { DetailsTableData } from '../../../dashboard/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-grid-table',
     templateUrl: './details-grid-table.component.html',
     styleUrls: ['./details-grid-table.component.scss'],
-    providers: [ChangeToNoSortStateService]
+    providers: [ChangeToNoSortStorageService]
 })
 export class DetailsGridTableComponent implements OnChanges {
 
@@ -54,7 +54,10 @@ export class DetailsGridTableComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         if (!changes.detailsData.isFirstChange()) {
             this.detailsData = changes.detailsData.currentValue;
-            this.gridColumnApi.autoSizeAllColumns();
+
+            if (this.gridColumnApi) {
+                this.gridColumnApi.autoSizeAllColumns();
+            }
         }
     }
 

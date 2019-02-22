@@ -1,24 +1,32 @@
 import {
-    Component, Input, OnChanges, SimpleChanges, EventEmitter, Output, ViewChild, HostListener
+    Component,
+    Input,
+    OnChanges,
+    SimpleChanges,
+    EventEmitter,
+    Output,
+    ViewChild,
+    HostListener
 } from '@angular/core';
 import { NgProgressComponent } from '@ngx-progressbar/core';
 import { takeWhile, endWith, tap } from 'rxjs/operators';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { initialTableReady, gettingDetailsLoader } from './details-grid.animations';
 import { DetailsGridTableComponent } from './components/details-grid-table/details-grid-table.component';
-import { DetailsGridResponse, DetailsGridRequest, DetailsTableData, DetailsTableSortEvent } from '../dashboard/interfaces/details-grid.interfaces';
+import {
+    DetailsGridResponse,
+    DetailsGridRequest,
+    DetailsTableData,
+    DetailsTableSortEvent
+} from '../dashboard/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-grid',
     templateUrl: './details-grid.component.html',
     styleUrls: ['./details-grid.component.scss'],
-    animations: [
-        initialTableReady,
-        gettingDetailsLoader
-    ]
+    animations: [initialTableReady, gettingDetailsLoader]
 })
 export class DetailsGridComponent implements OnChanges {
-
     @Input() details: DetailsGridResponse[];
     @Input() detailsGridRequest: DetailsGridRequest;
 
@@ -51,21 +59,13 @@ export class DetailsGridComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-
-        if (!changes.details.isFirstChange()) {
-
+        if (changes.details && !changes.details.isFirstChange()) {
             const details = changes.details.currentValue;
 
             this.detailsData = details.data;
             this.detailsInfo = details.info;
 
-            let pages = 1;
-
-            pages = details.info.total % this.detailsGridRequest.length >= 5
-                ? Math.ceil(details.info.total / this.detailsGridRequest.length)
-                : Math.floor(details.info.total / this.detailsGridRequest.length)
-                ;
-
+            const pages = this._getPages(details.info.total, this.detailsGridRequest.length);
             this.paginationCollectionSize = (pages || 1) * 10;
 
             // resetting page to previous page
@@ -74,17 +74,26 @@ export class DetailsGridComponent implements OnChanges {
 
             // completing progress bar
             if (this._progressBar) {
-
                 this._progressBar.state$
                     .pipe(
                         // tap(console.log),
                         takeWhile(value => !value.active),
                         endWith({ active: true, transform: '' })
                     )
-                    .subscribe(() => this._progressBar.complete())
-                    ;
+                    .subscribe(() => this._progressBar.complete());
             }
         }
+    }
+
+    private _getPages(totalRows: number, pageLength: number): number {
+        // include this if when you always want at least 1 page
+        if (totalRows === 0 || totalRows <= pageLength) {
+            return 1;
+        }
+
+        return totalRows % pageLength <= pageLength
+            ? Math.ceil(totalRows / pageLength)
+            : Math.floor(totalRows / pageLength);
     }
 
     private _emitDataTableRequestEvent(): void {
@@ -102,13 +111,11 @@ export class DetailsGridComponent implements OnChanges {
         this._detailsGridTable.showLoadingOverlay();
     }
 
-
     /**
      * Animation Events
      */
 
     onGettingDetailsLoader(e): void {
-
         // entering
         if (e.fromState === 'void') {
             // calling starting progress bar
@@ -129,25 +136,13 @@ export class DetailsGridComponent implements OnChanges {
         this.showGettingDetailsLoader = false;
     }
 
-
     /**
      * Table Events
      */
 
     onLengthChange(length: string): void {
-
-        this.detailsGridRequest = {
-            // resetting properties
-            start: 0,
-            sort: {
-                key: 'id',
-                direction: 0
-            },
-
-            // changing properties
-            length: Number(length),
-            search: this.detailsGridRequest.search
-        };
+        this.detailsGridRequest.start = 0;
+        this.detailsGridRequest.length = Number(length);
 
         // setting pagination so as to show first page
         this._detailsGridPagination.page = 1;
@@ -162,8 +157,8 @@ export class DetailsGridComponent implements OnChanges {
     }
 
     onSearchChange(text: string): void {
-        this.detailsGridRequest.search = text.toLowerCase();
         this.detailsGridRequest.start = 0;
+        this.detailsGridRequest.search = text.toLowerCase();
         this._emitDataTableRequestEvent();
     }
 

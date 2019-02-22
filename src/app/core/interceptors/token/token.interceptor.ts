@@ -9,25 +9,41 @@ import {
     HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { StateService } from '../../services/state/state.service';
+import { tap, take, filter } from 'rxjs/operators';
+import { StorageService } from '../../services/storage/storage.service';
+import { LoginData } from 'src/app/views/authentication/interfaces/login.interfaces';
 
+/**
+ * not using providedIn
+ * since it does not supports multi option
+ * for specifying multiple interceptors
+ */
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
     constructor(
         private _router: Router,
-        private _state: StateService
+        private _storage: StorageService
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        const user = this._state.get('user');
+        let token: string;
 
-        if (user) {
+        this._storage
+            .getItem('user')
+            .pipe(
+                take(1),
+                filter(userData => userData ? true : false),
+                // tap(console.log)
+            )
+            .subscribe((userData: LoginData) => token = userData.token)
+            ;
+
+        if (token) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: user.token
+                    Authorization: token
                 }
             });
         }
@@ -45,7 +61,7 @@ export class TokenInterceptor implements HttpInterceptor {
                         if (err instanceof HttpErrorResponse) {
                             if (err.status === 401 || err.status === 403) {
 
-                                this._state.set('token', '');
+                                this._storage.removeItem('token');
 
                                 if (err.error && err.error.code === 4000) {
 

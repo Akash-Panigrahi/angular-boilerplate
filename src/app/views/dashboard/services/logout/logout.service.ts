@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CacheService } from '../cache/cache.service';
-import { StateService } from 'src/app/core/services/state/state.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 
 @Injectable()
 export class LogoutService {
 
     constructor(
         private _router: Router,
-        private _state: StateService
+        private _storage: StorageService
     ) { }
 
     logout() {
 
-        // clear the state
-        this._state.clear();
+        // clear the storage
+        this._storage.clear();
 
         // clear the cache
         CacheService.clear();

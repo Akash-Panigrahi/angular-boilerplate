@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { StateService } from '../../services/state/state.service';
+import { StorageService } from '../../services/storage/storage.service';
+import { LoginData } from 'src/app/views/authentication/interfaces/login.interfaces';
+import { take } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -9,12 +11,18 @@ export class NotLoggedInUserGuard implements CanActivate {
 
     constructor(
         private _router: Router,
-        private _state: StateService
+        private _storage: StorageService
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
-        const user = this._state.get('user');
+        let user: LoginData;
+
+        this._storage
+            .getItem('user')
+            .pipe(take(1))
+            .subscribe((userData: LoginData) => user = userData)
+            ;
 
         // if route is of login page and user is already logged in
         if (state.url === '/login') {

@@ -45,7 +45,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
             DetailsGridHeaderComponent
         ]),
         NgProgressModule,
-        NgbPaginationModule.forRoot(),
+        NgbPaginationModule,
         NgSelectModule
     ],
     exports: [DetailsGridComponent]

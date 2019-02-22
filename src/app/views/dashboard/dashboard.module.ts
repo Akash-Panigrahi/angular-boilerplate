@@ -26,6 +26,7 @@ import { CopyrightPipe } from './pipes/copyright/copyright.pipe';
 import { DateTimeRangeService } from './services/date-time-range/date-time-range.service';
 import { FormatTimeService } from './services/format-time/format-time.service';
 import { LogoutService } from './services/logout/logout.service';
+import { DetailsGridRequestService } from './services/details-grid-request/details-grid-request.service';
 
 @NgModule({
     declarations: [
@@ -56,6 +57,7 @@ import { LogoutService } from './services/logout/logout.service';
     ],
     providers: [
         DateTimeRangeService,
+        DetailsGridRequestService,
         FormatTimeService,
         LogoutService
     ]

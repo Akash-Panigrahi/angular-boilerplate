@@ -1,13 +1,14 @@
-import { Component, OnInit, HostBinding, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { detailsPageAnimation } from './details-page.animations';
 import { DetailsPageService } from './details-page.service';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
-import { StateService } from 'src/app/core/services/state/state.service';
-import { take, delay } from 'rxjs/operators';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { take, delay, takeUntil, tap, takeWhile } from 'rxjs/operators';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
 import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
+import { DetailsGridRequestService } from '../../services/details-grid-request/details-grid-request.service';
 
 @Component({
     selector: 'app-details-page',
@@ -24,41 +25,38 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     details: DetailsGridResponse[];
     detailsGridRequest: DetailsGridRequest;
 
-    currentDateTimeRange$ = new Subscription();
-
-    initialDetailsGridRequest = {
-        start: 0,
-        length: 5,
-        search: '',
-        sort: {
-            key: 'id',
-            direction: 0
-        }
-    };
+    private _destroy$ = new Subject();
 
     constructor(
         private _detailsPageService: DetailsPageService,
         private _dateTimeRangeService: DateTimeRangeService,
+        private _detailsGridRequestService: DetailsGridRequestService,
         private _actionBarUiState: ActionBarUIState,
-        private _state: StateService
+        private _storage: StorageService
     ) { }
 
     ngOnInit(): void {
 
-        const detailsGridRequestFromState = this._state.get('details-grid-request');
+        this._storage
+            .getItem('details-grid-request')
+            .pipe(takeWhile(value => !!value))
+            .subscribe((detailsGridRequestData: DetailsGridRequest) => {
+                this.detailsGridRequest = detailsGridRequestData;
+            })
+            ;
+
         /**
          * if user in session
          * i.e., there is data in storage
          */
-        if (detailsGridRequestFromState) {
-            this.detailsGridRequest = detailsGridRequestFromState;
-        } else {
+        if (!this.detailsGridRequest) {
             // initial state saving
-            this._state.set('details-grid-request', this.initialDetailsGridRequest);
-            this.detailsGridRequest = this.initialDetailsGridRequest;
+            this._storage.setItem('details-grid-request', this._detailsGridRequestService.initial());
         }
 
-        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange()
+        this._dateTimeRangeService
+            .currentDateTimeRange()
+            .pipe(takeUntil(this._destroy$))
             .subscribe((dateTimeRange: DateTimeRange) => {
                 this._getDetails(dateTimeRange, this.detailsGridRequest);
             });
@@ -73,6 +71,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         this._detailsPageService
             .getDetails(detailsRequest)
             // .pipe(delay(3000))
+            .pipe(takeUntil(this._destroy$))
             .subscribe(
                 (res: DetailsGridResponse[]) => {
                     this.details = res;
@@ -86,10 +85,12 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         detailsGridRequest: DetailsGridRequest): void {
 
         // save state
-        this._state.set('details-grid-request', detailsGridRequest);
+        this._storage.setItem('details-grid-request', detailsGridRequest);
 
-        this._dateTimeRangeService.currentDateTimeRange()
+        this._dateTimeRangeService
+            .currentDateTimeRange()
             .pipe(take(1))
+            .pipe(takeUntil(this._destroy$))
             .subscribe((dateTimeRange: DateTimeRange) => {
                 this._getDetails(dateTimeRange, detailsGridRequest);
             });
@@ -98,7 +99,19 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     onDownloadDetails(
         detailsGridRequest: DetailsGridRequest): void {
 
-        const { startDate, startTime, endDate, endTime } = this._state.get('date-time-range');
+        let startDate, startTime, endDate, endTime;
+
+        this._storage
+            .getItem('date-time-range')
+            .pipe(takeWhile(value => !!value))
+            .subscribe((dateTimeRangeData: DateTimeRange) => {
+                 startDate = dateTimeRangeData.startDate;
+                 startTime = dateTimeRangeData.startTime;
+                 endDate = dateTimeRangeData.endDate;
+                 endTime = dateTimeRangeData.endTime;
+            })
+            ;
+
         const { start, length, search, sort } = detailsGridRequest;
 
         /* to disable max 140 characters for a line rule */
@@ -109,6 +122,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.currentDateTimeRange$.unsubscribe();
+        this._destroy$.next(true);
     }
 }
