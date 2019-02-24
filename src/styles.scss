@@ -5,12 +5,22 @@
 @import '~ag-grid-community/dist/styles/ag-theme-material.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "styles/variables";
+@import "styles/mixin";
+@import "styles/theme";
+
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700');
 
 :root {
     --smokey-black: #b7b7b7;
     // --grey-white: #f0f0f0;
     --grey-white: #fff;
+
+    // theming colors
+    --primary-color: #{$primary-color};
+    --accent-color: #{$accent-color};
+    --warm-color: #{$warm-color};
 }
 
 body {

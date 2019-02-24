@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap-grid.scss';
+@import '../../../../../styles/mixin';
 
 :host {
     z-index: 3;
@@ -13,10 +14,7 @@
     background: var(--light);
     height: 1.4rem;
     display: none;
-}
-
-.one-space {
-    display: none;
+    margin: 0 16px;
 }
 
 .logout-link {
@@ -32,11 +30,21 @@
         display: block;
     }
 
-    .one-space {
-        display: block;
-    }
-
     .logout-link {
         padding: .5rem;
+    }
+}
+
+.header-toolbar {
+    @include primary();
+}
+
+.action-links {
+    display: flex;
+    align-items: center;
+
+    .navigation-links {
+        padding: 0;
+        display: flex;
     }
 }
