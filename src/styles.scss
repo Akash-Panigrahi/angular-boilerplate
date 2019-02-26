@@ -5,30 +5,29 @@
 @import '~ag-grid-community/dist/styles/ag-theme-material.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
-// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "styles/variables";
 @import "styles/mixin";
 @import "styles/theme";
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700');
 
-:root {
-    --smokey-black: #b7b7b7;
-    // --grey-white: #f0f0f0;
-    --grey-white: #fff;
 
+:root {
     // theming colors
     --primary-color: #{$primary-color};
     --accent-color: #{$accent-color};
     --warm-color: #{$warm-color};
 }
 
+
 body {
     height: 100vh;
     max-width: 100vw;
-    font-family: 'Roboto Mono', Courier New, Helvetica, monospace;
+    font-family: 'Roboto Mono', 'Courier New', Helvetica, monospace;
+    font-size: 16px;
     overflow-x: hidden;
 }
+
 
 // css for overriding yellowing of text fields on autocomplete of chrome browser
 input:-webkit-autofill,
@@ -49,6 +48,7 @@ select:-internal-autofill-selected {
     -webkit-box-shadow: 0 0 0 1000px white inset;
     transition: background-color 5000s ease-in-out 0s;
 }
+
 
 @font-face {
     font-family: 'Material Icons';
@@ -93,10 +93,6 @@ select:-internal-autofill-selected {
 
     /* Support for IE. */
     font-feature-settings: 'liga';
-}
-
-.bg-grey-white {
-    background-color: var(--grey-white);
 }
 
 
@@ -317,6 +313,7 @@ select:-internal-autofill-selected {
     }
 }
 
+
 /* customizing ng=select details-table-length style */
 .ng-select.details-table-length {
     min-width: 4rem;
@@ -329,6 +326,7 @@ select:-internal-autofill-selected {
         padding-left: 10px;
     }
 }
+
 
 // custom separator
 .line-separator {

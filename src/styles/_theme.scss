@@ -7,9 +7,18 @@
 @include mat-core();
 
 // Define the default theme (same as the example above).
-$candy-app-primary : mat-palette($mat-red, 700, 100, A700);
-$candy-app-accent  : mat-palette($mat-light-blue, A200, A100, A400);
-$candy-app-theme   : mat-light-theme($candy-app-primary, $candy-app-accent);
+$app-primary : mat-palette($mat-green, 700, 300, 900);
+$app-accent  : mat-palette($mat-amber);
+$app-warn    : mat-palette($mat-red, A200);
+
+
+$app-theme: mat-light-theme(
+    $app-primary,
+    $app-accent,
+    $app-warn
+);
 
 // Include the default theme styles.
-@include angular-material-theme($candy-app-theme);
+.app-light-theme {
+    @include angular-material-theme($app-theme);
+}

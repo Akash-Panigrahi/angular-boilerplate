@@ -42,8 +42,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             .pipe(takeWhile(value => !!value))
             .subscribe((detailsGridRequestData: DetailsGridRequest) => {
                 this.detailsGridRequest = detailsGridRequestData;
-            })
-            ;
+            });
 
         /**
          * if user in session
@@ -51,7 +50,10 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
          */
         if (!this.detailsGridRequest) {
             // initial state saving
-            this._storage.setItem('details-grid-request', this._detailsGridRequestService.initial());
+            const initialState = this._detailsGridRequestService.initial();
+
+            this._storage.setItem('details-grid-request', initialState);
+            this.detailsGridRequest = initialState;
         }
 
         this._dateTimeRangeService
@@ -96,10 +98,9 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             });
     }
 
-    onDownloadDetails(
-        detailsGridRequest: DetailsGridRequest): void {
+    onDownloadDetails(detailsGridRequest: DetailsGridRequest): void {
 
-        let startDate, startTime, endDate, endTime;
+        let startDate: string, startTime: string, endDate: string, endTime: string;
 
         this._storage
             .getItem('date-time-range')
@@ -109,8 +110,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
                  startTime = dateTimeRangeData.startTime;
                  endDate = dateTimeRangeData.endDate;
                  endTime = dateTimeRangeData.endTime;
-            })
-            ;
+            });
 
         const { start, length, search, sort } = detailsGridRequest;
 

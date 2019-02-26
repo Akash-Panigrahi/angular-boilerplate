@@ -38,13 +38,13 @@
       <div class="details-grid__length">
         <app-details-grid-length class="child-component"
                                  [pageSizes]="pageSizes"
-                                 [initialPageSize]="this.detailsGridRequest.length"
+                                 [initialPageSize]="detailsGridRequest.length"
                                  (lengthChangeEvent)="onLengthChange($event)">
         </app-details-grid-length>
       </div>
       <div class="details-grid__search mt-xs">
         <app-details-grid-search class="child-component"
-                                 [initialSearchValue]="this.detailsGridRequest.search"
+                                 [initialSearchValue]="detailsGridRequest.search"
                                  (searchChangeEvent)="onSearchChange($event)">
         </app-details-grid-search>
       </div>
@@ -63,7 +63,8 @@
       <div class="details-grid__info">
         <app-details-grid-info class="child-component"
                                [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
-                               [detailsInfoTo]="detailsInfo.to" [detailsInfoTotal]="detailsInfo.total"
+                               [detailsInfoTo]="detailsInfo.to"
+                               [detailsInfoTotal]="detailsInfo.total"
                                [detailsInfoFilteredFrom]="detailsInfo.filteredFrom">
         </app-details-grid-info>
       </div>

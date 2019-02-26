@@ -1,6 +1,8 @@
 @import '~bootstrap/scss/bootstrap-grid.scss';
 
 :host {
+    --smokey-black: #b7b7b7;
+
     flex: 1;
     display: flex;
     align-items: center;
