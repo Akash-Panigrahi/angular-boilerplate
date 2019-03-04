@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://10.40.12.79:4000'
+  BASE_URL: 'https://basic-node-backend.herokuapp.com'
 };
 
 /*
