@@ -1,11 +1,11 @@
 image: docker:stable
 
-#services:
-#  - docker:dind
+services:
+  - docker:dind
 
 variables:
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-#  DOCKER_HOST: tcp://docker:2375
+  DOCKER_HOST: tcp://docker:2375
 #  DOCKER_DRIVER: overlay2
 
 stages:
@@ -13,6 +13,8 @@ stages:
 - release
 
 before_script:
+  - cat /etc/hosts
+  - docker info
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN git.vivaconnect.co
 
 build:
