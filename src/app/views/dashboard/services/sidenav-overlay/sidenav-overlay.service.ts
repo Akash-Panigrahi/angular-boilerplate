@@ -9,17 +9,12 @@ import { SidenavOverlayRef } from '../../class/sidenav-overlay-ref';
 import { SIDENAV_OVERLAY_DATA } from './sidenav-overlay.tokens';
 import { SidenavConfig } from '../../interfaces/sidenav.interface';
 
-
 @Injectable()
 export class SidenavOverlayService implements OnDestroy {
-
     private _onDestroy$ = new Subject<void>();
 
     /** Inject overlay service */
-    constructor(
-        private _overlay: Overlay,
-        private _injector: Injector
-    ) {}
+    constructor(private _overlay: Overlay, private _injector: Injector) {}
 
     open(config: SidenavConfig): SidenavOverlayRef {
         /** Returns an OverlayRef (which is a PortalHost) */
@@ -28,7 +23,11 @@ export class SidenavOverlayService implements OnDestroy {
         /** Instantiate remote control */
         const sidenavOverlayRef = new SidenavOverlayRef(overlayRef);
 
-        const overlayComponent = this._attachSidenavContainer(overlayRef, config, sidenavOverlayRef);
+        const overlayComponent = this._attachSidenavContainer(
+            overlayRef,
+            config,
+            sidenavOverlayRef
+        );
 
         /** Subscribe to a stream that emits when the backdrop was clicked */
         overlayRef
@@ -71,7 +70,6 @@ export class SidenavOverlayService implements OnDestroy {
         config: SidenavConfig,
         sidenavOverlayRef: SidenavOverlayRef
     ): PortalInjector {
-
         /** Instantiate new WeakMap for our custom injection tokens */
         const injectionTokens = new WeakMap();
 
@@ -86,17 +84,17 @@ export class SidenavOverlayService implements OnDestroy {
     private _attachSidenavContainer(
         overlayRef: OverlayRef,
         config: SidenavConfig,
-        sidenavOverlayRef: SidenavOverlayRef) {
+        sidenavOverlayRef: SidenavOverlayRef
+    ) {
+        const injector = this._createInjector(config, sidenavOverlayRef);
 
-            const injector = this._createInjector(config, sidenavOverlayRef);
+        /** Create ComponentPortal that can be attached to a PortalHost */
+        const containerPortal = new ComponentPortal(SidenavOverlayComponent, null, injector);
 
-            /** Create ComponentPortal that can be attached to a PortalHost */
-            const containerPortal = new ComponentPortal(SidenavOverlayComponent, null, injector);
+        /** Attach ComponentPortal to PortalHost */
+        const containerRef = overlayRef.attach(containerPortal);
 
-            /** Attach ComponentPortal to PortalHost */
-            const containerRef = overlayRef.attach(containerPortal);
-
-            return containerRef.instance;
+        return containerRef.instance;
     }
 
     ngOnDestroy(): void {

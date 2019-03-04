@@ -2,7 +2,9 @@
     <mat-toolbar color="primary">
         <mat-toolbar-row>
             <button class="sidenav-toggle mat-button"
-                    mat-button>
+                    mat-button
+                    *ngIf="!showLinks"
+                    (click)="showSidenav()">
                 <span class="mat-button-wrapper">
                     <mat-icon class="mat-icon material-icons mat-icon-no-color"
                               role="img"
@@ -21,13 +23,14 @@
                 Angular Dashboard
             </a>
 
-            <div class="action-links">
+            <div class="action-links"
+                 *ngIf="showLinks">
                 <a class="navigation-link"
                    mat-button
-                   *ngFor="let navItem of navItems"
+                   *ngFor="let item of navigationItems"
                    routerLinkActive="active"
-                   [routerLink]="navItem.url">
-                    {{ navItem.name }}
+                   [routerLink]="item.url">
+                    {{ item.name }}
                 </a>
                 <span class="divider"></span>
                 <a class="navigation-link"

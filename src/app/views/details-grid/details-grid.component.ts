@@ -144,31 +144,26 @@ export class DetailsGridComponent implements OnChanges {
         this.detailsGridRequest.start = 0;
         this.detailsGridRequest.length = Number(length);
 
-        // setting pagination so as to show first page
-        this._detailsGridPagination.page = 1;
-
-        /**
-         * triggering change detection for
-         * appCustomNgbPagination directive
-         */
-        this.currentPage = this._detailsGridPagination.page;
-
         this._emitDataTableRequestEvent();
     }
 
     onSearchChange(text: string): void {
         this.detailsGridRequest.start = 0;
         this.detailsGridRequest.search = text.toLowerCase();
+
         this._emitDataTableRequestEvent();
     }
 
     onPageChange(page: number): void {
         this.detailsGridRequest.start = page - 1;
+
         this._emitDataTableRequestEvent();
     }
 
     onSortChange(sort: DetailsTableSortEvent): void {
+        this.detailsGridRequest.start = 0;
         this.detailsGridRequest.sort = sort;
+
         this._emitDataTableRequestEvent();
     }
 }

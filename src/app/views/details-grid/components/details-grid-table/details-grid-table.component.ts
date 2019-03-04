@@ -3,7 +3,6 @@ import { GridApi, ColumnApi, ICellRendererParams, AgGridEvent } from 'ag-grid-co
 import { DetailsGridLoadingOverlayComponent } from '../details-grid-loading-overlay/details-grid-loading-overlay.component';
 import { DetailsGridNoRowsOverlayComponent } from '../details-grid-no-rows-overlay/details-grid-no-rows-overlay.component';
 import { DetailsGridHeaderComponent } from '../details-grid-header/details-grid-header.component';
-import { FormatTimeService } from 'src/app/views/dashboard/services/format-time/format-time.service';
 import { ChangeToNoSortStorageService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
 import { DetailsTableData } from '../../../dashboard/interfaces/details-grid.interfaces';
 
@@ -27,15 +26,11 @@ export class DetailsGridTableComponent implements OnChanges {
 
     columnDefs = [
         { headerName: 'Id', field: 'id' },
-        { headerName: 'First Name', field: 'first_name' },
-        { headerName: 'Last Name', field: 'last_name' },
-        { headerName: 'Email', field: 'email' },
-        { headerName: 'Gender', field: 'gender' },
+        { headerName: 'Mobile', field: 'mobile' },
+        { headerName: 'First Name', field: 'firstname' },
+        { headerName: 'Last Name', field: 'lastname' },
         { headerName: 'Date', field: 'date' },
-        {
-            headerName: 'Time', field: 'time',
-            cellRenderer: (params: ICellRendererParams) => this._formatTimeService.formatTime(params.value)
-        },
+        { headerName: 'Time', field: 'time' },
     ];
 
     frameworkComponents = {
@@ -47,9 +42,7 @@ export class DetailsGridTableComponent implements OnChanges {
     loadingOverlayComponent = 'customLoadingOverlay';
     noRowsOverlayComponent = 'customNoRowsOverlay';
 
-    constructor(
-        private _formatTimeService: FormatTimeService
-    ) { }
+    constructor() { }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!changes.detailsData.isFirstChange()) {

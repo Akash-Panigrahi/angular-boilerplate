@@ -29,6 +29,8 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     // setting initial date when app is opened
     lastUpdated = new Date();
 
+    private _dateTimeRange: DateTimeRange;
+
     private _destroy$ = new Subject();
 
     private _applyDateRangePicker = (ev, picker) => {
@@ -49,15 +51,8 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this._actionBarUIState.changeGettingDataBar('start');
 
-        let dateTimeRange: DateTimeRange;
-
-        this._storage
-            .getItem('date-time-range')
-            .pipe(takeWhile(value => !!value))
-            .subscribe((dateTimeRangeData: DateTimeRange) => (dateTimeRange = dateTimeRangeData));
-
         // pass new value in the stream
-        this._dateTimeRangeService.changeDateTimeRange(dateTimeRange);
+        this._dateTimeRangeService.changeDateTimeRange(this._dateTimeRange);
 
         // reset details-grid-request value
         this._storage.setItem('details-grid-request', this._detailsGridRequest.initial());
@@ -65,7 +60,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         this._actionBarUIState.currentGettingDataBar
             .pipe(takeUntil(this._destroy$))
             .subscribe(state => this._progressBar[state]());
-    };
+    }
 
     constructor(
         private _dateTimeRangeService: DateTimeRangeService,
@@ -74,24 +69,25 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         private _detailsGridRequest: DetailsGridRequestService
     ) {}
 
-    ngOnInit() {}
-
-    ngAfterViewInit() {
-        let dateTimeRange: DateTimeRange;
-
+    ngOnInit() {
         this._storage
             .getItem('date-time-range')
             .pipe(takeWhile(value => !!value))
-            .subscribe((dateTimeRangeData: DateTimeRange) => (dateTimeRange = dateTimeRangeData));
+            .subscribe((dateTimeRangeData: DateTimeRange) => {
+                this._dateTimeRange = dateTimeRangeData;
+            });
+    }
+
+    ngAfterViewInit() {
 
         let start, end;
 
-        if (!dateTimeRange) {
+        if (!this._dateTimeRange) {
             start = moment(new Date());
             end = moment(new Date());
         } else {
-            start = this._setMoment(dateTimeRange.startDate, dateTimeRange.startTime);
-            end = this._setMoment(dateTimeRange.endDate, dateTimeRange.endTime);
+            start = this._setMoment(this._dateTimeRange.startDate, this._dateTimeRange.startTime);
+            end = this._setMoment(this._dateTimeRange.endDate, this._dateTimeRange.endTime);
         }
 
         $('#reportrange').daterangepicker(

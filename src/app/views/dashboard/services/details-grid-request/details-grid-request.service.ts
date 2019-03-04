@@ -10,7 +10,7 @@ export class DetailsGridRequestService {
             search: '',
             sort: {
                 key: 'id',
-                direction: 0
+                direction: 1
             }
         };
     }

@@ -27,6 +27,8 @@ import { DateTimeRangeService } from './services/date-time-range/date-time-range
 import { FormatTimeService } from './services/format-time/format-time.service';
 import { LogoutService } from './services/logout/logout.service';
 import { DetailsGridRequestService } from './services/details-grid-request/details-grid-request.service';
+import { SidenavOverlayComponent } from './components/sidenav-overlay/sidenav-overlay.component';
+import { SidenavOverlayService } from './services/sidenav-overlay/sidenav-overlay.service';
 
 @NgModule({
     declarations: [
@@ -39,7 +41,8 @@ import { DetailsGridRequestService } from './services/details-grid-request/detai
         BasicColumnComponent,
         GradientPieComponent,
         KpiComponent,
-        CopyrightPipe
+        CopyrightPipe,
+        SidenavOverlayComponent
     ],
     imports: [
         CommonModule,
@@ -59,7 +62,15 @@ import { DetailsGridRequestService } from './services/details-grid-request/detai
         DateTimeRangeService,
         DetailsGridRequestService,
         FormatTimeService,
-        LogoutService
+        LogoutService,
+        SidenavOverlayService
+    ],
+    entryComponents: [
+        /**
+         * Needs to be added here because otherwise we can't
+         * dynamically render this component at runtime
+         */
+        SidenavOverlayComponent
     ]
 })
 export class DashboardModule {

@@ -20,8 +20,8 @@
     transform-origin: top center;
 
     @include media-breakpoint-down(sm) {
+        padding: 1rem;
         flex-direction: column;
-        @extend .bg-primary !optional;
     }
 }
 
@@ -41,7 +41,6 @@
     h2 {
         flex: 1;
         line-height: 1;
-        padding: 0 1rem;
         margin: 0;
         display: flex;
         align-items: center;
@@ -57,11 +56,34 @@
     }
 }
 
+.login-horizontal-separator {
+    padding-bottom: 1rem;
+    display: none;
+}
+
+.form-horizontal-separator {
+    padding-bottom: 1rem;
+    display: block;
+}
+
+@include media-breakpoint-down(sm) {
+    .login-horizontal-separator {
+        display: block;
+    }
+
+    .form-horizontal-separator {
+        display: none;
+    }
+}
+
 .login__logo {
     flex: 1;
-    padding: 1rem;
     height: 6rem;
     width: 6rem;
+
+    @include media-breakpoint-down(sm) {
+        padding: 0;
+    }
 
     img {
         width: 100%;
@@ -74,20 +96,19 @@
 .login__form {
     flex: 2;
     padding: 1rem;
-    // background: rgba(140, 155, 231, 0.46);
     background: var(--form-background-color);
     border-radius: 0 var(--login-container-border-radius) var(--login-container-border-radius) 0;
 
     @include media-breakpoint-down(sm) {
+        padding: 0rem;
         border-radius: 0 0 var(--login-container-border-radius) var(--login-container-border-radius);
     }
 }
 
 .login-form__inputs {
-    padding: 1rem 0;
 
     .input-group {
-        margin: 1rem 0 0;
+        margin-top: 1rem;
     }
 }
 

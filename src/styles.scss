@@ -5,20 +5,27 @@
 @import '~ag-grid-community/dist/styles/ag-theme-material.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+@import "styles/theme";
 @import "styles/variables";
 @import "styles/mixin";
-@import "styles/theme";
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700');
 
 
 :root {
-    // theming colors
-    --primary-color: #{$primary-color};
-    --accent-color: #{$accent-color};
-    --warm-color: #{$warm-color};
+    --background-color: #{$background-color};
+    --color: #{$color};
 }
 
+
+/** remove overflow-y: scroll */
+html {
+    .side-nav-overlay__panel {
+        @at-root .cdk-global-scrollblock {
+           overflow-y: hidden;
+        }
+    }
+}
 
 body {
     height: 100vh;
@@ -314,7 +321,7 @@ select:-internal-autofill-selected {
 }
 
 
-/* customizing ng=select details-table-length style */
+/* customizing ng-select details-table-length style */
 .ng-select.details-table-length {
     min-width: 4rem;
 
@@ -332,4 +339,12 @@ select:-internal-autofill-selected {
 .line-separator {
     display: block;
     margin-bottom: 1.25rem;
+}
+
+
+// sidenav component
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    &.dark-backdrop {
+        background: rgba(0,0,0,.32);
+    }
 }

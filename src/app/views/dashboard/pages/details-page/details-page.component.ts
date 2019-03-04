@@ -83,8 +83,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
             );
     }
 
-    onDetailsGridRequest(
-        detailsGridRequest: DetailsGridRequest): void {
+    onDetailsGridRequest(detailsGridRequest: DetailsGridRequest): void {
 
         // save state
         this._storage.setItem('details-grid-request', detailsGridRequest);
@@ -112,11 +111,11 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
                  endTime = dateTimeRangeData.endTime;
             });
 
-        const { start, length, search, sort } = detailsGridRequest;
+        const { search, sort } = detailsGridRequest;
 
         /* to disable max 140 characters for a line rule */
         // tslint:disable-next-line
-        const query = `?startDate=${startDate}&startTime=${startTime}&endDate=${endDate}&endTime=${endTime}&start=${start}&length=${length}&search=${search}&sort=${sort}`;
+        const query = `?startDate=${startDate}&startTime=${startTime}&endDate=${endDate}&endTime=${endTime}&search=${search}&sort=${JSON.stringify(sort)}`;
 
         this._detailsPageService.downloadDetails(query);
     }
