@@ -59,7 +59,7 @@ export class SidenavOverlayService implements OnDestroy {
             height: '100%',
             hasBackdrop: true,
             backdropClass: 'dark-backdrop',
-            panelClass: 'sidenav-overlay__panel',
+            panelClass: 'side-nav-overlay__panel',
             scrollStrategy: this._overlay.scrollStrategies.block(),
             positionStrategy
         });
