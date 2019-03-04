@@ -1,4 +1,4 @@
-FROM node:8.11.2-alpine as node
+FROM node:11-alpine as node
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY . .
 RUN npm run build-prod
 
 
-FROM nginx:alpine as webserver
+FROM nginx:alpine
 
 ENV TZ=Asia/Kolkata
 
