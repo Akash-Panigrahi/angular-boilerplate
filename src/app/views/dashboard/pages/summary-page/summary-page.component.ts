@@ -1,10 +1,11 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { summaryPageAnimation } from './summary-page.animations';
 import { SummaryPageService } from './summary-page.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 import { CacheService } from '../../services/cache/cache.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-summary-page',
@@ -24,7 +25,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
         gradientPie: null
     };
 
-    currentDateTimeRange$ = new Subscription();
+    private _onDestroy$ = new Subject<void>();
 
     constructor(
         private _summaryPageService: SummaryPageService,
@@ -36,13 +37,15 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
         /*
             listen to stream, then pass the new emitted value to getSummary observable
         */
-        this.currentDateTimeRange$ = this._dateTimeRangeService.currentDateTimeRange()
+        this._dateTimeRangeService
+            .currentDateTimeRange()
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe(data => {
 
                 // check if data is present in cacheservice
                 const cachedData = CacheService.get('summary', data);
 
-                if (cachedData) {
+                if (cachedData && cachedData.length) {
                     this.summaryData = cachedData;
                     this._actionBarUiState.changeGettingDataBar('complete');
                 } else {
@@ -51,9 +54,10 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
             });
     }
 
-    private _getSummary(summaryRange) {
+    private _getSummary(summaryRange): void {
         this._summaryPageService
             .getSummary(summaryRange)
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe(
                 /*
                     pass the response data,
@@ -74,6 +78,6 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         // stop listening to streams when component is destroyed
-        this.currentDateTimeRange$.unsubscribe();
+        this._onDestroy$.next();
     }
 }

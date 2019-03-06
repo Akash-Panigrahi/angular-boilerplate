@@ -4,7 +4,7 @@ import { SidenavOverlayService } from '../../services/sidenav-overlay/sidenav-ov
 import { SidenavOverlayRef } from '../../class/sidenav-overlay-ref';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { LoginData } from 'src/app/views/authentication/interfaces/login.interfaces';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _sidenavOverlayRef: SidenavOverlayRef;
 
     username: string;
+    showLinks: boolean;
 
     // array defining navigation model
     navigationItems = [
@@ -33,8 +34,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     private _onDestroy$ = new Subject<void>();
 
-    showLinks: boolean;
-
     constructor(
         private _logout: LogoutService,
         private _sidenavOverlayService: SidenavOverlayService,
@@ -46,7 +45,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this._storage
             .getItem('user')
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe((user: LoginData) => this.username = user.username);
+            .subscribe((user: LoginData) => {
+                this.username = user.username;
+            });
 
         this._breakpointObserver
             .observe(['(min-width: 768px)'])

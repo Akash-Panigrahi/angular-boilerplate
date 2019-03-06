@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 declare const moment: any;
 
 @Injectable()
-export class DateTimeRangeService {
+export class DateTimeRangeService implements OnDestroy {
     // service class required to facilitate data exchange between two components
 
     /*
@@ -20,18 +20,20 @@ export class DateTimeRangeService {
     // creating an observable from source for listening components to subscribe to
     // currentDateTimeRange = this._dateTimeRangeSource.asObservable();
 
+    private _onDestroy$ = new Subject<void>();
+
     private _dateTimeRange: DateTimeRange;
 
     constructor(private _storage: StorageService) {
         this._storage
             .getItem('date-time-range')
-            .pipe(takeWhile(value => !!value))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((dateTimeRangeData: DateTimeRange) => {
                 this._dateTimeRange = dateTimeRangeData;
             });
     }
 
-    changeDateTimeRange(dateTimeRange: DateTimeRange) {
+    changeDateTimeRange(dateTimeRange: DateTimeRange): void {
         // emit a new value, that will be passed to listening components
         // this._dateTimeRangeSource.next(dateTimeRange);
         this._storage.setItem('date-time-range', dateTimeRange);
@@ -65,5 +67,9 @@ export class DateTimeRangeService {
             startTime: start.format('H:mm:ss'),
             endTime: end.format('H:mm:ss')
         };
+    }
+
+    ngOnDestroy() {
+        this._onDestroy$.next();
     }
 }

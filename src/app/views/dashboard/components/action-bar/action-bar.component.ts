@@ -5,7 +5,7 @@ import { NgProgressComponent } from '@ngx-progressbar/core';
 import { ActionBarUIState } from './action-bar.ui-state';
 import { Subject } from 'rxjs';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
-import { take, tap, takeUntil, takeWhile } from 'rxjs/operators';
+import { take, tap, takeUntil } from 'rxjs/operators';
 import { DateTimeRange } from '../../interfaces/date-time-range.interface';
 import { DetailsGridRequestService } from '../../services/details-grid-request/details-grid-request.service';
 
@@ -31,7 +31,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private _dateTimeRange: DateTimeRange;
 
-    private _destroy$ = new Subject();
+    private _onDestroy$ = new Subject<void>();
 
     private _applyDateRangePicker = (ev, picker) => {
         // everytime new date range is selected
@@ -40,27 +40,21 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
             return false;
         }
 
-        const start = picker.startDate;
-        const end = picker.endDate;
-
-        // save in state
-        this._setDateTimeRangeInState(start, end);
-
         // updating the value
         this.lastUpdated = new Date();
 
         this._actionBarUIState.changeGettingDataBar('start');
 
-        // pass new value in the stream
-        this._dateTimeRangeService.changeDateTimeRange(this._dateTimeRange);
+        // save in storage
+        this._setDateTimeRangeInStorage(picker.startDate, picker.endDate);
 
         // reset details-grid-request value
         this._storage.setItem('details-grid-request', this._detailsGridRequest.initial());
 
         this._actionBarUIState.currentGettingDataBar
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe(state => this._progressBar[state]());
-    }
+    };
 
     constructor(
         private _dateTimeRangeService: DateTimeRangeService,
@@ -72,14 +66,13 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit() {
         this._storage
             .getItem('date-time-range')
-            .pipe(takeWhile(value => !!value))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((dateTimeRangeData: DateTimeRange) => {
                 this._dateTimeRange = dateTimeRangeData;
             });
     }
 
     ngAfterViewInit() {
-
         let start, end;
 
         if (!this._dateTimeRange) {
@@ -130,7 +123,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
         $('#reportrange').on('apply.daterangepicker', this._applyDateRangePicker);
 
-        this._setDateTimeRangeInState(start, end);
+        // this._setDateTimeRangeInStorage(start, end);
         this._updateDateRangePicker(start, end);
     }
 
@@ -153,7 +146,7 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         return date;
     }
 
-    private _setDateTimeRangeInState(start, end) {
+    private _setDateTimeRangeInStorage(start, end): void {
         const dateTimeRange = {
             startDate: start.format('YYYY-MM-DD'),
             endDate: end.format('YYYY-MM-DD'),
@@ -161,8 +154,8 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
             endTime: end.format('H:mm:ss')
         };
 
-        // save datetimerange in state
-        this._storage.setItem('date-time-range', dateTimeRange);
+        // pass new value in the stream
+        this._dateTimeRangeService.changeDateTimeRange(dateTimeRange);
     }
 
     isCalendarOpen() {
@@ -184,6 +177,6 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this._destroy$.next(true);
+        this._onDestroy$.next();
     }
 }

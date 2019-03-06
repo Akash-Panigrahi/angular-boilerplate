@@ -4,7 +4,7 @@ import { DetailsPageService } from './details-page.service';
 import { Subject } from 'rxjs';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { take, delay, takeUntil, tap, takeWhile } from 'rxjs/operators';
+import { take, delay, takeUntil, tap } from 'rxjs/operators';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
 import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
 import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
@@ -25,7 +25,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     details: DetailsGridResponse[];
     detailsGridRequest: DetailsGridRequest;
 
-    private _destroy$ = new Subject();
+    private _onDestroy$ = new Subject<void>();
 
     constructor(
         private _detailsPageService: DetailsPageService,
@@ -39,7 +39,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
         this._storage
             .getItem('details-grid-request')
-            .pipe(takeWhile(value => !!value))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((detailsGridRequestData: DetailsGridRequest) => {
                 this.detailsGridRequest = detailsGridRequestData;
             });
@@ -58,7 +58,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
         this._dateTimeRangeService
             .currentDateTimeRange()
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((dateTimeRange: DateTimeRange) => {
                 this._getDetails(dateTimeRange, this.detailsGridRequest);
             });
@@ -73,7 +73,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
         this._detailsPageService
             .getDetails(detailsRequest)
             // .pipe(delay(3000))
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe(
                 (res: DetailsGridResponse[]) => {
                     this.details = res;
@@ -90,8 +90,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
         this._dateTimeRangeService
             .currentDateTimeRange()
-            .pipe(take(1))
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((dateTimeRange: DateTimeRange) => {
                 this._getDetails(dateTimeRange, detailsGridRequest);
             });
@@ -103,7 +102,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
         this._storage
             .getItem('date-time-range')
-            .pipe(takeWhile(value => !!value))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((dateTimeRangeData: DateTimeRange) => {
                  startDate = dateTimeRangeData.startDate;
                  startTime = dateTimeRangeData.startTime;
@@ -121,6 +120,6 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this._destroy$.next(true);
+        this._onDestroy$.next();
     }
 }

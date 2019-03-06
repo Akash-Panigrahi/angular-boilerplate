@@ -37,8 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
                 filter(userData => userData ? true : false),
                 // tap(console.log)
             )
-            .subscribe((userData: LoginData) => token = userData.token)
-            ;
+            .subscribe((userData: LoginData) => token = userData.token);
 
         if (token) {
             request = request.clone({

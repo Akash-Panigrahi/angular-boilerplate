@@ -4,7 +4,7 @@ import { IHeaderParams } from 'ag-grid-community';
 import { Subject } from 'rxjs';
 import { ChangeToNoSortStorageService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { take, takeUntil, takeWhile } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { DetailsGridRequest } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
 
 @Component({
@@ -13,7 +13,7 @@ import { DetailsGridRequest } from 'src/app/views/dashboard/interfaces/details-g
     styleUrls: ['./details-grid-header.component.scss']
 })
 export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, OnDestroy {
-    private _destroy$ = new Subject();
+    private _onDestroy$ = new Subject<void>();
 
     params: IHeaderParams;
     colId: string;
@@ -41,7 +41,7 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
          * and reset all components to no sort state
          */
         this._changeToNoSortState.currentNoSortState
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe(columnToSkip => {
                 if (this.colId !== columnToSkip) {
                     this.currDirection = 0;
@@ -55,12 +55,14 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
         this._storage
             .getItem('details-grid-request')
             /**
-             * using takeWhile operator to unsubscribe
-             * from _storage stream
-             * cause the stream is completed by passing null to it
-             * so all that remains is to check if value is null or not
+             * Using takeUntil operator to unsubscribe
+             * from _storage stream.
+             * Even if stream is completed by invoking complete on it
+             * this particular component may not need it,
+             * hence its better to unsubscribe to stream at
+             * ngOnDestroy lifecycle
              */
-            .pipe(takeWhile(value => !!value))
+            .pipe(takeUntil(this._onDestroy$))
             .subscribe((detailsGridRequestData: DetailsGridRequest) => {
                 const { key, direction } = detailsGridRequestData.sort;
 
@@ -134,6 +136,6 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
     }
 
     ngOnDestroy() {
-        this._destroy$.next(true);
+        this._onDestroy$.next();
     }
 }

@@ -18,6 +18,7 @@
     box-shadow: 0px 12px 20px -14px black, 0 0 10px 1px rgba(53, 149, 252, 0.6);
     border-radius: var(--login-container-border-radius);
     transform-origin: top center;
+    margin: 2rem;
 
     @include media-breakpoint-down(sm) {
         padding: 1rem;
@@ -69,10 +70,6 @@
 @include media-breakpoint-down(sm) {
     .login-horizontal-separator {
         display: block;
-    }
-
-    .form-horizontal-separator {
-        display: none;
     }
 }
 

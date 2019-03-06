@@ -21,8 +21,7 @@ export class NotLoggedInUserGuard implements CanActivate {
         this._storage
             .getItem('user')
             .pipe(take(1))
-            .subscribe((userData: LoginData) => user = userData)
-            ;
+            .subscribe((userData: LoginData) => user = userData);
 
         // if route is of login page and user is already logged in
         if (state.url === '/login') {

@@ -4,21 +4,21 @@
             <app-kpi
                 class="child-component"
                 [kpiTitle]="'Total Calls'"
-                [kpiValue]="summaryData.kpis?.total_calls"
+                [kpiValue]="summaryData.kpis?.totalCalls"
             ></app-kpi>
             <app-kpi
                 class="child-component"
                 [kpiTitle]="'Inbound Calls'"
                 [kpiPercentTitle]="'Inbound calls with respect to total calls'"
-                [kpiPercent]="(summaryData.kpis?.inbound_calls / summaryData.kpis?.total_calls) | percent: '.2'"
-                [kpiValue]="summaryData.kpis?.inbound_calls"
+                [kpiPercent]="(summaryData.kpis?.inboundCalls / summaryData.kpis?.totalCalls) | percent: '.2'"
+                [kpiValue]="summaryData.kpis?.inboundCalls"
             ></app-kpi>
             <app-kpi
                 class="child-component"
                 [kpiTitle]="'Outbound Calls'"
                 [kpiPercentTitle]="'Outbound calls with respect to total calls'"
-                [kpiPercent]="(summaryData.kpis?.outbound_calls / summaryData.kpis?.total_calls) | percent: '.2'"
-                [kpiValue]="summaryData.kpis?.outbound_calls"
+                [kpiPercent]="(summaryData.kpis?.outboundCalls / summaryData.kpis?.totalCalls) | percent: '.2'"
+                [kpiValue]="summaryData.kpis?.outboundCalls"
             ></app-kpi>
         </div>
     </div>

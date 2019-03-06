@@ -52,7 +52,7 @@ export class StorageService {
     clear(): void {
         this.storage.clear();
         this.itemSources.forEach((itemSource: BehaviorSubject<StorageItemsTypes>) => {
-            itemSource.next(null);
+            // itemSource.next(null);
             itemSource.complete();
         });
 
