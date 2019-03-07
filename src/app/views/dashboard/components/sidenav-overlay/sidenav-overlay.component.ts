@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { LogoutService } from '../../services/logout/logout.service';
 import { SidenavOverlayRef } from '../../class/sidenav-overlay-ref';
 import { SIDENAV_OVERLAY_DATA } from '../../services/sidenav-overlay/sidenav-overlay.tokens';
 import { SidenavData } from '../../interfaces/sidenav.interface';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav-overlay',
@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class SidenavOverlayComponent implements OnInit {
 
+    activeRouteUrl: string;
+
     constructor(
         private _logout: LogoutService,
         private _router: Router,
@@ -20,7 +22,10 @@ export class SidenavOverlayComponent implements OnInit {
         @Inject(SIDENAV_OVERLAY_DATA) public sidenavData: SidenavData
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        /** current route url to style active route in template */
+        this.activeRouteUrl = this._router.url;
+    }
 
     changeRoute(routeUrl) {
         this._sidenavOverlayRef.close();

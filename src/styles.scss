@@ -7,6 +7,8 @@
 
 @import "styles/theme";
 @import "styles/variables";
+@import "styles/functions";
+@import "styles/typography";
 @import "styles/mixin";
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700');
@@ -18,10 +20,14 @@
 }
 
 
-/** remove overflow-y: scroll */
 html {
-    .side-nav-overlay__panel {
-        @at-root .cdk-global-scrollblock {
+
+    /**
+     * to remove scroll bar when side nav is shown
+     */
+     .side-nav-overlay__panel {
+         @at-root .cdk-global-scrollblock {
+            /** remove overflow-y: scroll */
            overflow-y: hidden;
         }
     }

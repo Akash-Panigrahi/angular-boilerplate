@@ -1,5 +1,5 @@
 <header class="main-header">
-    <mat-toolbar color="primary">
+    <mat-toolbar>
         <mat-toolbar-row>
             <button class="sidenav-toggle mat-button"
                     mat-button
@@ -28,10 +28,14 @@
                 <a class="navigation-link"
                    mat-button
                    *ngFor="let item of navigationItems"
-                   routerLinkActive="active"
+                   routerLinkActive="navigation-link--active"
                    [routerLink]="item.url">
                     {{ item.name }}
                 </a>
+
+                <!-- mat-divider must only work in mat-list -->
+                <mat-divider [vertical]="true"></mat-divider>
+
                 <span class="divider"></span>
                 <a class="navigation-link"
                    mat-button

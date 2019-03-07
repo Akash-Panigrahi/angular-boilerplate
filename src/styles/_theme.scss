@@ -7,8 +7,8 @@
 @include mat-core();
 
 // Define the default theme (same as the example above).
-$app-primary : mat-palette($mat-blue, 700, 300, 900);
-$app-accent  : mat-palette($mat-amber);
+$app-primary : mat-palette($mat-orange, 700, 300, 900);
+$app-accent  : mat-palette($mat-light-blue);
 $app-warn    : mat-palette($mat-red, A200);
 
 
@@ -18,7 +18,10 @@ $app-theme: mat-light-theme(
     $app-warn
 );
 
+@import 'components-theme';
+
 // Include the default theme styles.
 .app-light-theme {
     @include angular-material-theme($app-theme);
+    @include components-theme($app-theme);
 }

@@ -50,6 +50,12 @@
     &:hover {
         text-decoration: none;
     }
+
+    &--active {
+        border-bottom: 2px solid skyblue;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+    }
 }
 
 .user-avatar {

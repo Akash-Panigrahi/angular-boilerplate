@@ -24,11 +24,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     navigationItems = [
         {
             name: 'Summary',
-            url: '/summary'
+            url: '/summary',
+            icon: 'list_alt'
         },
         {
             name: 'Details',
-            url: '/details'
+            url: '/details',
+            icon: 'info'
         }
     ];
 

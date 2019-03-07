@@ -2,4 +2,4 @@ $background: map-get($app-theme, background);
 $foreground: map-get($app-theme, foreground);
 
 $background-color: mat-color($app-primary);
-$color: mat-color($app-accent);
+$color: mat-color($foreground, text);

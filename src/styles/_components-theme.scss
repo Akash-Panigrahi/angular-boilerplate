@@ -1,0 +1,5 @@
+@import 'app/views/dashboard/components/header/header.component.scss-theme';
+
+@mixin components-theme($theme) {
+    @include header-component-theme($theme);
+}
