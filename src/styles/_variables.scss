@@ -1,5 +1,5 @@
-$background: map-get($app-theme, background);
-$foreground: map-get($app-theme, foreground);
+$background: map-get($app-light-theme, background);
+$foreground: map-get($app-light-theme, foreground);
 
 $background-color: mat-color($app-primary);
 $color: mat-color($foreground, text);

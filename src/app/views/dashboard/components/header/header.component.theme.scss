@@ -3,13 +3,22 @@
 @mixin header-component-theme($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
-    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
 
     .app-header {
 
         .mat-toolbar {
             background-color: mat-color($primary);
             color: mat-color($primary, default-contrast);
+        }
+
+        .navigation-link {
+            color: mat-color($accent, default-contrast);
+
+            &--active {
+                border-bottom: 2px solid mat-color($accent);
+                background: mat-color($background, focused-button);
+            }
         }
     }
 }

@@ -1,5 +1,11 @@
-@import 'app/views/dashboard/components/header/header.component.scss-theme';
+@import '~@angular/material/theming';
+
+@import 'app/views/dashboard/components/header/header.component.theme';
+@import 'app/views/dashboard/components/footer/footer.component.theme';
+@import 'app/views/dashboard/components/sidenav-overlay/sidenav-overlay.component.theme';
 
 @mixin components-theme($theme) {
     @include header-component-theme($theme);
+    @include footer-component-theme($theme);
+    @include sidenav-overlay-component-theme($theme);
 }

@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap-grid.scss';
+@import 'mixins';
 
 :host {
     z-index: 3;
@@ -45,15 +46,12 @@
 }
 
 .navigation-link {
-    color: white;
 
     &:hover {
         text-decoration: none;
     }
 
     &--active {
-        border-bottom: 2px solid skyblue;
-        background: rgba(0, 0, 0, 0.1);
         border-radius: 0;
     }
 }
@@ -64,4 +62,8 @@
 
 .app-logo {
     margin-right: auto;
+}
+
+.mat-icon-wrapper {
+    @include center();
 }

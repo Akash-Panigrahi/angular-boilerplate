@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+
+@mixin footer-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $typograpy-config: mat-typograpy-config();
+
+    .app-footer {
+
+        footer {
+            background-color: mat-color($primary);
+            color: mat-color($primary, default-contrast);
+        }
+
+        span {
+            // font-size: mat-font-size($typograpy-config, subheading-1);
+        }
+    }
+}
