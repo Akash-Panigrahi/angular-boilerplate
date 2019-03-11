@@ -23,33 +23,30 @@
                 Angular Dashboard
             </a>
 
-            <div class="action-links"
+            <mat-nav-list class="action-links"
                  *ngIf="showLinks">
-                <a class="navigation-link"
-                   mat-button
-                   *ngFor="let item of navigationItems"
-                   routerLinkActive="navigation-link--active"
-                   [routerLink]="item.url">
+                 <mat-list-item class="navigation-link"
+                                *ngFor="let item of navigationItems"
+                                routerLinkActive="navigation-link--active"
+                                [routerLink]="item.url">
                     {{ item.name }}
-                </a>
+                </mat-list-item>
 
-                <!-- mat-divider must only work in mat-list -->
-                <mat-divider [vertical]="true"></mat-divider>
+                <mat-divider class="vertical-divider"
+                             [vertical]="true">
+                </mat-divider>
 
-                <span class="divider"></span>
-                <a class="navigation-link"
-                   mat-button
-                   [matMenuTriggerFor]="userMenu">
+                <mat-list-item [matMenuTriggerFor]="userMenu">
                     <mat-icon class="user-avatar">person_outline</mat-icon>
                     skydive
-                </a>
-                <mat-menu #userMenu="matMenu">
-                    <button mat-menu-item (click)="logout()">
-                        Logout
-                        <mat-icon>arrow_forward</mat-icon>
-                    </button>
-                </mat-menu>
-            </div>
+                    <mat-menu #userMenu="matMenu">
+                        <button mat-menu-item (click)="logout()">
+                            Logout
+                            <mat-icon>arrow_forward</mat-icon>
+                        </button>
+                    </mat-menu>
+                </mat-list-item>
+            </mat-nav-list>
         </mat-toolbar-row>
     </mat-toolbar>
 </header>
