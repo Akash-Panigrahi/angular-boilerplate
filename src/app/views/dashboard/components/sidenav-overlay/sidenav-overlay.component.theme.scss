@@ -4,16 +4,43 @@
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
 
     /** TODO: change class to the components one and not of the panel */
     .sidenav-overlay__panel {
 
+        /** TODO: use class instead of tag */
+        app-sidenav-overlay {
+            background-color: mat-color($background, background);
+            border-top: 4px solid mat-color($primary);
+        }
+
+        .user-info {
+            background-color: mat-color($accent, darker);
+        }
+
+        .user-name {
+            color: mat-color($accent, darker-contrast);
+        }
+
         .navigation-link {
 
-            &--active {
-                color: mat-color($primary, default-contrast);
-                background-color: mat-color($primary);
+            &:hover {
+                color: mat-color($foreground, text);
             }
+
+            &--active {
+                // color: mat-color($primary, default-contrast);
+                color: mat-color($primary, darker);
+
+                &:hover {
+                    color: mat-color($primary, darker);
+                }
+            }
+        }
+
+        .action-links {
+            background: mat-color($background, app-bar);
         }
 
         .logout-button {

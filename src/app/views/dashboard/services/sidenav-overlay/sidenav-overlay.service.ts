@@ -29,6 +29,9 @@ export class SidenavOverlayService implements OnDestroy {
             sidenavOverlayRef
         );
 
+        // Pass the instance of the overlay component to the remote control
+        sidenavOverlayRef.componentInstance = overlayComponent;
+
         /** Subscribe to a stream that emits when the backdrop was clicked */
         overlayRef
             .backdropClick()

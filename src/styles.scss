@@ -44,6 +44,15 @@ body {
     overflow-x: hidden;
 }
 
+// TODO: remove outline introduced by other css libraries
+// * {
+
+//     &:hover,
+//     &:active {
+//         outline: none !important;
+//     }
+// }
+
 
 // css for overriding yellowing of text fields on autocomplete of chrome browser
 input:-webkit-autofill,
@@ -109,6 +118,22 @@ select:-internal-autofill-selected {
 
     /* Support for IE. */
     font-feature-settings: 'liga';
+}
+
+
+// utility classes
+.horizontal-space {
+    display: inline-flex;
+    padding-right: 1rem;
+}
+
+.vertical-space {
+    display: inline-flex;
+    padding-bottom: 1rem;
+}
+
+.remaining-space {
+    flex: 1;
 }
 
 

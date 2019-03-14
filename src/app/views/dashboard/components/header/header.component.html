@@ -2,51 +2,66 @@
     <mat-toolbar>
         <mat-toolbar-row>
             <button class="sidenav-toggle mat-button"
-                    mat-button
+                    mat-icon-button
                     *ngIf="!showLinks"
                     (click)="showSidenav()">
-                <span class="mat-icon-wrapper">
-                    <mat-icon class="mat-icon material-icons"
-                              role="img"
-                              aria-hidden="true">
-                        menu
-                    </mat-icon>
-                </span>
-                <div class="mat-button-ripple mat-ripple"
-                     matripple>
-                </div>
-                <div class="mat-button-focus-overlay"></div>
+                <mat-icon class="mat-icon material-icons"
+                          role="img"
+                          aria-hidden="true">
+                    menu
+                </mat-icon>
             </button>
 
-            <a class="navigation-link app-logo"
+            <div class="horizontal-space"></div>
+
+            <a class="app-logo"
                routerLink="/summary">
                 Angular Dashboard
             </a>
 
-            <mat-nav-list class="action-links"
+            <div class="remaining-space"></div>
+
+            <div class="action-links"
                  *ngIf="showLinks">
-                 <mat-list-item class="navigation-link"
-                                *ngFor="let item of navigationItems"
-                                routerLinkActive="navigation-link--active"
-                                [routerLink]="item.url">
+
+                <mat-nav-list class="navigation-links">
+                    <mat-list-item class="navigation-link"
+                                   *ngFor="let item of navigationItems"
+                                   routerLinkActive="navigation-link--active"
+                                   [routerLink]="item.url">
+                        {{ item.name }}
+                    </mat-list-item>
+                </mat-nav-list>
+
+            <!-- <div class="action-links"
+                *ngIf="showLinks">
+                <a class="navigation-link"
+                   mat-button
+                   *ngFor="let item of navigationItems"
+                   routerLinkActive="navigation-link--active"
+                   [routerLink]="item.url">
                     {{ item.name }}
-                </mat-list-item>
+                </a> -->
 
-                <mat-divider class="vertical-divider"
-                             [vertical]="true">
-                </mat-divider>
+                <div class="horizontal-space"></div>
 
-                <mat-list-item [matMenuTriggerFor]="userMenu">
-                    <mat-icon class="user-avatar">person_outline</mat-icon>
-                    skydive
+                <button class="user-actions"
+                        mat-button
+                        [matMenuTriggerFor]="userMenu">
+                    <span class="username">{{ username }}</span>
+                    <div class="horizontal-space"></div>
+                    <mat-icon>expand_more</mat-icon>
+
                     <mat-menu #userMenu="matMenu">
-                        <button mat-menu-item (click)="logout()">
+                        <button mat-menu-item
+                                (click)="logout()">
                             Logout
-                            <mat-icon>arrow_forward</mat-icon>
                         </button>
                     </mat-menu>
-                </mat-list-item>
-            </mat-nav-list>
+                </button>
+
+            </div>
+
         </mat-toolbar-row>
     </mat-toolbar>
 </header>

@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         {
             name: 'Details',
             url: '/details',
-            icon: 'info'
+            icon: 'info_outline'
         }
     ];
 

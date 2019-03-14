@@ -44,18 +44,10 @@
     }
 
     &--active {
-        border-radius: 0;
+        // border-radius: 0;
     }
 }
 
 .user-avatar {
     margin-right: 8px;
-}
-
-.app-logo {
-    margin-right: auto;
-}
-
-.mat-icon-wrapper {
-    @include center();
 }

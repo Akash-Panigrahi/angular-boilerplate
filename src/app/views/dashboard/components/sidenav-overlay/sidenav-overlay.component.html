@@ -12,13 +12,13 @@
                        *ngFor="let item of sidenavData.navigationItems"
                        [class.navigation-link--active]="activeRouteUrl === item.url"
                        (click)="changeRoute(item.url)">
+            <mat-icon mat-list-icon>{{ item.icon }}</mat-icon>
             <a mat-line>{{ item.name }}</a>
-            <button mat-icon-button>
-                <mat-icon>{{ item.icon }}</mat-icon>
-            </button>
         </mat-list-item>
     </mat-nav-list>
-    <!-- <mat-divider></mat-divider> -->
+
+    <div class="vertical-space"></div>
+
     <button class="logout-button"
             mat-raised-button
             (click)="logout()">

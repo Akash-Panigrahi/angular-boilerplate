@@ -14,16 +14,18 @@
 
         .navigation-link {
             color: mat-color($accent, default-contrast);
-            border-bottom: 2px solid transparent;
 
             &--active {
-                border-bottom: 2px solid mat-color($accent);
-                background: mat-color($background, focused-button);
+                background: mat-color($background, focused-button) !important;
             }
         }
 
-        .vertical-divider {
-            border-right-color: mat-color($background, divider);
+        .app-logo {
+            color: mat-color($primary, default-contrast);
+        }
+
+        .user-actions {
+            background-color: mat-color($accent);
         }
     }
 }
