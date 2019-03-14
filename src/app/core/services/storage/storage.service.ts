@@ -22,6 +22,9 @@ export class StorageService {
     }
 
     getItem(key: string): Observable<StorageItemsTypes> {
+
+        // console.log(`storage ${this.itemSources.has(key) ? '' : 'does not '}has ${key} with value ${this.storage.getItem(key)}`);
+
         if (!this.itemSources.has(key)) {
             this.itemSources.set(key, new BehaviorSubject<StorageItemsTypes>(JSON.parse(this.storage.getItem(key))));
         }
@@ -30,6 +33,9 @@ export class StorageService {
     }
 
     setItem(key: string, value: StorageItemsTypes): void {
+
+        // console.log(`setting ${key} in storage`);
+
         try {
             this.storage.setItem(key, JSON.stringify(value));
             if (this.itemSources.has(key)) {

@@ -123,7 +123,8 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
         $('#reportrange').on('apply.daterangepicker', this._applyDateRangePicker);
 
-        // this._setDateTimeRangeInStorage(start, end);
+        // setting date-time-range in storage once
+        this._setDateTimeRangeInStorage(start, end);
         this._updateDateRangePicker(start, end);
     }
 
