@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { slideDown } from './action-bar.animations';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { NgProgressComponent } from '@ngx-progressbar/core';
@@ -8,6 +8,9 @@ import { DateTimeRangeService } from '../../services/date-time-range/date-time-r
 import { take, tap, takeUntil } from 'rxjs/operators';
 import { DateTimeRange } from '../../interfaces/date-time-range.interface';
 import { DetailsGridRequestService } from '../../services/details-grid-request/details-grid-request.service';
+import { DatetimerangeRef } from '../datetimerange/datetimerange-ref';
+import { DatetimerangeOverlayService } from '../../services/datetimerange-overlay/datetimerange-overlay.service';
+import { DatetimerangeComponent } from '../datetimerange/datetimerange.component';
 
 // declare variables to avoid error in aot compilation process
 declare const $: any;
@@ -23,11 +26,15 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     // getting a reference to the progress bar in the html file
     @ViewChild('gettingDataBar') private _progressBar: NgProgressComponent;
 
+    @ViewChild('datetimerangeEl', { read: ElementRef }) private _datetimerangeEl: ElementRef<DatetimerangeComponent>;
+
     // property required to trigger animation
     isOpen = false;
 
     // setting initial date when app is opened
     lastUpdated = new Date();
+
+    private _datetimerangeRef: DatetimerangeRef;
 
     private _dateTimeRange: DateTimeRange;
 
@@ -54,13 +61,14 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         this._actionBarUIState.currentGettingDataBar
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(state => this._progressBar[state]());
-    };
+    }
 
     constructor(
         private _dateTimeRangeService: DateTimeRangeService,
         private _storage: StorageService,
         private _actionBarUIState: ActionBarUIState,
-        private _detailsGridRequest: DetailsGridRequestService
+        private _detailsGridRequest: DetailsGridRequestService,
+        private _datetimerangeOverlayService: DatetimerangeOverlayService,
     ) {}
 
     ngOnInit() {
@@ -175,6 +183,13 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
 
         return false;
+    }
+
+    toggleDateTimeRange() {
+        // triggering animation by changing state
+        this._datetimerangeRef = this._datetimerangeOverlayService.open({
+            el: this._datetimerangeEl.nativeElement
+        });
     }
 
     ngOnDestroy() {

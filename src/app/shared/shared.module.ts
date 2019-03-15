@@ -8,7 +8,8 @@ import {
     MatListModule,
     MatMenuModule,
     MatSidenavModule,
-    MatDividerModule
+    MatDividerModule,
+    MatRippleModule
 } from '@angular/material';
 
 import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
@@ -29,7 +30,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatSidenavModule,
         OverlayModule,
         LayoutModule,
-        MatDividerModule
+        MatDividerModule,
+        MatRippleModule
     ],
     declarations: [
         // public
@@ -46,7 +48,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatSidenavModule,
         OverlayModule,
         LayoutModule,
-        MatDividerModule
+        MatDividerModule,
+        MatRippleModule
     ]
 })
 export class SharedModule {

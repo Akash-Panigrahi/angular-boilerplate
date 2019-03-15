@@ -21,6 +21,23 @@
         &nbsp;
         <i class="material-icons">arrow_drop_down</i>
     </div>
+
+    <button #datetimerangeEl
+            mat-raised-button
+            color="accent"
+            (click)="toggleDateTimeRange()">
+        <div class="calendar-icon__wrapper">
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+        </div>
+        <div class="horizontal-space"></div>
+
+        <span>DateTimePicker</span>
+
+        <div class="horizontal-space"></div>
+
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
     <div class="last-updated">
         <h5>Last Updated | {{ lastUpdated | date: 'dd-MM-yyyy h:mm:ss a' }}</h5>
     </div>

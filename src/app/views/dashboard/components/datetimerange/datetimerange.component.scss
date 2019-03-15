@@ -1,0 +1,46 @@
+.ranges {
+    border-radius: 4px;
+
+    li {
+        font-size: inherit;
+        padding: 10px 0 10px 16px;
+        letter-spacing: 0.25px;
+        text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
+
+        &:hover,
+        &:focus {
+            border-radius: 0 100px 100px 0;
+            color: #1a73e8;
+        }
+
+        &.active {
+            border-radius: 0 100px 100px 0;
+            background-color: #1a73e8;
+            cursor: default;
+            color: white;
+            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
+        }
+    }
+}
+
+.range {
+    white-space: nowrap;
+    display: flex;
+    height: 3rem;
+    padding-right: 1rem;
+
+    button {
+        padding: 0 1rem;
+        text-align: left;
+        width: 100%;
+    }
+
+    &--active {
+        border-radius: 0 100px 100px 0;
+        cursor: default;
+    }
+
+    .mat-ripple {
+        border-radius: 0 100px 100px 0;
+    }
+}

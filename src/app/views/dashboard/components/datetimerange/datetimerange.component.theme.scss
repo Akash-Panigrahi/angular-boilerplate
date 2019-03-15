@@ -1,0 +1,45 @@
+@import '~@angular/material/theming';
+
+@mixin datetimerange-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    /** TODO: change class to the components one and not of the panel */
+    .datetimerange__panel {
+
+        .ranges {
+            @include mat-elevation(6);
+            background-color: mat-color($background, background);
+            position: relative;
+
+            &:before {
+                position: absolute;
+                content: ' ';
+                bottom: 100%;
+                left: 50%;
+                transform: translate3d(-50%, 0, 0);
+                width: 0;
+                height: 0;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid mat-color($background, background);
+            }
+        }
+
+        .range {
+            transition: $swift-ease-out;
+
+            &--active {
+                @include mat-elevation(2);
+                background-color: mat-color($accent);
+                color: mat-color($accent, default-contrast);
+            }
+
+            &:hover:not(&--active) {
+                color: mat-color($accent);
+            }
+        }
+    }
+}

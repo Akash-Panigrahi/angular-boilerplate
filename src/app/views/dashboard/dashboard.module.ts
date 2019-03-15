@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 
 import { NgbCollapseModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartModule } from 'angular-highcharts';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -29,6 +30,8 @@ import { LogoutService } from './services/logout/logout.service';
 import { DetailsGridRequestService } from './services/details-grid-request/details-grid-request.service';
 import { SidenavOverlayComponent } from './components/sidenav-overlay/sidenav-overlay.component';
 import { SidenavOverlayService } from './services/sidenav-overlay/sidenav-overlay.service';
+import { DatetimerangeComponent } from './components/datetimerange/datetimerange.component';
+import { DatetimerangeOverlayService } from './services/datetimerange-overlay/datetimerange-overlay.service';
 
 @NgModule({
     declarations: [
@@ -42,7 +45,8 @@ import { SidenavOverlayService } from './services/sidenav-overlay/sidenav-overla
         GradientPieComponent,
         KpiComponent,
         CopyrightPipe,
-        SidenavOverlayComponent
+        SidenavOverlayComponent,
+        DatetimerangeComponent
     ],
     imports: [
         CommonModule,
@@ -53,6 +57,8 @@ import { SidenavOverlayService } from './services/sidenav-overlay/sidenav-overla
         ChartModule,
         NgProgressModule,
         NgbDatepickerModule,
+        OwlDateTimeModule,
+        OwlNativeDateTimeModule,
 
         SharedModule,
         DashboardRoutingModule,
@@ -63,14 +69,16 @@ import { SidenavOverlayService } from './services/sidenav-overlay/sidenav-overla
         DetailsGridRequestService,
         FormatTimeService,
         LogoutService,
-        SidenavOverlayService
+        SidenavOverlayService,
+        DatetimerangeOverlayService
     ],
     entryComponents: [
         /**
          * Needs to be added here because otherwise we can't
          * dynamically render this component at runtime
          */
-        SidenavOverlayComponent
+        SidenavOverlayComponent,
+        DatetimerangeComponent
     ]
 })
 export class DashboardModule {

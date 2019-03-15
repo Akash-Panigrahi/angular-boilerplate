@@ -4,6 +4,7 @@
 @import '~ag-grid-community/dist/styles/ag-grid.css';
 @import '~ag-grid-community/dist/styles/ag-theme-material.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 @import "styles/theme";
 @import "styles/variables";
@@ -45,13 +46,19 @@ body {
 }
 
 // TODO: remove outline introduced by other css libraries
-// * {
+* {
 
-//     &:hover,
-//     &:active {
-//         outline: none !important;
-//     }
-// }
+    &:hover,
+    &:active,
+    &:focus {
+        outline: none !important;
+    }
+}
+
+// resetting css introduced by user agent stylesheet
+button {
+    padding: 0;
+}
 
 
 // css for overriding yellowing of text fields on autocomplete of chrome browser
