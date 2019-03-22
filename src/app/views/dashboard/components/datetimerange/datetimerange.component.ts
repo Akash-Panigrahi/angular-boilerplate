@@ -24,7 +24,8 @@ export const MY_CUSTOM_DATETIME_FORMATS = {
     animations: [slideDownRangesAnimation],
     providers: [
         {
-            provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_DATETIME_FORMATS
+            provide: OWL_DATE_TIME_FORMATS,
+            useValue: MY_CUSTOM_DATETIME_FORMATS
         }
     ]
 })
@@ -122,7 +123,6 @@ export class DatetimerangeComponent implements OnInit, OnDestroy {
          * if dateTime is set, means user has already clicked on atleast one range
          * then check whether user has clicked already selected value
          */
-        console.log(this.dateTime, dateTimeRange);
         if (this.dateTime && this._dateTimeRangeIsSame(this.dateTime, dateTimeRange)) {
             return false;
         }
@@ -134,13 +134,6 @@ export class DatetimerangeComponent implements OnInit, OnDestroy {
     }
 
     private _dateTimeRangeIsSame(firstDateTimeRange: MomentRange, secondDateTimeRange: MomentRange): boolean {
-        /* console.log(
-            firstDateTimeRange[0].format(),
-            secondDateTimeRange[0].format(),
-            firstDateTimeRange[1].format(),
-            secondDateTimeRange[1].format()
-        ); */
-
         if (
             firstDateTimeRange[0].format() === secondDateTimeRange[0].format() &&
             firstDateTimeRange[1].format() === secondDateTimeRange[1].format()
