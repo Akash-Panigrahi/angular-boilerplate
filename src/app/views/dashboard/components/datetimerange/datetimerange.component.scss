@@ -1,25 +1,17 @@
 .ranges {
     border-radius: 4px;
+    position: relative;
 
-    li {
-        font-size: inherit;
-        padding: 10px 0 10px 16px;
-        letter-spacing: 0.25px;
-        text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
-
-        &:hover,
-        &:focus {
-            border-radius: 0 100px 100px 0;
-            color: #1a73e8;
-        }
-
-        &.active {
-            border-radius: 0 100px 100px 0;
-            background-color: #1a73e8;
-            cursor: default;
-            color: white;
-            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
-        }
+    &:before {
+        position: absolute;
+        content: ' ';
+        bottom: 100%;
+        left: 1rem;
+        transform: translate3d(-50%, 0, 0);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0px 10px 10px 10px;
     }
 }
 
@@ -29,18 +21,26 @@
     height: 3rem;
     padding-right: 1rem;
 
+    @mixin right-side-rounded() {
+        border-radius: 0 100px 100px 0;
+    }
+
     button {
         padding: 0 1rem;
         text-align: left;
         width: 100%;
+
+        &:hover:not(.range--active) {
+            @include right-side-rounded();
+        }
     }
 
     &--active {
-        border-radius: 0 100px 100px 0;
+        @include right-side-rounded();
         cursor: default;
     }
 
     .mat-ripple {
-        border-radius: 0 100px 100px 0;
+        @include right-side-rounded();
     }
 }

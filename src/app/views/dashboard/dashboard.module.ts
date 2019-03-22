@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 
 import { NgbCollapseModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartModule } from 'angular-highcharts';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { OwlDateTimeModule } from 'ng-pick-datetime';
+import { OwlMomentDateTimeModule } from 'ng-pick-datetime-moment';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -58,7 +59,7 @@ import { DatetimerangeOverlayService } from './services/datetimerange-overlay/da
         NgProgressModule,
         NgbDatepickerModule,
         OwlDateTimeModule,
-        OwlNativeDateTimeModule,
+        OwlMomentDateTimeModule,
 
         SharedModule,
         DashboardRoutingModule,

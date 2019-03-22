@@ -53,14 +53,14 @@ export class DatetimerangeOverlayService implements OnDestroy {
     private _getOverlayConfig(config: DatetimerangeOverlayConfig): OverlayConfig {
 
         const positions = [
-            new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }),
+            new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
             new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' })
         ];
 
         const positionStrategy = this._overlay
             .position()
             .flexibleConnectedTo(config.el)
-            .withDefaultOffsetY(10)
+            .withDefaultOffsetY(12)
             .withPositions(positions)
             .withPush(false)
             ;
@@ -70,7 +70,7 @@ export class DatetimerangeOverlayService implements OnDestroy {
             hasBackdrop: true,
             backdropClass: 'light-backdrop',
             panelClass: 'datetimerange__panel',
-            scrollStrategy: this._overlay.scrollStrategies.close(),
+            scrollStrategy: this._overlay.scrollStrategies.reposition(),
             positionStrategy
         });
 
@@ -86,7 +86,7 @@ export class DatetimerangeOverlayService implements OnDestroy {
 
         /** Set custom injection tokens */
         injectionTokens.set(DatetimerangeRef, datetimerangeRef);
-        injectionTokens.set(DATETIMERANGE_OVERLAY_DATA, config.el);
+        injectionTokens.set(DATETIMERANGE_OVERLAY_DATA, config.data);
 
         /** Instantiate new PortalInjector */
         return new PortalInjector(this._injector, injectionTokens);

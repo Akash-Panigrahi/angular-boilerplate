@@ -4,10 +4,12 @@
 @import 'app/views/dashboard/components/footer/footer.component.theme';
 @import 'app/views/dashboard/components/sidenav-overlay/sidenav-overlay.component.theme';
 @import 'app/views/dashboard/components/datetimerange/datetimerange.component.theme';
+@import 'app/views/dashboard/components/action-bar/action-bar.component.theme';
 
 @mixin components-theme($theme) {
     @include header-component-theme($theme);
     @include footer-component-theme($theme);
     @include sidenav-overlay-component-theme($theme);
     @include datetimerange-component-theme($theme);
+    @include action-bar-component-theme($theme);
 }

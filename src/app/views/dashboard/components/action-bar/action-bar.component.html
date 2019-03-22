@@ -7,9 +7,9 @@
     </ng-progress>
 </div>
 <div class="line-separator"></div>
-<div class="container-fluid action-bar"
-     [@slideDown]="isOpen ? 'open' : 'close'">
-    <div id="reportrange"
+<div class="container-fluid action-bar">
+     <!-- [@slideDown]="isOpen ? 'open' : 'close'"> -->
+    <!-- <div id="reportrange"
          class="datetimerangepicker"
          rippleOnClick
          (click)="isCalendarOpen()">
@@ -20,18 +20,19 @@
         <span></span>
         &nbsp;
         <i class="material-icons">arrow_drop_down</i>
-    </div>
+    </div> -->
 
-    <button #datetimerangeEl
+    <button class="datetimerangepicker__button"
+            #datetimerangeEl
             mat-raised-button
-            color="accent"
             (click)="toggleDateTimeRange()">
         <div class="calendar-icon__wrapper">
             <mat-icon class="calendar-icon">calendar_today</mat-icon>
         </div>
+
         <div class="horizontal-space"></div>
 
-        <span>DateTimePicker</span>
+        <span>{{ start | date: 'MMMM dd, yyyy' }} - {{ end | date: 'MMMM dd, yyyy' }}</span>
 
         <div class="horizontal-space"></div>
 
