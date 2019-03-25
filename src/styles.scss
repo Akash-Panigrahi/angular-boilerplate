@@ -1,6 +1,4 @@
 @import '~bootstrap/scss/bootstrap';
-@import '~daterangepicker/daterangepicker.css';
-@import '~ngx-toastr/toastr-bs4-alert';
 @import '~ag-grid-community/dist/styles/ag-grid.css';
 @import '~ag-grid-community/dist/styles/ag-theme-material.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
@@ -17,8 +15,7 @@
 
 
 :root {
-    --background-color: #{$background-color};
-    --color: #{$color};
+    --red: $app-green;
 }
 
 
@@ -131,124 +128,16 @@ select:-internal-autofill-selected {
 // utility classes
 .horizontal-space {
     display: inline-flex;
-    padding-right: 1rem;
+    padding-right: 0.5rem;
 }
 
 .vertical-space {
     display: inline-flex;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
 }
 
 .remaining-space {
     flex: 1;
-}
-
-
-/* customzing date-time-range picker style */
-.daterangepicker {
-    background-color: #f5f5f5;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
-
-    .ranges {
-        background-color: #f5f5f5;
-        padding-right: 10px;
-
-        li {
-            font-size: inherit;
-            padding: 10px 0 10px 16px;
-            letter-spacing: 0.25px;
-            text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
-
-            &:hover,
-            &:focus {
-                border-radius: 0 100px 100px 0;
-                color: #1a73e8;
-            }
-
-            &.active {
-                border-radius: 0 100px 100px 0;
-                background-color: #1a73e8;
-                cursor: default;
-                color: white;
-                box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
-            }
-        }
-    }
-
-    &.show-calendar {
-
-        .ranges {
-            margin-top: 0;
-        }
-    }
-
-    .drp-calendar {
-        background: white;
-
-        &.left {
-            padding: 5px;
-            margin: 6px 3px 6px 6px !important;
-        }
-
-        &.right {
-            padding: 5px;
-            margin: 6px 6px 6px 3px !important;
-        }
-    }
-
-    .drp-buttons {
-        background-color: white;
-
-        .drp-selected {
-            font-size: 1rem;
-            letter-spacing: 1px;
-            color: #111111;
-            line-height: 1.2;
-            margin-bottom: 10px;
-        }
-
-        .btn {
-            font-size: 1rem;
-            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
-            border-radius: 2px;
-
-            &:active {
-                box-shadow: none;
-            }
-        }
-    }
-
-    select {
-
-        &.monthselect,
-        &.yearselect,
-        &.hourselect,
-        &.minuteselect,
-        &.ampmselect {
-            background-color: #eeeeee;
-            border: 1px solid #eeeeee;
-            padding: 5px;
-            color: #303030;
-            font-size: 14px;
-            width: auto;
-        }
-    }
-
-    .calendar-table {
-        padding: 0 !important;
-
-        table {
-            border-collapse: separate;
-            border-spacing: 1px;
-        }
-
-        td,
-        th {
-            padding: 5px;
-            font-size: 15px;
-            border: 0;
-        }
-    }
 }
 
 

@@ -8,9 +8,10 @@
     .app-action-bar {
 
         .datetimerangepicker__button {
+            @include mat-typography-level-to-styles($typography-config, subheading-2);
+
             background-color: mat-color($accent);
             color: mat-color($accent, default-contrast);
-            font-size: mat-font-size($typography-config, subheading-2);
         }
     }
 }

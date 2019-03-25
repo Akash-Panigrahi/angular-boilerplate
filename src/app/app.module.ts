@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressRouterModule } from '@ngx-progressbar/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +19,6 @@ import { AppRoutingModule } from './app-routing.module';
         HttpClientModule,
 
         // 3rd Party Modules
-        ToastrModule.forRoot(),
         NgProgressModule,
         NgProgressRouterModule,
 

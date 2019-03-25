@@ -26,8 +26,9 @@
         }
 
         .user-actions {
+            @include mat-typography-level-to-styles($typography-config, subheading-2);
+
             background-color: mat-color($accent);
-            font-size: mat-font-size($typography-config, subheading-2);
         }
     }
 }

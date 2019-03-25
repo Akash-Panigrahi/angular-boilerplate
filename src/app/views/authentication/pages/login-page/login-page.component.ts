@@ -1,10 +1,11 @@
-import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginPageAnimation, errorSlideDown } from './login-page.animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginPageService } from './login-page.service';
-import { ToastrService } from 'ngx-toastr';
 import { LoginData } from '../../interfaces/login.interfaces';
+import { MatSnackBar } from '@angular/material';
+import { CoreToastrComponent } from 'src/app/core/components/core-toastr/core-toastr.component';
 
 @Component({
     selector: 'app-login-page',
@@ -55,7 +56,7 @@ export class LoginPageComponent implements OnInit {
         private _router: Router,
         private _formBuilder: FormBuilder,
         private _loginPageService: LoginPageService,
-        private _toastr: ToastrService
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit() {}
@@ -68,21 +69,40 @@ export class LoginPageComponent implements OnInit {
     onSubmit() {
         this.loggingIn = true;
 
-        this._loginPageService.login(this.loginForm.value).subscribe(
-            (res: LoginData) => {
-                this._toastr.success(`${res.username} logged in successfully!`);
-                this._router.navigateByUrl('/summary');
-            },
-            (err: Error) => {
-                /*
-                        any error thrown from the observable will be catch by this
-                        error observer
-                    */
+        this._loginPageService.login(this.loginForm.value)
+            .subscribe(
+                (res: LoginData) => {
 
-                this.loggingIn = false;
+                    this._snackBar.openFromComponent(
+                        CoreToastrComponent,
+                        {
+                            data: {
+                                message: `${res.username} logged in successfully!`,
+                                status: 'success'
+                            }
+                        }
+                    );
 
-                this._toastr.error(err.message);
-            }
-        );
+                    this._router.navigateByUrl('/summary');
+                },
+                (err: Error) => {
+                    /**
+                     * any error thrown from the observable will be catch by this
+                     * error observer
+                     */
+
+                    this.loggingIn = false;
+
+                    this._snackBar.openFromComponent(
+                        CoreToastrComponent,
+                        {
+                            data: {
+                                message: err.message,
+                                status: 'error'
+                            }
+                        }
+                    );
+                }
+            );
     }
 }

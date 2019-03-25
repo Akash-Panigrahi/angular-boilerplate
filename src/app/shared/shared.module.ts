@@ -9,7 +9,8 @@ import {
     MatMenuModule,
     MatSidenavModule,
     MatDividerModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSnackBarModule
 } from '@angular/material';
 
 import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
@@ -31,7 +32,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         OverlayModule,
         LayoutModule,
         MatDividerModule,
-        MatRippleModule
+        MatRippleModule,
+        MatSnackBarModule
     ],
     declarations: [
         // public
@@ -49,7 +51,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         OverlayModule,
         LayoutModule,
         MatDividerModule,
-        MatRippleModule
+        MatRippleModule,
+        MatSnackBarModule
     ]
 })
 export class SharedModule {
