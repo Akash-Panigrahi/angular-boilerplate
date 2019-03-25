@@ -7,6 +7,6 @@ export const slideDown = trigger('slideDown', [
         query('.daterangepicker', [
             style({ transform: 'translateY(-50px)', opacity: '0' }),
             animate('350ms ease-in', style('*'))
-        ])
+        ], { optional: true })
     ])
 ]);

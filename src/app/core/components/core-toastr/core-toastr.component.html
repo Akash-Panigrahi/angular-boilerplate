@@ -1,0 +1,20 @@
+<mat-icon [ngSwitch]="status">
+    <ng-template [ngSwitchCase]="'success'">
+        check_circle
+    </ng-template>
+    <ng-template [ngSwitchCase]="'error'">
+        cancel
+    </ng-template>
+    <ng-template [ngSwitchCase]="'warning'">
+        warning
+    </ng-template>
+    <ng-template [ngSwitchCase]="'info'">
+        info
+    </ng-template>
+</mat-icon>
+
+<div class="horizontal-space"></div>
+
+<span class="message">
+    {{ data.message }}
+</span>

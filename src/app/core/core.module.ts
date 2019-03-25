@@ -8,11 +8,32 @@ import { ModuleAlreadyLoadedGuard } from './guards/module-already-loaded/module-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MockBackendInterceptor } from './interceptors/mock-backend.interceptor';
 import { TokenInterceptor } from './interceptors/token/token.interceptor';
+import { CoreToastrComponent } from './components/core-toastr/core-toastr.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-    declarations: [PageNotFoundComponent],
-    imports: [CommonModule, RouterModule],
+    declarations: [
+        PageNotFoundComponent,
+        CoreToastrComponent
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        SharedModule
+    ],
     providers: [
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useValue: {
+                panelClass: 'core-toastr',
+                verticalPosition: 'top',
+                horizontalPosition: 'end',
+                duration: 2000
+            }
+        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
@@ -24,7 +45,8 @@ import { TokenInterceptor } from './interceptors/token/token.interceptor';
             useClass: MockBackendInterceptor,
             multi: true
         } */
-    ]
+    ],
+    entryComponents: [CoreToastrComponent]
 })
 export class CoreModule {
     constructor(

@@ -65,3 +65,22 @@
         z-index: 1;
     }
 }
+
+// TODO: change to proper contextual class name
+.datetimerangepicker__button {
+    height: 3rem;
+}
+
+.calendar-icon__wrapper {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 0;
+    width: auto;
+}

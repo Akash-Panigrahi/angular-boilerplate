@@ -45,7 +45,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
                 // check if data is present in cacheservice
                 const cachedData = CacheService.get('summary', data);
 
-                if (cachedData && cachedData.length) {
+                if (cachedData) {
                     this.summaryData = cachedData;
                     this._actionBarUiState.changeGettingDataBar('complete');
                 } else {

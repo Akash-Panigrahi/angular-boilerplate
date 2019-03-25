@@ -1,0 +1,39 @@
+<mat-action-list class="ranges"
+                 [@slideDownRangesAnimation]="isDateTimeRangeOpen ? 'open' : 'close'"
+                 (@slideDownRangesAnimation.start)="onSlideDownRangesAnimation($event)"
+                 (@slideDownRangesAnimation.done)="onSlideDownRangesAnimation($event)">
+
+    <div class="range"
+         *ngFor="let range of datetimerangeData.ranges | keyvalue:orderByIndex"
+         (click)="changeRange(range.key, range.value)">
+        <button [class.range--active]="range.key === activeRange"
+                matRipple>
+            <div class="range__label">
+                {{ range.key }}
+            </div>
+        </button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="range"
+         (click)="changeRange('Custom', null)"
+         [owlDateTimeTrigger]="datetimerangeEl">
+        <button [class.range--active]="'Custom' === activeRange"
+                matRipple>
+            Custom
+        </button>
+    </div>
+</mat-action-list>
+
+<input hidden
+       [owlDateTime]="datetimerangeEl"
+       [selectMode]="'range'"
+       [(ngModel)]="pickerDateTime"
+       (dateTimeChange)="onDateTimeChange($event.value)">
+
+<owl-date-time #datetimerangeEl
+               [pickerMode]="'dialog'"
+               [hour12Timer]="true"
+               (afterPickerClosed)="onPickerClosed($event)">
+</owl-date-time>

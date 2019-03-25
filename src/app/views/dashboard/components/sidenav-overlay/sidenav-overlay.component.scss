@@ -27,32 +27,6 @@
     max-width: 8rem;
 }
 
-.ranges {
-    background-color: #f5f5f5;
-    padding-right: 10px;
-
-    li {
-        font-size: inherit;
-        padding: 10px 0 10px 16px;
-        letter-spacing: 0.25px;
-        text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
-
-        &:hover,
-        &:focus {
-            border-radius: 0 100px 100px 0;
-            color: #1a73e8;
-        }
-
-        &.active {
-            border-radius: 0 100px 100px 0;
-            background-color: #1a73e8;
-            cursor: default;
-            color: white;
-            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
-        }
-    }
-}
-
 .logout-button {
     margin: 0 1rem;
     border-radius: 50px;

@@ -2,7 +2,7 @@
 
 @mixin footer-component-theme($theme) {
     $primary: map-get($theme, primary);
-    $typograpy-config: mat-typograpy-config();
+    $typography-config: mat-typography-config();
 
     .app-footer {
 
@@ -12,7 +12,7 @@
         }
 
         span {
-            // font-size: mat-font-size($typograpy-config, subheading-1);
+            font-size: mat-font-size($typography-config, subheading-1);
         }
     }
 }

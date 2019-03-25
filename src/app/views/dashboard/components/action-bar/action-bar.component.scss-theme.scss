@@ -1,0 +1,17 @@
+@import '~@angular/material/theming';
+
+@mixin action-bar-component-theme($theme) {
+    $accent: map-get($theme, accent);
+    $typography-config: mat-typography-config();
+
+    /** TODO: change class to the components one and not of the panel */
+    .app-action-bar {
+
+        .datetimerangepicker__button {
+            @include mat-typography-level-to-styles($typography-config, subheading-2);
+
+            background-color: mat-color($accent);
+            color: mat-color($accent, default-contrast);
+        }
+    }
+}

@@ -4,6 +4,7 @@
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $background: map-get($theme, background);
+    $typography-config: mat-typography-config();
 
     .app-header {
 
@@ -25,6 +26,8 @@
         }
 
         .user-actions {
+            @include mat-typography-level-to-styles($typography-config, subheading-2);
+
             background-color: mat-color($accent);
         }
     }

@@ -1,11 +1,19 @@
-@import '~@angular/material/theming';
+// component themes
+@import 'app/views/dashboard/components/header/header.component.scss-theme';
+@import 'app/views/dashboard/components/footer/footer.component.scss-theme';
+@import 'app/views/dashboard/components/sidenav-overlay/sidenav-overlay.component.scss-theme';
+@import 'app/views/dashboard/components/datetimerange/datetimerange.component.scss-theme';
+@import 'app/views/dashboard/components/action-bar/action-bar.component.scss-theme';
+@import 'app/views/authentication/pages/login-page/login-page.component.scss-theme';
+@import 'app/core/components/core-toastr/core-toastr.component.scss-theme';
 
-@import 'app/views/dashboard/components/header/header.component.theme';
-@import 'app/views/dashboard/components/footer/footer.component.theme';
-@import 'app/views/dashboard/components/sidenav-overlay/sidenav-overlay.component.theme';
 
 @mixin components-theme($theme) {
     @include header-component-theme($theme);
     @include footer-component-theme($theme);
     @include sidenav-overlay-component-theme($theme);
+    @include datetimerange-component-theme($theme);
+    @include action-bar-component-theme($theme);
+    @include login-page-component-theme($theme);
+    @include core-toastr-theme($theme);
 }
