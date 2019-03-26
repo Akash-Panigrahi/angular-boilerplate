@@ -4,6 +4,7 @@
 @import 'components-theme';
 
 $app-typography: mat-typography-config(
+    $font-family: 'Roboto, "Open Sans", "Helvetica Neue", sans-serif'
     // $button: mat-typography-level(16px, 16px, 500)
 );
 

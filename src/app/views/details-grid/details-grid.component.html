@@ -25,12 +25,13 @@
               [disabled]="!detailsData?.length"
               (click)="downloadDetailsEvent.emit(detailsGridRequest)">
         <span>Download Details</span>
-        <i class="material-icons">arrow_downward</i>
+        <div class="horizontal-space"></div>
+        <i class="material-icons">cloud_download</i>
       </button>
     </div>
   </div>
 
-  <br>
+  <div class="vertical-space2"></div>
 
   <div class="details-grid"
        #detailsGrid>
@@ -50,14 +51,14 @@
       </div>
     </div>
 
-    <br>
+    <div class="vertical-space2"></div>
 
     <app-details-grid-table class="child-component"
                             #detailsGridTable
                             [detailsData]="detailsData">
     </app-details-grid-table>
 
-    <br>
+    <div class="vertical-space2"></div>
 
     <div class="details-grid__info-pagination d-flex flex-wrap justify-content-center justify-content-sm-between align-items-center">
       <div class="details-grid__info">

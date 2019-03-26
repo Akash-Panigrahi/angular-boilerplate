@@ -25,12 +25,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         {
             name: 'Summary',
             url: '/summary',
-            icon: 'list_alt'
+            icon: 'subject'
         },
         {
             name: 'Details',
             url: '/details',
-            icon: 'info_outline'
+            icon: 'description'
         }
     ];
 

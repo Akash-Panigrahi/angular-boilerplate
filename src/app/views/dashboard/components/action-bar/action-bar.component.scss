@@ -11,41 +11,6 @@
     z-index: 1;
 }
 
-.datetimerangepicker {
-    --picker-blue: #1a73e8;
-    background: lighten(#1a73e8, 5%);
-    cursor: pointer;
-    padding: 10px;
-    border: 1px solid var(--primary);
-    border-radius: 2px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: inset 0 -15px 10px var(--picker-blue);
-    transition: all 0.1s ease-out;
-
-    &:hover,
-    &:focus {
-        box-shadow: inset 0 15px 10px var(--picker-blue);
-    }
-
-    .calendar-icon {
-        width: 24px;
-        height: 24px;
-        position: relative;
-
-        i {
-            position: absolute;
-            right: 0;
-        }
-    }
-
-    span {
-        flex: 1;
-    }
-}
-
 .last-updated {
     margin: 1rem 0 0 1rem;
     flex-grow: 1;
@@ -69,18 +34,5 @@
 // TODO: change to proper contextual class name
 .datetimerangepicker__button {
     height: 3rem;
-}
-
-.calendar-icon__wrapper {
-    display: inline-flex;
-    width: 1.5rem;
-    height: 1.5rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.calendar-icon {
-    position: absolute;
-    right: 0;
-    width: auto;
+    border-radius: 3rem;
 }

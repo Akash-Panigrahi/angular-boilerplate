@@ -8,27 +8,11 @@
 </div>
 <div class="line-separator"></div>
 <div class="container-fluid action-bar">
-     <!-- [@slideDown]="isOpen ? 'open' : 'close'"> -->
-    <!-- <div id="reportrange"
-         class="datetimerangepicker"
-         rippleOnClick
-         (click)="isCalendarOpen()">
-        <div class="calendar-icon">
-            <i class="material-icons">calendar_today</i>
-        </div>
-        &nbsp;
-        <span></span>
-        &nbsp;
-        <i class="material-icons">arrow_drop_down</i>
-    </div> -->
-
     <button class="datetimerangepicker__button"
             #datetimerangeEl
             mat-raised-button
             (click)="toggleDateTimeRange()">
-        <div class="calendar-icon__wrapper">
-            <mat-icon class="calendar-icon">calendar_today</mat-icon>
-        </div>
+        <mat-icon>date_range</mat-icon>
 
         <div class="horizontal-space"></div>
 
@@ -36,7 +20,7 @@
 
         <div class="horizontal-space"></div>
 
-        <mat-icon>arrow_drop_down</mat-icon>
+        <mat-icon>arrow_drop_down_circle_outline</mat-icon>
     </button>
 
     <div class="last-updated">
