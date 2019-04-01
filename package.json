@@ -1,5 +1,5 @@
 {
-  "name": "basic",
+  "name": "ngx-basic-boilerplate",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
