@@ -10,7 +10,10 @@ import {
     MatSidenavModule,
     MatDividerModule,
     MatRippleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule
 } from '@angular/material';
 
 import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
@@ -33,7 +36,10 @@ import { LayoutModule } from '@angular/cdk/layout';
         LayoutModule,
         MatDividerModule,
         MatRippleModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule
     ],
     declarations: [
         // public
@@ -42,6 +48,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     // declarations and imports needs to be exported to be used by other modules
     exports: [
         RippleOnClickDirective,
+
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
@@ -52,7 +59,10 @@ import { LayoutModule } from '@angular/cdk/layout';
         LayoutModule,
         MatDividerModule,
         MatRippleModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule
     ]
 })
 export class SharedModule {

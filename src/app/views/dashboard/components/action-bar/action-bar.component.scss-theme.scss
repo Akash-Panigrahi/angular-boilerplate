@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 
 @mixin action-bar-component-theme($theme) {
+    $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $typography-config: mat-typography-config();
 
@@ -8,10 +9,34 @@
     .app-action-bar {
 
         .datetimerangepicker__button {
-            @include mat-typography-level-to-styles($typography-config, subheading-2);
-
             background-color: mat-color($accent);
             color: mat-color($accent, default-contrast);
         }
+
+
+        .from-to__wrapper {
+
+            /*
+                had to write layout style in theme file,
+                cause the following class is generated as component template
+                so there are no custom attributes attached to it, necessary for
+                encapsulation
+            */
+            .mat-form-field-wrapper {
+                padding-bottom: 0;
+            }
+
+            .mat-form-field-infix {
+                width: auto;
+            }
+
+            .mat-form-field-flex:hover {
+
+                .mat-form-field-outline-thick {
+                    color: mat-color($primary);
+                }
+            }
+        }
+
     }
 }

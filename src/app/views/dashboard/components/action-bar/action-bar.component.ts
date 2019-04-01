@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { take, tap, takeUntil } from 'rxjs/operators';
 import { NgProgressComponent } from '@ngx-progressbar/core';
 import { Subject } from 'rxjs';
@@ -12,8 +12,7 @@ import { DateTimeRange } from '../../interfaces/date-time-range.interface';
 import { DetailsGridRequestService } from '../../services/details-grid-request/details-grid-request.service';
 import { DatetimerangeRef } from '../datetimerange/datetimerange-ref';
 import { DatetimerangeOverlayService } from '../../services/datetimerange-overlay/datetimerange-overlay.service';
-import { DatetimerangeComponent, Moment } from '../datetimerange/datetimerange.component';
-import { MomentRange, } from '../../interfaces/datetimerange.interface';
+import { MomentRange, Moment } from '../../interfaces/datetimerange.interface';
 
 // declare variables to avoid error in aot compilation process
 declare const $: any;
@@ -24,14 +23,11 @@ declare const $: any;
     styleUrls: ['./action-bar.component.scss'],
     animations: [slideDown]
 })
-export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ActionBarComponent implements OnInit, OnDestroy {
     // getting a reference to the progress bar in the html file
     @ViewChild('gettingDataBar') private _progressBar: NgProgressComponent;
 
     @ViewChild('datetimerangeEl', { read: ElementRef }) private _datetimerangeEl: HTMLElement;
-
-    // property required to trigger animation
-    // isOpen = false;
 
     // setting initial date when app is opened
     lastUpdated = new Date();
@@ -66,8 +62,6 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     private _datetimerangeRef: DatetimerangeRef;
 
     private _dateTimeRange: DateTimeRange;
-
-    dateTimeRange2;
 
     private _onDestroy$ = new Subject<void>();
 
@@ -120,68 +114,6 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    ngAfterViewInit() {
-
-        // if (!this._dateTimeRange) {
-        //     this.start = moment(new Date());
-        //     this.end = moment(new Date());
-        //     this._setDateTimeRangeInStorage(this.start, this.end);
-        // } else {
-        //     this.start = this._setMoment(this._dateTimeRange.startDate, this._dateTimeRange.startTime);
-        //     this.end = this._setMoment(this._dateTimeRange.endDate, this._dateTimeRange.endTime);
-        // }
-
-        // $('#reportrange').daterangepicker(
-        //     {
-        //         timePicker: true,
-        //         showDropdowns: true,
-        //         startDate: start,
-        //         endDate: end,
-        //         locale: {
-        //             format: 'DD/MM/YYYY h:mm:ss A'
-        //         },
-        //         maxDate: new Date(),
-        //         parentEl: '.action-bar',
-        //         ranges: {
-        //             Today: [moment(), moment()],
-        //             Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        //             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        //             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        //             'This Month': [moment().startOf('month'), moment().endOf('month')],
-        //             'Last Month': [
-        //                 moment()
-        //                     .subtract(1, 'month')
-        //                     .startOf('month'),
-        //                 moment()
-        //                     .subtract(1, 'month')
-        //                     .endOf('month')
-        //             ],
-        //             'Last Year': [
-        //                 moment()
-        //                     .subtract(1, 'year')
-        //                     .startOf('year'),
-        //                 moment()
-        //                     .subtract(1, 'year')
-        //                     .endOf('year')
-        //             ]
-        //         }
-        //     },
-        //     this._updateDateRangePicker
-        // );
-
-        // $('#reportrange').on('apply.daterangepicker', this._applyDateRangePicker);
-
-        // setting date-time-range in storage once
-        // this._setDateTimeRangeInStorage(start, end);
-        // this._updateDateRangePicker(start, end);
-    }
-
-    // private _updateDateRangePicker(start: Moment, end: Moment): void {
-    //     $('#reportrange span').html(
-    //         start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY')
-    //     );
-    // }
-
     private _setMoment(date: string, time: string): Moment {
         const momentDate = moment(date);
         const momentTime = moment(time, 'h:mm:ss');
@@ -231,6 +163,8 @@ export class ActionBarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     toggleDateTimeRange() {
+        console.log(this.start, this.end);
+
         // triggering animation by changing state
         this._datetimerangeRef = this._datetimerangeOverlayService.open({
             el: this._datetimerangeEl,

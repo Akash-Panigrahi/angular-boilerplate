@@ -8,20 +8,59 @@
 </div>
 <div class="line-separator"></div>
 <div class="container-fluid action-bar">
-    <button class="datetimerangepicker__button"
-            #datetimerangeEl
-            mat-raised-button
-            (click)="toggleDateTimeRange()">
-        <mat-icon>date_range</mat-icon>
+    <div class="date-time-range__wrapper">
+        <button class="datetimerangepicker__button"
+                #datetimerangeEl
+                mat-fab
+                (click)="toggleDateTimeRange()">
+            <mat-icon>date_range</mat-icon>
+        </button>
 
-        <div class="horizontal-space"></div>
+        <div class="horizontal-space2"></div>
 
-        <span>{{ start | date: 'MMMM dd, yyyy' }} - {{ end | date: 'MMMM dd, yyyy' }}</span>
+        <!-- <span>{{ start | date: 'MMMM dd, yyyy h:mm a' }} ~ {{ end | date: 'MMMM dd, yyyy h:mm a' }}</span> -->
+        <div class="from-to__wrapper">
+            <mat-form-field appearance="outline"
+                            [owlDateTimeTrigger]="fromDateTime">
+                <mat-label>From</mat-label>
+                <input readonly
+                       matInput
+                       [(ngModel)]="start"
+                       [owlDateTime]="fromDateTime">
+                <mat-icon matSuffix>today</mat-icon>
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
 
-        <div class="horizontal-space"></div>
+            <owl-date-time #fromDateTime
+                           [pickerMode]="'dialog'"
+                           [hour12Timer]="true">
+            </owl-date-time>
 
-        <mat-icon>arrow_drop_down_circle_outline</mat-icon>
-    </button>
+            <div class="horizontal-space2"></div>
+
+            <mat-form-field appearance="outline"
+                            [owlDateTimeTrigger]="toDateTime">
+                <mat-label>To</mat-label>
+                <input readonly
+                       matInput
+                       [(ngModel)]="end"
+                       [owlDateTime]="toDateTime">
+                <mat-icon matSuffix>today</mat-icon>
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+            <owl-date-time #toDateTime
+                           [pickerMode]="'dialog'"
+                           [hour12Timer]="true">
+            </owl-date-time>
+        </div>
+    </div>
+
+    <!-- show in desktop mode -->
+    <div class="remaining-space"></div>
+
+    <!-- show in handset mode -->
+    <div class="vertical-space2"></div>
 
     <div class="last-updated">
         <h5>Last Updated | {{ lastUpdated | date: 'dd-MM-yyyy h:mm:ss a' }}</h5>

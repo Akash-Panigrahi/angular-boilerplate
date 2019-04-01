@@ -1,6 +1,6 @@
 @import '~@angular/material/theming';
 
-@mixin core-toastr-theme($theme) {
+@mixin core-toastr-component-theme($theme) {
     $typography-config: mat-typography-config();
 
     .core-toastr {

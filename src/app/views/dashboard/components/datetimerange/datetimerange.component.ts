@@ -1,33 +1,17 @@
 import { Component, OnInit, HostListener, EventEmitter, Inject, OnDestroy } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
-import * as moment from 'moment';
 
 import { slideDownRangesAnimation } from './datetimerange.animations';
 import { DatetimerangeRef } from './datetimerange-ref';
 import { DATETIMERANGE_OVERLAY_DATA } from '../../services/datetimerange-overlay/datetimerange-overlay.tokens';
-import { DatetimerangeData } from '../../interfaces/datetimerange.interface';
+import { DatetimerangeData, MomentRange } from '../../interfaces/datetimerange.interface';
 import { Subject } from 'rxjs';
-import { OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
-
-export type Moment = moment.Moment;
-export type MomentRange = [Moment, Moment];
-
-export const MY_CUSTOM_DATETIME_FORMATS = {
-    fullPickerInput: 'LLL',
-    monthYearLabel: 'MMM YYYY',
-};
 
 @Component({
     selector: 'app-datetimerange',
     templateUrl: './datetimerange.component.html',
     styleUrls: ['./datetimerange.component.scss'],
-    animations: [slideDownRangesAnimation],
-    providers: [
-        {
-            provide: OWL_DATE_TIME_FORMATS,
-            useValue: MY_CUSTOM_DATETIME_FORMATS
-        }
-    ]
+    animations: [slideDownRangesAnimation]
 })
 export class DatetimerangeComponent implements OnInit, OnDestroy {
 

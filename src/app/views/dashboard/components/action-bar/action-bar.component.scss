@@ -6,13 +6,22 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    // justify-content: space-between;
+    // align-items: center;
     z-index: 1;
 }
 
+.date-time-range__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.from-to__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .last-updated {
-    margin: 1rem 0 0 1rem;
     flex-grow: 1;
     text-align: right;
 
@@ -29,10 +38,4 @@
     >ng-progress {
         z-index: 1;
     }
-}
-
-// TODO: change to proper contextual class name
-.datetimerangepicker__button {
-    height: 3rem;
-    border-radius: 3rem;
 }

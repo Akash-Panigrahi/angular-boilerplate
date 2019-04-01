@@ -1,6 +1,38 @@
+<!-- <mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{ kpiTitle }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            <span title="kpiPercentTitle" *ngIf="kpiPercent">({{ kpiPercent }})</span>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <span class="kpi__value">{{ kpiValue }}</span>
+    </mat-card-content>
+</mat-card> -->
+
 <div class="kpi">
     <p>{{ kpiTitle }}
         <span title="kpiPercentTitle" *ngIf="kpiPercent">({{ kpiPercent }})</span>
     </p>
     <span class="kpi__value">{{ kpiValue }}</span>
 </div>
+<!--
+<div class="kpi">
+    <div class="kpi-title__wrapper">
+        <div class="kpi-title">
+            {{ kpiTitle }}
+        </div>
+    </div>
+    <div class="kpi-percent__wrapper" *ngIf="kpiPercent">
+        <div class="kpi-percent">
+            {{ kpiPercent }}
+        </div>
+    </div>
+    <div class="kpi-value__wrapper">
+        <div class="kpi-value">
+            {{ kpiValue }}
+        </div>
+    </div>
+</div> -->
