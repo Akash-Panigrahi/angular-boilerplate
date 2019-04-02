@@ -11,11 +11,12 @@
     app-kpi {
         .kpi {
             @include _mat-theme-overridable-elevation(1, $theme);
-            background-color: mat-color($accent);
-            color: mat-contrast($accent, 500);
+            background-color: mat-color($accent, 300);
+            color: mat-contrast($accent, 300);
 
             &-title {
                 font-size: mat-font-size($typography-config, title);
+                // border-bottom: 1px solid mat-color($primary);
 
                 &::after {
                     background-color: mat-color($primary);
@@ -24,17 +25,18 @@
 
             &-percent {
                 font-size: mat-font-size($typography-config, body-1);
-
-                &__wrapper {
-                    border-top-color: mat-contrast($accent, 500);
-                }
+                color: mat-color($foreground, secondary-text);
             }
 
             &-value {
                 font: {
-                    size: mat-font-size($typography-config, headline);
+                    size: mat-font-size($typography-config, display-1);
                     weight: mat-font-weight($typography-config, title);
                 }
+            }
+
+            &-divider {
+                background-color: mat-color($foreground, divider);
             }
         }
     }

@@ -12,12 +12,22 @@
     </mat-card-content>
 </mat-card> -->
 
-<div class="kpi">
-    <p>{{ kpiTitle }}
-        <span title="kpiPercentTitle" *ngIf="kpiPercent">({{ kpiPercent }})</span>
+<mat-card class="kpi">
+    <p class="kpi-title">
+        {{ kpiTitle }}
+        <span class="kpi-percent"
+            title="kpiPercentTitle"
+            *ngIf="kpiPercent">
+            ({{ kpiPercent }})
+        </span>
     </p>
-    <span class="kpi__value">{{ kpiValue }}</span>
-</div>
+
+    <div class="vertical-space"></div>
+    <div class="kpi-divider"></div>
+    <div class="vertical-space"></div>
+
+    <p class="kpi-value">{{ kpiValue }}</p>
+</mat-card>
 <!--
 <div class="kpi">
     <div class="kpi-title__wrapper">
