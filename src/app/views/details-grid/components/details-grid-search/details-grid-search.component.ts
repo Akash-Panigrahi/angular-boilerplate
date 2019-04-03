@@ -1,8 +1,6 @@
-import {
-    Component, OnInit, EventEmitter, Output, Input
-} from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-details-grid-search',
@@ -10,17 +8,18 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
     styleUrls: ['./details-grid-search.component.scss']
 })
 export class DetailsGridSearchComponent implements OnInit {
+    @Input()
+    initialSearchValue: string;
 
-    @Input() initialSearchValue: string;
+    @Output()
+    searchChangeEvent = new EventEmitter<string>();
 
-    @Output() searchChangeEvent = new EventEmitter<string>();
+    searchBox = new FormControl();
 
-    searchChange$ = new Subject<string>();
-
-    constructor() { }
+    constructor() {}
 
     ngOnInit() {
-        this.searchChange$.asObservable()
+        this.searchBox.valueChanges
             .pipe(
                 debounceTime(400),
                 distinctUntilChanged()

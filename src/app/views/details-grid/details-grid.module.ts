@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgProgressModule } from '@ngx-progressbar/core';
@@ -23,6 +23,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
     declarations: [
         CustomNgbPaginationDirective,
+
         DetailsGridLengthComponent,
         DetailsGridInfoComponent,
         DetailsGridLoadingOverlayComponent,
@@ -34,7 +35,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ],
     imports: [
         CommonModule,
-        FormsModule,
+        ReactiveFormsModule,
 
         SharedModule,
 

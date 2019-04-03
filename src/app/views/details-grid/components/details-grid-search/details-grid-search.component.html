@@ -1,6 +1,7 @@
-<input type="text"
-       placeholder="Search mobile..."
-       class="form-control search-input"
-       #searchInput
-       [value]="initialSearchValue"
-       (keyup)="searchChange$.next($event.target.value)">
+<mat-form-field>
+    <input type="text"
+        matInput
+        placeholder="Search mobile..."
+        [value]="initialSearchValue"
+        [formControl]="searchBox">
+</mat-form-field>
