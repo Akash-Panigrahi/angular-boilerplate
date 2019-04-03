@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { AgGridModule } from 'ag-grid-angular';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 import { environment } from 'src/environments/environment';
 
@@ -45,8 +44,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
             DetailsGridHeaderComponent
         ]),
         NgProgressModule,
-        NgbPaginationModule,
-        NgSelectModule
+        NgbPaginationModule
     ],
     exports: [DetailsGridComponent]
 })
