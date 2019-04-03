@@ -1,17 +1,29 @@
 <span>Show</span>
 
-<div class="horizontal-space"></div>
+<div class="horizontal-space2"></div>
 
-<ng-select
-    class="details-table-length"
+<!-- <ng-select class="details-grid-length"
     [items]="pageSizes"
     [(ngModel)]="initialPageSize"
     [clearable]="false"
     [clearOnBackspace]="false"
     [searchable]="false"
-    (change)="lengthChangeEvent.emit($event)"
-></ng-select>
+    (change)="lengthChangeEvent.emit($event)">
+</ng-select> -->
 
-<div class="horizontal-space"></div>
+<mat-form-field class="details-grid-length">
+    <mat-select [panelClass]="'details-grid-length__panel'"
+        [value]="initialPageSize"
+        (selectionChange)="onSelectionChange($event.value)">
+        <mat-option *ngFor="let page of pageSizes"
+            [value]="page"
+            [class.selected]="page === initialPageSize"
+            [disabled]="page === initialPageSize">
+            {{ page }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div class="horizontal-space2"></div>
 
 <span>Records</span>

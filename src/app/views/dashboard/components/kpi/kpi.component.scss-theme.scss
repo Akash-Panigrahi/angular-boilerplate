@@ -10,7 +10,7 @@
     /** TODO: change class to the components one and not of the panel */
     app-kpi {
         .kpi {
-            @include _mat-theme-overridable-elevation(1, $theme);
+            @include _mat-theme-overridable-elevation(2, $theme);
             background-color: mat-color($accent, 300);
             color: mat-contrast($accent, 300);
 

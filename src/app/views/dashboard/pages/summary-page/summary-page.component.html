@@ -1,20 +1,17 @@
 <div class="container-fluid">
     <div class="kpi">
         <div class="kpis">
-            <app-kpi
-                class="child-component"
+            <app-kpi class="child-component"
                 [kpiTitle]="'Total Calls'"
                 [kpiValue]="summaryData.kpis?.totalCalls">
             </app-kpi>
-            <app-kpi
-                class="child-component"
+            <app-kpi class="child-component"
                 [kpiTitle]="'Inbound Calls'"
                 [kpiPercentTitle]="'Inbound calls with respect to total calls'"
                 [kpiPercent]="(summaryData.kpis?.inboundCalls / summaryData.kpis?.totalCalls) | percent: '.2'"
                 [kpiValue]="summaryData.kpis?.inboundCalls">
             </app-kpi>
-            <app-kpi
-                class="child-component"
+            <app-kpi class="child-component"
                 [kpiTitle]="'Outbound Calls'"
                 [kpiPercentTitle]="'Outbound calls with respect to total calls'"
                 [kpiPercent]="(summaryData.kpis?.outboundCalls / summaryData.kpis?.totalCalls) | percent: '.2'"
@@ -23,12 +20,10 @@
         </div>
     </div>
     <div class="charts">
-        <app-basic-column
-            class="child-component"
+        <app-basic-column class="child-component"
             [basicColumn]="summaryData.basicColumn">
         </app-basic-column>
-        <app-gradient-pie
-            class="child-component"
+        <app-gradient-pie class="child-component"
             [gradientPie]="summaryData.gradientPie">
         </app-gradient-pie>
     </div>

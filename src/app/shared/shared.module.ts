@@ -13,7 +13,8 @@ import {
     MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
 } from '@angular/material';
 
 import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
@@ -39,7 +40,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatSnackBarModule,
         MatFormFieldModule,
         MatInputModule,
-        MatCardModule
+        MatCardModule,
+        MatSelectModule
     ],
     declarations: [
         // public
@@ -62,7 +64,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatSnackBarModule,
         MatFormFieldModule,
         MatInputModule,
-        MatCardModule
+        MatCardModule,
+        MatSelectModule
     ]
 })
 export class SharedModule {

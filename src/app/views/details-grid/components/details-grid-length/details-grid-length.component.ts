@@ -13,4 +13,8 @@ export class DetailsGridLengthComponent {
     @Input() initialPageSize: number;
 
     @Output() lengthChangeEvent = new EventEmitter<number>();
+
+    onSelectionChange(value: number): void {
+        this.lengthChangeEvent.emit(value);
+    }
 }

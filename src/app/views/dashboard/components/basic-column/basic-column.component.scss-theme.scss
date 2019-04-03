@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin basic-column-component-theme($theme) {
+
+    /** TODO: change class to the components one and not of the panel */
+    app-basic-column {
+        .basic-column {
+            @include _mat-theme-overridable-elevation(2, $theme);
+        }
+    }
+}
