@@ -144,6 +144,27 @@ select:-internal-autofill-selected {
     flex: 1;
 }
 
+// no bottom spacing for mat-form-field elements
+.no-mat-form-field-bottom {
+    .mat-form-field {
+        &-underline {
+            bottom : 0;
+        }
+
+        &-wrapper {
+            padding-bottom: 0;
+        }
+    }
+}
+
+.no-mat-form-field-top {
+    .mat-form-field {
+        &-infix {
+            border-top: 0;
+        }
+    }
+}
+
 
 /* effects */
 .ripple-element {
