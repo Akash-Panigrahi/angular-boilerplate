@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin details-grid-component-theme($theme) {
+
+    .download-details__tooltip {
+        font-size: $mat-tooltip-handset-font-size;
+        padding-top: $mat-tooltip-handset-vertical-padding;
+        padding-bottom: $mat-tooltip-handset-vertical-padding;
+    }
+}

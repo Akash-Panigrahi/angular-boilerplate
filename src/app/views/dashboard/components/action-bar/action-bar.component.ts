@@ -4,7 +4,6 @@ import { NgProgressComponent } from '@ngx-progressbar/core';
 import { Subject } from 'rxjs';
 import * as moment from 'moment';
 
-import { slideDown } from './action-bar.animations';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ActionBarUIState } from './action-bar.ui-state';
 import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
@@ -14,14 +13,10 @@ import { DatetimerangeRef } from '../datetimerange/datetimerange-ref';
 import { DatetimerangeOverlayService } from '../../services/datetimerange-overlay/datetimerange-overlay.service';
 import { MomentRange, Moment } from '../../interfaces/datetimerange.interface';
 
-// declare variables to avoid error in aot compilation process
-declare const $: any;
-
 @Component({
     selector: 'app-action-bar',
     templateUrl: './action-bar.component.html',
-    styleUrls: ['./action-bar.component.scss'],
-    animations: [slideDown]
+    styleUrls: ['./action-bar.component.scss']
 })
 export class ActionBarComponent implements OnInit, OnDestroy {
     // getting a reference to the progress bar in the html file
@@ -64,29 +59,6 @@ export class ActionBarComponent implements OnInit, OnDestroy {
     private _dateTimeRange: DateTimeRange;
 
     private _onDestroy$ = new Subject<void>();
-
-    private _applyDateRangePicker = (ev, picker) => {
-        // everytime new date range is selected
-
-        if (this._isOldDateRange(picker)) {
-            return false;
-        }
-
-        // updating the value
-        this.lastUpdated = new Date();
-
-        this._actionBarUIState.changeGettingDataBar('start');
-
-        // save in storage
-        this._setDateTimeRangeInStorage(picker.startDate, picker.endDate);
-
-        // reset details-grid-request value
-        this._storage.setItem('details-grid-request', this._detailsGridRequest.initial());
-
-        this._actionBarUIState.currentGettingDataBar
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(state => this._progressBar[state]());
-    }
 
     constructor(
         private _dateTimeRangeService: DateTimeRangeService,
@@ -144,26 +116,7 @@ export class ActionBarComponent implements OnInit, OnDestroy {
         this._dateTimeRangeService.changeDateTimeRange(dateTimeRange);
     }
 
-    // isCalendarOpen() {
-    //     // triggering animation by changing state
-    //     this.isOpen = !this.isOpen;
-    // }
-
-    private _isOldDateRange(picker): boolean {
-        const { oldStartDate, oldEndDate, startDate, endDate } = picker;
-
-        if (
-            this.getDateTime(oldStartDate) === this.getDateTime(startDate) &&
-            this.getDateTime(oldEndDate) === this.getDateTime(endDate)
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
     toggleDateTimeRange() {
-        console.log(this.start, this.end);
 
         // triggering animation by changing state
         this._datetimerangeRef = this._datetimerangeOverlayService.open({

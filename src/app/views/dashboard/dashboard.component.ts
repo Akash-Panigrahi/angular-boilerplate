@@ -4,7 +4,7 @@ import { dashboardAnimation } from './dashboard.animations';
 import { OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
 
 export const MY_CUSTOM_DATETIME_FORMATS = {
-    fullPickerInput: 'LLL',
+    fullPickerInput: 'MMM DD, YYYY h:mm:ss A',
     monthYearLabel: 'MMM YYYY',
 };
 

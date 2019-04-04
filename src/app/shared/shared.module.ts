@@ -14,7 +14,8 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
 } from '@angular/material';
 
 import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
@@ -41,7 +42,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatFormFieldModule,
         MatInputModule,
         MatCardModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTooltipModule
     ],
     declarations: [
         // public
@@ -65,7 +67,8 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatFormFieldModule,
         MatInputModule,
         MatCardModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTooltipModule
     ]
 })
 export class SharedModule {

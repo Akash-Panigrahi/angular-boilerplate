@@ -1,57 +1,54 @@
 <div class="getting-data__progress-bar">
     <ng-progress id="getting-data__progress-bar"
-                 #gettingDataBar
-                 fixed="false"
-                 color="red"
-                 [spinner]="false">
+        #gettingDataBar
+        fixed="false"
+        color="red"
+        [spinner]="false">
     </ng-progress>
 </div>
+
 <div class="line-separator"></div>
+
 <div class="container-fluid action-bar">
     <div class="date-time-range__wrapper">
         <button class="datetimerangepicker__button"
-                #datetimerangeEl
-                mat-fab
-                (click)="toggleDateTimeRange()">
+            #datetimerangeEl
+            mat-fab
+            (click)="toggleDateTimeRange()">
             <mat-icon>date_range</mat-icon>
         </button>
 
         <div class="horizontal-space2"></div>
 
-        <!-- <span>{{ start | date: 'MMMM dd, yyyy h:mm a' }} ~ {{ end | date: 'MMMM dd, yyyy h:mm a' }}</span> -->
         <div class="from-to__wrapper">
             <mat-form-field appearance="outline"
-                            [owlDateTimeTrigger]="fromDateTime">
+                [owlDateTimeTrigger]="fromDateTime">
                 <mat-label>From</mat-label>
                 <input readonly
-                       matInput
-                       [(ngModel)]="start"
-                       [owlDateTime]="fromDateTime">
-                <mat-icon matSuffix>today</mat-icon>
-                <!-- <mat-hint>Hint</mat-hint> -->
+                    matInput
+                    [(ngModel)]="start"
+                    [owlDateTime]="fromDateTime">
             </mat-form-field>
 
             <owl-date-time #fromDateTime
-                           [pickerMode]="'dialog'"
-                           [hour12Timer]="true">
+                [pickerMode]="'dialog'"
+                [hour12Timer]="true">
             </owl-date-time>
 
             <div class="horizontal-space2"></div>
 
             <mat-form-field appearance="outline"
-                            [owlDateTimeTrigger]="toDateTime">
+                [owlDateTimeTrigger]="toDateTime">
                 <mat-label>To</mat-label>
                 <input readonly
-                       matInput
-                       [(ngModel)]="end"
-                       [owlDateTime]="toDateTime">
-                <mat-icon matSuffix>today</mat-icon>
-                <!-- <mat-hint>Hint</mat-hint> -->
+                    matInput
+                    [(ngModel)]="end"
+                    [owlDateTime]="toDateTime">
             </mat-form-field>
 
             <owl-date-time #toDateTime
-                           [pickerMode]="'dialog'"
-                           [hour12Timer]="true">
+                [pickerMode]="'dialog'"
+                [hour12Timer]="true">
             </owl-date-time>
         </div>
     </div>
@@ -63,6 +60,7 @@
     <div class="vertical-space2"></div>
 
     <div class="last-updated">
-        <h5>Last Updated | {{ lastUpdated | date: 'dd-MM-yyyy h:mm:ss a' }}</h5>
+        <span>Last Updated</span>
+        <h5>{{ lastUpdated | date: 'dd-MM-yyyy h:mm:ss a' }}</h5>
     </div>
 </div>
