@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-12 child-component">
             <app-details-grid [details]="details"
-                              [detailsGridRequest]="detailsGridRequest"
-                              (detailsGridRequestEvent)="onDetailsGridRequest($event)"
-                              (downloadDetailsEvent)="onDownloadDetails($event)">
+                [detailsGridRequest]="detailsGridRequest"
+                (detailsGridRequestEvent)="onDetailsGridRequest($event)"
+                (downloadDetailsEvent)="onDownloadDetails($event)">
             </app-details-grid>
         </div>
     </div>

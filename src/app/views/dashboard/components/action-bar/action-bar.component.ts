@@ -51,8 +51,8 @@ export class ActionBarComponent implements OnInit, OnDestroy {
         ]],
     ]);
 
-    start: Moment;
-    end: Moment;
+    from: Moment;
+    to: Moment;
 
     private _datetimerangeRef: DatetimerangeRef;
 
@@ -77,12 +77,12 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             });
 
         if (!this._dateTimeRange) {
-            this.start = moment(new Date());
-            this.end = moment(new Date());
-            this._setDateTimeRangeInStorage(this.start, this.end);
+            this.from = moment(new Date());
+            this.to = moment(new Date());
+            this._setDateTimeRangeInStorage(this.from, this.to);
         } else {
-            this.start = this._setMoment(this._dateTimeRange.startDate, this._dateTimeRange.startTime);
-            this.end = this._setMoment(this._dateTimeRange.endDate, this._dateTimeRange.endTime);
+            this.from = this._setMoment(this._dateTimeRange.fromDate, this._dateTimeRange.fromTime);
+            this.to = this._setMoment(this._dateTimeRange.toDate, this._dateTimeRange.toTime);
         }
     }
 
@@ -99,17 +99,17 @@ export class ActionBarComponent implements OnInit, OnDestroy {
         return momentDate;
     }
 
-    private _setDateTimeRangeInStorage(start: Moment, end: Moment): void {
-        // update local properties with current start and end times
-        this.start = start;
-        this.end = end;
-        // this.dateTimeRange2 = `${this.getDate(start)} ${this.getDate(end)}`;
+    private _setDateTimeRangeInStorage(from: Moment, to: Moment): void {
+        // update local properties with current from and to times
+        this.from = from;
+        this.to = to;
+        // this.dateTimeRange2 = `${this.getDate(from)} ${this.getDate(to)}`;
 
         const dateTimeRange = {
-            startDate: this.getDate(start),
-            endDate: this.getDate(end),
-            startTime: this.getTime(start),
-            endTime: this.getTime(end)
+            fromDate: this.getDate(from),
+            toDate: this.getDate(to),
+            fromTime: this.getTime(from),
+            toTime: this.getTime(to)
         };
 
         // pass new value in the stream
@@ -122,7 +122,7 @@ export class ActionBarComponent implements OnInit, OnDestroy {
         this._datetimerangeRef = this._datetimerangeOverlayService.open({
             el: this._datetimerangeEl,
             data: {
-                dateTimeRange: [this.start, this.end],
+                dateTimeRange: [this.from, this.to],
                 ranges: this.ranges
             }
         });
@@ -136,7 +136,7 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             });
     }
 
-    private _dateTimeChange(start: Moment, end: Moment): void {
+    private _dateTimeChange(from: Moment, to: Moment): void {
         // everytime new date range is selected
 
         // updating the value
@@ -145,7 +145,7 @@ export class ActionBarComponent implements OnInit, OnDestroy {
         this._actionBarUIState.changeGettingDataBar('start');
 
         // save in storage
-        this._setDateTimeRangeInStorage(start, end);
+        this._setDateTimeRangeInStorage(from, to);
 
         // reset details-grid-request value
         this._storage.setItem('details-grid-request', this._detailsGridRequest.initial());

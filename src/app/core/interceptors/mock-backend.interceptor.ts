@@ -1,12 +1,6 @@
-import {
-    HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor
-} from '@angular/common/http';
-import {
-    Observable, of
-} from 'rxjs';
-import {
-    delay, mergeMap, materialize, dematerialize
-} from 'rxjs/operators';
+import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 // mock datasets
 import { USERS } from '../mocks/users.mock';
@@ -64,7 +58,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
 
                     if (request.url.endsWith('/details') && request.method === 'POST') {
 
-                        const { startDate, endDate, startTime, endTime, start, length, search, sort } = request.body;
+                        const { fromDate, toDate, fromTime, toTime, start, length, search, sort } = request.body;
 
                         let totalWithoutSearch = 0;
                         let totalWithSearch = 0;
@@ -76,10 +70,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
                                 const [hour, minute] = time.split(':').map(parseFloat);
                                 const detailsDate = new Date(new Date(date).setHours(hour, minute));
 
-                                const requestStartDate = new Date(`${startDate} ${startTime}`);
-                                const requestEndDate = new Date(`${endDate} ${endTime}`);
+                                const requestFromDate = new Date(`${fromDate} ${fromTime}`);
+                                const requestToDate = new Date(`${toDate} ${toTime}`);
 
-                                if (detailsDate >= requestStartDate && detailsDate <= requestEndDate) {
+                                if (detailsDate >= requestFromDate && detailsDate <= requestToDate) {
 
                                     totalWithoutSearch++;
 
@@ -146,7 +140,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         // console.group('request-response');
                         // console.log('Request', request.body);
                         // console.log('Response', data);
-                        // console.groupEnd();
+                        // console.groupTo();
 
                         return of(new HttpResponse({
                             status: 200,
@@ -162,22 +156,22 @@ export class MockBackendInterceptor implements HttpInterceptor {
 
                         const summary = SUMMARY.reduce((summaries: any, summary) => {
 
-                            const { start_date, end_date, start_time, end_time } = summary;
-                            const [start_hour, start_minute] = start_time.split(':').map(parseFloat);
-                            const [end_hour, end_minute] = end_time.split(':').map(parseFloat);
-                            const summaryStartDate = new Date(new Date(start_date).setHours(start_hour, start_minute));
-                            const summaryEndDate = new Date(new Date(end_date).setHours(end_hour, end_minute));
+                            const { from_date, to_date, from_time, to_time } = summary;
+                            const [from_hour, from_minute] = from_time.split(':').map(parseFloat);
+                            const [to_hour, to_minute] = to_time.split(':').map(parseFloat);
+                            const summaryFromDate = new Date(new Date(from_date).setHours(from_hour, from_minute));
+                            const summaryToDate = new Date(new Date(to_date).setHours(to_hour, to_minute));
 
-                            const { startDate, endDate, startTime, endTime } = request.body;
-                            const requestStartDate = new Date(`${startDate} ${startTime}`);
-                            const requestEndDate = new Date(`${endDate} ${endTime}`);
+                            const { fromDate, toDate, fromTime, toTime } = request.body;
+                            const requestFromDate = new Date(`${fromDate} ${fromTime}`);
+                            const requestToDate = new Date(`${toDate} ${toTime}`);
 
                             if (
-                                summaryStartDate <= summaryEndDate &&
-                                summaryStartDate >= requestStartDate &&
-                                summaryStartDate <= requestEndDate &&
-                                summaryEndDate <= requestEndDate &&
-                                summaryEndDate >= requestStartDate
+                                summaryFromDate <= summaryToDate &&
+                                summaryFromDate >= requestFromDate &&
+                                summaryFromDate <= requestToDate &&
+                                summaryToDate <= requestToDate &&
+                                summaryToDate >= requestFromDate
                             ) {
 
                                 const gradientPie = [];

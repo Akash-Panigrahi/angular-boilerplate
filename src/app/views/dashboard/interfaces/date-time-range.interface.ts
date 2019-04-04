@@ -1,6 +1,6 @@
 export interface DateTimeRange {
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
+  fromDate: string;
+  fromTime: string;
+  toDate: string;
+  toTime: string;
 }

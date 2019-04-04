@@ -101,10 +101,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-03-03',
-        'end_date': '2018-12-08',
-        'start_time': '13:07',
-        'end_time': '1:04'
+        'from_date': '2018-03-03',
+        'to_date': '2018-12-08',
+        'from_time': '13:07',
+        'to_time': '1:04'
     },
     {
         'kpis': {
@@ -208,10 +208,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-02',
-        'end_date': '2018-08-02',
-        'start_time': '0:10',
-        'end_time': '7:09'
+        'from_date': '2018-12-02',
+        'to_date': '2018-08-02',
+        'from_time': '0:10',
+        'to_time': '7:09'
     },
     {
         'kpis': {
@@ -315,10 +315,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-09-15',
-        'end_date': '2018-07-04',
-        'start_time': '3:08',
-        'end_time': '5:11'
+        'from_date': '2018-09-15',
+        'to_date': '2018-07-04',
+        'from_time': '3:08',
+        'to_time': '5:11'
     },
     {
         'kpis': {
@@ -422,10 +422,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-05-02',
-        'end_date': '2018-12-15',
-        'start_time': '2:11',
-        'end_time': '12:12'
+        'from_date': '2018-05-02',
+        'to_date': '2018-12-15',
+        'from_time': '2:11',
+        'to_time': '12:12'
     },
     {
         'kpis': {
@@ -529,10 +529,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-10-22',
-        'end_date': '2018-04-11',
-        'start_time': '17:05',
-        'end_time': '22:03'
+        'from_date': '2018-10-22',
+        'to_date': '2018-04-11',
+        'from_time': '17:05',
+        'to_time': '22:03'
     },
     {
         'kpis': {
@@ -636,10 +636,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-11-27',
-        'end_date': '2018-10-06',
-        'start_time': '15:10',
-        'end_time': '13:08'
+        'from_date': '2018-11-27',
+        'to_date': '2018-10-06',
+        'from_time': '15:10',
+        'to_time': '13:08'
     },
     {
         'kpis': {
@@ -743,10 +743,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-10-02',
-        'end_date': '2018-08-28',
-        'start_time': '19:09',
-        'end_time': '9:12'
+        'from_date': '2018-10-02',
+        'to_date': '2018-08-28',
+        'from_time': '19:09',
+        'to_time': '9:12'
     },
     {
         'kpis': {
@@ -850,10 +850,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-07-31',
-        'end_date': '2018-11-19',
-        'start_time': '9:09',
-        'end_time': '23:09'
+        'from_date': '2018-07-31',
+        'to_date': '2018-11-19',
+        'from_time': '9:09',
+        'to_time': '23:09'
     },
     {
         'kpis': {
@@ -957,10 +957,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-16',
-        'end_date': '2018-02-15',
-        'start_time': '2:12',
-        'end_time': '0:10'
+        'from_date': '2018-12-16',
+        'to_date': '2018-02-15',
+        'from_time': '2:12',
+        'to_time': '0:10'
     },
     {
         'kpis': {
@@ -1064,10 +1064,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-19',
-        'end_date': '2018-11-14',
-        'start_time': '18:12',
-        'end_time': '20:08'
+        'from_date': '2018-12-19',
+        'to_date': '2018-11-14',
+        'from_time': '18:12',
+        'to_time': '20:08'
     },
     {
         'kpis': {
@@ -1171,10 +1171,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-08-14',
-        'end_date': '2018-10-29',
-        'start_time': '2:08',
-        'end_time': '18:12'
+        'from_date': '2018-08-14',
+        'to_date': '2018-10-29',
+        'from_time': '2:08',
+        'to_time': '18:12'
     },
     {
         'kpis': {
@@ -1278,10 +1278,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-07-31',
-        'end_date': '2018-11-04',
-        'start_time': '16:04',
-        'end_time': '22:09'
+        'from_date': '2018-07-31',
+        'to_date': '2018-11-04',
+        'from_time': '16:04',
+        'to_time': '22:09'
     },
     {
         'kpis': {
@@ -1385,10 +1385,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-04-11',
-        'end_date': '2018-10-01',
-        'start_time': '19:12',
-        'end_time': '10:09'
+        'from_date': '2018-04-11',
+        'to_date': '2018-10-01',
+        'from_time': '19:12',
+        'to_time': '10:09'
     },
     {
         'kpis': {
@@ -1492,10 +1492,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-09-16',
-        'end_date': '2018-02-19',
-        'start_time': '5:11',
-        'end_time': '12:03'
+        'from_date': '2018-09-16',
+        'to_date': '2018-02-19',
+        'from_time': '5:11',
+        'to_time': '12:03'
     },
     {
         'kpis': {
@@ -1599,10 +1599,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-10-01',
-        'end_date': '2018-10-16',
-        'start_time': '21:12',
-        'end_time': '5:09'
+        'from_date': '2018-10-01',
+        'to_date': '2018-10-16',
+        'from_time': '21:12',
+        'to_time': '5:09'
     },
     {
         'kpis': {
@@ -1706,10 +1706,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-09-09',
-        'end_date': '2018-11-14',
-        'start_time': '19:08',
-        'end_time': '22:10'
+        'from_date': '2018-09-09',
+        'to_date': '2018-11-14',
+        'from_time': '19:08',
+        'to_time': '22:10'
     },
     {
         'kpis': {
@@ -1813,10 +1813,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-05-17',
-        'end_date': '2018-10-23',
-        'start_time': '10:11',
-        'end_time': '20:12'
+        'from_date': '2018-05-17',
+        'to_date': '2018-10-23',
+        'from_time': '10:11',
+        'to_time': '20:12'
     },
     {
         'kpis': {
@@ -1920,10 +1920,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-10-25',
-        'end_date': '2018-08-05',
-        'start_time': '3:12',
-        'end_time': '5:10'
+        'from_date': '2018-10-25',
+        'to_date': '2018-08-05',
+        'from_time': '3:12',
+        'to_time': '5:10'
     },
     {
         'kpis': {
@@ -2027,10 +2027,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-29',
-        'end_date': '2018-10-15',
-        'start_time': '20:09',
-        'end_time': '12:12'
+        'from_date': '2018-12-29',
+        'to_date': '2018-10-15',
+        'from_time': '20:09',
+        'to_time': '12:12'
     },
     {
         'kpis': {
@@ -2134,10 +2134,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-08-27',
-        'end_date': '2018-10-26',
-        'start_time': '2:05',
-        'end_time': '3:01'
+        'from_date': '2018-08-27',
+        'to_date': '2018-10-26',
+        'from_time': '2:05',
+        'to_time': '3:01'
     },
     {
         'kpis': {
@@ -2241,10 +2241,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-08-21',
-        'end_date': '2018-04-29',
-        'start_time': '11:12',
-        'end_time': '1:07'
+        'from_date': '2018-08-21',
+        'to_date': '2018-04-29',
+        'from_time': '11:12',
+        'to_time': '1:07'
     },
     {
         'kpis': {
@@ -2348,10 +2348,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-24',
-        'end_date': '2018-09-04',
-        'start_time': '13:12',
-        'end_time': '4:11'
+        'from_date': '2018-12-24',
+        'to_date': '2018-09-04',
+        'from_time': '13:12',
+        'to_time': '4:11'
     },
     {
         'kpis': {
@@ -2455,10 +2455,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-09-28',
-        'end_date': '2018-11-15',
-        'start_time': '8:08',
-        'end_time': '13:11'
+        'from_date': '2018-09-28',
+        'to_date': '2018-11-15',
+        'from_time': '8:08',
+        'to_time': '13:11'
     },
     {
         'kpis': {
@@ -2562,10 +2562,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-09-05',
-        'end_date': '2018-08-27',
-        'start_time': '1:09',
-        'end_time': '7:11'
+        'from_date': '2018-09-05',
+        'to_date': '2018-08-27',
+        'from_time': '1:09',
+        'to_time': '7:11'
     },
     {
         'kpis': {
@@ -2669,10 +2669,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-07',
-        'end_date': '2018-12-28',
-        'start_time': '9:05',
-        'end_time': '20:04'
+        'from_date': '2018-12-07',
+        'to_date': '2018-12-28',
+        'from_time': '9:05',
+        'to_time': '20:04'
     },
     {
         'kpis': {
@@ -2776,10 +2776,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-08-26',
-        'end_date': '2018-07-16',
-        'start_time': '6:10',
-        'end_time': '5:05'
+        'from_date': '2018-08-26',
+        'to_date': '2018-07-16',
+        'from_time': '6:10',
+        'to_time': '5:05'
     },
     {
         'kpis': {
@@ -2883,10 +2883,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-07-24',
-        'end_date': '2018-06-01',
-        'start_time': '23:12',
-        'end_time': '20:12'
+        'from_date': '2018-07-24',
+        'to_date': '2018-06-01',
+        'from_time': '23:12',
+        'to_time': '20:12'
     },
     {
         'kpis': {
@@ -2990,10 +2990,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-10-17',
-        'end_date': '2018-04-09',
-        'start_time': '9:08',
-        'end_time': '11:12'
+        'from_date': '2018-10-17',
+        'to_date': '2018-04-09',
+        'from_time': '9:08',
+        'to_time': '11:12'
     },
     {
         'kpis': {
@@ -3097,10 +3097,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-01-09',
-        'end_date': '2018-11-25',
-        'start_time': '21:10',
-        'end_time': '2:11'
+        'from_date': '2018-01-09',
+        'to_date': '2018-11-25',
+        'from_time': '21:10',
+        'to_time': '2:11'
     },
     {
         'kpis': {
@@ -3204,10 +3204,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-08-03',
-        'end_date': '2018-10-08',
-        'start_time': '8:09',
-        'end_time': '2:11'
+        'from_date': '2018-08-03',
+        'to_date': '2018-10-08',
+        'from_time': '8:09',
+        'to_time': '2:11'
     },
     {
         'kpis': {
@@ -3311,10 +3311,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-06-19',
-        'end_date': '2018-09-17',
-        'start_time': '6:02',
-        'end_time': '6:11'
+        'from_date': '2018-06-19',
+        'to_date': '2018-09-17',
+        'from_time': '6:02',
+        'to_time': '6:11'
     },
     {
         'kpis': {
@@ -3418,10 +3418,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-07-31',
-        'end_date': '2018-01-08',
-        'start_time': '18:12',
-        'end_time': '2:02'
+        'from_date': '2018-07-31',
+        'to_date': '2018-01-08',
+        'from_time': '18:12',
+        'to_time': '2:02'
     },
     {
         'kpis': {
@@ -3525,10 +3525,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-17',
-        'end_date': '2018-12-18',
-        'start_time': '18:10',
-        'end_time': '1:12'
+        'from_date': '2018-12-17',
+        'to_date': '2018-12-18',
+        'from_time': '18:10',
+        'to_time': '1:12'
     },
     {
         'kpis': {
@@ -3632,10 +3632,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-19',
-        'end_date': '2018-10-18',
-        'start_time': '14:07',
-        'end_time': '1:09'
+        'from_date': '2018-12-19',
+        'to_date': '2018-10-18',
+        'from_time': '14:07',
+        'to_time': '1:09'
     },
     {
         'kpis': {
@@ -3739,10 +3739,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-11-07',
-        'end_date': '2018-12-12',
-        'start_time': '0:12',
-        'end_time': '9:06'
+        'from_date': '2018-11-07',
+        'to_date': '2018-12-12',
+        'from_time': '0:12',
+        'to_time': '9:06'
     },
     {
         'kpis': {
@@ -3846,10 +3846,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-11-27',
-        'end_date': '2018-09-24',
-        'start_time': '8:09',
-        'end_time': '9:09'
+        'from_date': '2018-11-27',
+        'to_date': '2018-09-24',
+        'from_time': '8:09',
+        'to_time': '9:09'
     },
     {
         'kpis': {
@@ -3953,10 +3953,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-24',
-        'end_date': '2018-08-24',
-        'start_time': '18:12',
-        'end_time': '19:06'
+        'from_date': '2018-12-24',
+        'to_date': '2018-08-24',
+        'from_time': '18:12',
+        'to_time': '19:06'
     },
     {
         'kpis': {
@@ -4060,10 +4060,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-07-12',
-        'end_date': '2018-12-19',
-        'start_time': '20:07',
-        'end_time': '17:12'
+        'from_date': '2018-07-12',
+        'to_date': '2018-12-19',
+        'from_time': '20:07',
+        'to_time': '17:12'
     },
     {
         'kpis': {
@@ -4167,10 +4167,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-10-07',
-        'end_date': '2018-08-16',
-        'start_time': '19:07',
-        'end_time': '13:05'
+        'from_date': '2018-10-07',
+        'to_date': '2018-08-16',
+        'from_time': '19:07',
+        'to_time': '13:05'
     },
     {
         'kpis': {
@@ -4274,10 +4274,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-11-03',
-        'end_date': '2018-12-06',
-        'start_time': '6:10',
-        'end_time': '22:12'
+        'from_date': '2018-11-03',
+        'to_date': '2018-12-06',
+        'from_time': '6:10',
+        'to_time': '22:12'
     },
     {
         'kpis': {
@@ -4381,10 +4381,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-02-17',
-        'end_date': '2018-12-02',
-        'start_time': '13:07',
-        'end_time': '4:07'
+        'from_date': '2018-02-17',
+        'to_date': '2018-12-02',
+        'from_time': '13:07',
+        'to_time': '4:07'
     },
     {
         'kpis': {
@@ -4488,10 +4488,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-09-07',
-        'end_date': '2018-09-19',
-        'start_time': '14:12',
-        'end_time': '19:12'
+        'from_date': '2018-09-07',
+        'to_date': '2018-09-19',
+        'from_time': '14:12',
+        'to_time': '19:12'
     },
     {
         'kpis': {
@@ -4595,10 +4595,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-05',
-        'end_date': '2018-06-06',
-        'start_time': '7:08',
-        'end_time': '2:12'
+        'from_date': '2018-12-05',
+        'to_date': '2018-06-06',
+        'from_time': '7:08',
+        'to_time': '2:12'
     },
     {
         'kpis': {
@@ -4702,10 +4702,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-25',
-        'end_date': '2018-07-11',
-        'start_time': '15:12',
-        'end_time': '2:12'
+        'from_date': '2018-12-25',
+        'to_date': '2018-07-11',
+        'from_time': '15:12',
+        'to_time': '2:12'
     },
     {
         'kpis': {
@@ -4809,10 +4809,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-05-08',
-        'end_date': '2018-07-20',
-        'start_time': '5:05',
-        'end_time': '9:10'
+        'from_date': '2018-05-08',
+        'to_date': '2018-07-20',
+        'from_time': '5:05',
+        'to_time': '9:10'
     },
     {
         'kpis': {
@@ -4916,10 +4916,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-04-02',
-        'end_date': '2018-03-31',
-        'start_time': '20:08',
-        'end_time': '19:12'
+        'from_date': '2018-04-02',
+        'to_date': '2018-03-31',
+        'from_time': '20:08',
+        'to_time': '19:12'
     },
     {
         'kpis': {
@@ -5023,10 +5023,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-11-03',
-        'end_date': '2018-12-03',
-        'start_time': '5:12',
-        'end_time': '12:07'
+        'from_date': '2018-11-03',
+        'to_date': '2018-12-03',
+        'from_time': '5:12',
+        'to_time': '12:07'
     },
     {
         'kpis': {
@@ -5130,10 +5130,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-10-29',
-        'end_date': '2018-05-01',
-        'start_time': '19:08',
-        'end_time': '3:11'
+        'from_date': '2018-10-29',
+        'to_date': '2018-05-01',
+        'from_time': '19:08',
+        'to_time': '3:11'
     },
     {
         'kpis': {
@@ -5237,10 +5237,10 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-12-04',
-        'end_date': '2018-10-31',
-        'start_time': '0:09',
-        'end_time': '0:10'
+        'from_date': '2018-12-04',
+        'to_date': '2018-10-31',
+        'from_time': '0:09',
+        'to_time': '0:10'
     },
     {
         'kpis': {
@@ -5344,9 +5344,9 @@ export const SUMMARY = [
                 ]
             }
         ],
-        'start_date': '2018-11-30',
-        'end_date': '2018-10-01',
-        'start_time': '11:11',
-        'end_time': '1:12'
+        'from_date': '2018-11-30',
+        'to_date': '2018-10-01',
+        'from_time': '11:11',
+        'to_time': '1:12'
     }
 ];

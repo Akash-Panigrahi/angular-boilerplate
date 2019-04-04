@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { DateTimeRange } from '../../interfaces/date-time-range.interface';
 
 @Injectable()
 export class DetailsPageService {
@@ -11,7 +12,7 @@ export class DetailsPageService {
         private _api: ApiService
     ) { }
 
-    getDetails(data): Observable<any> {
+    getDetails(data: DateTimeRange): Observable<any> {
         return this._api.post('/details', data)
             .pipe(take(1))
             .pipe(

@@ -58,14 +58,14 @@ export class DateTimeRangeService implements OnDestroy {
             return this._dateTimeRange;
         }
 
-        const start = moment(new Date());
-        const end = moment(new Date());
+        const from = moment(new Date());
+        const to = moment(new Date());
 
         return {
-            startDate: start.format('YYYY-MM-DD'),
-            endDate: end.format('YYYY-MM-DD'),
-            startTime: start.format('H:mm:ss'),
-            endTime: end.format('H:mm:ss')
+            fromDate: from.format('YYYY-MM-DD'),
+            toDate: to.format('YYYY-MM-DD'),
+            fromTime: from.format('H:mm:ss'),
+            toTime: to.format('H:mm:ss')
         };
     }
 
