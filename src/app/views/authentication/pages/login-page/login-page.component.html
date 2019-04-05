@@ -1,34 +1,48 @@
 <div class="login">
-    <div class="login__header">
-        <div class="login__logo">
+    <div class="login-header">
+        <div class="login-logo">
             <img src="/assets/images/angular.svg" alt="Angular Logo">
         </div>
     </div>
 
     <div class="login-horizontal-separator"></div>
 
-    <form class="login__form"
-          autocomplete="off"
-          [formGroup]="loginForm"
-          (ngSubmit)="onSubmit()">
-        <div class="login-form__inputs">
-            <div class="input-group">
-                <i class="material-icons icon__person">person</i>
-                <div class="login-form__control-container">
-                    <div class="login-form__input-container">
-                        <input id="username"
-                               type="text"
-                               class="form-control login-form__input"
-                               placeholder="Username"
-                               title="Your username"
-                               aria-label="Username"
-                               spellcheck="false"
-                               formControlName="username"
-                               maxlength="32">
+    <form class="login-form"
+        autocomplete="off"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()">
+
+        <div class="login-form__fields">
+            <div class="login-form__field"
+                [class.field-focused]="fieldFocused === 'username'">
+                <mat-icon class="icon-person">person</mat-icon>
+
+                <div class="horizontal-space"></div>
+
+                <div class="login-form__control-wrapper">
+                    <label class="login-form__label"
+                        for="username">
+                        Username
+                    </label>
+
+                    <div class="login-form__input-wrapper">
+
+                        <input class="login-form__input"
+                            type="text"
+                            id="username"
+                            placeholder="Your username"
+                            title="Your username"
+                            aria-label="Username"
+                            spellcheck="false"
+                            formControlName="username"
+                            maxlength="32"
+                            (focus)="focusField('username')"
+                            (focusout)="focusField('')">
                     </div>
-                    <div class="form-error"
-                         *ngIf="username.invalid && (username.dirty || username.touched)"
-                         @errorSlideDown>
+
+                    <div class="login-form__errors"
+                        *ngIf="username.invalid && (username.dirty || username.touched)"
+                        @errorSlideDown>
                         <div *ngIf="username?.errors?.required">
                             Username is required.
                         </div>
@@ -41,26 +55,40 @@
                     </div>
                 </div>
             </div>
-            <div class="input-group">
-                <i class="material-icons icon__vpn_key">vpn_key</i>
-                <div class="login-form__control-container">
-                    <div class="login-form__input-container">
-                        <input class="form-control login-form__input"
-                               id="password"
-                               [type]="passwordFieldType"
-                               placeholder="Password"
-                               title="Your password"
-                               aria-label="Password"
-                               formControlName="password"
-                               maxlength="128">
-                        <i class="material-icons icon__visibility"
+
+            <div class="login-form__field"
+                [class.field-focused]="fieldFocused === 'password'">
+                <mat-icon class="icon-vpn_key">vpn_key</mat-icon>
+
+                <div class="horizontal-space"></div>
+
+                <div class="login-form__control-wrapper">
+                    <label class="login-form__label"
+                        for="password">
+                        Password
+                    </label>
+
+                    <div class="login-form__input-wrapper">
+                        <input class="login-form__input"
+                            id="password"
+                            [type]="passwordFieldType"
+                            placeholder="Your password"
+                            title="Your password"
+                            aria-label="Password"
+                            formControlName="password"
+                            maxlength="128"
+                            (focus)="focusField('password')"
+                            (focusout)="focusField('')">
+
+                        <mat-icon class="icon-visibility"
                            (click)="togglePasswordVisibility()">
                            {{ passwordVisibility ? 'visibility' : 'visibility_off' }}
-                        </i>
+                        </mat-icon>
                     </div>
-                    <div class="form-error"
-                         *ngIf="password.invalid && (password.dirty || password.touched)"
-                         @errorSlideDown>
+
+                    <div class="login-form__errors"
+                        *ngIf="password.invalid && (password.dirty || password.touched)"
+                        @errorSlideDown>
                         <div *ngIf="password?.errors?.required">
                             Password is required.
                         </div>
@@ -75,13 +103,76 @@
             </div>
         </div>
 
+
+        <div class="login-form__fields">
+            <div class="login-form__field">
+                <mat-icon>person</mat-icon>
+
+                <div class="horizontal-space"></div>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Username</mat-label>
+
+                    <input matInput
+                        type="text"
+                        placeholder="Your username"
+                        title="Your username"
+                        aria-label="Username"
+                        spellcheck="false"
+                        formControlName="username"
+                        maxlength="32">
+
+                    <mat-error *ngIf="username?.errors?.required">
+                        Username is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="username?.errors?.minlength">
+                        Username must be at least 5 characters long.
+                    </mat-error>
+                    <mat-error *ngIf="username?.errors?.maxlength">
+                        Username must be no more than 32 characters in length.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="login-form__field">
+                <mat-icon>vpn_key</mat-icon>
+
+                <div class="horizontal-space"></div>
+
+                <mat-form-field appearance="standard">
+                    <label>Password</label>
+
+                    <input matInput
+                        [type]="passwordFieldType"
+                        placeholder="Your password"
+                        title="Your password"
+                        aria-label="Password"
+                        formControlName="password"
+                        maxlength="128">
+
+                    <mat-icon matSuffix
+                        (click)="togglePasswordVisibility()">
+                        {{ passwordVisibility ? 'visibility' : 'visibility_off' }}
+                    </mat-icon>
+
+                    <mat-error *ngIf="password?.errors?.required">
+                        Password is <strong>required</strong>.
+                    </mat-error>
+                    <mat-error *ngIf="password?.errors?.minlength">
+                        Password must be at least 8 characters long.
+                    </mat-error>
+                    <mat-error *ngIf="password?.errors?.maxlength">
+                        Password must be no more than 128 characters in length.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
         <div class="form-horizontal-separator"></div>
 
-        <div class="login-form__submit-btn">
-            <button class="btn"
-                    type="submit"
-                    rippleOnClick
-                    [disabled]="loginForm.invalid || loggingIn">
+        <div class="submit-btn">
+            <button type="submit" class="btn"
+                rippleOnClick
+                [disabled]="loginForm.invalid || loggingIn">
                 {{ loggingIn ? 'Logging In...' : 'Log In' }}
             </button>
         </div>

@@ -1,8 +1,64 @@
 @import '~@angular/material/theming';
 
 @mixin login-page-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $foreground: map-get($theme, foreground);
+    $typography-config: mat-typography-config();
 
-    .app-login-page {
+    app-login-page {
 
+        .login-form {
+
+            .field-focused {
+                .login-form__label {
+                    color: mat-color($primary);
+                }
+
+                .login-form__input-wrapper {
+                    border-bottom: 1px solid mat-color($primary);
+                }
+            }
+
+            &__label {
+                color: mat-color($foreground, secondary-text);
+                @include mat-typography-level-to-styles($typography-config, caption);
+            }
+
+            &__input {
+
+                &:focus:not(:disabled) {}
+            }
+
+            &__errors {
+                color: mat-color($app-palette-red);
+                font-size: mat-font-size($typography-config, caption);
+                margin-top: 0.5rem;
+            }
+        }
+
+        .submit-btn {
+
+            button {
+                background-color: mat-color($app-palette-indigo, A400);
+                color: mat-contrast($app-palette-indigo, A400);
+                @include mat-elevation(6);
+
+                &:hover:not(:disabled),
+                &:focus:not(:disabled) {
+                    @include mat-overridable-elevation(
+                        6,
+                        mat-color($app-palette-indigo, A400),
+                        1
+                    );
+                }
+            }
+        }
+
+        .ng-invalid {
+            &.ng-touched,
+            &.ng-dirty {
+                border-bottom-color: mat-color($app-palette-red);
+            }
+        }
     }
 }
