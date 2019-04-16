@@ -54,6 +54,8 @@ export class ActionBarComponent implements OnInit, OnDestroy {
     from: Moment;
     to: Moment;
 
+    max = new Date();
+
     private _datetimerangeRef: DatetimerangeRef;
 
     private _dateTimeRange: DateTimeRange;
@@ -123,7 +125,8 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             el: this._datetimerangeEl,
             data: {
                 dateTimeRange: [this.from, this.to],
-                ranges: this.ranges
+                ranges: this.ranges,
+                max: this.max
             }
         });
 
@@ -132,11 +135,11 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             .dateTime$
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(dateTimeRangeData => {
-                this._dateTimeChange(...dateTimeRangeData);
+                this.onDateTimeChange(...dateTimeRangeData);
             });
     }
 
-    private _dateTimeChange(from: Moment, to: Moment): void {
+    onDateTimeChange(from: Moment, to: Moment): void {
         // everytime new date range is selected
 
         // updating the value

@@ -27,7 +27,9 @@
                 <input readonly
                     matInput
                     [(ngModel)]="from"
-                    [owlDateTime]="fromDateTime">
+                    [max]="max"
+                    [owlDateTime]="fromDateTime"
+                    (dateTimeChange)="onDateTimeChange($event.value, to)">
             </mat-form-field>
 
             <owl-date-time #fromDateTime
@@ -43,7 +45,10 @@
                 <input readonly
                     matInput
                     [(ngModel)]="to"
-                    [owlDateTime]="toDateTime">
+                    [min]="from"
+                    [max]="max"
+                    [owlDateTime]="toDateTime"
+                    (dateTimeChange)="onDateTimeChange(from, $event.value)">
             </mat-form-field>
 
             <owl-date-time #toDateTime

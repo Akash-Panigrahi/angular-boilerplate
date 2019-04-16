@@ -30,6 +30,7 @@
        [owlDateTime]="datetimerangeEl"
        [selectMode]="'range'"
        [(ngModel)]="pickerDateTime"
+       [max]="datetimerangeData.max"
        (dateTimeChange)="onDateTimeChange($event.value)">
 
 <owl-date-time #datetimerangeEl
