@@ -1,8 +1,6 @@
 @import '~bootstrap/scss/bootstrap-grid.scss';
 
 :host {
-    --smokey-black: #b7b7b7;
-
     flex: 1;
     display: flex;
     align-items: center;
@@ -183,7 +181,6 @@
 .icon-visibility {
     height: auto;
     width: auto;
-    color: #444444;
     padding-bottom: 5px;
 
     &::selection {
@@ -192,7 +189,6 @@
 }
 
 .icon-visibility {
-    border-bottom: 1px solid var(--smokey-black);
     margin-right: 0;
     padding-left: 0.5rem;
     cursor: pointer;

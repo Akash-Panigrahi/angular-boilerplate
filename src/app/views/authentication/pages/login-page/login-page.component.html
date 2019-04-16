@@ -14,7 +14,8 @@
 
         <div class="login-form__fields">
             <div class="login-form__field"
-                [class.field-focused]="fieldFocused === 'username'">
+                [class.field-focused]="fieldFocused === 'username'"
+                [class.field-errored]="username.invalid">
                 <mat-icon class="icon-person">person</mat-icon>
 
                 <div class="horizontal-space"></div>
@@ -57,7 +58,8 @@
             </div>
 
             <div class="login-form__field"
-                [class.field-focused]="fieldFocused === 'password'">
+                [class.field-focused]="fieldFocused === 'password'"
+                [class.field-errored]="password.invalid">
                 <mat-icon class="icon-vpn_key">vpn_key</mat-icon>
 
                 <div class="horizontal-space"></div>
@@ -100,70 +102,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="login-form__fields">
-            <div class="login-form__field">
-                <mat-icon>person</mat-icon>
-
-                <div class="horizontal-space"></div>
-
-                <mat-form-field appearance="standard">
-                    <mat-label>Username</mat-label>
-
-                    <input matInput
-                        type="text"
-                        placeholder="Your username"
-                        title="Your username"
-                        aria-label="Username"
-                        spellcheck="false"
-                        formControlName="username"
-                        maxlength="32">
-
-                    <mat-error *ngIf="username?.errors?.required">
-                        Username is <strong>required</strong>
-                    </mat-error>
-                    <mat-error *ngIf="username?.errors?.minlength">
-                        Username must be at least 5 characters long.
-                    </mat-error>
-                    <mat-error *ngIf="username?.errors?.maxlength">
-                        Username must be no more than 32 characters in length.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="login-form__field">
-                <mat-icon>vpn_key</mat-icon>
-
-                <div class="horizontal-space"></div>
-
-                <mat-form-field appearance="standard">
-                    <label>Password</label>
-
-                    <input matInput
-                        [type]="passwordFieldType"
-                        placeholder="Your password"
-                        title="Your password"
-                        aria-label="Password"
-                        formControlName="password"
-                        maxlength="128">
-
-                    <mat-icon matSuffix
-                        (click)="togglePasswordVisibility()">
-                        {{ passwordVisibility ? 'visibility' : 'visibility_off' }}
-                    </mat-icon>
-
-                    <mat-error *ngIf="password?.errors?.required">
-                        Password is <strong>required</strong>.
-                    </mat-error>
-                    <mat-error *ngIf="password?.errors?.minlength">
-                        Password must be at least 8 characters long.
-                    </mat-error>
-                    <mat-error *ngIf="password?.errors?.maxlength">
-                        Password must be no more than 128 characters in length.
-                    </mat-error>
-                </mat-form-field>
             </div>
         </div>
 

@@ -8,14 +8,29 @@
     app-login-page {
 
         .login-form {
+            $self: '.login-form';
 
             .field-focused {
-                .login-form__label {
+                #{$self}__label {
                     color: mat-color($primary);
                 }
 
-                .login-form__input-wrapper {
+                #{$self}__input-wrapper {
                     border-bottom: 1px solid mat-color($primary);
+                }
+            }
+
+            .field-errored {
+                #{$self}__label {
+                    color: mat-color($app-palette-red);
+                }
+
+                #{$self}__input-wrapper {
+                    border-bottom-color: mat-color($app-palette-red);
+                }
+
+                #{$self}__errors {
+                    color: mat-color($app-palette-red);
                 }
             }
 
@@ -26,14 +41,21 @@
 
             &__input {
 
+                &-wrapper {
+                    border-bottom: 1px solid mat-color($foreground, secondary-text);
+                }
+
                 &:focus:not(:disabled) {}
             }
 
             &__errors {
-                color: mat-color($app-palette-red);
                 font-size: mat-font-size($typography-config, caption);
                 margin-top: 0.5rem;
             }
+        }
+
+        .mat-icon {
+            color: mat-color($foreground, 'text');
         }
 
         .submit-btn {
@@ -51,13 +73,6 @@
                         1
                     );
                 }
-            }
-        }
-
-        .ng-invalid {
-            &.ng-touched,
-            &.ng-dirty {
-                border-bottom-color: mat-color($app-palette-red);
             }
         }
     }
