@@ -7,55 +7,10 @@
 
     app-login-page {
 
-        .login-form {
-            $self: '.login-form';
-
-            .field-focused {
-                #{$self}__label {
-                    color: mat-color($primary);
-                }
-
-                #{$self}__input-wrapper {
-                    border-bottom: 1px solid mat-color($primary);
-                }
+        .login-form__field {
+            .mat-form-field-wrapper {
+                width: 100%;
             }
-
-            .field-errored {
-                #{$self}__label {
-                    color: mat-color($app-palette-red);
-                }
-
-                #{$self}__input-wrapper {
-                    border-bottom-color: mat-color($app-palette-red);
-                }
-
-                #{$self}__errors {
-                    color: mat-color($app-palette-red);
-                }
-            }
-
-            &__label {
-                color: mat-color($foreground, secondary-text);
-                @include mat-typography-level-to-styles($typography-config, caption);
-            }
-
-            &__input {
-
-                &-wrapper {
-                    border-bottom: 1px solid mat-color($foreground, secondary-text);
-                }
-
-                &:focus:not(:disabled) {}
-            }
-
-            &__errors {
-                font-size: mat-font-size($typography-config, caption);
-                margin-top: 0.5rem;
-            }
-        }
-
-        .mat-icon {
-            color: mat-color($foreground, 'text');
         }
 
         .submit-btn {

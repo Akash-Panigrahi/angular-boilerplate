@@ -52,8 +52,6 @@ export class LoginPageComponent implements OnInit {
         return this.loginForm.get('password');
     }
 
-    fieldFocused: string;
-
     constructor(
         private _router: Router,
         private _formBuilder: FormBuilder,
@@ -106,9 +104,5 @@ export class LoginPageComponent implements OnInit {
                     );
                 }
             );
-    }
-
-    focusField(field: string): void {
-        this.fieldFocused = field;
     }
 }

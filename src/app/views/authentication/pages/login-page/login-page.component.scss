@@ -60,11 +60,6 @@
     display: none;
 }
 
-.form-horizontal-separator {
-    padding-bottom: 1rem;
-    display: block;
-}
-
 @include media-breakpoint-down(sm) {
     .login-horizontal-separator {
         display: block;
@@ -87,7 +82,6 @@
     }
 }
 
-
 .login-form {
     flex: 2;
     padding: 1rem;
@@ -100,52 +94,8 @@
     }
 }
 
-.login-form__fields {
-    .login-form__field {
-        margin-top: 1rem;
-        display: flex;
-        align-items: flex-end;
-    }
-}
-
-.login-form__control-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.login-form__input-wrapper {
-    display: flex;
-    align-items: flex-end;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-}
-
-.login-form__label {
-    margin-bottom: 0;
-}
-
-.login-form__input {
-    flex: 1;
-    background: var(--form-background-color);
-    border-radius: 0;
-    border: 0;
-    color: var(--dark);
-    padding-bottom: 5px;
-    position: relative;
-
-    &:focus {
-        box-shadow: 0 0 0 1000px white inset; // to hide the background yellow color in chrome
-    }
-
-    &#password {
-        &.ng-invalid.ng-touched,
-        &.ng-invalid.ng-dirty {
-            +.icon__visibility {
-                border-bottom-color: var(--danger);
-            }
-        }
-    }
+.login-form__field {
+    width: 100%;
 }
 
 .submit-btn {
@@ -172,38 +122,6 @@
 
         &:disabled {
             cursor: not-allowed;
-        }
-    }
-}
-
-.icon-person,
-.icon-vpn_key,
-.icon-visibility {
-    height: auto;
-    width: auto;
-    padding-bottom: 5px;
-
-    &::selection {
-        background: transparent;
-    }
-}
-
-.icon-visibility {
-    margin-right: 0;
-    padding-left: 0.5rem;
-    cursor: pointer;
-
-    &:focus {
-        box-shadow: none;
-    }
-
-    @at-root {
-        .login-form__field {
-            &:focus {
-                ~.icon-visibility {
-                    border-bottom-color: #666666;
-                }
-            }
         }
     }
 }

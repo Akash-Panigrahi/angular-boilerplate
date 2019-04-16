@@ -13,99 +13,55 @@
         (ngSubmit)="onSubmit()">
 
         <div class="login-form__fields">
-            <div class="login-form__field"
-                [class.field-focused]="fieldFocused === 'username'"
-                [class.field-errored]="username.invalid">
-                <mat-icon class="icon-person">person</mat-icon>
+            <mat-form-field appearance="standard" class="login-form__field">
+                <mat-label>Username</mat-label>
 
-                <div class="horizontal-space"></div>
+                <input matInput
+                    type="text"
+                    placeholder="Your username"
+                    title="Your username"
+                    aria-label="Username"
+                    spellcheck="false"
+                    formControlName="username"
+                    maxlength="32">
 
-                <div class="login-form__control-wrapper">
-                    <label class="login-form__label"
-                        for="username">
-                        Username
-                    </label>
+                <mat-error *ngIf="username?.errors?.required">
+                    Username is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="username?.errors?.minlength">
+                    Username must be at least 5 characters long.
+                </mat-error>
+                <mat-error *ngIf="username?.errors?.maxlength">
+                    Username must be no more than 32 characters in length.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="standard" class="login-form__field">
+                <mat-label>Password</mat-label>
 
-                    <div class="login-form__input-wrapper">
+                <input matInput
+                    [type]="passwordFieldType"
+                    placeholder="Your password"
+                    title="Your password"
+                    aria-label="Password"
+                    formControlName="password"
+                    maxlength="128">
 
-                        <input class="login-form__input"
-                            type="text"
-                            id="username"
-                            placeholder="Your username"
-                            title="Your username"
-                            aria-label="Username"
-                            spellcheck="false"
-                            formControlName="username"
-                            maxlength="32"
-                            (focus)="focusField('username')"
-                            (focusout)="focusField('')">
-                    </div>
+                <mat-icon matSuffix
+                    (click)="togglePasswordVisibility()">
+                    {{ passwordVisibility ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
 
-                    <div class="login-form__errors"
-                        *ngIf="username.invalid && (username.dirty || username.touched)"
-                        @errorSlideDown>
-                        <div *ngIf="username?.errors?.required">
-                            Username is required.
-                        </div>
-                        <div *ngIf="username?.errors?.minlength">
-                            Username must be at least 5 characters long.
-                        </div>
-                        <div *ngIf="username?.errors?.maxlength">
-                            Username must be no more than 32 characters in length.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="login-form__field"
-                [class.field-focused]="fieldFocused === 'password'"
-                [class.field-errored]="password.invalid">
-                <mat-icon class="icon-vpn_key">vpn_key</mat-icon>
-
-                <div class="horizontal-space"></div>
-
-                <div class="login-form__control-wrapper">
-                    <label class="login-form__label"
-                        for="password">
-                        Password
-                    </label>
-
-                    <div class="login-form__input-wrapper">
-                        <input class="login-form__input"
-                            id="password"
-                            [type]="passwordFieldType"
-                            placeholder="Your password"
-                            title="Your password"
-                            aria-label="Password"
-                            formControlName="password"
-                            maxlength="128"
-                            (focus)="focusField('password')"
-                            (focusout)="focusField('')">
-
-                        <mat-icon class="icon-visibility"
-                           (click)="togglePasswordVisibility()">
-                           {{ passwordVisibility ? 'visibility' : 'visibility_off' }}
-                        </mat-icon>
-                    </div>
-
-                    <div class="login-form__errors"
-                        *ngIf="password.invalid && (password.dirty || password.touched)"
-                        @errorSlideDown>
-                        <div *ngIf="password?.errors?.required">
-                            Password is required.
-                        </div>
-                        <div *ngIf="password?.errors?.minlength">
-                            Password must be at least 8 characters long.
-                        </div>
-                        <div *ngIf="password?.errors?.maxlength">
-                            Password must be no more than 128 characters in length.
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <mat-error *ngIf="password?.errors?.required">
+                    Password is <strong>required</strong>.
+                </mat-error>
+                <mat-error *ngIf="password?.errors?.minlength">
+                    Password must be at least 8 characters long.
+                </mat-error>
+                <mat-error *ngIf="password?.errors?.maxlength">
+                    Password must be no more than 128 characters in length.
+                </mat-error>
+            </mat-form-field>
         </div>
-
-        <div class="form-horizontal-separator"></div>
 
         <div class="submit-btn">
             <button type="submit" class="btn"
