@@ -6,7 +6,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RouterModule } from '@angular/router';
 import { ModuleAlreadyLoadedGuard } from './guards/module-already-loaded/module-already-loaded.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MockBackendInterceptor } from './interceptors/mock-backend.interceptor';
 import { TokenInterceptor } from './interceptors/token/token.interceptor';
 import { CoreToastrComponent } from './components/core-toastr/core-toastr.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,13 +37,7 @@ import { SharedModule } from '../shared/shared.module';
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
             multi: true
-        },
-        /* {
-            // mock provider for faking backend
-            provide: HTTP_INTERCEPTORS,
-            useClass: MockBackendInterceptor,
-            multi: true
-        } */
+        }
     ],
     entryComponents: [CoreToastrComponent]
 })
