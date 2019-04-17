@@ -10,10 +10,8 @@
 
 .login {
     --login-wrapper-border-radius: 10px;
-    --form-background-color: white;
     max-width: 450px;
     display: flex;
-    box-shadow: 0px 12px 20px -14px black, 0 0 10px 1px rgba(53, 149, 252, 0.6);
     border-radius: var(--login-wrapper-border-radius);
     transform-origin: top center;
     margin: 2rem;
@@ -29,39 +27,18 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--login-wrapper-border-radius) 0 0 var(--login-wrapper-border-radius);
-    background: #429dff;
     flex: 1;
 
     @include media-breakpoint-down(sm) {
-        background: var(--form-background-color);
         border-radius: var(--login-wrapper-border-radius) var(--login-wrapper-border-radius) 0 0;
-    }
-
-    h2 {
-        flex: 1;
-        line-height: 1;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        font-size: 2rem;
-        word-spacing: -10px;
-        color: var(--form-background-color);
-
-        @include media-breakpoint-down(sm) {
-            color: #429dff;
-            justify-content: center;
-            padding: 1rem;
-        }
     }
 }
 
 .login-horizontal-separator {
     padding-bottom: 1rem;
     display: none;
-}
 
-@include media-breakpoint-down(sm) {
-    .login-horizontal-separator {
+    @include media-breakpoint-down(sm) {
         display: block;
     }
 }
@@ -85,7 +62,6 @@
 .login-form {
     flex: 2;
     padding: 1rem;
-    background: var(--form-background-color);
     border-radius: 0 var(--login-wrapper-border-radius) var(--login-wrapper-border-radius) 0;
 
     @include media-breakpoint-down(sm) {

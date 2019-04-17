@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
-import { loginPageAnimation, errorSlideDown } from './login-page.animations';
+import { loginPageAnimation } from './login-page.animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginPageService } from './login-page.service';
 import { LoginData } from '../../interfaces/login.interfaces';
@@ -11,7 +11,7 @@ import { CoreToastrComponent } from 'src/app/core/components/core-toastr/core-to
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
     styleUrls: ['./login-page.component.scss'],
-    animations: [loginPageAnimation, errorSlideDown],
+    animations: [loginPageAnimation],
     /**
      * using 'providers' the scope of 'LoginPageService'
      * is limited to this component class and it's descendents

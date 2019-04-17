@@ -31,18 +31,3 @@ export const loginPageAnimation = trigger('loginPageAnimation', [
         ], { optional: true }),
     ])
 ]);
-
-export const errorSlideDown = trigger('errorSlideDown', [
-    transition(':enter', [
-        style({ perspective: '1000px' }),
-        query('div', [
-            style({
-                opacity: 0, transform: 'rotateX(70deg)', transformOrigin: 'top center'
-            }),
-            animate('500ms', style('*'))
-        ], { optional: true }),
-    ]),
-    transition(':leave', animate('300ms', style({
-        height: 0, opacity: 0, transform: 'scaleY(0.8)'
-    })))
-]);
