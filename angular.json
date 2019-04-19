@@ -35,9 +35,7 @@
                             ]
                         },
                         "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/daterangepicker/moment.min.js",
-                            "node_modules/daterangepicker/daterangepicker.js"
+                            "node_modules/jquery/dist/jquery.min.js"
                         ]
                     },
                     "configurations": {
