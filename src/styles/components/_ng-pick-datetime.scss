@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+
+@mixin ng-pick-datetime-theme($theme) {
+    $primary: map-get($theme, primary);
+
+    .owl-dt-calendar-table {
+
+        .owl-dt-calendar-cell-selected {
+            background-color: mat-color($app-palette-red);
+        }
+
+        .owl-dt-calendar-cell-in-range {
+            background: mat-color($primary, 0.2);
+        }
+    }
+
+    .owl-dt-container-buttons {
+        color: mat-color($app-palette-red);
+    }
+
+    .owl-dt-container-info .owl-dt-container-info-active {
+        color: mat-color($app-palette-red);
+    }
+
+    .owl-dt-timer-hour12 {
+        color: mat-color($app-palette-red);
+
+        &-box {
+            &:focus,
+            &:hover {
+                .owl-dt-control-button-content {
+                    background-color: mat-color($app-palette-red);
+                }
+            }
+        }
+    }
+}

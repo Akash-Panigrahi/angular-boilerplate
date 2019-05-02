@@ -15,6 +15,7 @@
 
 @import 'app/core/components/core-toastr/core-toastr.component.scss-theme';
 
+@import 'components/ng-pick-datetime';
 
 @mixin components-theme($theme) {
     @include header-component-theme($theme);
@@ -32,4 +33,6 @@
 
     @include details-grid-length-component-theme($theme);
     @include details-grid-component-theme($theme);
+
+    @include ng-pick-datetime-theme($theme);
 }
