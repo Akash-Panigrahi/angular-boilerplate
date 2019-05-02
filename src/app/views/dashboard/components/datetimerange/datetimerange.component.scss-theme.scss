@@ -21,15 +21,23 @@
         .range {
             transition: $swift-ease-out;
 
-            &--active {
-                @include mat-elevation(2);
-                background-color: mat-color($accent);
-                color: mat-color($accent, default-contrast);
-            }
+            &__button {
 
-            button:hover:not(&--active) {
-                background-color: mat-color($background, hover);
-                color: mat-color($accent);
+                &:hover {
+                    background-color: mat-color($background, hover);
+                    color: mat-color($accent, 900);
+                }
+
+                &--active {
+                    @include mat-elevation(2);
+                    background-color: mat-color($accent, 900);
+                    color: mat-contrast($accent, 900);
+
+                    &:hover {
+                        background-color: mat-color($accent, 900);
+                        color: mat-contrast($accent, 900);
+                    }
+                }
             }
         }
     }

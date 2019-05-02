@@ -1,13 +1,14 @@
 <mat-action-list class="ranges"
-                 [@slideDownRangesAnimation]="isDateTimeRangeOpen ? 'open' : 'close'"
-                 (@slideDownRangesAnimation.start)="onSlideDownRangesAnimation($event)"
-                 (@slideDownRangesAnimation.done)="onSlideDownRangesAnimation($event)">
+    [@slideDownRangesAnimation]="isDateTimeRangeOpen ? 'open' : 'close'"
+    (@slideDownRangesAnimation.start)="onSlideDownRangesAnimation($event)"
+    (@slideDownRangesAnimation.done)="onSlideDownRangesAnimation($event)">
 
     <div class="range"
-         *ngFor="let range of datetimerangeData.ranges | keyvalue:orderByIndex"
-         (click)="changeRange(range.key, range.value)">
-        <button [class.range--active]="range.key === activeRange"
-                matRipple>
+        *ngFor="let range of datetimerangeData.ranges | keyvalue:orderByIndex"
+        (click)="changeRange(range.key, range.value)">
+        <button [class.range__button--active]="range.key === activeRange"
+            class="range__button"
+            matRipple>
             <div class="range__label">
                 {{ range.key }}
             </div>
@@ -17,24 +18,25 @@
     <mat-divider></mat-divider>
 
     <div class="range"
-         (click)="changeRange('Custom', null)"
-         [owlDateTimeTrigger]="datetimerangeEl">
-        <button [class.range--active]="'Custom' === activeRange"
-                matRipple>
+        (click)="changeRange('Custom', null)"
+        [owlDateTimeTrigger]="datetimerangeEl">
+        <button [class.range__button--active]="'Custom' === activeRange"
+            class="range__button"
+            matRipple>
             Custom
         </button>
     </div>
 </mat-action-list>
 
 <input hidden
-       [owlDateTime]="datetimerangeEl"
-       [selectMode]="'range'"
-       [(ngModel)]="pickerDateTime"
-       [max]="datetimerangeData.max"
-       (dateTimeChange)="onDateTimeChange($event.value)">
+    [owlDateTime]="datetimerangeEl"
+    [selectMode]="'range'"
+    [(ngModel)]="pickerDateTime"
+    [max]="datetimerangeData.max"
+    (dateTimeChange)="onDateTimeChange($event.value)">
 
 <owl-date-time #datetimerangeEl
-               [pickerMode]="'dialog'"
-               [hour12Timer]="true"
-               (afterPickerClosed)="onPickerClosed($event)">
+    [pickerMode]="'dialog'"
+    [hour12Timer]="true"
+    (afterPickerClosed)="onPickerClosed($event)">
 </owl-date-time>

@@ -5,6 +5,7 @@
     $accent: map-get($theme, accent);
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
+    $typography-config: mat-typography-config();
 
     /** TODO: change class to the components one and not of the panel */
     .sidenav-overlay__panel {
@@ -12,14 +13,15 @@
         /** TODO: use class instead of tag */
         app-sidenav-overlay {
             background-color: mat-color($background, background);
-            border-top: 4px solid mat-color($primary);
+            border-top: 4px solid mat-color($accent);
         }
 
         .user-info {
-            background-color: mat-color($accent, darker);
+            background-color: mat-color($primary, darker);
         }
 
         .user-name {
+            @include mat-typography-level-to-styles($typography-config, title);
             color: mat-color($accent, darker-contrast);
         }
 

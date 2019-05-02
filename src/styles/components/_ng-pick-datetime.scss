@@ -6,7 +6,7 @@
     .owl-dt-calendar-table {
 
         .owl-dt-calendar-cell-selected {
-            background-color: mat-color($app-palette-red);
+            background-color: mat-color($primary);
         }
 
         .owl-dt-calendar-cell-in-range {
@@ -15,21 +15,21 @@
     }
 
     .owl-dt-container-buttons {
-        color: mat-color($app-palette-red);
+        color: mat-color($primary);
     }
 
     .owl-dt-container-info .owl-dt-container-info-active {
-        color: mat-color($app-palette-red);
+        color: mat-color($primary);
     }
 
     .owl-dt-timer-hour12 {
-        color: mat-color($app-palette-red);
+        color: mat-color($primary);
 
         &-box {
             &:focus,
             &:hover {
                 .owl-dt-control-button-content {
-                    background-color: mat-color($app-palette-red);
+                    background-color: mat-color($primary);
                 }
             }
         }

@@ -3,7 +3,7 @@
 
 @mixin login-page-component-theme($theme) {
     $primary: map-get($theme, primary);
-    $foreground: map-get($theme, foreground);
+    $accent: map-get($theme, accent);
     $typography-config: mat-typography-config();
 
     app-login-page {
@@ -11,11 +11,11 @@
         .login {
             box-shadow:
                 0 12px 20px -14px rgba(0, 0, 0, 0.4),
-                0  0   10px   1px rgba(53, 149, 252, 0.6);
+                0  0   10px   1px mat-color($primary, lighter);
         }
 
         .login-header {
-            background-color: mat-color($app-palette-blue);
+            background-color: mat-color($primary);
             flex: 1;
 
             @include media-breakpoint-down(sm) {
@@ -32,15 +32,15 @@
         .submit-btn {
 
             button {
-                background-color: mat-color($app-palette-indigo, A400);
-                color: mat-contrast($app-palette-indigo, A400);
+                background-color: mat-color($accent, A700);
+                color: mat-contrast($accent, A700);
                 @include mat-elevation(6);
 
                 &:hover:not(:disabled),
                 &:focus:not(:disabled) {
                     @include mat-overridable-elevation(
                         6,
-                        mat-color($app-palette-indigo, A400),
+                        mat-color($accent, A700),
                         1
                     );
                 }

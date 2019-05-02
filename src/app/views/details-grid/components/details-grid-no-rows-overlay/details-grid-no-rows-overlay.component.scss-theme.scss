@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+
+@mixin details-grid-no-rows-overlay-component-theme($theme) {
+    $primary: map-get($theme, primary);
+
+    app-details-grid-no-rows-overlay {
+
+        .no-clients-list {
+            background: linear-gradient(to right, mat-color($primary, 300), mat-color($primary, 900));
+        }
+    }
+}

@@ -10,6 +10,7 @@
 
 @import 'app/views/details-grid/components/details-grid-length/details-grid-length.component.scss-theme';
 @import 'app/views/details-grid/details-grid.component.scss-theme';
+@import 'app/views/details-grid/components/details-grid-no-rows-overlay/details-grid-no-rows-overlay.component.scss-theme';
 
 @import 'app/views/authentication/pages/login-page/login-page.component.scss-theme';
 
@@ -33,6 +34,7 @@
 
     @include details-grid-length-component-theme($theme);
     @include details-grid-component-theme($theme);
+    @include details-grid-no-rows-overlay-component-theme($theme);
 
     @include ng-pick-datetime-theme($theme);
 }
