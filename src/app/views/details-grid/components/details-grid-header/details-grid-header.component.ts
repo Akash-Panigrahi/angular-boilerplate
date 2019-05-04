@@ -64,11 +64,11 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
              */
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((detailsGridRequestData: DetailsGridRequest) => {
-                const { key, direction } = detailsGridRequestData.sort;
+                const { sort_key, sort_direction } = detailsGridRequestData;
 
-                if (key === this.colId) {
+                if (sort_key === this.colId) {
                     /** set ui state of this header component */
-                    this.currDirection = direction;
+                    this.currDirection = sort_direction;
                     this.setSortDirection(this.currDirection);
 
                     /** set ui state of sibling header components to noSort */
@@ -124,8 +124,8 @@ export class DetailsGridHeaderComponent implements IHeaderAngularComp, OnInit, O
         target.dispatchEvent(
             new CustomEvent('detailsTableSortChangeEvent', {
                 detail: {
-                    key: colId,
-                    direction: this.nextDirection
+                    sort_key: colId,
+                    sort_direction: this.nextDirection
                 },
                 bubbles: true
             })

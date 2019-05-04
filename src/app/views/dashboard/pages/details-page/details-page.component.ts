@@ -98,23 +98,21 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
 
     onDownloadDetails(detailsGridRequest: DetailsGridRequest): void {
 
-        let fromDate: string, fromTime: string, toDate: string, toTime: string;
+        let start_datetime: string, end_datetime: string;
 
         this._storage
             .getItem('date-time-range')
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((dateTimeRangeData: DateTimeRange) => {
-                fromDate = dateTimeRangeData.fromDate;
-                fromTime = dateTimeRangeData.fromTime;
-                toDate = dateTimeRangeData.toDate;
-                toTime = dateTimeRangeData.toTime;
+                start_datetime = dateTimeRangeData.start_datetime;
+                end_datetime = dateTimeRangeData.end_datetime;
             });
 
-        const { search, sort } = detailsGridRequest;
+        const { search, sort_key, sort_direction } = detailsGridRequest;
 
         /* to disable max 140 characters for a line rule */
         // tslint:disable-next-line
-        const query = `?fromDate=${fromDate}&fromTime=${fromTime}&toDate=${toDate}&toTime=${toTime}&search=${search}&sort=${JSON.stringify(sort)}`;
+        const query = `?start_datetime=${start_datetime}&end_datetime=${end_datetime}&search=${search}&sort_key=${sort_key}&sort_direction=${sort_direction}`;
 
         this._detailsPageService.downloadDetails(query);
     }

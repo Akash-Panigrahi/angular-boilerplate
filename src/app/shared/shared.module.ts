@@ -15,7 +15,11 @@ import {
     MatInputModule,
     MatCardModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
 } from '@angular/material';
 
 import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
@@ -43,7 +47,11 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatInputModule,
         MatCardModule,
         MatSelectModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule
     ],
     declarations: [
         // public
@@ -68,7 +76,11 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatInputModule,
         MatCardModule,
         MatSelectModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule
     ]
 })
 export class SharedModule {

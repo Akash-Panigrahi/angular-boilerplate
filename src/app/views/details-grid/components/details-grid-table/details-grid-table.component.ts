@@ -4,7 +4,6 @@ import { DetailsGridLoadingOverlayComponent } from '../details-grid-loading-over
 import { DetailsGridNoRowsOverlayComponent } from '../details-grid-no-rows-overlay/details-grid-no-rows-overlay.component';
 import { DetailsGridHeaderComponent } from '../details-grid-header/details-grid-header.component';
 import { ChangeToNoSortStorageService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
-import { DetailsTableData } from '../../../dashboard/interfaces/details-grid.interfaces';
 
 @Component({
     selector: 'app-details-grid-table',
@@ -14,7 +13,27 @@ import { DetailsTableData } from '../../../dashboard/interfaces/details-grid.int
 })
 export class DetailsGridTableComponent implements OnChanges {
 
-    @Input() detailsData: DetailsTableData;
+    dataSource = [
+        {
+            seqNo: '1',
+            description: 'Building First App',
+            duration: '4:17'
+        },
+        {
+            seqNo: '2',
+            description: 'Building First Component',
+            duration: '2:07'
+        },
+        {
+            seqNo: '3',
+            description: '@Input - How to pass data',
+            duration: '2:33'
+        }
+    ];
+
+    displayedColumns = ["seqNo", "description", "duration"];
+
+    @Input() tableData: any[];
 
     gridApi: GridApi;
     gridColumnApi: ColumnApi;
@@ -45,12 +64,8 @@ export class DetailsGridTableComponent implements OnChanges {
     constructor() { }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (!changes.detailsData.isFirstChange()) {
-            this.detailsData = changes.detailsData.currentValue;
-
-            if (this.gridColumnApi) {
-                this.gridColumnApi.autoSizeAllColumns();
-            }
+        if (this.gridColumnApi) {
+            this.gridColumnApi.autoSizeAllColumns();
         }
     }
 
@@ -68,5 +83,9 @@ export class DetailsGridTableComponent implements OnChanges {
 
     showLoadingOverlay(): void {
         this.gridApi.showLoadingOverlay();
+    }
+
+    onRowClicked(row) {
+        console.log(row);
     }
 }

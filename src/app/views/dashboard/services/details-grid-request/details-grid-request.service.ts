@@ -8,10 +8,8 @@ export class DetailsGridRequestService {
             start: 0,
             length: 5,
             search: '',
-            sort: {
-                key: 'id',
-                direction: 1
-            }
+            sort_key: 'id',
+            sort_direction: 1
         };
     }
 }

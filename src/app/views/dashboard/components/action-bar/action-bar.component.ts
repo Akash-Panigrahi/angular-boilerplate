@@ -19,7 +19,7 @@ import { MomentRange, Moment } from '../../interfaces/datetimerange.interface';
     styleUrls: ['./action-bar.component.scss']
 })
 export class ActionBarComponent implements OnInit, OnDestroy {
-    // getting a reference to the progress bar in the html file
+    // getting a reference end_datetime the progress bar in the html file
     @ViewChild('gettingDataBar') private _progressBar: NgProgressComponent;
 
     @ViewChild('datetimerangeEl', { read: ElementRef }) private _datetimerangeEl: HTMLElement;
@@ -79,12 +79,11 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             });
 
         if (!this._dateTimeRange) {
-            this.from = moment(new Date());
-            this.to = moment(new Date());
+            this.from = this.to = moment(new Date());
             this._setDateTimeRangeInStorage(this.from, this.to);
         } else {
-            this.from = this._setMoment(this._dateTimeRange.fromDate, this._dateTimeRange.fromTime);
-            this.to = this._setMoment(this._dateTimeRange.toDate, this._dateTimeRange.toTime);
+            this.from = this.getMoment(this._dateTimeRange.start_datetime);
+            this.to = this.getMoment(this._dateTimeRange.end_datetime);
         }
     }
 
@@ -105,13 +104,10 @@ export class ActionBarComponent implements OnInit, OnDestroy {
         // update local properties with current from and to times
         this.from = from;
         this.to = to;
-        // this.dateTimeRange2 = `${this.getDate(from)} ${this.getDate(to)}`;
 
         const dateTimeRange = {
-            fromDate: this.getDate(from),
-            toDate: this.getDate(to),
-            fromTime: this.getTime(from),
-            toTime: this.getTime(to)
+            start_datetime: this.getDateTime(from),
+            end_datetime: this.getDateTime(to)
         };
 
         // pass new value in the stream
@@ -139,7 +135,7 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             });
     }
 
-    onDateTimeChange(from: Moment, to: Moment): void {
+    onDateTimeChange(start_datetime: Moment, end_datetime: Moment): void {
         // everytime new date range is selected
 
         // updating the value
@@ -148,7 +144,7 @@ export class ActionBarComponent implements OnInit, OnDestroy {
         this._actionBarUIState.changeGettingDataBar('start');
 
         // save in storage
-        this._setDateTimeRangeInStorage(from, to);
+        this._setDateTimeRangeInStorage(start_datetime, end_datetime);
 
         // reset details-grid-request value
         this._storage.setItem('details-grid-request', this._detailsGridRequest.initial());
@@ -158,16 +154,12 @@ export class ActionBarComponent implements OnInit, OnDestroy {
             .subscribe(state => this._progressBar[state]());
     }
 
-    getDateTime(date: Moment): string {
-        return moment(date).format('YYYY-MM-DD H:mm:ss');
+    getDateTime(datetime: Moment): string {
+        return moment(datetime).format('YYYY-MM-DD H:mm:ss');
     }
 
-    getDate(date: Moment): string {
-        return moment(date).format('YYYY-MM-DD');
-    }
-
-    getTime(date: Moment): string {
-        return moment(date).format('H:mm:ss');
+    getMoment(datetime: string): Moment {
+        return moment(datetime);
     }
 
     ngOnDestroy() {

@@ -1,14 +1,14 @@
 <span>
-    Showing {{ detailsInfoFrom }} to {{ detailsInfoTo }} of {{ detailsInfoTotal }} records
+    Showing {{ from }} to {{ to }} of {{ total }} records
 </span>
 
 <!--
-    if detailsInfoFilteredFrom !== detailsInfoTotal
+    if filtered !== total
     i.e., search/filter was not performed
 -->
-<ng-template [ngIf]="detailsInfoFilteredFrom !== detailsInfoTotal">
+<ng-template [ngIf]="filtered !== total">
     <br>
     <span>
-        (filtered from {{ detailsInfoFilteredFrom }} results)
+        (filtered from {{ filtered }} results)
     </span>
 </ng-template>

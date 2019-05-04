@@ -1,12 +1,41 @@
+<mat-table class="lessons-table mat-elevation-z4" [dataSource]="dataSource">
+
+    <ng-container matColumnDef="seqNo">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let lesson">{{lesson.seqNo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell class="description-cell"
+                  *matCellDef="let lesson">{{lesson.description}}</mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+        <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+        <mat-cell class="duration-cell"
+                  *matCellDef="let lesson">{{lesson.duration}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"
+        (click)="onRowClicked(row)">
+    </mat-row>
+
+</mat-table>
+
+
 <ag-grid-angular class="ag-theme-material"
-                 [rowData]="detailsData"
-                 [animateRows]="true"
-                 [defaultColDef]="defaultColDef"
-                 [columnDefs]="columnDefs"
-                 [suppressMovableColumns]="true"
-                 [frameworkComponents]="frameworkComponents"
-                 [loadingOverlayComponent]="loadingOverlayComponent"
-                 [noRowsOverlayComponent]="noRowsOverlayComponent"
-                 (gridReady)="onGridReady($event)"
-                 (viewportChanged)="onViewportChanged($event)">
+    [rowData]="tableData"
+    [animateRows]="true"
+    [defaultColDef]="defaultColDef"
+    [columnDefs]="columnDefs"
+    [suppressMovableColumns]="true"
+    [frameworkComponents]="frameworkComponents"
+    [loadingOverlayComponent]="loadingOverlayComponent"
+    [noRowsOverlayComponent]="noRowsOverlayComponent"
+    (gridReady)="onGridReady($event)"
+    (viewportChanged)="onViewportChanged($event)">
 </ag-grid-angular>

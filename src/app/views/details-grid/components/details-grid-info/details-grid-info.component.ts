@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class DetailsGridInfoComponent {
 
-    @Input() detailsInfoFrom: number;
-    @Input() detailsInfoTo: number;
-    @Input() detailsInfoTotal: number;
-    @Input() detailsInfoFilteredFrom: number;
+    @Input() from: number;
+    @Input() to: number;
+    @Input() total: number;
+    @Input() filtered: number;
 }
