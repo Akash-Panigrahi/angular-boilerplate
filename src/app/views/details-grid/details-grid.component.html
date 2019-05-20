@@ -24,7 +24,7 @@
                     matTooltip="Download Details"
                     matTooltipClass="download-details__tooltip"
                     [matTooltipPosition]="'before'"
-                    [disabled]="!detailsData?.length"
+                    [disabled]="!details?.data?.length"
                     (click)="downloadDetailsEvent.emit(detailsGridRequest)">
                 <mat-icon>cloud_download</mat-icon>
             </button>
@@ -55,7 +55,7 @@
 
         <app-details-grid-table class="child-component"
             #detailsGridTable
-            [detailsData]="detailsData">
+            [tableData]="tableData">
         </app-details-grid-table>
 
         <div class="vertical-space2"></div>
@@ -63,12 +63,13 @@
         <div class="details-grid__info-pagination d-flex flex-wrap justify-content-center justify-content-sm-between align-items-center">
             <div class="details-grid__info">
                 <app-details-grid-info class="child-component"
-                    [detailsInfoFrom]="detailsData?.length ? detailsInfo.from : '0'"
-                    [detailsInfoTo]="detailsInfo.to"
-                    [detailsInfoTotal]="detailsInfo.total"
-                    [detailsInfoFilteredFrom]="detailsInfo.filteredFrom">
+                    [from]="from"
+                    [to]="to"
+                    [filtered]="filtered"
+                    [total]="total">
                 </app-details-grid-info>
             </div>
+
             <div class="details-grid__pagination mt-xs">
                 <ngb-pagination class="child-component d-flex justify-content-end"
                     #detailsGridPagination

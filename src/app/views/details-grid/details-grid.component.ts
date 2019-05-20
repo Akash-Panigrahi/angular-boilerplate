@@ -16,7 +16,6 @@ import { DetailsGridTableComponent } from './components/details-grid-table/detai
 import {
     DetailsGridResponse,
     DetailsGridRequest,
-    DetailsTableData,
     DetailsTableSortEvent
 } from '../dashboard/interfaces/details-grid.interfaces';
 
@@ -27,7 +26,7 @@ import {
     animations: [initialTableReady, gettingDetailsLoader]
 })
 export class DetailsGridComponent implements OnChanges {
-    @Input() details: DetailsGridResponse[];
+    @Input() details: DetailsGridResponse;
     @Input() detailsGridRequest: DetailsGridRequest;
 
     @Output() detailsGridRequestEvent = new EventEmitter<DetailsGridRequest>();
@@ -38,18 +37,16 @@ export class DetailsGridComponent implements OnChanges {
     @ViewChild('detailsGridPagination') private _detailsGridPagination: NgbPagination;
     @ViewChild('detailsGridTable') private _detailsGridTable: DetailsGridTableComponent;
 
-    detailsInfo = {
-        from: 0,
-        to: 0,
-        total: 0,
-        filteredFrom: 0
-    };
-
     showGettingDetailsLoader = true;
     initialTableReady = 'no';
     pageSizes = [3, 5, 10, 25, 50, 100];
 
-    detailsData: DetailsTableData[];
+    tableData = [];
+    from = 0;
+    to = 0;
+    filtered = 0;
+    total = 0;
+
     paginationCollectionSize: number;
     currentPage: number;
 
@@ -60,12 +57,14 @@ export class DetailsGridComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.details && !changes.details.isFirstChange()) {
-            const details = changes.details.currentValue;
 
-            this.detailsData = details.data;
-            this.detailsInfo = details.info;
+            this.tableData = this.details.data;
+            this.from = this.detailsGridRequest.start + 1;
+            this.to = this.detailsGridRequest.start + this.detailsGridRequest.length;
+            this.filtered = this.details.total;
+            this.total = this.details.filtered;
 
-            const pages = this._getPages(details.info.total, this.detailsGridRequest.length);
+            const pages = this._getPages(this.details.total, this.detailsGridRequest.length);
             this.paginationCollectionSize = (pages || 1) * 10;
 
             // resetting page to previous page
@@ -155,14 +154,15 @@ export class DetailsGridComponent implements OnChanges {
     }
 
     onPageChange(page: number): void {
-        this.detailsGridRequest.start = page - 1;
+        this.detailsGridRequest.start = (page - 1) * this.detailsGridRequest.length;
 
         this._emitDataTableRequestEvent();
     }
 
     onSortChange(sort: DetailsTableSortEvent): void {
         this.detailsGridRequest.start = 0;
-        this.detailsGridRequest.sort = sort;
+        this.detailsGridRequest.sort_key = sort.sort_key;
+        this.detailsGridRequest.sort_direction = sort.sort_direction;
 
         this._emitDataTableRequestEvent();
     }

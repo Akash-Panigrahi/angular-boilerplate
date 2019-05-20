@@ -1,35 +1,24 @@
-import { DetailsTableSortDirection } from '../enums/details-grid.enums';
-
-export interface DetailsTableData {
-    id: number;
-    first_name: string;
-    last_name: string;
-    gender: string;
-    email: string;
-    date: string;
-    time: string;
-}
-
-export interface DetailsGridInfo {
-    from: number;
-    to: number;
-    total: number;
-    filteredFrom: number;
-}
-
 export interface DetailsGridRequest {
     start: number;
     length: number;
     search: string;
-    sort: DetailsTableSortEvent;
+    sort_key: DetailsTableSortEvent['sort_key'];
+    sort_direction: DetailsTableSortEvent['sort_direction'];
 }
 
 export interface DetailsGridResponse {
-    data: DetailsTableData[];
-    info: DetailsGridInfo;
+    data: any[];
+    filtered: number;
+    total: number;
 }
 
 export interface DetailsTableSortEvent {
-    key: string;
-    direction: DetailsTableSortDirection;
+    sort_key: string;
+    sort_direction: DetailsTableSortDirection;
+}
+
+export enum DetailsTableSortDirection {
+    ASC = 1,
+    DESC = -1,
+    NONE = 0,
 }

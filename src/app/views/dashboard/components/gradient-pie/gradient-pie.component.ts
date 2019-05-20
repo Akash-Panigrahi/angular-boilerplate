@@ -1,7 +1,8 @@
 import {
     Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges, AfterViewInit
 } from '@angular/core';
-import { Chart, Highcharts } from 'angular-highcharts';
+import { Chart } from 'angular-highcharts';
+import * as Highcharts from 'highcharts';
 
 @Component({
     selector: 'app-gradient-pie',
@@ -19,7 +20,6 @@ export class GradientPieComponent implements OnInit, OnChanges, AfterViewInit, O
     constructor() { }
 
     ngOnInit() {
-
         this.chart = new Chart(<any>{
             chart: {
                 plotBackgroundColor: null,
