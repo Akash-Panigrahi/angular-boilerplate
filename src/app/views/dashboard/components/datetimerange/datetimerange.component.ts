@@ -3,8 +3,8 @@ import { AnimationEvent } from '@angular/animations';
 
 import { slideDownRangesAnimation } from './datetimerange.animations';
 import { DatetimerangeRef } from './datetimerange-ref';
-import { DATETIMERANGE_OVERLAY_DATA } from '../../services/datetimerange-overlay/datetimerange-overlay.tokens';
-import { DatetimerangeData, MomentRange } from '../../interfaces/datetimerange.interface';
+import { DATETIMERANGE_OVERLAY_DATA } from '../../services/datetimerange/datetimerange.tokens';
+import { DatetimerangeData, MomentRange } from '../../types/datetimerange';
 import { Subject } from 'rxjs';
 
 @Component({

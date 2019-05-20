@@ -2,7 +2,7 @@
 @import 'app/views/dashboard/components/header/header.component.scss-theme';
 @import 'app/views/dashboard/components/footer/footer.component.scss-theme';
 @import 'app/views/dashboard/components/kpi/kpi.component.scss-theme';
-@import 'app/views/dashboard/components/sidenav-overlay/sidenav-overlay.component.scss-theme';
+@import 'app/views/dashboard/components/sidenav/sidenav.component.scss-theme';
 @import 'app/views/dashboard/components/datetimerange/datetimerange.component.scss-theme';
 @import 'app/views/dashboard/components/action-bar/action-bar.component.scss-theme';
 @import 'app/views/dashboard/components/basic-column/basic-column.component.scss-theme';
@@ -14,7 +14,7 @@
 
 @import 'app/views/authentication/pages/login-page/login-page.component.scss-theme';
 
-@import 'app/core/components/core-toastr/core-toastr.component.scss-theme';
+@import 'app/core/components/toast/toast.component.scss-theme';
 
 @import 'components/ng-pick-datetime';
 
@@ -22,7 +22,7 @@
     @include header-component-theme($theme);
     @include footer-component-theme($theme);
     @include kpi-component-theme($theme);
-    @include sidenav-overlay-component-theme($theme);
+    @include sidenav-component-theme($theme);
     @include datetimerange-component-theme($theme);
     @include action-bar-component-theme($theme);
     @include basic-column-component-theme($theme);
@@ -30,7 +30,7 @@
 
     @include login-page-component-theme($theme);
 
-    @include core-toastr-component-theme($theme);
+    @include toast-component-theme($theme);
 
     @include details-grid-length-component-theme($theme);
     @include details-grid-component-theme($theme);

@@ -1,10 +1,9 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { summaryPageAnimation } from './summary-page.animations';
 import { SummaryPageService } from './summary-page.service';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
-import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
-import { CacheService } from '../../services/cache/cache.service';
+import { DateTimeRangeService } from '../../storage-services/date-time-range/date-time-range.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -41,16 +40,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
             .currentDateTimeRange()
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(data => {
-
-                // check if data is present in cacheservice
-                const cachedData = CacheService.get('summary', data);
-
-                if (cachedData) {
-                    this.summaryData = cachedData;
-                    this._actionBarUiState.changeGettingDataBar('complete');
-                } else {
-                    this._getSummary(data);
-                }
+                this._getSummary(data);
             });
     }
 
@@ -66,10 +56,6 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
                 */
                 res => {
                     this.summaryData = res;
-
-                    // set data in cacheservice
-                    CacheService.set('summary', summaryRange, res);
-
                     this._actionBarUiState.changeGettingDataBar('complete');
                 },
                 err => console.error(err)

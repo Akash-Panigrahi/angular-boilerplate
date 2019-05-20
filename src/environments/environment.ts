@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    //   BASE_URL: 'http://localhost:4000'
-    BASE_URL: 'https://basic-node-backend.herokuapp.com'
+    //   baseUrl: 'http://localhost:4000'
+    baseUrl: 'https://basic-node-backend.herokuapp.com'
 };
 
 /*

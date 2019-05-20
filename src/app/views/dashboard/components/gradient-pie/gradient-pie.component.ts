@@ -1,8 +1,8 @@
 import {
     Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges, AfterViewInit
 } from '@angular/core';
-import { Chart } from 'angular-highcharts';
-import * as Highcharts from 'highcharts';
+// import { Chart } from 'angular-highcharts';
+// import * as Highcharts from 'highcharts';
 
 @Component({
     selector: 'app-gradient-pie',
@@ -20,7 +20,7 @@ export class GradientPieComponent implements OnInit, OnChanges, AfterViewInit, O
     constructor() { }
 
     ngOnInit() {
-        this.chart = new Chart(<any>{
+        /* this.chart = new Chart(<any>{
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -60,7 +60,7 @@ export class GradientPieComponent implements OnInit, OnChanges, AfterViewInit, O
                     ]
                 };
             })
-        });
+        }); */
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -70,22 +70,22 @@ export class GradientPieComponent implements OnInit, OnChanges, AfterViewInit, O
             because we are updating data from cache,
             which **will** have data in the first change.
         */
-        if (changes.gradientPie.currentValue) {
+        // if (changes.gradientPie.currentValue) {
 
             /*
                 storing data in the local variable,
                 to use for subsequent invocation from router.
             */
-            this._currentGradientPie = changes.gradientPie.currentValue;
+            // this._currentGradientPie = changes.gradientPie.currentValue;
 
             /*
                 But for first change this.chart will not be present,
                 hence the *if* check
             */
-            if (this.chart) {
-                this._updateChart();
-            }
-        }
+            // if (this.chart) {
+                // this._updateChart();
+            // }
+        // }
     }
 
     /*
@@ -97,15 +97,15 @@ export class GradientPieComponent implements OnInit, OnChanges, AfterViewInit, O
         and chart will be created.
     */
     ngAfterViewInit() {
-        this._updateChart();
+        // this._updateChart();
     }
 
-    private _updateChart() {
+    /* private _updateChart() {
         this.chart.removeSeries(0);
         this.chart.addSeries({ name: 'Share', data: this._currentGradientPie }, true, true);
-    }
+    } */
 
     ngOnDestroy() {
-        this.chart.destroy();
+        // this.chart.destroy();
     }
 }

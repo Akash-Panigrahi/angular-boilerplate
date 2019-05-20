@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+
+@mixin toast-component-theme($theme) {
+    $typography-config: mat-typography-config();
+
+    .toast {
+        @include mat-typography-level-to-styles($typography-config, subheading-2);
+
+        /*
+         what : styles to overide default styles of snackbar
+         why  : the default background-color was dark,
+                which we want to change according to the status of the snackbar
+        */
+        padding: 0;
+        display: flex;
+
+        .success {
+            background-color: mat-color($app-palette-green, 200);
+            color: mat-contrast($app-palette-green, 200);
+        }
+
+        .error {
+            background-color: mat-color($app-palette-red, 200);
+            color: mat-contrast($app-palette-red, 200);
+        }
+
+        .warning {
+            background-color: mat-color($app-palette-yellow, 200);
+            color: mat-contrast($app-palette-yellow, 200);
+        }
+
+        .info {
+            background-color: mat-color($app-palette-blue, 200);
+            color: mat-contrast($app-palette-blue, 200);
+        }
+    }
+}

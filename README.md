@@ -57,7 +57,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
         |-- [+] http
         |-- [+] mocks
         |-- [+] interceptors
-        |-- [+] interfaces
+        |-- [+] types
         |-- [+] services
         |-- core.module.ts
     |
@@ -100,7 +100,7 @@ The CoreModule contains singleton services, universal components and other featu
         |-- [+] http
         |-- [+] mocks
         |-- [+] interceptors
-        |-- [+] interfaces
+        |-- [+] types
         |-- [+] services
         |-- core.module.ts
 ```
@@ -167,12 +167,12 @@ This allows us to catch and modify the requests and responses from our API calls
 
 This also contains a *mock-backend-interceptor* which will put a halt to any requests and return predefined responses, which is  useful for mocking backend and testing the app.
 
-##### interfaces
+##### types
 
-Interfaces contain type definitions for enforcing strict type checking.
+types contain type definitions for enforcing strict type checking.
 
 ```ts
-|-- interfaces
+|-- types
     |-- login.interface.ts
 ```
 

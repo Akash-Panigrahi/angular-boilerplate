@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LogoutService } from '../../services/logout/logout.service';
-import { SidenavOverlayService } from '../../services/sidenav-overlay/sidenav-overlay.service';
-import { SidenavOverlayRef } from '../../class/sidenav-overlay-ref';
+import { SidenavOverlayService } from '../../services/sidenav/sidenav.service';
+import { SidenavOverlayRef } from '../sidenav/sidenav-ref';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { LoginData } from 'src/app/views/authentication/interfaces/login.interfaces';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { LoginData } from 'src/app/core/types/login';
+import { LogoutService } from 'src/app/core/services/logout/logout.service';
 
 @Component({
     selector: 'app-header',

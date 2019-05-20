@@ -3,16 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-
 import { NgbCollapseModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { ChartModule } from 'angular-highcharts';
 import { OwlDateTimeModule } from 'ng-pick-datetime';
 import { OwlMomentDateTimeModule } from 'ng-pick-datetime-moment';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DetailsGridModule } from '../details-grid/details-grid.module';
-
 import { DashboardComponent } from './dashboard.component';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { SummaryPageComponent } from './pages/summary-page/summary-page.component';
@@ -24,15 +21,12 @@ import { GradientPieComponent } from './components/gradient-pie/gradient-pie.com
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { KpiComponent } from './components/kpi/kpi.component';
 import { CopyrightPipe } from './pipes/copyright/copyright.pipe';
-
-import { DateTimeRangeService } from './services/date-time-range/date-time-range.service';
-import { FormatTimeService } from './services/format-time/format-time.service';
-import { LogoutService } from './services/logout/logout.service';
-import { DetailsGridRequestService } from './services/details-grid-request/details-grid-request.service';
-import { SidenavOverlayComponent } from './components/sidenav-overlay/sidenav-overlay.component';
-import { SidenavOverlayService } from './services/sidenav-overlay/sidenav-overlay.service';
+import { DateTimeRangeService } from './storage-services/date-time-range/date-time-range.service';
+import { DetailsGridRequestService } from './storage-services/details-grid-request/details-grid-request.service';
+import { SidenavOverlayComponent } from './components/sidenav/sidenav.component';
+import { SidenavOverlayService } from './services/sidenav/sidenav.service';
 import { DatetimerangeComponent } from './components/datetimerange/datetimerange.component';
-import { DatetimerangeOverlayService } from './services/datetimerange-overlay/datetimerange-overlay.service';
+import { DatetimerangeOverlayService } from './services/datetimerange/datetimerange.service';
 
 @NgModule({
     declarations: [
@@ -55,7 +49,6 @@ import { DatetimerangeOverlayService } from './services/datetimerange-overlay/da
         FormsModule,
 
         NgbCollapseModule,
-        ChartModule,
         NgProgressModule,
         NgbDatepickerModule,
         OwlDateTimeModule,
@@ -68,8 +61,6 @@ import { DatetimerangeOverlayService } from './services/datetimerange-overlay/da
     providers: [
         DateTimeRangeService,
         DetailsGridRequestService,
-        FormatTimeService,
-        LogoutService,
         SidenavOverlayService,
         DatetimerangeOverlayService
     ],

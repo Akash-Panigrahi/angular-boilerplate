@@ -5,10 +5,10 @@ import { Subject } from 'rxjs';
 import { ActionBarUIState } from '../../components/action-bar/action-bar.ui-state';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { take, delay, takeUntil, tap } from 'rxjs/operators';
-import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
-import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
-import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
-import { DetailsGridRequestService } from '../../services/details-grid-request/details-grid-request.service';
+import { DateTimeRangeService } from '../../storage-services/date-time-range/date-time-range.service';
+import { DateTimeRange } from 'src/app/views/dashboard/types/date-time-range';
+import { DetailsGridRequest, DetailsGridResponse } from 'src/app/views/dashboard/types/details-grid';
+import { DetailsGridRequestService } from '../../storage-services/details-grid-request/details-grid-request.service';
 
 @Component({
     selector: 'app-details-page',
@@ -97,24 +97,26 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     }
 
     onDownloadDetails(detailsGridRequest: DetailsGridRequest): void {
-
-        let start_datetime: string, end_datetime: string;
-
         this._storage
             .getItem('date-time-range')
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((dateTimeRangeData: DateTimeRange) => {
-                start_datetime = dateTimeRangeData.start_datetime;
-                end_datetime = dateTimeRangeData.end_datetime;
+            .pipe(take(1))
+            .subscribe((dateTimeRange: DateTimeRange) => {
+
+                const start_datetime = dateTimeRange.start_datetime;
+                const end_datetime = dateTimeRange.end_datetime;
+
+                const params = {
+                    start_datetime,
+                    end_datetime,
+                    search: detailsGridRequest.search
+                };
+
+                this._detailsPageService
+                    .downloadDetails(params)
+                    .pipe(take(1))
+                    .subscribe();
+
             });
-
-        const { search, sort_key, sort_direction } = detailsGridRequest;
-
-        /* to disable max 140 characters for a line rule */
-        // tslint:disable-next-line
-        const query = `?start_datetime=${start_datetime}&end_datetime=${end_datetime}&search=${search}&sort_key=${sort_key}&sort_direction=${sort_direction}`;
-
-        this._detailsPageService.downloadDetails(query);
     }
 
     ngOnDestroy(): void {

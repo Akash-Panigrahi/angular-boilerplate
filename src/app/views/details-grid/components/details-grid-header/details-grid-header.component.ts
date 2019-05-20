@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { ChangeToNoSortStorageService } from '../../services/change-to-no-sort-state/change-to-no-sort-state.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { take, takeUntil } from 'rxjs/operators';
-import { DetailsGridRequest } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
+import { DetailsGridRequest } from 'src/app/views/dashboard/types/details-grid';
 
 @Component({
     selector: 'app-details-grid-header',

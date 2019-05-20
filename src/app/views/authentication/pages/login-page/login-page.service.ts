@@ -1,9 +1,10 @@
-import { ApiService } from 'src/app/core/http/api/api.service';
-import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { map, catchError, take } from 'rxjs/operators';
+
+import { ApiService } from 'src/app/core/http/api/api.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { LoginResponse, LoginData } from '../../interfaces/login.interfaces';
+import { LoginResponse, LoginData } from 'src/app/core/types/login';
 
 @Injectable()
 export class LoginPageService {

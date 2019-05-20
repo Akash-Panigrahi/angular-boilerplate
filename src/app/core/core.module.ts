@@ -1,21 +1,27 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { environment } from 'src/environments/environment';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
-import { ModuleAlreadyLoadedGuard } from './guards/module-already-loaded/module-already-loaded.guard';
+import { environment } from 'src/environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './interceptors/token/token.interceptor';
-import { CoreToastrComponent } from './components/core-toastr/core-toastr.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ModuleAlreadyLoadedGuard } from './guards/module-already-loaded/module-already-loaded.guard';
+import { TokenInterceptor } from './interceptors/token/token.interceptor';
+import { ToastComponent } from './components/toast/toast.component';
 import { SharedModule } from '../shared/shared.module';
+import { HttpErrorInterceptor } from './interceptors/http-error/http-error.interceptor';
+import { HttpErrorHandlerService } from './services/http-error-handler/http-error-handler.service';
+import { LogoutService } from './services/logout/logout.service';
+import { StorageService } from './services/storage/storage.service';
+import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
 
 @NgModule({
     declarations: [
         PageNotFoundComponent,
-        CoreToastrComponent
+        ToastComponent,
+        InternalServerErrorComponent
     ],
     imports: [
         CommonModule,
@@ -27,7 +33,7 @@ import { SharedModule } from '../shared/shared.module';
         {
             provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
             useValue: {
-                panelClass: 'core-toastr',
+                panelClass: 'toast',
                 verticalPosition: 'top',
                 horizontalPosition: 'end',
                 duration: 2000
@@ -37,9 +43,17 @@ import { SharedModule } from '../shared/shared.module';
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
             multi: true
-        }
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true
+        },
+        HttpErrorHandlerService,
+        LogoutService,
+        StorageService
     ],
-    entryComponents: [CoreToastrComponent]
+    entryComponents: [ToastComponent]
 })
 export class CoreModule {
     constructor(

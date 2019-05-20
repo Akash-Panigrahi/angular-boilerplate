@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { LoginData } from 'src/app/views/authentication/interfaces/login.interfaces';
-import { DetailsGridRequest } from 'src/app/views/dashboard/interfaces/details-grid.interfaces';
-import { DateTimeRange } from 'src/app/views/dashboard/interfaces/date-time-range.interface';
+import { LoginData } from 'src/app/core/types/login';
+import { DetailsGridRequest } from 'src/app/views/dashboard/types/details-grid';
+import { DateValue } from 'src/app/views/dashboard/types/date-value';
+import { DateTimeRange } from 'src/app/views/dashboard/types/date-time-range';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class StorageService {
+
+    /*
+        BehaviorSubject is a kind of Subject that allows to set initial value of stream.
+        Subject allows for multicasting,
+        so multiple components can listen to one data source.
+    */
+
     private itemSources: Map<string, BehaviorSubject<StorageItemsTypes>> = new Map();
     storage = sessionStorage;
 
@@ -29,6 +35,7 @@ export class StorageService {
             this.itemSources.set(key, new BehaviorSubject<StorageItemsTypes>(JSON.parse(this.storage.getItem(key))));
         }
 
+        // creating an observable from source for listening components to subscribe to
         return this.itemSources.get(key).asObservable();
     }
 
@@ -66,4 +73,4 @@ export class StorageService {
     }
 }
 
-type StorageItemsTypes = LoginData | DetailsGridRequest | DateTimeRange;
+type StorageItemsTypes = LoginData | DetailsGridRequest | DateValue | DateTimeRange | string;

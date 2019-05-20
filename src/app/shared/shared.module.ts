@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CommonModule } from '@angular/common';
 import {
     MatToolbarModule,
     MatButtonModule,
@@ -16,21 +15,14 @@ import {
     MatCardModule,
     MatSelectModule,
     MatTooltipModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableModule
+    MatDialogModule
 } from '@angular/material';
 
-import { RippleOnClickDirective } from './directives/ripple-on-click/ripple-on-click.directive';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
     imports: [
-        // private
-        CommonModule,
-
         // public
         MatToolbarModule,
         MatButtonModule,
@@ -48,19 +40,10 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatCardModule,
         MatSelectModule,
         MatTooltipModule,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatTableModule
-    ],
-    declarations: [
-        // public
-        RippleOnClickDirective
+        MatDialogModule
     ],
     // declarations and imports needs to be exported to be used by other modules
     exports: [
-        RippleOnClickDirective,
-
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
@@ -77,10 +60,7 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatCardModule,
         MatSelectModule,
         MatTooltipModule,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatTableModule
+        MatDialogModule
     ]
 })
 export class SharedModule {

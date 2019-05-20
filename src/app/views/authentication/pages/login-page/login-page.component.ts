@@ -1,11 +1,12 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
-import { loginPageAnimation } from './login-page.animations';
-import { FormBuilder, Validators } from '@angular/forms';
-import { LoginPageService } from './login-page.service';
-import { LoginData } from '../../interfaces/login.interfaces';
 import { MatSnackBar } from '@angular/material';
-import { CoreToastrComponent } from 'src/app/core/components/core-toastr/core-toastr.component';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import { loginPageAnimation } from './login-page.animations';
+import { LoginPageService } from './login-page.service';
+import { LoginData } from 'src/app/core/types/login';
+import { ToastComponent } from 'src/app/core/components/toast/toast.component';
 
 @Component({
     selector: 'app-login-page',
@@ -74,10 +75,10 @@ export class LoginPageComponent implements OnInit {
                 (res: LoginData) => {
 
                     this._snackBar.openFromComponent(
-                        CoreToastrComponent,
+                        ToastComponent,
                         {
                             data: {
-                                message: `${res.username} logged in successfully!`,
+                                message: `${this.username.value} logged in successfully!`,
                                 status: 'success'
                             }
                         }
@@ -94,7 +95,7 @@ export class LoginPageComponent implements OnInit {
                     this.loggingIn = false;
 
                     this._snackBar.openFromComponent(
-                        CoreToastrComponent,
+                        ToastComponent,
                         {
                             data: {
                                 message: err.message,

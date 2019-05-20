@@ -6,12 +6,12 @@ import * as moment from 'moment';
 
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ActionBarUIState } from './action-bar.ui-state';
-import { DateTimeRangeService } from '../../services/date-time-range/date-time-range.service';
-import { DateTimeRange } from '../../interfaces/date-time-range.interface';
-import { DetailsGridRequestService } from '../../services/details-grid-request/details-grid-request.service';
+import { DateTimeRangeService } from '../../storage-services/date-time-range/date-time-range.service';
+import { DateTimeRange } from '../../types/date-time-range';
+import { DetailsGridRequestService } from '../../storage-services/details-grid-request/details-grid-request.service';
 import { DatetimerangeRef } from '../datetimerange/datetimerange-ref';
-import { DatetimerangeOverlayService } from '../../services/datetimerange-overlay/datetimerange-overlay.service';
-import { MomentRange, Moment } from '../../interfaces/datetimerange.interface';
+import { DatetimerangeOverlayService } from '../../services/datetimerange/datetimerange.service';
+import { MomentRange, Moment } from '../../types/datetimerange';
 
 @Component({
     selector: 'app-action-bar',

@@ -166,34 +166,6 @@ select:-internal-autofill-selected {
 }
 
 
-/* effects */
-.ripple-element {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.2s ease;
-}
-
-.ink {
-    display: block;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 100%;
-    transform: scale(0);
-}
-
-.animate {
-    animation: ripple 0.65s linear;
-}
-
-@keyframes ripple {
-    100% {
-        opacity: 0;
-        transform: scale(2.5);
-    }
-}
-
-
 /* customizing ag-grid style */
 .ag-theme-material {
     font-size: 1rem;

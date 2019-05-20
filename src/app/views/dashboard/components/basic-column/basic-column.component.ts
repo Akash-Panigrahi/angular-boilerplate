@@ -1,7 +1,7 @@
 import {
     Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, AfterViewInit
 } from '@angular/core';
-import { Chart } from 'angular-highcharts';
+// import { Chart } from 'angular-highcharts';
 
 @Component({
     selector: 'app-basic-column',
@@ -19,7 +19,7 @@ export class BasicColumnComponent implements OnInit, OnChanges, AfterViewInit, O
     constructor() { }
 
     ngOnInit() {
-        this.chart = new Chart(<any>{
+        /* this.chart = new Chart(<any>{
             chart: {
                 type: 'column'
             },
@@ -66,11 +66,11 @@ export class BasicColumnComponent implements OnInit, OnChanges, AfterViewInit, O
                     borderWidth: 0
                 }
             }
-        });
+        }); */
     }
 
     ngOnChanges(changes: SimpleChanges) {
-
+/*
         if (changes.basicColumn.currentValue) {
 
             this._currentBasicColumn = changes.basicColumn.currentValue;
@@ -78,14 +78,14 @@ export class BasicColumnComponent implements OnInit, OnChanges, AfterViewInit, O
             if (this.chart) {
                 this._updateChart();
             }
-        }
+        } */
     }
 
     ngAfterViewInit() {
-        this._updateChart();
+        // this._updateChart();
     }
 
-    private _updateChart() {
+    /* private _updateChart() {
         const chart = this.chart.ref;
 
         while (chart.series.length) {
@@ -99,9 +99,9 @@ export class BasicColumnComponent implements OnInit, OnChanges, AfterViewInit, O
         }
 
         chart.redraw();
-    }
+    } */
 
     ngOnDestroy() {
-        this.chart.destroy();
+        // this.chart.destroy();
     }
 }

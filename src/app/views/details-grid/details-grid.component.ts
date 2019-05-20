@@ -17,7 +17,7 @@ import {
     DetailsGridResponse,
     DetailsGridRequest,
     DetailsTableSortEvent
-} from '../dashboard/interfaces/details-grid.interfaces';
+} from '../dashboard/types/details-grid';
 
 @Component({
     selector: 'app-details-grid',
